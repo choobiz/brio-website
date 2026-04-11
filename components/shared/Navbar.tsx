@@ -4,64 +4,75 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Phone, Menu, X } from "lucide-react";
-import { COMPANY, NAV_LINKS } from "@/lib/constants";
+import { COMPANY } from "@/lib/constants";
+
+const NAV_ITEMS = [
+  { label: "HOME", href: "/" },
+  { label: "SERVICES", href: "/services" },
+  { label: "ABOUT US", href: "/about-us" },
+  { label: "PROJECTS", href: "/projects" },
+  { label: "FINANCING", href: "/financing" },
+  { label: "BRIO BLOG", href: "/blog" },
+];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-50 bg-white border-b border-border shadow-sm">
+    <nav className="absolute top-0 left-0 right-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-[72px]">
-          {/* Logo */}
+        <div className="flex items-center justify-between" style={{ height: "76px" }}>
           <Link href="/" className="shrink-0">
-            <Image src="/images/logo.png" alt={COMPANY.name} width={140} height={48} className="h-12 w-auto" priority />
+            <Image src="/images/logo.png" alt={COMPANY.name} width={160} height={50} className="h-[50px] w-auto" priority />
           </Link>
 
           {/* Desktop nav */}
           <div className="hidden lg:flex items-center gap-6">
-            {NAV_LINKS.map((link) => (
-              <Link key={link.label} href={link.href} className="text-[15px] font-medium text-text-secondary hover:text-brio-blue transition-colors">
+            {NAV_ITEMS.map((link) => (
+              <Link
+                key={link.label}
+                href={link.href}
+                className="text-[14px] font-medium text-white/90 hover:text-white transition-colors tracking-wide"
+              >
                 {link.label}
               </Link>
             ))}
           </div>
 
-          {/* Phone + CTA */}
-          <div className="hidden lg:flex items-center gap-4">
-            <a href={`tel:${COMPANY.phoneClean}`} className="flex items-center gap-2 text-sm font-medium text-text-secondary hover:text-brio-blue transition-colors">
-              <Phone className="w-4 h-4" />
-              {COMPANY.phone}
-            </a>
-            <Link href="/about-us#get-in-touch" className="inline-flex items-center h-10 px-5 bg-brio-blue text-white text-sm font-semibold rounded-lg hover:bg-brio-blue/90 transition-colors">
-              Get Free Estimate
-            </Link>
-          </div>
+          {/* Phone */}
+          <a
+            href={`tel:${COMPANY.phoneClean}`}
+            className="hidden lg:flex items-center gap-2 text-[14px] font-medium text-white/90 hover:text-white transition-colors"
+          >
+            <Phone className="w-4 h-4" />
+            {COMPANY.phone}
+          </a>
 
-          {/* Mobile */}
+          {/* Mobile toggle */}
           <div className="flex lg:hidden items-center gap-2">
-            <a href={`tel:${COMPANY.phoneClean}`} className="w-10 h-10 flex items-center justify-center text-brio-navy" aria-label="Call">
+            <a href={`tel:${COMPANY.phoneClean}`} className="w-10 h-10 flex items-center justify-center text-white" aria-label="Call">
               <Phone className="w-5 h-5" />
             </a>
-            <button onClick={() => setOpen(!open)} className="w-10 h-10 flex items-center justify-center text-brio-navy" aria-label="Menu">
+            <button onClick={() => setOpen(!open)} className="w-10 h-10 flex items-center justify-center text-white" aria-label="Menu">
               {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile menu */}
       {open && (
-        <div className="lg:hidden bg-white border-t border-border">
+        <div className="lg:hidden bg-brio-navy/95 backdrop-blur-sm">
           <div className="px-4 py-4 space-y-1">
-            {NAV_LINKS.map((link) => (
-              <Link key={link.label} href={link.href} className="block py-3 text-base font-medium text-brio-navy hover:text-brio-blue" onClick={() => setOpen(false)}>
+            {NAV_ITEMS.map((link) => (
+              <Link
+                key={link.label}
+                href={link.href}
+                className="block py-3 text-[15px] font-medium text-white"
+                onClick={() => setOpen(false)}
+              >
                 {link.label}
               </Link>
             ))}
-            <Link href="/about-us#get-in-touch" className="block w-full text-center mt-4 py-3 bg-brio-blue text-white font-semibold rounded-lg" onClick={() => setOpen(false)}>
-              Get Free Estimate
-            </Link>
           </div>
         </div>
       )}

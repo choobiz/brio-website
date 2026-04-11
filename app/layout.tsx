@@ -1,17 +1,10 @@
 import type { Metadata } from "next";
-import { Sora, Inter } from "next/font/google";
+import { Open_Sans } from "next/font/google";
 import Script from "next/script";
 import { TRACKING, COMPANY } from "@/lib/constants";
 import "./globals.css";
 
-const sora = Sora({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  display: "swap",
-  variable: "--font-heading",
-});
-
-const inter = Inter({
+const openSans = Open_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
@@ -21,8 +14,8 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL("https://builtbybrio.com"),
   title: {
-    default: "BRIO Construction | Vancouver Renovations & Custom Homes",
-    template: "%s | BRIO Construction",
+    default: "Home - BRIO Construction",
+    template: "%s - BRIO Construction",
   },
   description: COMPANY.description,
   icons: { icon: "/favicon.png" },
@@ -39,9 +32,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en-CA" className={`${sora.variable} ${inter.variable}`}>
+    <html lang="en-CA" className={openSans.variable}>
       <head>
-        {/* GA4 + Google Ads */}
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${TRACKING.ga4Id}`}
           strategy="afterInteractive"
@@ -50,8 +42,6 @@ export default function RootLayout({
           {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
 gtag('js',new Date());gtag('config','${TRACKING.ga4Id}');gtag('config','${TRACKING.gadsId}');`}
         </Script>
-
-        {/* Microsoft Clarity */}
         <Script id="clarity" strategy="afterInteractive">
           {`(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","${TRACKING.clarityId}");`}
         </Script>

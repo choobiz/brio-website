@@ -1,26 +1,19 @@
 @import "tailwindcss";
 
 @theme {
-  /* Brand Colors */
+  /* Exact colors from live site */
   --color-brio-navy: #1D3146;
-  --color-brio-blue: #0068A0;
-  --color-brio-gold: #C5A55A;
-  --color-brio-dark: #111827;
-  --color-brio-light: #F8FAFB;
-
-  /* Functional Colors */
-  --color-text-primary: #1D3146;
-  --color-text-secondary: #4B5563;
-  --color-text-muted: #9CA3AF;
+  --color-brio-light-gray: #F5F5F5;
+  --color-brio-faq-bg: #F9F9F9;
+  --color-text-dark: #1D3146;
+  --color-text-body: #555555;
+  --color-text-muted: #888888;
   --color-border: #E5E7EB;
-  --color-bg-light: #F3F4F6;
-  --color-bg-white: #FFFFFF;
-  --color-accent-green: #059669;
-  --color-accent-red: #DC2626;
+  --color-white: #FFFFFF;
 
-  /* Fonts */
-  --font-heading: "Sora", sans-serif;
-  --font-sans: "Inter", sans-serif;
+  /* Fonts matching live site */
+  --font-heading: "Times New Roman", "Georgia", serif;
+  --font-sans: "Open Sans", sans-serif;
 }
 
 html {
@@ -29,12 +22,12 @@ html {
 
 body {
   font-family: var(--font-sans);
-  color: var(--color-text-secondary);
+  color: var(--color-text-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4 {
   font-family: var(--font-heading);
-  color: var(--color-text-primary);
+  color: var(--color-text-dark);
 }

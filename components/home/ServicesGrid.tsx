@@ -1,49 +1,55 @@
 import Link from "next/link";
-import { Home, Building2, Paintbrush, UtensilsCrossed, Bath, Layers, Zap, Store, Map, PlusSquare, Hammer, Building } from "lucide-react";
+import Image from "next/image";
 import { SERVICES } from "@/lib/constants";
 
-const ICONS: Record<string, React.ElementType> = {
-  utensils: UtensilsCrossed,
-  paintbrush: Paintbrush,
-  bath: Bath,
-  layers: Layers,
-  home: Home,
-  building: Building,
-  building2: Building2,
-  house: Hammer,
-  "plus-square": PlusSquare,
-  store: Store,
-  zap: Zap,
-  map: Map,
+const SERVICE_IMAGES: Record<string, string> = {
+  "custom-home-construction": "/images/projects/trinity-thumb.jpg",
+  "spec-home-construction": "/images/projects/lolo-thumb.jpg",
+  "laneway-home-construction": "/images/projects/jefferson-thumb.jpg",
+  "home-additions-extensions": "/images/projects/east-broadway-thumb.jpg",
+  "home-renovations": "/images/projects/brokerage-thumb.jpg",
+  "commercial-renovations": "/images/projects/dental-office-thumb.jpg",
+  "kitchen-remodeling": "/images/projects/east-broadway-thumb.jpg",
+  "bathroom-remodeling": "/images/projects/jefferson-thumb.jpg",
+  "basement-remodeling": "/images/projects/lolo-thumb.jpg",
+  "high-performance-homes": "/images/projects/trinity-thumb.jpg",
+  "strata-services": "/images/projects/brokerage-thumb.jpg",
+  "land-development-pre-construction": "/images/projects/coffeeshop-thumb.jpg",
 };
 
 export default function ServicesGrid() {
   return (
-    <section className="py-16 md:py-24 bg-white">
+    <section className="bg-brio-light-gray py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <p className="text-brio-blue text-sm font-semibold uppercase tracking-wider mb-2">Our Services</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-brio-navy font-heading mb-3">
-            Whatever Your Project, BRIO Will Bring Your Vision to Life
+        <div className="text-center mb-10">
+          <p className="text-text-body text-sm uppercase tracking-widest mb-3">our services</p>
+          <h2 className="text-[32px] md:text-[42px] font-semibold text-brio-navy font-heading lowercase first-letter:uppercase">
+            whatever your project, BRIO team will bring your vision to life.
           </h2>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-          {SERVICES.map((service) => {
-            const Icon = ICONS[service.icon] || Home;
-            return (
-              <Link
-                key={service.slug}
-                href={`/${service.slug}`}
-                className="group flex flex-col items-center text-center p-6 rounded-xl border border-border hover:border-brio-blue/30 hover:shadow-lg transition-all duration-200"
-              >
-                <div className="w-14 h-14 rounded-xl bg-brio-blue/10 flex items-center justify-center mb-4 group-hover:bg-brio-blue/20 transition-colors">
-                  <Icon className="w-7 h-7 text-brio-blue" />
-                </div>
-                <h3 className="text-brio-navy text-sm font-semibold leading-tight">{service.name}</h3>
-              </Link>
-            );
-          })}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5">
+          {SERVICES.filter(s => s.slug !== "kitchen-refinishing" && s.slug !== "painting-services").map((service) => (
+            <Link
+              key={service.slug}
+              href={`/${service.slug}`}
+              className="group relative block overflow-hidden aspect-[4/3]"
+            >
+              <Image
+                src={SERVICE_IMAGES[service.slug] || "/images/projects/east-broadway-thumb.jpg"}
+                alt={service.name}
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-4">
+                <h5 className="text-white text-[13px] md:text-[14px] font-semibold uppercase tracking-wide">
+                  {service.name}
+                </h5>
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
     </section>
