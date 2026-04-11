@@ -19,7 +19,7 @@ export default function PartnersCarousel() {
   return (
     <section className="bg-brio-light-gray py-8 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-4">
-        <h2 className="text-center text-text-muted text-xs uppercase tracking-[3px]">our partners</h2>
+        <h2 className="text-center text-text-body text-[16px] md:text-[18px] uppercase tracking-[4px] font-semibold">our partners</h2>
       </div>
       <div className="relative">
         <div className="flex animate-scroll gap-12 items-center">
