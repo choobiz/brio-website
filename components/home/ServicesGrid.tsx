@@ -1,21 +1,20 @@
 import Link from "next/link";
-import Image from "next/image";
-import { SERVICES } from "@/lib/constants";
+import { Home, Building2, Landmark, PlusSquare, Paintbrush, Store, UtensilsCrossed, Bath, Layers, Zap, Settings, Map } from "lucide-react";
 
-const SERVICE_IMAGES: Record<string, string> = {
-  "custom-home-construction": "/images/services/custom-home.jpg",
-  "spec-home-construction": "/images/services/spec-home.jpg",
-  "laneway-home-construction": "/images/services/laneway.jpg",
-  "home-additions-extensions": "/images/services/additions.jpg",
-  "home-renovations": "/images/services/renovations.jpg",
-  "commercial-renovations": "/images/services/commercial.jpg",
-  "kitchen-remodeling": "/images/services/kitchen.jpg",
-  "bathroom-remodeling": "/images/services/bathroom.jpg",
-  "basement-remodeling": "/images/services/basement.jpg",
-  "high-performance-homes": "/images/services/high-perf.jpg",
-  "strata-services": "/images/services/strata.jpg",
-  "land-development-pre-construction": "/images/services/land-dev.jpg",
-};
+const SERVICES = [
+  { name: "Custom Home Construction", slug: "custom-home-construction", icon: Home },
+  { name: "Spec Home Construction", slug: "spec-home-construction", icon: Building2 },
+  { name: "Laneway Home Construction", slug: "laneway-home-construction", icon: Landmark },
+  { name: "Home Additions & Extensions", slug: "home-additions-extensions", icon: PlusSquare },
+  { name: "Home Renovations", slug: "home-renovations", icon: Paintbrush },
+  { name: "Commercial Renovations", slug: "commercial-renovations", icon: Store },
+  { name: "Kitchen Remodeling", slug: "kitchen-remodeling", icon: UtensilsCrossed },
+  { name: "Bathroom Remodeling", slug: "bathroom-remodeling", icon: Bath },
+  { name: "Basement Remodeling", slug: "basement-remodeling", icon: Layers },
+  { name: "High Performance Homes", slug: "high-performance-homes", icon: Zap },
+  { name: "Strata Services", slug: "strata-services", icon: Settings },
+  { name: "Land Development & Pre-Construction", slug: "land-development-pre-construction", icon: Map },
+];
 
 export default function ServicesGrid() {
   return (
@@ -23,33 +22,29 @@ export default function ServicesGrid() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
           <p className="text-text-body text-sm uppercase tracking-widest mb-3">our services</p>
-          <h2 className="text-[32px] md:text-[42px] font-semibold text-brio-navy font-heading lowercase first-letter:uppercase">
+          <h2 className="text-[28px] md:text-[42px] font-semibold text-brio-navy font-heading">
             whatever your project, BRIO team will bring your vision to life.
           </h2>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5">
-          {SERVICES.filter(s => s.slug !== "kitchen-refinishing" && s.slug !== "painting-services").map((service) => (
-            <Link
-              key={service.slug}
-              href={`/${service.slug}`}
-              className="group relative block overflow-hidden aspect-[4/3]"
-            >
-              <Image
-                src={SERVICE_IMAGES[service.slug] || "/images/projects/east-broadway-thumb.jpg"}
-                alt={service.name}
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
-                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-4">
-                <h5 className="text-white text-[13px] md:text-[14px] font-semibold uppercase tracking-wide">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-6">
+          {SERVICES.map((service) => {
+            const Icon = service.icon;
+            return (
+              <Link
+                key={service.slug}
+                href={`/${service.slug}`}
+                className="group flex flex-col items-center text-center bg-white p-6 md:p-8 hover:shadow-lg transition-all duration-200"
+              >
+                <div className="w-16 h-16 mb-4 flex items-center justify-center">
+                  <Icon className="w-10 h-10 text-brio-navy group-hover:text-brio-navy/70 transition-colors" strokeWidth={1.2} />
+                </div>
+                <h5 className="text-brio-navy text-[13px] md:text-[14px] font-semibold uppercase tracking-wide leading-tight">
                   {service.name}
                 </h5>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            );
+          })}
         </div>
       </div>
     </section>
