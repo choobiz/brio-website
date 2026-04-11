@@ -1,19 +1,65 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Hero() {
-  return (
-    <section className="relative min-h-[650px] flex items-center overflow-hidden">
-      <Image
-        src="/images/hero-home.jpg"
-        alt="BRIO Construction project"
-        fill
-        priority
-        className="object-cover"
-        sizes="100vw"
-      />
-      <div className="absolute inset-0 bg-black/50" />
+const SLIDES = [
+  "/images/hero-slides/slide-1.jpg",
+  "/images/hero-slides/slide-2.jpg",
+  "/images/hero-slides/slide-3.jpg",
+  "/images/hero-slides/slide-4.jpg",
+  "/images/hero-slides/slide-5.jpg",
+  "/images/hero-slides/slide-6.jpg",
+  "/images/hero-slides/slide-7.jpg",
+  "/images/hero-slides/slide-8.jpg",
+];
 
+const SLIDE_DURATION = 5000; // 5 seconds per slide
+
+export default function Hero() {
+  const [current, setCurrent] = useState(0);
+  const [isZooming, setIsZooming] = useState(true);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIsZooming(false);
+      // Brief pause for crossfade, then start next slide
+      setTimeout(() => {
+        setCurrent((prev) => (prev + 1) % SLIDES.length);
+        setIsZooming(true);
+      }, 800);
+    }, SLIDE_DURATION);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <section className="relative min-h-[650px] md:min-h-[750px] flex items-center overflow-hidden">
+      {/* Background slideshow */}
+      {SLIDES.map((src, i) => (
+        <div
+          key={src}
+          className="absolute inset-0 transition-opacity duration-[1200ms] ease-in-out"
+          style={{ opacity: i === current ? 1 : 0 }}
+        >
+          <Image
+            src={src}
+            alt=""
+            fill
+            priority={i === 0}
+            className={`object-cover transition-transform duration-[6000ms] ease-out ${
+              i === current && isZooming ? "scale-110" : "scale-100"
+            }`}
+            sizes="100vw"
+          />
+        </div>
+      ))}
+
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black/45" />
+
+      {/* Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-28 lg:py-36 w-full">
         <div className="max-w-3xl">
           <h1 className="text-white text-[42px] md:text-[56px] lg:text-[68px] font-semibold leading-[1.1] mb-6 font-heading">
@@ -29,6 +75,20 @@ export default function Hero() {
             Book Your Free Consultation
           </Link>
         </div>
+      </div>
+
+      {/* Slide indicators */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex gap-2">
+        {SLIDES.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => { setCurrent(i); setIsZooming(true); }}
+            className={`w-2 h-2 rounded-full transition-all ${
+              i === current ? "bg-white w-6" : "bg-white/40"
+            }`}
+            aria-label={`Go to slide ${i + 1}`}
+          />
+        ))}
       </div>
     </section>
   );
