@@ -19,11 +19,11 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="absolute top-0 left-0 right-0 z-50 bg-brio-navy/60 backdrop-blur-sm">
+    <nav className="sticky top-0 z-50 bg-white shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between" style={{ height: "76px" }}>
+        <div className="flex items-center justify-between" style={{ height: "64px" }}>
           <Link href="/" className="shrink-0">
-            <Image src="/images/logo.png" alt={COMPANY.name} width={160} height={50} className="h-[50px] w-auto" priority />
+            <Image src="/images/logo.png" alt={COMPANY.name} width={140} height={50} className="h-[50px] w-auto" priority />
           </Link>
 
           {/* Desktop nav */}
@@ -32,7 +32,7 @@ export default function Navbar() {
               <Link
                 key={link.label}
                 href={link.href}
-                className="text-[14px] font-medium text-white/90 hover:text-white transition-colors tracking-wide"
+                className="text-[14px] font-medium text-brio-navy hover:text-brio-navy/70 transition-colors tracking-wide"
               >
                 {link.label}
               </Link>
@@ -42,7 +42,7 @@ export default function Navbar() {
           {/* Phone */}
           <a
             href={`tel:${COMPANY.phoneClean}`}
-            className="hidden lg:flex items-center gap-2 text-[14px] font-medium text-white/90 hover:text-white transition-colors"
+            className="hidden lg:flex items-center gap-2 text-[14px] font-medium text-brio-navy hover:text-brio-navy/70 transition-colors"
           >
             <Phone className="w-4 h-4" />
             {COMPANY.phone}
@@ -50,10 +50,10 @@ export default function Navbar() {
 
           {/* Mobile toggle */}
           <div className="flex lg:hidden items-center gap-2">
-            <a href={`tel:${COMPANY.phoneClean}`} className="w-10 h-10 flex items-center justify-center text-white" aria-label="Call">
+            <a href={`tel:${COMPANY.phoneClean}`} className="w-10 h-10 flex items-center justify-center text-brio-navy" aria-label="Call">
               <Phone className="w-5 h-5" />
             </a>
-            <button onClick={() => setOpen(!open)} className="w-10 h-10 flex items-center justify-center text-white" aria-label="Menu">
+            <button onClick={() => setOpen(!open)} className="w-10 h-10 flex items-center justify-center text-brio-navy" aria-label="Menu">
               {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>

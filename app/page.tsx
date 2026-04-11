@@ -1,6 +1,7 @@
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
 import Hero from "@/components/home/Hero";
+import PartnersCarousel from "@/components/home/PartnersCarousel";
 import ServicesGrid from "@/components/home/ServicesGrid";
 import ProcessSteps from "@/components/home/ProcessSteps";
 import TrustSignals from "@/components/home/TrustSignals";
@@ -33,12 +34,7 @@ export default function Home() {
       <Navbar />
       <Hero />
 
-      {/* Partners Bar */}
-      <section className="bg-brio-light-gray py-5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-center text-text-muted text-xs uppercase tracking-widest mb-0">our partners</h2>
-        </div>
-      </section>
+      <PartnersCarousel />
 
       {/* Building Confidence Section */}
       <section className="py-16 md:py-24 bg-white">
