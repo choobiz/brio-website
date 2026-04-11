@@ -19,7 +19,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="absolute top-0 left-0 right-0 z-50">
+    <nav className="absolute top-0 left-0 right-0 z-50 bg-brio-navy/60 backdrop-blur-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between" style={{ height: "76px" }}>
           <Link href="/" className="shrink-0">

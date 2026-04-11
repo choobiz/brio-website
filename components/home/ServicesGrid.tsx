@@ -3,18 +3,18 @@ import Image from "next/image";
 import { SERVICES } from "@/lib/constants";
 
 const SERVICE_IMAGES: Record<string, string> = {
-  "custom-home-construction": "/images/projects/trinity-thumb.jpg",
-  "spec-home-construction": "/images/projects/lolo-thumb.jpg",
-  "laneway-home-construction": "/images/projects/jefferson-thumb.jpg",
-  "home-additions-extensions": "/images/projects/east-broadway-thumb.jpg",
-  "home-renovations": "/images/projects/brokerage-thumb.jpg",
-  "commercial-renovations": "/images/projects/dental-office-thumb.jpg",
-  "kitchen-remodeling": "/images/projects/east-broadway-thumb.jpg",
-  "bathroom-remodeling": "/images/projects/jefferson-thumb.jpg",
-  "basement-remodeling": "/images/projects/lolo-thumb.jpg",
-  "high-performance-homes": "/images/projects/trinity-thumb.jpg",
-  "strata-services": "/images/projects/brokerage-thumb.jpg",
-  "land-development-pre-construction": "/images/projects/coffeeshop-thumb.jpg",
+  "custom-home-construction": "/images/services/custom-home.jpg",
+  "spec-home-construction": "/images/services/spec-home.jpg",
+  "laneway-home-construction": "/images/services/laneway.jpg",
+  "home-additions-extensions": "/images/services/additions.jpg",
+  "home-renovations": "/images/services/renovations.jpg",
+  "commercial-renovations": "/images/services/commercial.jpg",
+  "kitchen-remodeling": "/images/services/kitchen.jpg",
+  "bathroom-remodeling": "/images/services/bathroom.jpg",
+  "basement-remodeling": "/images/services/basement.jpg",
+  "high-performance-homes": "/images/services/high-perf.jpg",
+  "strata-services": "/images/services/strata.jpg",
+  "land-development-pre-construction": "/images/services/land-dev.jpg",
 };
 
 export default function ServicesGrid() {
