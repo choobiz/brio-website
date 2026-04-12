@@ -100,25 +100,37 @@ export default function CityPageLayout({ cityName }: CityPageLayoutProps) {
     <>
       <Navbar />
 
-      {/* ── Hero ── */}
-      <section className="bg-white pt-14 pb-20 md:pt-20 md:pb-28">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-lg mb-10">
-            <h1 className="font-heading text-[36px] md:text-[48px] font-semibold text-brio-navy leading-[1.1] mb-4">
-              Achieve Your Dream Home In {cityName}
-            </h1>
-            <p className="text-text-body text-[15px] leading-relaxed mb-6">
-              Remodel with BRIO Construction, get transparent pricing, expert guidance, and turn your ideas into reality.
-            </p>
-            <Link
-              href="#get-in-touch"
-              className="inline-block bg-brio-navy text-white text-[13px] font-semibold px-7 py-3.5 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
-            >
-              Contact Us for a Free Quotation
-            </Link>
+      {/* ── Hero – two-column: text left, image right ── */}
+      <section className="bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 items-center">
+            {/* Left – text */}
+            <div className="py-16 md:py-24 md:pr-12">
+              <h1 className="font-heading text-[36px] md:text-[46px] font-semibold text-brio-navy leading-[1.15] mb-5">
+                Achieve Your Dream Home In {cityName}
+              </h1>
+              <p className="text-text-body text-[15px] leading-relaxed mb-7 max-w-md">
+                Remodel with BRIO Construction, get transparent pricing, expert guidance, and turn your ideas into reality.
+              </p>
+              <Link
+                href="#get-in-touch"
+                className="inline-block bg-brio-navy text-white text-[13px] font-semibold px-7 py-3.5 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
+              >
+                Contact Us for a Free Quotation
+              </Link>
+            </div>
+            {/* Right – image */}
+            <div className="relative h-[300px] md:h-full md:min-h-[480px]">
+              <Image
+                src="/images/city/hero-1.jpg"
+                alt="Modern home renovation by BRIO Construction"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority
+              />
+            </div>
           </div>
-
-          <ImageCarousel />
         </div>
       </section>
 
