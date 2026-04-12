@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Phone, Menu, X, ChevronDown } from "lucide-react";
-import { COMPANY, SERVICES } from "@/lib/constants";
+import { COMPANY, SERVICES, AREAS } from "@/lib/constants";
 
 interface DropdownItem {
   label: string;
@@ -16,6 +16,7 @@ interface NavItem {
   href: string;
   dropdown?: DropdownItem[];
   twoColumn?: boolean;
+  customDropdown?: "about";
 }
 
 const SERVICE_DROPDOWN_SLUGS = [
@@ -36,7 +37,7 @@ const SERVICE_DROPDOWN_SLUGS = [
 
 const NAV_ITEMS: NavItem[] = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about-us" },
+  { label: "About", href: "/about-us", customDropdown: "about" },
   {
     label: "Services",
     href: "/services",
@@ -78,7 +79,7 @@ function DesktopDropdown({
     };
   }, []);
 
-  if (!item.dropdown) {
+  if (!item.dropdown && !item.customDropdown) {
     return (
       <Link
         href={item.href}
@@ -101,21 +102,47 @@ function DesktopDropdown({
 
       {open && (
         <div className="absolute top-full left-0 pt-2 z-50">
-          <div
-            className={`bg-white rounded shadow-lg border border-gray-100 py-2 ${
-              item.twoColumn ? "grid grid-cols-2 min-w-[480px]" : "min-w-[260px]"
-            }`}
-          >
-            {item.dropdown.map((sub) => (
-              <Link
-                key={sub.href}
-                href={sub.href}
-                className="block px-4 py-2.5 text-[13px] text-gray-700 hover:bg-gray-50 hover:text-brio-navy transition-colors"
-              >
-                {sub.label}
-              </Link>
-            ))}
-          </div>
+          {item.customDropdown === "about" ? (
+            <div className="bg-white rounded shadow-lg border border-gray-100 min-w-[420px]">
+              <div className="px-5 py-3">
+                <Link href="/about-us" className="block text-[14px] text-gray-800 hover:text-brio-navy transition-colors py-1.5">
+                  About Us
+                </Link>
+                <Link href="/areas-we-serve" className="block text-[14px] text-gray-800 hover:text-brio-navy transition-colors py-1.5">
+                  Areas We Serve
+                </Link>
+              </div>
+              <hr className="border-gray-200 mx-5" />
+              <div className="grid grid-cols-2 gap-x-4 px-5 py-4">
+                {AREAS.map((area) => (
+                  <Link
+                    key={area.slug}
+                    href={`/${area.slug}`}
+                    className="flex items-center gap-2 py-1.5 text-[13px] font-medium text-gray-700 hover:text-brio-navy transition-colors"
+                  >
+                    <span className="text-gray-400">&rarr;</span>
+                    {area.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div
+              className={`bg-white rounded shadow-lg border border-gray-100 py-2 ${
+                item.twoColumn ? "grid grid-cols-2 min-w-[480px]" : "min-w-[260px]"
+              }`}
+            >
+              {item.dropdown!.map((sub) => (
+                <Link
+                  key={sub.href}
+                  href={sub.href}
+                  className="block px-4 py-2.5 text-[13px] text-gray-700 hover:bg-gray-50 hover:text-brio-navy transition-colors"
+                >
+                  {sub.label}
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
       )}
     </div>
@@ -196,15 +223,8 @@ export default function Navbar() {
       {mobileOpen && (
         <div className="lg:hidden bg-brio-navy/95 backdrop-blur-sm">
           <div className="px-4 py-4 space-y-1">
-            <Link
-              href="/"
-              className="block py-3 text-[15px] font-medium text-white"
-              onClick={() => setMobileOpen(false)}
-            >
-              Home
-            </Link>
             {NAV_ITEMS.map((item) =>
-              item.dropdown ? (
+              item.dropdown || item.customDropdown ? (
                 <div key={item.label}>
                   <button
                     onClick={() =>
@@ -221,23 +241,37 @@ export default function Navbar() {
                   </button>
                   {mobileExpanded === item.label && (
                     <div className="pl-4 pb-2 space-y-1">
-                      <Link
-                        href={item.href}
-                        className="block py-2 text-[14px] text-white/80 hover:text-white"
-                        onClick={() => setMobileOpen(false)}
-                      >
-                        View All
-                      </Link>
-                      {item.dropdown.map((sub) => (
-                        <Link
-                          key={sub.href}
-                          href={sub.href}
-                          className="block py-2 text-[14px] text-white/80 hover:text-white"
-                          onClick={() => setMobileOpen(false)}
-                        >
-                          {sub.label}
-                        </Link>
-                      ))}
+                      {item.customDropdown === "about" ? (
+                        <>
+                          <Link href="/about-us" className="block py-2 text-[14px] text-white/80 hover:text-white" onClick={() => setMobileOpen(false)}>About Us</Link>
+                          <Link href="/areas-we-serve" className="block py-2 text-[14px] text-white/80 hover:text-white" onClick={() => setMobileOpen(false)}>Areas We Serve</Link>
+                          {AREAS.map((area) => (
+                            <Link key={area.slug} href={`/${area.slug}`} className="block py-2 text-[14px] text-white/60 hover:text-white pl-2" onClick={() => setMobileOpen(false)}>
+                              &rarr; {area.name}
+                            </Link>
+                          ))}
+                        </>
+                      ) : (
+                        <>
+                          <Link
+                            href={item.href}
+                            className="block py-2 text-[14px] text-white/80 hover:text-white"
+                            onClick={() => setMobileOpen(false)}
+                          >
+                            View All
+                          </Link>
+                          {item.dropdown!.map((sub) => (
+                            <Link
+                              key={sub.href}
+                              href={sub.href}
+                              className="block py-2 text-[14px] text-white/80 hover:text-white"
+                              onClick={() => setMobileOpen(false)}
+                            >
+                              {sub.label}
+                            </Link>
+                          ))}
+                        </>
+                      )}
                     </div>
                   )}
                 </div>
