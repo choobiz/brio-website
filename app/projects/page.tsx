@@ -41,7 +41,7 @@ export default function ProjectsPage() {
                 <div className="p-6">
                   <h3 className="text-brio-navy text-[18px] font-semibold font-heading mb-1">{p.name}</h3>
                   <p className="text-text-muted text-[13px] mb-3">Project Year: {p.year}</p>
-                  <Link href={`/projects`} className="text-brio-navy text-[13px] font-semibold uppercase tracking-wide hover:underline">Learn More →</Link>
+                  <Link href={`/projects/${p.slug}`} className="text-brio-navy text-[13px] font-semibold uppercase tracking-wide hover:underline">Learn More →</Link>
                 </div>
               </div>
             ))}
