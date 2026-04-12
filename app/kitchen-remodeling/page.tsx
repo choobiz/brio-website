@@ -124,6 +124,39 @@ export default function KitchenPage() {
       </section>
 
 
+      {/* Before/After Section */}
+      <section className="py-10 md:py-16 bg-brio-light-gray">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {[
+              { before: "/images/kitchen/before-1.jpg", after: "/images/kitchen/after-1.jpg" },
+              { before: "/images/kitchen/before-2.jpg", after: "/images/kitchen/after-2.jpg" },
+              { before: "/images/kitchen/before-3.webp", after: "/images/kitchen/after-3.png" },
+            ].map((pair, i) => (
+              <div key={i} className="relative overflow-hidden rounded-sm">
+                <div className="grid grid-cols-2 h-[250px]">
+                  <div className="relative">
+                    <Image src={pair.before} alt={`Kitchen before renovation ${i + 1}`} fill className="object-cover" sizes="25vw" />
+                    {i === 1 && <span className="absolute bottom-3 right-1 bg-black/50 text-white text-[11px] px-2 py-0.5 rounded">Before</span>}
+                  </div>
+                  <div className="relative">
+                    <Image src={pair.after} alt={`Kitchen after renovation ${i + 1}`} fill className="object-cover" sizes="25vw" />
+                    {i === 1 && <span className="absolute bottom-3 left-1 bg-black/50 text-white text-[11px] px-2 py-0.5 rounded">After</span>}
+                  </div>
+                </div>
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <div className="w-8 h-8 rounded-full bg-white/80 flex items-center justify-center shadow">
+                    <svg className="w-4 h-4 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M8 7l-4 5 4 5M16 7l4 5-4 5" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* 6. Trust Signals — Two-column layout */}
       <section className="py-16 md:py-24 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -166,12 +199,32 @@ export default function KitchenPage() {
         </div>
       </section>
 
-      {/* 7. Full-width CTA banner */}
-      <section className="bg-brio-navy py-14 md:py-20">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-heading text-[24px] md:text-[34px] font-bold text-white uppercase tracking-wide leading-snug">
-            Love Your Kitchen Again, Let&apos;s Build Something Beautiful!
+      {/* 7. Kitchen Gallery */}
+      <section className="py-14 md:py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="font-heading text-[24px] md:text-[34px] font-semibold text-brio-navy uppercase tracking-wide leading-snug mb-10 italic">
+            Love Your Kitchen Again,<br />Let&apos;s Build Something Beautiful!
           </h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+            {[
+              "/images/kitchen/gallery-09.webp",
+              "/images/kitchen/gallery-10.webp",
+              "/images/kitchen/gallery-11.webp",
+              "/images/kitchen/gallery-01.jpg",
+              "/images/kitchen/gallery-12.webp",
+              "/images/kitchen/gallery-03.jpg",
+              "/images/kitchen/gallery-06.webp",
+              "/images/kitchen/gallery-13.jpg",
+              "/images/kitchen/gallery-04.jpg",
+              "/images/kitchen/gallery-05.webp",
+              "/images/kitchen/gallery-02.jpg",
+              "/images/kitchen/gallery-00.jpg",
+            ].map((src, i) => (
+              <div key={i} className="relative aspect-[4/3] overflow-hidden">
+                <Image src={src} alt={`Kitchen renovation project ${i + 1}`} fill className="object-cover hover:scale-105 transition-transform duration-300" sizes="(max-width: 768px) 50vw, 33vw" />
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
