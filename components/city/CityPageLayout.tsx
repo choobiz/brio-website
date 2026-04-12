@@ -133,7 +133,7 @@ export default function CityPageLayout({ cityName }: CityPageLayoutProps) {
             {/* Right – image */}
             <div className="relative h-[300px] md:h-full md:min-h-[480px]">
               <Image
-                src="/images/city/hero-2.jpg"
+                src="/images/city/hero-main.jpg"
                 alt="Modern home renovation by BRIO Construction"
                 fill
                 className="object-cover"
