@@ -81,23 +81,16 @@ export default function AboutPage() {
     <>
       <Navbar />
 
-      {/* Hero */}
-      <section className="relative py-24 md:py-36">
-        <Image
-          src="/images/about/hero.png"
-          alt="BRIO Construction van in front of a custom home"
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="absolute inset-0 bg-brio-navy/60" />
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-[36px] md:text-[48px] font-semibold text-white font-heading mb-4">
-            About BRIO Construction
-          </h1>
-          <p className="text-white/90 text-[16px] md:text-[18px] leading-relaxed max-w-2xl mx-auto">
-            Built with Confidence, Built by BRIO.
-          </p>
+      {/* Hero Image */}
+      <section>
+        <div className="relative w-full aspect-[21/9] md:aspect-[3/1]">
+          <Image
+            src="/images/about/hero.png"
+            alt="BRIO Construction van in front of a custom home"
+            fill
+            className="object-cover"
+            priority
+          />
         </div>
       </section>
 
