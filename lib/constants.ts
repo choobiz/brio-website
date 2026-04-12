@@ -49,6 +49,7 @@ export const AREAS = [
   { name: "New Westminster", slug: "new-westminster" },
   { name: "Squamish", slug: "squamish" },
   { name: "Lions Bay", slug: "lions-bay" },
+  { name: "Port Moody", slug: "port-moody" },
 ] as const;
 
 export const NAV_LINKS = [
