@@ -42,49 +42,60 @@ function buildFaq(cityName: string) {
 }
 
 function ImageCarousel() {
+  // Show 2 images at a time, so we have pairs: [0,1] and [2,3]
+  const totalSlides = Math.ceil(HERO_IMAGES.length / 2);
   const [current, setCurrent] = useState(0);
 
-  const prev = () => setCurrent((c) => (c === 0 ? HERO_IMAGES.length - 1 : c - 1));
-  const next = () => setCurrent((c) => (c === HERO_IMAGES.length - 1 ? 0 : c + 1));
+  const prev = () => setCurrent((c) => (c === 0 ? totalSlides - 1 : c - 1));
+  const next = () => setCurrent((c) => (c === totalSlides - 1 ? 0 : c + 1));
 
   return (
     <div className="relative w-full">
-      <div className="relative aspect-[16/9] overflow-hidden">
-        {HERO_IMAGES.map((img, i) => (
-          <div
-            key={img.src}
-            className={`absolute inset-0 transition-opacity duration-500 ${i === current ? "opacity-100" : "opacity-0"}`}
-          >
-            <Image src={img.src} alt={img.alt} fill className="object-cover" sizes="100vw" priority={i === 0} />
-          </div>
-        ))}
+      <div className="overflow-hidden">
+        <div
+          className="flex transition-transform duration-500 ease-in-out"
+          style={{ transform: `translateX(-${current * 100}%)` }}
+        >
+          {Array.from({ length: totalSlides }).map((_, slideIdx) => (
+            <div key={slideIdx} className="w-full shrink-0 grid grid-cols-2 gap-4">
+              {HERO_IMAGES.slice(slideIdx * 2, slideIdx * 2 + 2).map((img) => (
+                <div key={img.src} className="relative aspect-[4/3] overflow-hidden">
+                  <Image src={img.src} alt={img.alt} fill className="object-cover" sizes="50vw" />
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
-      {/* Dots */}
-      <div className="flex justify-center gap-2 mt-4">
-        {HERO_IMAGES.map((_, i) => (
+      {/* Dots + Arrows row */}
+      <div className="flex items-center justify-center gap-4 mt-5">
+        <div className="flex gap-2">
+          {Array.from({ length: totalSlides }).map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrent(i)}
+              className={`w-2.5 h-2.5 rounded-full transition-colors ${i === current ? "bg-brio-navy" : "bg-gray-300"}`}
+              aria-label={`Go to slide ${i + 1}`}
+            />
+          ))}
+        </div>
+        <div className="flex gap-2">
           <button
-            key={i}
-            onClick={() => setCurrent(i)}
-            className={`w-2.5 h-2.5 rounded-full transition-colors ${i === current ? "bg-brio-navy" : "bg-gray-300"}`}
-            aria-label={`Go to slide ${i + 1}`}
-          />
-        ))}
+            onClick={prev}
+            className="w-8 h-8 rounded-full border border-brio-navy flex items-center justify-center text-brio-navy hover:bg-brio-navy hover:text-white transition-colors"
+            aria-label="Previous"
+          >
+            <ChevronLeft className="w-4 h-4" />
+          </button>
+          <button
+            onClick={next}
+            className="w-8 h-8 rounded-full border border-brio-navy flex items-center justify-center text-brio-navy hover:bg-brio-navy hover:text-white transition-colors"
+            aria-label="Next"
+          >
+            <ChevronRight className="w-4 h-4" />
+          </button>
+        </div>
       </div>
-      {/* Arrows */}
-      <button
-        onClick={prev}
-        className="absolute right-12 -bottom-5 w-8 h-8 rounded-full border border-brio-navy flex items-center justify-center text-brio-navy hover:bg-brio-navy hover:text-white transition-colors"
-        aria-label="Previous"
-      >
-        <ChevronLeft className="w-4 h-4" />
-      </button>
-      <button
-        onClick={next}
-        className="absolute right-2 -bottom-5 w-8 h-8 rounded-full border border-brio-navy flex items-center justify-center text-brio-navy hover:bg-brio-navy hover:text-white transition-colors"
-        aria-label="Next"
-      >
-        <ChevronRight className="w-4 h-4" />
-      </button>
     </div>
   );
 }
@@ -122,7 +133,7 @@ export default function CityPageLayout({ cityName }: CityPageLayoutProps) {
             {/* Right – image */}
             <div className="relative h-[300px] md:h-full md:min-h-[480px]">
               <Image
-                src="/images/city/hero-1.jpg"
+                src="/images/city/hero-2.jpg"
                 alt="Modern home renovation by BRIO Construction"
                 fill
                 className="object-cover"
@@ -135,7 +146,7 @@ export default function CityPageLayout({ cityName }: CityPageLayoutProps) {
       </section>
 
       {/* ── Image Carousel ── */}
-      <section className="bg-white pb-16 md:pb-24">
+      <section className="bg-white pt-8 pb-16 md:pt-12 md:pb-24 border-t border-gray-100">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <ImageCarousel />
         </div>
