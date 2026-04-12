@@ -81,12 +81,32 @@ export default function AboutPage() {
     <>
       <Navbar />
 
+      {/* Hero */}
+      <section className="relative py-24 md:py-36">
+        <Image
+          src="/images/about/hero.png"
+          alt="BRIO Construction van in front of a custom home"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-brio-navy/60" />
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-[36px] md:text-[48px] font-semibold text-white font-heading mb-4">
+            About BRIO Construction
+          </h1>
+          <p className="text-white/90 text-[16px] md:text-[18px] leading-relaxed max-w-2xl mx-auto">
+            Built with Confidence, Built by BRIO.
+          </p>
+        </div>
+      </section>
+
       {/* Core Values */}
       <section className="bg-brio-light-gray py-16 md:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-[32px] md:text-[42px] font-semibold text-brio-navy font-heading text-center mb-6">
+          <h2 className="text-[28px] md:text-[36px] font-semibold text-brio-navy font-heading text-center mb-6">
             Our Core Values
-          </h1>
+          </h2>
           <p className="text-text-body text-[15px] leading-relaxed text-center mb-10">
             At BRIO Construction, our values shape everything we do from the way
             we build to the relationships we cultivate with clients, partners,
