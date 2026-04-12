@@ -323,6 +323,49 @@ export default function CityPageLayout({ cityName }: CityPageLayoutProps) {
         </div>
       </section>
 
+      {/* ── Newsletter ── */}
+      <section className="py-16 md:py-24 bg-brio-light-gray">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            {/* Left – text + form */}
+            <div>
+              <p className="text-text-muted text-[12px] uppercase tracking-widest mb-2">Subscribe</p>
+              <h2 className="font-heading text-[28px] md:text-[34px] font-bold text-brio-navy mb-4">
+                The Inside Look
+              </h2>
+              <p className="text-text-body text-[15px] leading-relaxed mb-6">
+                The email newsletter that delivers curated home decor and furniture picks, expert design advice, and more. Join 4,000+ subscribers.
+              </p>
+              <form className="space-y-3">
+                <input
+                  type="email"
+                  placeholder="Your email address..."
+                  className="w-full h-12 px-4 border border-gray-300 text-sm bg-white focus:outline-none focus:border-brio-navy"
+                />
+                <button
+                  type="submit"
+                  className="w-full h-12 bg-brio-navy text-white font-semibold uppercase tracking-wide text-[13px] hover:bg-brio-navy/90 transition-colors"
+                >
+                  Sign Me Up
+                </button>
+              </form>
+            </div>
+            {/* Right – image with arch shape */}
+            <div className="flex justify-center">
+              <div className="relative w-[340px] h-[400px] md:w-[380px] md:h-[440px] rounded-t-full overflow-hidden">
+                <Image
+                  src="/images/newsletter.png"
+                  alt="Builder overlooking a construction site"
+                  fill
+                  className="object-cover"
+                  sizes="400px"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <Footer />
     </>
   );
