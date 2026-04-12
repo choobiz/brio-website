@@ -9,12 +9,51 @@ import FAQ from "@/components/shared/FAQ";
 import { SERVICES } from "@/lib/constants";
 import { ChevronLeft, ChevronRight, Check } from "lucide-react";
 
-const HERO_IMAGES = [
-  { src: "/images/city/hero-1.jpg", alt: "Modern bathroom renovation" },
-  { src: "/images/city/hero-2.jpg", alt: "Kitchen interior design" },
-  { src: "/images/city/hero-3.jpg", alt: "Home renovation in progress" },
-  { src: "/images/city/hero-4.webp", alt: "Custom home interior" },
+// 13 images available — each city gets a unique set
+const ALL_IMAGES = [
+  "/images/city/hero-main.jpg",   // 0  - duplex exterior
+  "/images/city/img-01.jpg",      // 1  - interior living
+  "/images/city/img-02.jpg",      // 2  - luxury living room
+  "/images/city/img-03.jpg",      // 3  - duplex interior
+  "/images/city/img-04.jpg",      // 4  - home extension living area
+  "/images/city/img-05.webp",     // 5  - modern interior
+  "/images/city/img-06.webp",     // 6  - kitchen/dining
+  "/images/city/img-07.avif",     // 7  - warm living room
+  "/images/city/img-08.webp",     // 8  - bathroom renovation
+  "/images/city/img-09.webp",     // 9  - kitchen after
+  "/images/city/img-10.webp",     // 10 - kitchen after
+  "/images/city/img-11.webp",     // 11 - kitchen after
+  "/images/city/img-12.webp",     // 12 - kitchen after
+  "/images/city/img-13.jpg",      // 13 - condo interior
 ];
+
+// Each city gets: [heroImage, servicesImage, carousel1, carousel2, carousel3, carousel4]
+const CITY_IMAGES: Record<string, number[]> = {
+  "Vancouver":        [0, 6,   1, 2, 9, 13],
+  "North Vancouver":  [1, 8,   3, 5, 10, 7],
+  "West Vancouver":   [2, 11,  4, 0, 8, 6],
+  "Burnaby":          [3, 9,   7, 1, 12, 5],
+  "Coquitlam":        [4, 10,  0, 6, 13, 8],
+  "Richmond":         [5, 12,  2, 3, 11, 7],
+  "New Westminster":  [7, 13,  1, 9, 4, 0],
+  "Squamish":         [6, 1,   5, 12, 3, 10],
+  "Lions Bay":        [13, 3,  8, 11, 2, 9],
+  "Port Moody":       [8, 5,   7, 10, 0, 4],
+};
+
+function getCityImages(cityName: string) {
+  const indices = CITY_IMAGES[cityName] ?? [0, 6, 1, 2, 9, 13];
+  return {
+    hero: ALL_IMAGES[indices[0]],
+    services: ALL_IMAGES[indices[1]],
+    carousel: [
+      { src: ALL_IMAGES[indices[2]], alt: `${cityName} renovation project 1` },
+      { src: ALL_IMAGES[indices[3]], alt: `${cityName} renovation project 2` },
+      { src: ALL_IMAGES[indices[4]], alt: `${cityName} renovation project 3` },
+      { src: ALL_IMAGES[indices[5]], alt: `${cityName} renovation project 4` },
+    ],
+  };
+}
 
 const TRUST_ITEMS = [
   { title: "Clear Communication", text: "We aim to maintain clear communication with you throughout the entire project, to help ensure your renovation is a success." },
@@ -41,9 +80,9 @@ function buildFaq(cityName: string) {
   ];
 }
 
-function ImageCarousel() {
+function ImageCarousel({ images }: { images: { src: string; alt: string }[] }) {
   // Show 2 images at a time, so we have pairs: [0,1] and [2,3]
-  const totalSlides = Math.ceil(HERO_IMAGES.length / 2);
+  const totalSlides = Math.ceil(images.length / 2);
   const [current, setCurrent] = useState(0);
 
   const prev = () => setCurrent((c) => (c === 0 ? totalSlides - 1 : c - 1));
@@ -58,7 +97,7 @@ function ImageCarousel() {
         >
           {Array.from({ length: totalSlides }).map((_, slideIdx) => (
             <div key={slideIdx} className="w-full shrink-0 grid grid-cols-2 gap-4">
-              {HERO_IMAGES.slice(slideIdx * 2, slideIdx * 2 + 2).map((img) => (
+              {images.slice(slideIdx * 2, slideIdx * 2 + 2).map((img) => (
                 <div key={img.src} className="relative aspect-[4/3] overflow-hidden">
                   <Image src={img.src} alt={img.alt} fill className="object-cover" sizes="50vw" />
                 </div>
@@ -106,6 +145,7 @@ interface CityPageLayoutProps {
 
 export default function CityPageLayout({ cityName }: CityPageLayoutProps) {
   const faq = buildFaq(cityName);
+  const cityImages = getCityImages(cityName);
 
   return (
     <>
@@ -133,8 +173,8 @@ export default function CityPageLayout({ cityName }: CityPageLayoutProps) {
             {/* Right – image */}
             <div className="relative h-[300px] md:h-full md:min-h-[480px]">
               <Image
-                src="/images/city/hero-main.jpg"
-                alt="Modern home renovation by BRIO Construction"
+                src={cityImages.hero}
+                alt={`Home renovation in ${cityName} by BRIO Construction`}
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -148,7 +188,7 @@ export default function CityPageLayout({ cityName }: CityPageLayoutProps) {
       {/* ── Image Carousel ── */}
       <section className="bg-white pt-8 pb-16 md:pt-12 md:pb-24 border-t border-gray-100">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ImageCarousel />
+          <ImageCarousel images={cityImages.carousel} />
         </div>
       </section>
 
@@ -244,8 +284,8 @@ export default function CityPageLayout({ cityName }: CityPageLayoutProps) {
             {/* Right – image */}
             <div className="relative h-[350px] md:h-auto md:min-h-[500px]">
               <Image
-                src="/images/city/hero-1.jpg"
-                alt="Kitchen renovation by BRIO Construction"
+                src={cityImages.services}
+                alt={`Renovation project in ${cityName} by BRIO Construction`}
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
