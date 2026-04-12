@@ -195,46 +195,63 @@ export default function CityPageLayout({ cityName }: CityPageLayoutProps) {
         </div>
       </section>
 
-      {/* ── Services – two-column with checkmarks ── */}
-      <section className="py-10 md:py-14 bg-white border-t border-gray-100">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-2.5">
-            <ul className="space-y-2.5">
-              {SERVICES_LEFT.map((s) => (
-                <li key={s.slug}>
-                  <Link href={`/${s.slug}`} className="flex items-center gap-2.5 text-text-body text-[14px] hover:text-brio-navy transition-colors">
-                    <Check className="w-4 h-4 text-brio-navy shrink-0" />
-                    {s.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <ul className="space-y-2.5">
-              {SERVICES_RIGHT.map((s) => (
-                <li key={s.slug}>
-                  <Link href={`/${s.slug}`} className="flex items-center gap-2.5 text-text-body text-[14px] hover:text-brio-navy transition-colors">
-                    <Check className="w-4 h-4 text-brio-navy shrink-0" />
-                    {s.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
+      {/* ── Services + CTA with image on right ── */}
+      <section className="bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
+            {/* Left – service list + CTA */}
+            <div className="py-12 md:py-16 md:pr-12">
+              {/* Service checkmarks */}
+              <div className="grid grid-cols-2 gap-x-8 gap-y-3 mb-12">
+                <ul className="space-y-3">
+                  {SERVICES_LEFT.map((s) => (
+                    <li key={s.slug}>
+                      <Link href={`/${s.slug}`} className="flex items-center gap-3 text-text-body text-[14px] font-medium hover:text-brio-navy transition-colors">
+                        <span className="w-5 h-5 rounded bg-brio-navy flex items-center justify-center shrink-0">
+                          <Check className="w-3.5 h-3.5 text-white" />
+                        </span>
+                        {s.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                <ul className="space-y-3">
+                  {SERVICES_RIGHT.map((s) => (
+                    <li key={s.slug}>
+                      <Link href={`/${s.slug}`} className="flex items-center gap-3 text-text-body text-[14px] font-medium hover:text-brio-navy transition-colors">
+                        <span className="w-5 h-5 rounded bg-brio-navy flex items-center justify-center shrink-0">
+                          <Check className="w-3.5 h-3.5 text-white" />
+                        </span>
+                        {s.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-      {/* ── Dark CTA Banner ── */}
-      <section className="bg-brio-navy py-12 md:py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-heading text-[24px] md:text-[32px] font-bold text-white mb-6 uppercase tracking-wider leading-snug">
-            No Matter the Project, You<br />Can Begin Your Build Today
-          </h2>
-          <Link
-            href="#get-in-touch"
-            className="inline-block border-2 border-white text-white text-[13px] font-semibold px-7 py-3 uppercase tracking-wide hover:bg-white hover:text-brio-navy transition-colors"
-          >
-            Contact Us for a Free Consultation Today!
-          </Link>
+              {/* Navy CTA */}
+              <h2 className="font-heading text-[26px] md:text-[34px] font-bold text-brio-navy leading-[1.15] mb-6 uppercase tracking-wide">
+                No Matter the Project, You Can Begin Your Build Today
+              </h2>
+              <Link
+                href="#get-in-touch"
+                className="inline-block bg-brio-navy text-white text-[13px] font-semibold px-7 py-3.5 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
+              >
+                Contact Us for a Free Consultation Today!
+              </Link>
+            </div>
+
+            {/* Right – image */}
+            <div className="relative h-[350px] md:h-auto md:min-h-[500px]">
+              <Image
+                src="/images/city/hero-1.jpg"
+                alt="Kitchen renovation by BRIO Construction"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            </div>
+          </div>
         </div>
       </section>
 
