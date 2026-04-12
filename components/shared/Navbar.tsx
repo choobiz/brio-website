@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Phone, Menu, X, ChevronDown } from "lucide-react";
-import { COMPANY, SERVICES, AREAS } from "@/lib/constants";
+import { COMPANY, SERVICES } from "@/lib/constants";
 
 interface DropdownItem {
   label: string;
@@ -15,23 +15,39 @@ interface NavItem {
   label: string;
   href: string;
   dropdown?: DropdownItem[];
+  twoColumn?: boolean;
 }
 
+const SERVICE_DROPDOWN_SLUGS = [
+  "custom-home-construction",
+  "spec-home-construction",
+  "laneway-home-construction",
+  "home-additions-extensions",
+  "commercial-renovations",
+  "home-renovations",
+  "painting-services",
+  "kitchen-remodeling",
+  "bathroom-remodeling",
+  "basement-remodeling",
+  "high-performance-homes",
+  "strata-services",
+  "land-development-pre-construction",
+] as const;
+
 const NAV_ITEMS: NavItem[] = [
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about-us" },
   {
-    label: "Our Services",
+    label: "Services",
     href: "/services",
-    dropdown: SERVICES.map((s) => ({ label: s.name, href: `/${s.slug}` })),
+    dropdown: SERVICES.filter((s) =>
+      (SERVICE_DROPDOWN_SLUGS as readonly string[]).includes(s.slug)
+    ).map((s) => ({ label: s.name, href: `/${s.slug}` })),
+    twoColumn: true,
   },
   { label: "Projects", href: "/projects" },
-  {
-    label: "Areas We Serve",
-    href: "/areas-we-serve",
-    dropdown: AREAS.map((a) => ({ label: a.name, href: `/${a.slug}` })),
-  },
-  { label: "About", href: "/about-us" },
-  { label: "Blog", href: "/blog" },
   { label: "Financing", href: "/financing" },
+  { label: "Brio Blog", href: "/blog" },
 ];
 
 function DesktopDropdown({
@@ -85,7 +101,11 @@ function DesktopDropdown({
 
       {open && (
         <div className="absolute top-full left-0 pt-2 z-50">
-          <div className="bg-white rounded shadow-lg border border-gray-100 py-2 min-w-[260px]">
+          <div
+            className={`bg-white rounded shadow-lg border border-gray-100 py-2 ${
+              item.twoColumn ? "grid grid-cols-2 min-w-[480px]" : "min-w-[260px]"
+            }`}
+          >
             {item.dropdown.map((sub) => (
               <Link
                 key={sub.href}
