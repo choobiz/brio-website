@@ -324,43 +324,22 @@ export default function CityPageLayout({ cityName }: CityPageLayoutProps) {
       </section>
 
       {/* ── Newsletter ── */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            {/* Left – text + form */}
+      <section className="py-10 md:py-14 bg-white border-t border-gray-100">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 items-center">
             <div>
-              <p className="text-text-muted text-[12px] uppercase tracking-widest mb-2">Subscribe</p>
-              <h2 className="font-heading text-[28px] md:text-[34px] font-bold text-brio-navy mb-4">
-                The Inside Look
-              </h2>
-              <p className="text-text-body text-[15px] leading-relaxed mb-6">
+              <p className="text-text-muted text-[11px] uppercase tracking-widest mb-1">Subscribe</p>
+              <h2 className="font-heading text-[22px] md:text-[26px] font-bold text-brio-navy mb-2">The Inside Look</h2>
+              <p className="text-text-body text-[13px] leading-relaxed mb-4 max-w-md">
                 The email newsletter that delivers curated home decor and furniture picks, expert design advice, and more. Join 4,000+ subscribers.
               </p>
-              <form className="space-y-3">
-                <input
-                  type="email"
-                  placeholder="Your email address..."
-                  className="w-full h-12 px-4 border border-gray-300 text-sm bg-white focus:outline-none focus:border-brio-navy"
-                />
-                <button
-                  type="submit"
-                  className="w-full h-12 bg-brio-navy text-white font-semibold uppercase tracking-wide text-[13px] hover:bg-brio-navy/90 transition-colors"
-                >
-                  Sign Me Up
-                </button>
+              <form className="flex gap-2 max-w-md">
+                <input type="email" placeholder="Your email address..." className="flex-1 h-10 px-4 border border-gray-300 text-sm bg-white focus:outline-none focus:border-brio-navy" />
+                <button type="submit" className="h-10 px-5 bg-brio-navy text-white font-semibold uppercase tracking-wide text-[12px] hover:bg-brio-navy/90 transition-colors shrink-0">Sign Me Up</button>
               </form>
             </div>
-            {/* Right – image with arch shape */}
-            <div className="flex justify-center">
-              <div className="relative w-[340px] h-[400px] md:w-[380px] md:h-[440px] rounded-t-full overflow-hidden">
-                <Image
-                  src="/images/newsletter.png"
-                  alt="Builder overlooking a construction site"
-                  fill
-                  className="object-cover"
-                  sizes="400px"
-                />
-              </div>
+            <div className="hidden md:block relative w-[200px] h-[240px] rounded-t-full overflow-hidden">
+              <Image src="/images/newsletter.png" alt="Builder overlooking a construction site" fill className="object-cover" sizes="200px" />
             </div>
           </div>
         </div>
