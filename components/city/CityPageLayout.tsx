@@ -134,6 +134,13 @@ export default function CityPageLayout({ cityName }: CityPageLayoutProps) {
         </div>
       </section>
 
+      {/* ── Image Carousel ── */}
+      <section className="bg-white pb-16 md:pb-24">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ImageCarousel />
+        </div>
+      </section>
+
       {/* ── Learn More ── */}
       <section className="py-16 md:py-24 bg-white border-t border-gray-100">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -221,7 +228,7 @@ export default function CityPageLayout({ cityName }: CityPageLayoutProps) {
       </section>
 
       {/* ── Build with Confidence ── */}
-      <section className="py-16 md:py-24 bg-brio-light-gray">
+      <section className="py-16 md:py-24 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="font-heading text-[22px] md:text-[28px] font-semibold text-brio-navy text-center mb-14 uppercase tracking-wider">
             Build with Confidence
@@ -242,7 +249,7 @@ export default function CityPageLayout({ cityName }: CityPageLayoutProps) {
           <div className="text-center">
             <Link
               href="#get-in-touch"
-              className="inline-block bg-brio-navy text-white text-[13px] font-semibold px-7 py-3.5 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
+              className="inline-block border-2 border-brio-navy text-brio-navy text-[13px] font-semibold px-7 py-3 uppercase tracking-wide hover:bg-brio-navy hover:text-white transition-colors"
             >
               Schedule Your Free Consultation Today!
             </Link>
