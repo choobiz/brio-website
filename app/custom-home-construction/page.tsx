@@ -4,6 +4,7 @@ import Footer from "@/components/shared/Footer";
 import FAQ from "@/components/shared/FAQ";
 import Link from "next/link";
 import Image from "next/image";
+import PartnersCarousel from "@/components/shared/PartnersCarousel";
 
 export const metadata: Metadata = {
   title: "Custom Home Construction",
@@ -147,18 +148,7 @@ export default function CustomHomeConstructionPage() {
       </section>
 
       {/* 2. Partners */}
-      <section className="py-10 md:py-14 bg-white border-t border-gray-100">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-heading text-[18px] md:text-[22px] font-semibold text-brio-navy uppercase tracking-wider mb-8">
-            Our Partners
-          </h2>
-          <div className="flex items-center justify-center gap-8 md:gap-14 flex-wrap">
-            <Image src="/images/partners/havan.png" alt="HAVAN" width={120} height={60} className="h-10 md:h-14 w-auto object-contain" />
-            <Image src="/images/partners/renomark.png" alt="RenoMark" width={120} height={60} className="h-10 md:h-14 w-auto object-contain" />
-            <Image src="/images/partners/warranty-2510.png" alt="2-5-10 Home Warranty" width={120} height={60} className="h-10 md:h-14 w-auto object-contain" />
-          </div>
-        </div>
-      </section>
+      <PartnersCarousel />
 
       {/* 3. Photo Gallery */}
       <section className="py-14 md:py-20 bg-white">
