@@ -4,6 +4,7 @@ import Footer from "@/components/shared/Footer";
 import FAQ from "@/components/shared/FAQ";
 import Link from "next/link";
 import Image from "next/image";
+import BeforeAfterSlider from "@/components/service/BeforeAfterSlider";
 
 export const metadata: Metadata = {
   title: "Kitchen Remodeling",
@@ -117,42 +118,27 @@ export default function KitchenPage() {
       {/* 2. Partners */}
       <section className="py-10 md:py-14 bg-white border-t border-gray-100">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-heading text-[18px] md:text-[22px] font-semibold text-brio-navy uppercase tracking-wider">
+          <h2 className="font-heading text-[18px] md:text-[22px] font-semibold text-brio-navy uppercase tracking-wider mb-8">
             Our Partners
           </h2>
+          <div className="flex items-center justify-center gap-8 md:gap-14 flex-wrap">
+            <Image src="/images/partners/havan.png" alt="HAVAN" width={120} height={60} className="h-10 md:h-14 w-auto object-contain" />
+            <Image src="/images/partners/renomark.png" alt="RenoMark" width={120} height={60} className="h-10 md:h-14 w-auto object-contain" />
+            <Image src="/images/partners/warranty-2510.png" alt="2-5-10 Home Warranty" width={120} height={60} className="h-10 md:h-14 w-auto object-contain" />
+          </div>
         </div>
       </section>
 
-
-      {/* Before/After Section */}
+      {/* Before/After Interactive Sliders */}
       <section className="py-10 md:py-16 bg-brio-light-gray">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="font-heading text-[22px] md:text-[28px] font-semibold text-brio-navy text-center mb-8 uppercase tracking-wider">
+            Check Out These Transformations!
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {[
-              { before: "/images/kitchen/before-1.jpg", after: "/images/kitchen/after-1.jpg" },
-              { before: "/images/kitchen/before-2.jpg", after: "/images/kitchen/after-2.jpg" },
-              { before: "/images/kitchen/before-3.webp", after: "/images/kitchen/after-3.png" },
-            ].map((pair, i) => (
-              <div key={i} className="relative overflow-hidden rounded-sm">
-                <div className="grid grid-cols-2 h-[250px]">
-                  <div className="relative">
-                    <Image src={pair.before} alt={`Kitchen before renovation ${i + 1}`} fill className="object-cover" sizes="25vw" />
-                    {i === 1 && <span className="absolute bottom-3 right-1 bg-black/50 text-white text-[11px] px-2 py-0.5 rounded">Before</span>}
-                  </div>
-                  <div className="relative">
-                    <Image src={pair.after} alt={`Kitchen after renovation ${i + 1}`} fill className="object-cover" sizes="25vw" />
-                    {i === 1 && <span className="absolute bottom-3 left-1 bg-black/50 text-white text-[11px] px-2 py-0.5 rounded">After</span>}
-                  </div>
-                </div>
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                  <div className="w-8 h-8 rounded-full bg-white/80 flex items-center justify-center shadow">
-                    <svg className="w-4 h-4 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M8 7l-4 5 4 5M16 7l4 5-4 5" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            ))}
+            <BeforeAfterSlider before="/images/kitchen/before-1.jpg" after="/images/kitchen/after-1.jpg" altBefore="Kitchen before renovation 1" altAfter="Kitchen after renovation 1" />
+            <BeforeAfterSlider before="/images/kitchen/before-2.jpg" after="/images/kitchen/after-2.jpg" altBefore="Kitchen before renovation 2" altAfter="Kitchen after renovation 2" />
+            <BeforeAfterSlider before="/images/kitchen/before-3.webp" after="/images/kitchen/after-3.png" altBefore="Kitchen before renovation 3" altAfter="Kitchen after renovation 3" />
           </div>
         </div>
       </section>
@@ -207,18 +193,18 @@ export default function KitchenPage() {
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
             {[
+              "/images/kitchen/gallery-01.jpeg",
+              "/images/kitchen/gallery-02.webp",
+              "/images/kitchen/gallery-03.webp",
+              "/images/kitchen/gallery-04.jpeg",
+              "/images/kitchen/gallery-05.jpg",
+              "/images/kitchen/gallery-06.jpg",
+              "/images/kitchen/gallery-07.jpeg",
+              "/images/kitchen/gallery-08.webp",
               "/images/kitchen/gallery-09.webp",
               "/images/kitchen/gallery-10.webp",
-              "/images/kitchen/gallery-11.webp",
-              "/images/kitchen/gallery-01.jpg",
+              "/images/kitchen/gallery-11.jpg",
               "/images/kitchen/gallery-12.webp",
-              "/images/kitchen/gallery-03.jpg",
-              "/images/kitchen/gallery-06.webp",
-              "/images/kitchen/gallery-13.jpg",
-              "/images/kitchen/gallery-04.jpg",
-              "/images/kitchen/gallery-05.webp",
-              "/images/kitchen/gallery-02.jpg",
-              "/images/kitchen/gallery-00.jpg",
             ].map((src, i) => (
               <div key={i} className="relative aspect-[4/3] overflow-hidden">
                 <Image src={src} alt={`Kitchen renovation project ${i + 1}`} fill className="object-cover hover:scale-105 transition-transform duration-300" sizes="(max-width: 768px) 50vw, 33vw" />
