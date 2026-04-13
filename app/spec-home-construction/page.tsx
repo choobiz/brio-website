@@ -150,49 +150,60 @@ export default function SpecHomeConstructionPage() {
       {/* 2. Partners */}
       <PartnersCarousel />
 
-      {/* 3. Why Choose BRIO For Your Spec Home Build? — Two-column */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="font-heading text-[22px] md:text-[28px] font-semibold text-brio-navy text-center mb-12 uppercase tracking-wider">
-            Why Choose BRIO For Your Spec Home Build?
-          </h2>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-            {/* Left – why choose items */}
-            <div>
-              <ul className="space-y-6">
-                {WHY_CHOOSE.map((item) => (
-                  <li key={item.title} className="flex items-start gap-4">
-                    <span className="w-5 h-5 rounded bg-brio-navy flex items-center justify-center shrink-0 mt-0.5">
-                      <Check className="w-3.5 h-3.5 text-white" />
-                    </span>
-                    <div>
-                      <h3 className="text-brio-navy text-[15px] font-semibold mb-1">
-                        {item.title}
-                      </h3>
-                      <p className="text-text-body text-[13px] leading-relaxed">
-                        {item.desc}
-                      </p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-              <p className="text-brio-navy font-semibold text-[14px] mt-8 ml-9">
-                Maximize your investment &mdash; work with a top spec home builder!
-              </p>
+      {/* 3. Why Choose BRIO For Your Spec Home Build? — Image left, bullets right */}
+      <section className="bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 items-center">
+            {/* Left – image */}
+            <div className="relative h-[350px] md:h-[480px]">
+              <Image
+                src="/images/city/img-06.webp"
+                alt="Modern kitchen by BRIO Construction"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
             </div>
-
-            {/* Right – process steps */}
-            <div className="space-y-8">
-              {PROCESS_STEPS.map((item) => (
-                <div key={item.step}>
-                  <h3 className="text-brio-navy text-[14px] font-semibold uppercase tracking-wide mb-2">
-                    {item.title}
-                  </h3>
-                  <p className="text-text-body text-[13px] leading-relaxed">
-                    {item.desc}
-                  </p>
-                </div>
-              ))}
+            {/* Right – heading + bullets */}
+            <div className="py-12 md:py-16 md:pl-12">
+              <h2 className="font-heading text-[28px] md:text-[34px] font-semibold text-brio-navy leading-tight mb-8">
+                Why Choose BRIO For Your Spec Home Build?
+              </h2>
+              <ul className="space-y-4 mb-6">
+                <li className="flex items-start gap-3">
+                  <span className="w-5 h-5 rounded bg-brio-navy flex items-center justify-center shrink-0 mt-0.5">
+                    <Check className="w-3.5 h-3.5 text-white" />
+                  </span>
+                  <p className="text-text-body text-[14px]"><span className="font-bold">Proven Experience</span> &ndash; 15+ years building high-quality homes.</p>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="w-5 h-5 rounded bg-brio-navy flex items-center justify-center shrink-0 mt-0.5">
+                    <Check className="w-3.5 h-3.5 text-white" />
+                  </span>
+                  <p className="text-text-body text-[14px]"><span className="font-bold">Market Expertise</span> &ndash; We understand <span className="font-bold">what sells</span> and how to optimize for profitability.</p>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="w-5 h-5 rounded bg-brio-navy flex items-center justify-center shrink-0 mt-0.5">
+                    <Check className="w-3.5 h-3.5 text-white" />
+                  </span>
+                  <p className="text-text-body text-[14px]"><span className="font-bold">Fast &amp; Efficient Process</span> &ndash; We streamline timelines to maximize returns.</p>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="w-5 h-5 rounded bg-brio-navy flex items-center justify-center shrink-0 mt-0.5">
+                    <Check className="w-3.5 h-3.5 text-white" />
+                  </span>
+                  <p className="text-text-body text-[14px]"><span className="font-bold">Energy-Efficient Solutions</span> &ndash; Sustainable homes are in demand&mdash;we help you build smart.</p>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="w-5 h-5 rounded bg-brio-navy flex items-center justify-center shrink-0 mt-0.5">
+                    <Check className="w-3.5 h-3.5 text-white" />
+                  </span>
+                  <p className="text-text-body text-[14px]"><span className="font-bold">On-Time &amp; On-Budget Execution</span> &ndash; We pride ourselves on delivering homes efficiently without compromising on quality.</p>
+                </li>
+              </ul>
+              <p className="text-text-body text-[14px] italic mt-6">
+                Maximize your investment&mdash;work with a top spec home builder!
+              </p>
             </div>
           </div>
         </div>
