@@ -106,27 +106,26 @@ export default function CustomHomeConstructionPage() {
     <>
       <Navbar />
 
-      {/* 1. Hero — Two-column, dark navy background */}
-      <section className="bg-brio-navy">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 items-stretch">
+      {/* 1. Hero — Two-column, white background */}
+      <section className="bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 items-center">
             {/* Left – text */}
-            <div className="py-16 md:py-24 px-6 sm:px-10 lg:px-16 flex flex-col justify-center">
-              <h1 className="font-heading text-[36px] md:text-[46px] font-semibold text-white leading-[1.15] mb-6 italic">
-                INSPIRED BY YOU, CRAFTED BY BRIO
+            <div className="py-16 md:py-24 md:pr-12">
+              <h1 className="font-heading text-[36px] md:text-[46px] font-semibold text-brio-navy leading-[1.15] mb-6 italic">
+                Inspired by You,<br />Crafted by BRIO
               </h1>
-              <p className="text-white/90 text-[15px] leading-relaxed mb-8 max-w-lg">
-                A custom home is more than a building &mdash; it&rsquo;s a
-                reflection of your unique lifestyle, personality, and aspirations.
-                Unlike spec homes, a custom build requires specialized expertise to
-                bring your vision to life with precision and care. At BRIO
-                Construction, we partner with you from concept to completion to
-                create a home of lasting quality that&rsquo;s truly yours.
+              <p className="text-text-body text-[15px] leading-relaxed mb-8 max-w-lg">
+                Custom home construction is a reflection of{" "}
+                <span className="underline">your unique lifestyle and vision</span>.
+                Unlike spec homes, it demands specialized expertise. As one of the
+                leading custom home construction companies, BRIO creates lasting,
+                quality homes that transform your living experience.
               </p>
               <div>
                 <Link
                   href="#get-in-touch"
-                  className="inline-block border-2 border-white text-white text-[13px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-white hover:text-brio-navy transition-colors"
+                  className="inline-block bg-brio-navy text-white text-[13px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
                 >
                   Contact Us for a Free Quotation
                 </Link>
@@ -135,8 +134,8 @@ export default function CustomHomeConstructionPage() {
             {/* Right – image */}
             <div className="relative h-[350px] md:h-auto md:min-h-[520px]">
               <Image
-                src="/images/city/img-03.jpg"
-                alt="Custom duplex exterior by BRIO Construction"
+                src="/images/city/img-06.webp"
+                alt="Modern kitchen interior by BRIO Construction"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
