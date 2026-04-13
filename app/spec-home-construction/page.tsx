@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
 import FAQ from "@/components/shared/FAQ";
-import ContactForm from "@/components/service/ContactForm";
+import PartnersCarousel from "@/components/shared/PartnersCarousel";
 import Link from "next/link";
+import Image from "next/image";
+import { Check } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Spec Home Construction",
@@ -105,108 +107,274 @@ export default function SpecHomeConstructionPage() {
     <>
       <Navbar />
 
-      {/* Hero */}
-      <section className="bg-brio-light-gray py-16 md:py-24">
+      {/* 1. Hero — Two-column, white background */}
+      <section className="bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 items-stretch">
+            {/* Left – text */}
+            <div className="py-16 md:py-24 md:pr-12 flex flex-col justify-center">
+              <h1 className="font-heading text-[36px] md:text-[46px] font-semibold text-brio-navy leading-[1.15] mb-5 italic">
+                Turn-Key Spec Home Development And Construction
+              </h1>
+              <p className="text-text-body text-[15px] leading-relaxed mb-8 max-w-lg">
+                Investing in real estate starts with building market-ready homes
+                that attract buyers and deliver strong returns. With 15+ years of
+                experience in new home construction, we understand market trends,
+                zoning regulations, and buyer preferences &mdash; ensuring that your
+                investment is built for success.
+              </p>
+              <div>
+                <Link
+                  href="#get-in-touch"
+                  className="inline-block bg-brio-navy text-white text-[13px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
+                >
+                  Book Your Free Consultation Now!
+                </Link>
+              </div>
+            </div>
+            {/* Right – image */}
+            <div className="relative h-[350px] md:h-auto md:min-h-[520px]">
+              <Image
+                src="/images/city/img-03.jpg"
+                alt="Spec home construction by BRIO Construction"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 2. Partners */}
+      <PartnersCarousel />
+
+      {/* 3. Why Choose BRIO For Your Spec Home Build? — Two-column */}
+      <section className="py-16 md:py-24 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="font-heading text-[22px] md:text-[28px] font-semibold text-brio-navy text-center mb-12 uppercase tracking-wider">
+            Why Choose BRIO For Your Spec Home Build?
+          </h2>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            {/* Left – why choose items */}
+            <div>
+              <ul className="space-y-6">
+                {WHY_CHOOSE.map((item) => (
+                  <li key={item.title} className="flex items-start gap-4">
+                    <span className="w-5 h-5 rounded bg-brio-navy flex items-center justify-center shrink-0 mt-0.5">
+                      <Check className="w-3.5 h-3.5 text-white" />
+                    </span>
+                    <div>
+                      <h3 className="text-brio-navy text-[15px] font-semibold mb-1">
+                        {item.title}
+                      </h3>
+                      <p className="text-text-body text-[13px] leading-relaxed">
+                        {item.desc}
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+              <p className="text-brio-navy font-semibold text-[14px] mt-8 ml-9">
+                Maximize your investment &mdash; work with a top spec home builder!
+              </p>
+            </div>
+
+            {/* Right – process steps */}
+            <div className="space-y-8">
+              {PROCESS_STEPS.map((item) => (
+                <div key={item.step}>
+                  <h3 className="text-brio-navy text-[14px] font-semibold uppercase tracking-wide mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-text-body text-[13px] leading-relaxed">
+                    {item.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. The BRIO Spec Home Services — CTA section */}
+      <section className="py-14 md:py-20 bg-white border-t border-gray-100">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-[32px] md:text-[42px] font-semibold text-brio-navy font-heading mb-4">
-            Turn-key Spec Home Development And Construction
-          </h1>
-          <p className="text-text-body text-[16px] leading-relaxed mb-8 max-w-2xl mx-auto">
-            Investing in real estate starts with building market-ready homes
-            that attract buyers and deliver strong returns. With 15+ years of
-            experience in new home construction, we understand market trends,
-            zoning regulations, and buyer preferences &mdash; ensuring that your
-            investment is built for success.
+          <h2 className="font-heading text-[24px] md:text-[32px] font-semibold text-brio-navy uppercase tracking-wide mb-5">
+            The BRIO Spec Home Services
+          </h2>
+          <p className="text-text-body text-[15px] leading-relaxed mb-8 max-w-2xl mx-auto">
+            At BRIO Construction, we offer full-service spec home development,
+            from land acquisition consulting to final build completion. Start
+            your spec home project with experts who know how to build for
+            profit!
           </p>
           <Link
             href="#get-in-touch"
-            className="inline-block bg-brio-navy text-white text-[14px] font-semibold px-8 py-4 uppercase tracking-wide"
+            className="inline-block bg-brio-navy text-white text-[13px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
           >
-            Book Your Free Consultation Now!
+            Book Your Free Consultation Today!
           </Link>
         </div>
       </section>
 
-      {/* Why Choose BRIO */}
+      {/* 5. What Is Spec Home Construction? */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-[28px] md:text-[36px] font-semibold text-brio-navy font-heading text-center mb-12">
-            Why Choose BRIO for Spec Home Construction?
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="font-heading text-[24px] md:text-[32px] font-semibold text-brio-navy uppercase tracking-wide mb-5 text-center">
+            What Is Spec Home Construction?
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {WHY_CHOOSE.map((item) => (
-              <div key={item.title}>
-                <h3 className="text-brio-navy text-[18px] font-semibold font-heading mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-text-body text-[15px] leading-relaxed">
-                  {item.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Process Steps */}
-      <section className="py-16 md:py-24 bg-brio-light-gray">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-[28px] md:text-[36px] font-semibold text-brio-navy font-heading text-center mb-12">
-            Our Spec Home Construction Process
-          </h2>
-          <div className="space-y-10">
-            {PROCESS_STEPS.map((item) => (
-              <div key={item.step} className="flex gap-6">
-                <div className="shrink-0 w-12 h-12 bg-brio-navy text-white flex items-center justify-center text-[18px] font-semibold font-heading">
-                  {item.step}
-                </div>
-                <div>
-                  <h3 className="text-brio-navy text-[18px] font-semibold font-heading mb-2">
-                    {item.title}
-                  </h3>
-                  <p className="text-text-body text-[15px] leading-relaxed">
-                    {item.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* What is Spec Home Construction? */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-[28px] md:text-[36px] font-semibold text-brio-navy font-heading text-center mb-6">
-            What is Spec Home Construction?
-          </h2>
-          <p className="text-text-body text-[16px] leading-relaxed mb-10 max-w-3xl mx-auto text-center">
+          <p className="text-text-body text-[15px] leading-relaxed mb-10 max-w-3xl mx-auto text-center">
             A spec home (short for &ldquo;speculative home&rdquo;) is a
             residential property built without a pre-identified buyer. The
             builder designs and constructs the home based on market research and
-            buyer demand, then sells it upon or near completion. It&rsquo;s one
-            of the most effective ways to invest in real estate development.
+            buyer demand, with high-demand features that appeal to a wide range
+            of buyers. It&rsquo;s one of the most effective ways to invest in
+            real estate development.
           </p>
-          <h3 className="text-brio-navy text-[20px] font-semibold font-heading text-center mb-8">
-            Why Invest in Spec Home Construction?
+
+          <h3 className="font-heading text-[18px] md:text-[22px] font-semibold text-brio-navy mb-6">
+            Why invest in a spec home?
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <ul className="space-y-5 mb-8">
             {INVEST_REASONS.map((item) => (
-              <div key={item.title} className="bg-brio-light-gray p-8">
-                <h4 className="text-brio-navy text-[18px] font-semibold font-heading mb-3">
-                  {item.title}
-                </h4>
-                <p className="text-text-body text-[15px] leading-relaxed">
-                  {item.desc}
-                </p>
-              </div>
+              <li key={item.title} className="flex items-start gap-4">
+                <span className="w-5 h-5 rounded bg-brio-navy flex items-center justify-center shrink-0 mt-0.5">
+                  <Check className="w-3.5 h-3.5 text-white" />
+                </span>
+                <div>
+                  <h4 className="text-brio-navy text-[15px] font-semibold mb-1">
+                    {item.title}
+                  </h4>
+                  <p className="text-text-body text-[13px] leading-relaxed">
+                    {item.desc}
+                  </p>
+                </div>
+              </li>
             ))}
+          </ul>
+          <div>
+            <Link
+              href="#get-in-touch"
+              className="inline-block bg-brio-navy text-white text-[13px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
+            >
+              Book Your Free Consultation Now!
+            </Link>
           </div>
         </div>
       </section>
 
-      <ContactForm />
-      <FAQ items={FAQ_ITEMS} />
+      {/* 6. Contact Form + FAQ side by side */}
+      <section id="get-in-touch" className="py-14 md:py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Left – form */}
+            <div>
+              <h3 className="font-heading text-[20px] md:text-[24px] font-semibold text-brio-navy mb-2 uppercase tracking-wide">
+                Let&apos;s Discuss Your Project
+              </h3>
+              <p className="text-text-body text-[13px] leading-relaxed mb-6">
+                Ready to explore the possibilities for your project? We&apos;d
+                love to hear your ideas! Taking the first step is easy. Share a
+                few details below, and our team will get in touch to schedule a
+                friendly, no-obligation consultation to discuss your project.
+              </p>
+              <form className="space-y-3">
+                <input
+                  type="text"
+                  required
+                  placeholder="Name"
+                  className="w-full h-11 px-4 border border-gray-300 text-sm bg-white focus:outline-none focus:border-brio-navy"
+                />
+                <div className="grid grid-cols-2 gap-3">
+                  <input
+                    type="tel"
+                    required
+                    placeholder="Phone"
+                    className="w-full h-11 px-4 border border-gray-300 text-sm bg-white focus:outline-none focus:border-brio-navy"
+                  />
+                  <input
+                    type="email"
+                    required
+                    placeholder="Email"
+                    className="w-full h-11 px-4 border border-gray-300 text-sm bg-white focus:outline-none focus:border-brio-navy"
+                  />
+                </div>
+                <input
+                  type="text"
+                  placeholder="Service Address"
+                  className="w-full h-11 px-4 border border-gray-300 text-sm bg-white focus:outline-none focus:border-brio-navy"
+                />
+                <textarea
+                  placeholder="Description of Work"
+                  rows={4}
+                  className="w-full px-4 py-3 border border-gray-300 text-sm bg-white focus:outline-none focus:border-brio-navy resize-none"
+                />
+                <button
+                  type="submit"
+                  className="w-full h-11 bg-brio-navy text-white font-semibold uppercase tracking-wide text-[13px] hover:bg-brio-navy/90 transition-colors"
+                >
+                  Book Now!
+                </button>
+              </form>
+            </div>
+
+            {/* Right – FAQ */}
+            <div>
+              <h3 className="font-heading text-[20px] md:text-[24px] font-semibold text-brio-navy mb-6 uppercase tracking-wide">
+                Frequently Asked Questions
+              </h3>
+              <FAQ items={FAQ_ITEMS} compact />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 7. Newsletter */}
+      <section className="py-10 md:py-14 bg-white border-t border-gray-100">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 items-center">
+            <div>
+              <p className="text-text-muted text-[11px] uppercase tracking-widest mb-1">
+                Subscribe
+              </p>
+              <h2 className="font-heading text-[22px] md:text-[26px] font-bold text-brio-navy mb-2">
+                The Inside Look
+              </h2>
+              <p className="text-text-body text-[13px] leading-relaxed mb-4 max-w-md">
+                The email newsletter that delivers curated home decor and
+                furniture picks, expert design advice, and more. Join 4,000+
+                subscribers.
+              </p>
+              <form className="flex gap-2 max-w-md">
+                <input
+                  type="email"
+                  placeholder="Your email address..."
+                  className="flex-1 h-10 px-4 border border-gray-300 text-sm bg-white focus:outline-none focus:border-brio-navy"
+                />
+                <button
+                  type="submit"
+                  className="h-10 px-5 bg-brio-navy text-white font-semibold uppercase tracking-wide text-[12px] hover:bg-brio-navy/90 transition-colors shrink-0"
+                >
+                  Sign Me Up
+                </button>
+              </form>
+            </div>
+            <div className="hidden md:block relative w-[200px] h-[240px] rounded-t-full overflow-hidden">
+              <Image
+                src="/images/newsletter.png"
+                alt="Builder overlooking a construction site"
+                fill
+                className="object-cover"
+                sizes="200px"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 8. Footer */}
       <Footer />
     </>
   );
