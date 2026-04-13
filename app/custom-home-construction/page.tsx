@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
 import FAQ from "@/components/shared/FAQ";
-import ContactForm from "@/components/service/ContactForm";
-import Testimonials from "@/components/service/Testimonials";
 import Link from "next/link";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Custom Home Construction",
@@ -81,107 +80,296 @@ const FAQ_ITEMS = [
   },
 ];
 
+const TESTIMONIALS = [
+  {
+    name: "Sam S.",
+    location: "Vancouver",
+    project: "Spec Home",
+    text: "BRIO Construction exceeded our expectations on every level. Their attention to detail and commitment to quality craftsmanship transformed our spec home into something truly special. Communication was excellent throughout the entire process.",
+  },
+  {
+    name: "Ron M.",
+    location: "North Vancouver",
+    project: "Full Renovation",
+    text: "From start to finish, the BRIO team was professional, transparent, and delivered outstanding results. Our full home renovation was completed on time and on budget. We couldn't be happier with the final outcome.",
+  },
+  {
+    name: "K.M.",
+    location: "Vancouver",
+    project: "Bathroom Remodeling",
+    text: "We hired BRIO for our bathroom remodel and were blown away by the quality of work. The team was respectful of our home, cleaned up daily, and the finished product looks absolutely stunning. Highly recommend!",
+  },
+];
+
 export default function CustomHomeConstructionPage() {
   return (
     <>
       <Navbar />
 
-      {/* Hero */}
-      <section className="bg-brio-light-gray py-16 md:py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-[32px] md:text-[42px] font-semibold text-brio-navy font-heading mb-4">
-            Inspired by You, Crafted by BRIO
-          </h1>
-          <p className="text-text-body text-[16px] leading-relaxed mb-8 max-w-2xl mx-auto">
-            A custom home is more than a building &mdash; it&rsquo;s a
-            reflection of your unique lifestyle, personality, and aspirations.
-            Unlike spec homes, a custom build requires specialized expertise to
-            bring your vision to life with precision and care. At BRIO
-            Construction, we partner with you from concept to completion to
-            create a home that&rsquo;s truly yours.
-          </p>
-          <Link
-            href="#get-in-touch"
-            className="inline-block bg-brio-navy text-white text-[14px] font-semibold px-8 py-4 uppercase tracking-wide"
-          >
-            Contact Us for a Free Quotation
-          </Link>
+      {/* 1. Hero — Two-column, dark navy background */}
+      <section className="bg-brio-navy">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 items-stretch">
+            {/* Left – text */}
+            <div className="py-16 md:py-24 px-6 sm:px-10 lg:px-16 flex flex-col justify-center">
+              <h1 className="font-heading text-[36px] md:text-[46px] font-semibold text-white leading-[1.15] mb-6 italic">
+                INSPIRED BY YOU, CRAFTED BY BRIO
+              </h1>
+              <p className="text-white/90 text-[15px] leading-relaxed mb-8 max-w-lg">
+                A custom home is more than a building &mdash; it&rsquo;s a
+                reflection of your unique lifestyle, personality, and aspirations.
+                Unlike spec homes, a custom build requires specialized expertise to
+                bring your vision to life with precision and care. At BRIO
+                Construction, we partner with you from concept to completion to
+                create a home of lasting quality that&rsquo;s truly yours.
+              </p>
+              <div>
+                <Link
+                  href="#get-in-touch"
+                  className="inline-block border-2 border-white text-white text-[13px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-white hover:text-brio-navy transition-colors"
+                >
+                  Contact Us for a Free Quotation
+                </Link>
+              </div>
+            </div>
+            {/* Right – image */}
+            <div className="relative h-[350px] md:h-auto md:min-h-[520px]">
+              <Image
+                src="/images/city/img-03.jpg"
+                alt="Custom duplex exterior by BRIO Construction"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority
+              />
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Why Choose BRIO */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-[28px] md:text-[36px] font-semibold text-brio-navy font-heading text-center mb-2">
+      {/* 2. Partners */}
+      <section className="py-10 md:py-14 bg-white border-t border-gray-100">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="font-heading text-[18px] md:text-[22px] font-semibold text-brio-navy uppercase tracking-wider mb-8">
+            Our Partners
+          </h2>
+          <div className="flex items-center justify-center gap-8 md:gap-14 flex-wrap">
+            <Image src="/images/partners/havan.png" alt="HAVAN" width={120} height={60} className="h-10 md:h-14 w-auto object-contain" />
+            <Image src="/images/partners/renomark.png" alt="RenoMark" width={120} height={60} className="h-10 md:h-14 w-auto object-contain" />
+            <Image src="/images/partners/warranty-2510.png" alt="2-5-10 Home Warranty" width={120} height={60} className="h-10 md:h-14 w-auto object-contain" />
+          </div>
+        </div>
+      </section>
+
+      {/* 3. Photo Gallery */}
+      <section className="py-14 md:py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="font-heading text-[24px] md:text-[34px] font-semibold text-brio-navy uppercase tracking-wide text-center mb-10">
             Why Choose BRIO for Your Custom Home?
           </h2>
-          <p className="text-text-muted text-[16px] text-center mb-12">
-            What Sets BRIO Apart?
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {WHY_CHOOSE.map((item) => (
-              <div key={item.title}>
-                <h3 className="text-brio-navy text-[18px] font-semibold font-heading mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-text-body text-[15px] leading-relaxed">
-                  {item.desc}
-                </p>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+            {[
+              "/images/city/img-01.jpg",
+              "/images/city/img-03.jpg",
+              "/images/city/img-04.jpg",
+              "/images/city/img-05.webp",
+              "/images/city/img-13.jpg",
+              "/images/city/img-02.jpg",
+            ].map((src, i) => (
+              <div key={i} className="relative aspect-[4/3] overflow-hidden">
+                <Image
+                  src={src}
+                  alt={`Custom home construction project ${i + 1}`}
+                  fill
+                  className="object-cover hover:scale-105 transition-transform duration-300"
+                  sizes="(max-width: 768px) 50vw, 33vw"
+                />
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Testimonials */}
-      <Testimonials heading="What Our Clients Are Saying" />
-
-      {/* Process Steps */}
+      {/* 4. What Sets BRIO Apart? */}
       <section className="py-16 md:py-24 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-[28px] md:text-[36px] font-semibold text-brio-navy font-heading text-center mb-12">
-            Our Custom Home Building Process
+          <h2 className="font-heading text-[28px] md:text-[36px] font-semibold text-brio-navy mb-4">
+            What Sets BRIO Apart?
           </h2>
-          <div className="space-y-10">
-            {PROCESS_STEPS.map((item) => (
-              <div key={item.step} className="flex gap-6">
-                <div className="shrink-0 w-12 h-12 bg-brio-navy text-white flex items-center justify-center text-[18px] font-semibold font-heading">
-                  {item.step}
-                </div>
+          <p className="text-text-body text-[15px] leading-relaxed mb-8 max-w-3xl">
+            When searching for a partner to build your dream home, trust and
+            reliability matter most. BRIO Construction delivers excellence through
+            our unwavering commitment to quality workmanship, open communication,
+            and precise project execution.
+          </p>
+          <ul className="space-y-6 mb-8">
+            {WHY_CHOOSE.map((item) => (
+              <li key={item.title} className="flex items-start gap-4">
+                <span className="w-6 h-6 bg-brio-navy flex items-center justify-center shrink-0 mt-0.5">
+                  <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                </span>
                 <div>
-                  <h3 className="text-brio-navy text-[18px] font-semibold font-heading mb-2">
+                  <h3 className="text-brio-navy text-[15px] font-semibold mb-1">
                     {item.title}
                   </h3>
-                  <p className="text-text-body text-[15px] leading-relaxed">
+                  <p className="text-text-body text-[13px] leading-relaxed">
                     {item.desc}
                   </p>
                 </div>
+              </li>
+            ))}
+          </ul>
+          <p className="text-text-body text-[15px] leading-relaxed max-w-3xl">
+            At BRIO, we transform your vision into thoughtfully designed, expertly
+            crafted living spaces.
+          </p>
+        </div>
+      </section>
+
+      {/* 5. Testimonials */}
+      <section className="py-16 md:py-24 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="font-heading text-[22px] md:text-[28px] font-semibold text-brio-navy uppercase tracking-wide text-center mb-12">
+            What Our Clients Are Saying
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {TESTIMONIALS.map((t) => (
+              <div key={t.name} className="bg-brio-light-gray p-8">
+                <p className="text-text-body text-[14px] leading-relaxed mb-6 italic">
+                  &ldquo;{t.text}&rdquo;
+                </p>
+                <div className="border-t border-gray-200 pt-4">
+                  <p className="text-brio-navy text-[15px] font-semibold">{t.name}</p>
+                  <p className="text-text-muted text-[13px]">{t.location} &mdash; {t.project}</p>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 md:py-24 bg-brio-light-gray">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-text-body text-[16px] leading-relaxed mb-8 max-w-2xl mx-auto">
-            Building a custom home is an exciting journey &mdash; and choosing
-            the right builder makes all the difference. At BRIO Construction, we
-            bring your dream home to life with expert craftsmanship, transparent
-            communication, and a commitment to excellence at every stage.
-          </p>
-          <Link
-            href="#get-in-touch"
-            className="inline-block bg-brio-navy text-white text-[14px] font-semibold px-8 py-4 uppercase tracking-wide"
-          >
-            Book Your Free Consultation Today!
-          </Link>
+      {/* 6. Process — THE BRIO CUSTOM HOME SERVICES */}
+      <section className="py-16 md:py-24 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Intro heading + CTA */}
+          <div className="max-w-3xl mb-14">
+            <h2 className="font-heading text-[28px] md:text-[36px] font-semibold text-brio-navy uppercase tracking-wide mb-5">
+              The BRIO Custom Home Services
+            </h2>
+            <p className="text-text-body text-[15px] leading-relaxed mb-8">
+              Building a custom home is an exciting journey &mdash; and choosing
+              the right builder makes all the difference. At BRIO Construction, we
+              bring your dream home to life with expert craftsmanship, transparent
+              communication, and a commitment to excellence at every stage.
+            </p>
+            <Link
+              href="#get-in-touch"
+              className="inline-block bg-brio-navy text-white text-[13px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
+            >
+              Book Your Free Consultation Today!
+            </Link>
+          </div>
+
+          {/* Two-column: image left, steps right */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+            {/* Left – image */}
+            <div className="relative aspect-[4/5] w-full overflow-hidden">
+              <Image
+                src="/images/city/img-01.jpg"
+                alt="BRIO custom home construction"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
+
+            {/* Right – numbered steps with bullet points */}
+            <div className="space-y-10">
+              {PROCESS_STEPS.map((item) => (
+                <div key={item.step}>
+                  <h3 className="text-brio-navy text-[16px] font-semibold uppercase tracking-wide mb-3">
+                    Step {item.step}. {item.title}
+                  </h3>
+                  <ul className="space-y-2">
+                    {item.desc.split(". ").filter(Boolean).map((sentence, i) => (
+                      <li key={i} className="flex items-start gap-3">
+                        <span className="text-brio-navy mt-1.5 shrink-0">&#8226;</span>
+                        <p className="text-text-body text-[14px] leading-relaxed">
+                          {sentence.endsWith(".") ? sentence : `${sentence}.`}
+                        </p>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
-      <ContactForm />
-      <FAQ items={FAQ_ITEMS} />
+      {/* 7. Contact Form + FAQ side by side */}
+      <section id="get-in-touch" className="py-14 md:py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Left – form */}
+            <div>
+              <h3 className="font-heading text-[20px] md:text-[24px] font-semibold text-brio-navy mb-2 uppercase tracking-wide">
+                Let&apos;s Discuss Your Project
+              </h3>
+              <p className="text-text-body text-[13px] leading-relaxed mb-6">
+                Ready to explore the possibilities for your project? We&apos;d love to hear your ideas!
+                Taking the first step is easy. Share a few details below, and our team will get in touch to schedule a friendly, no-obligation consultation to discuss your project.
+              </p>
+              <form className="space-y-3">
+                <input type="text" required placeholder="Name" className="w-full h-11 px-4 border border-gray-300 text-sm bg-white focus:outline-none focus:border-brio-navy" />
+                <div className="grid grid-cols-2 gap-3">
+                  <input type="tel" required placeholder="Phone" className="w-full h-11 px-4 border border-gray-300 text-sm bg-white focus:outline-none focus:border-brio-navy" />
+                  <input type="email" required placeholder="Email" className="w-full h-11 px-4 border border-gray-300 text-sm bg-white focus:outline-none focus:border-brio-navy" />
+                </div>
+                <input type="text" placeholder="Service Address" className="w-full h-11 px-4 border border-gray-300 text-sm bg-white focus:outline-none focus:border-brio-navy" />
+                <textarea placeholder="Description of Work" rows={4} className="w-full px-4 py-3 border border-gray-300 text-sm bg-white focus:outline-none focus:border-brio-navy resize-none" />
+                <button type="submit" className="w-full h-11 bg-brio-navy text-white font-semibold uppercase tracking-wide text-[13px] hover:bg-brio-navy/90 transition-colors">
+                  Book Now!
+                </button>
+              </form>
+            </div>
+
+            {/* Right – FAQ */}
+            <div>
+              <h3 className="font-heading text-[20px] md:text-[24px] font-semibold text-brio-navy mb-6 uppercase tracking-wide">
+                Frequently Asked Questions
+              </h3>
+              <FAQ items={FAQ_ITEMS} compact />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 8. Newsletter */}
+      <section className="py-10 md:py-14 bg-white border-t border-gray-100">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 items-center">
+            <div>
+              <p className="text-text-muted text-[11px] uppercase tracking-widest mb-1">Subscribe</p>
+              <h2 className="font-heading text-[22px] md:text-[26px] font-bold text-brio-navy mb-2">The Inside Look</h2>
+              <p className="text-text-body text-[13px] leading-relaxed mb-4 max-w-md">
+                The email newsletter that delivers curated home decor and furniture picks, expert design advice, and more. Join 4,000+ subscribers.
+              </p>
+              <form className="flex gap-2 max-w-md">
+                <input type="email" placeholder="Your email address..." className="flex-1 h-10 px-4 border border-gray-300 text-sm bg-white focus:outline-none focus:border-brio-navy" />
+                <button type="submit" className="h-10 px-5 bg-brio-navy text-white font-semibold uppercase tracking-wide text-[12px] hover:bg-brio-navy/90 transition-colors shrink-0">Sign Me Up</button>
+              </form>
+            </div>
+            <div className="hidden md:block relative w-[200px] h-[240px] rounded-t-full overflow-hidden">
+              <Image src="/images/newsletter.png" alt="Builder overlooking a construction site" fill className="object-cover" sizes="200px" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 9. Footer */}
       <Footer />
     </>
   );
