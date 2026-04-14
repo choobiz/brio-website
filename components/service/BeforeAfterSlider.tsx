@@ -60,30 +60,23 @@ export default function BeforeAfterSlider({
       {/* After image (full background) */}
       <Image src={after} alt={altAfter} fill className="object-cover" sizes="33vw" />
 
-      {/* Before image (clipped) */}
+      {/* Before image — use clip-path to reveal only the left portion */}
       <div
-        className="absolute inset-0 overflow-hidden"
-        style={{ width: `${position}%` }}
+        className="absolute inset-0 z-[1]"
+        style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}
       >
-        <Image
-          src={before}
-          alt={altBefore}
-          fill
-          className="object-cover"
-          sizes="33vw"
-          style={{ maxWidth: "none", width: containerRef.current?.offsetWidth || "100%" }}
-        />
+        <Image src={before} alt={altBefore} fill className="object-cover" sizes="33vw" />
       </div>
 
       {/* Divider line */}
       <div
-        className="absolute top-0 bottom-0 w-0.5 bg-white shadow-lg z-10"
+        className="absolute top-0 bottom-0 w-0.5 bg-white z-[2]"
         style={{ left: `${position}%`, transform: "translateX(-50%)" }}
       />
 
       {/* Handle */}
       <div
-        className="absolute top-1/2 z-20 -translate-y-1/2 -translate-x-1/2"
+        className="absolute top-1/2 z-[3] -translate-y-1/2 -translate-x-1/2"
         style={{ left: `${position}%` }}
       >
         <div className="w-10 h-10 rounded-full bg-white/90 shadow-lg flex items-center justify-center">
@@ -103,13 +96,19 @@ export default function BeforeAfterSlider({
         </div>
       </div>
 
-      {/* Labels */}
-      <span className="absolute bottom-3 left-3 bg-black/50 text-white text-[11px] px-2 py-0.5 rounded z-10">
-        Before
-      </span>
-      <span className="absolute bottom-3 right-3 bg-black/50 text-white text-[11px] px-2 py-0.5 rounded z-10">
-        After
-      </span>
+      {/* Before label — only visible when slider shows before area */}
+      {position > 10 && (
+        <span className="absolute bottom-3 left-3 bg-black/50 text-white text-[11px] px-2 py-0.5 rounded z-[2]">
+          Before
+        </span>
+      )}
+
+      {/* After label — only visible when slider shows after area */}
+      {position < 90 && (
+        <span className="absolute bottom-3 right-3 bg-black/50 text-white text-[11px] px-2 py-0.5 rounded z-[0]">
+          After
+        </span>
+      )}
     </div>
   );
 }
