@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
 import FAQ from "@/components/shared/FAQ";
-import ContactForm from "@/components/service/ContactForm";
-import TrustSignals from "@/components/service/TrustSignals";
-import Testimonials from "@/components/service/Testimonials";
+import PartnersCarousel from "@/components/shared/PartnersCarousel";
+import BeforeAfterSlider from "@/components/service/BeforeAfterSlider";
+import Newsletter from "@/components/home/Newsletter";
 import Link from "next/link";
+import Image from "next/image";
+import { Check } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Bathroom Remodeling",
@@ -157,27 +159,6 @@ const KEY_SELLING_POINTS = [
   },
 ];
 
-const PROCESS_STEPS = [
-  {
-    step: 1,
-    title: "Book Your Free Consultation",
-    description:
-      "Meet with our design team to discuss your vision, needs, and budget. We\u2019ll walk through your space and explore possibilities together.",
-  },
-  {
-    step: 2,
-    title: "Visualize Your Dream Space",
-    description:
-      "Receive a complimentary 3D rendering so you can see exactly what your new bathroom will look like before any work begins.",
-  },
-  {
-    step: 3,
-    title: "Transform Your Bathroom in 2 Weeks",
-    description:
-      "Our expert team gets to work, delivering a complete bathroom transformation with minimal disruption to your daily life.",
-  },
-];
-
 const FAQ_ITEMS = [
   {
     q: "How does the design process work?",
@@ -201,41 +182,72 @@ const FAQ_ITEMS = [
   },
 ];
 
+const TESTIMONIALS = [
+  {
+    name: "Sam S.",
+    location: "Vancouver",
+    project: "Spec Home",
+    text: "BRIO Construction exceeded our expectations on every level. Their attention to detail and commitment to quality craftsmanship transformed our spec home into something truly special. Communication was excellent throughout the entire process.",
+  },
+  {
+    name: "Ron M.",
+    location: "North Vancouver",
+    project: "Full Renovation",
+    text: "From start to finish, the BRIO team was professional, transparent, and delivered outstanding results. Our full home renovation was completed on time and on budget. We couldn\u2019t be happier with the final outcome.",
+  },
+  {
+    name: "K.M.",
+    location: "Vancouver",
+    project: "Bathroom Remodeling",
+    text: "We hired BRIO for our bathroom remodel and were blown away by the quality of work. The team was respectful of our home, cleaned up daily, and the finished product looks absolutely stunning. Highly recommend!",
+  },
+];
+
 export default function BathroomPage() {
   return (
     <>
       <Navbar />
 
-      {/* ── Hero ── */}
-      <section className="bg-brio-light-gray py-16 md:py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-[32px] md:text-[42px] font-semibold text-brio-navy font-heading mb-6">
-            Transform Your Bathroom in Record Time with Brio!
+      {/* ── 1. Hero — Dark Navy, Left-aligned ── */}
+      <section className="bg-brio-navy py-16 md:py-24">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h1 className="text-[32px] md:text-[46px] font-semibold italic text-white font-heading mb-8 leading-tight">
+            Transform Your Bathroom In Record Time With Brio!
           </h1>
-          <ul className="space-y-2 mb-6">
-            <li className="text-brio-navy font-semibold text-[18px]">
-              Complete Remodel in Just 2 weeks!
+          <ul className="space-y-3 mb-8">
+            <li className="text-white text-[16px] md:text-[18px] leading-relaxed">
+              <span className="font-semibold">Complete Remodel in Just 2 weeks!</span>{" "}
+              &ndash; No long waits, no hassle!
             </li>
-            <li className="text-brio-navy font-semibold text-[18px]">
-              Starting at Very Low Prices
+            <li className="text-white text-[16px] md:text-[18px] leading-relaxed">
+              <span className="font-semibold">Starting at Very Low Prices</span>{" "}
+              &ndash; High-quality renovation at an unbeatable price.
             </li>
-            <li className="text-brio-navy font-semibold text-[18px]">
-              Complimentary 3D Rendering
+            <li className="text-white text-[16px] md:text-[18px] leading-relaxed">
+              <span className="font-semibold">Complimentary 3D Rendering</span>{" "}
+              &ndash; See your new bathroom before construction begins!
+              Limited-Time Offer &ndash; Act Now!
             </li>
           </ul>
+          <p className="text-white/90 text-[16px] md:text-[18px] mb-8">
+            Don&apos;t miss out! Upgrade your bathroom with confidence.
+          </p>
           <Link
             href="#get-in-touch"
-            className="inline-block bg-brio-navy text-white text-[14px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
+            className="inline-block border-2 border-white text-white text-[14px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-white hover:text-brio-navy transition-colors"
           >
-            Book Your Free Consultation Now
+            BOOK YOUR FREE CONSULTATION NOW!
           </Link>
         </div>
       </section>
 
-      {/* ── 3 Packages ── */}
+      {/* ── 2. Partners ── */}
+      <PartnersCarousel />
+
+      {/* ── 3. BRIO Bathroom Packages ── */}
       <section className="py-16 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-[28px] md:text-[36px] font-semibold text-brio-navy font-heading text-center mb-12">
+          <h2 className="text-[28px] md:text-[36px] font-semibold text-brio-navy font-heading text-center mb-12 uppercase tracking-wide">
             BRIO Bathroom Packages
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -268,7 +280,7 @@ export default function BathroomPage() {
                       key={f}
                       className="text-text-body text-[14px] flex items-start gap-2"
                     >
-                      <span className="text-brio-navy mt-0.5">&#10003;</span>
+                      <Check className="w-4 h-4 text-brio-navy mt-0.5 shrink-0" />
                       {f}
                     </li>
                   ))}
@@ -279,6 +291,12 @@ export default function BathroomPage() {
                   <p className="text-text-muted text-[11px]">
                     12-month interest-free financing
                   </p>
+                  <Link
+                    href="#get-in-touch"
+                    className="text-brio-navy text-[12px] underline hover:no-underline mt-1 inline-block"
+                  >
+                    Learn More
+                  </Link>
                 </div>
                 <Link
                   href="#get-in-touch"
@@ -292,29 +310,32 @@ export default function BathroomPage() {
         </div>
       </section>
 
-      {/* ── Comparison Table ── */}
+      {/* ── 4. Comparison Table ── */}
       <section className="py-16 md:py-24 bg-brio-light-gray">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-[28px] md:text-[36px] font-semibold text-brio-navy font-heading text-center mb-12">
-            Compare Our Bathroom Packages
+          <h2 className="text-[28px] md:text-[36px] font-semibold text-brio-navy font-heading text-center mb-2 uppercase tracking-wide">
+            BATHROOM RENOVATION PACKAGES
           </h2>
+          <p className="text-text-muted text-[15px] text-center mb-12">
+            Transform your bathroom with our comprehensive renovation packages
+          </p>
 
           {/* Desktop table */}
           <div className="hidden lg:block overflow-x-auto">
             <table className="w-full border-collapse">
               <thead>
                 <tr>
-                  <th className="text-left p-4 bg-brio-navy text-white text-[14px] font-semibold uppercase tracking-wide w-[18%]">
-                    Category
+                  <th className="text-left p-4 bg-brio-navy text-white text-[14px] font-semibold uppercase tracking-wide w-[16%]">
+                    Feature
                   </th>
-                  <th className="text-left p-4 bg-brio-navy text-white text-[14px] font-semibold uppercase tracking-wide w-[27%]">
-                    Refresh &mdash; $15,000
+                  <th className="text-left p-4 bg-brio-navy text-white text-[14px] font-semibold uppercase tracking-wide w-[28%]">
+                    Package 1: The Refresh ($15K-$23K)
                   </th>
-                  <th className="text-left p-4 bg-brio-navy text-white text-[14px] font-semibold uppercase tracking-wide w-[27%]">
-                    Retreat &mdash; $25,000
+                  <th className="text-left p-4 bg-brio-navy text-white text-[14px] font-semibold uppercase tracking-wide w-[28%]">
+                    Package 2: The Retreat ($25K-$45K)
                   </th>
-                  <th className="text-left p-4 bg-brio-navy text-white text-[14px] font-semibold uppercase tracking-wide w-[27%]">
-                    Spa &mdash; $50,000+
+                  <th className="text-left p-4 bg-brio-navy text-white text-[14px] font-semibold uppercase tracking-wide w-[28%]">
+                    Package 3: The Spa ($50K+)
                   </th>
                 </tr>
               </thead>
@@ -381,82 +402,216 @@ export default function BathroomPage() {
         </div>
       </section>
 
-      {/* ── Key Selling Points ── */}
+      {/* ── 5. Before/After Sliders ── */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-[28px] md:text-[36px] font-semibold text-brio-navy font-heading text-center mb-12">
-            Why Choose BRIO for Your Bathroom Remodel?
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-[28px] md:text-[36px] font-semibold text-brio-navy font-heading text-center mb-12 uppercase tracking-wide">
+            CHECK OUT THESE TRANSFORMATIONS!
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {KEY_SELLING_POINTS.map((point) => (
-              <div key={point.title}>
-                <h3 className="text-brio-navy text-[18px] font-semibold font-heading mb-3">
-                  {point.title}
-                </h3>
-                <ul className="space-y-2">
-                  {point.items.map((item) => (
-                    <li
-                      key={item}
-                      className="text-text-body text-[14px] leading-relaxed flex items-start gap-2"
-                    >
-                      <span className="text-brio-navy font-bold mt-0.5">
-                        &#x2022;
-                      </span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <BeforeAfterSlider
+              before="/images/bathroom/before-1.webp"
+              after="/images/bathroom/after-1.webp"
+              altBefore="Bathroom before renovation 1"
+              altAfter="Bathroom after renovation 1"
+            />
+            <BeforeAfterSlider
+              before="/images/bathroom/before-2.webp"
+              after="/images/bathroom/after-2.webp"
+              altBefore="Bathroom before renovation 2"
+              altAfter="Bathroom after renovation 2"
+            />
+            <BeforeAfterSlider
+              before="/images/bathroom/before-3.webp"
+              after="/images/bathroom/after-3.webp"
+              altBefore="Bathroom before renovation 3"
+              altAfter="Bathroom after renovation 3"
+            />
           </div>
         </div>
       </section>
 
-      {/* ── Trust Signals ── */}
-      <TrustSignals />
-
-      {/* ── Testimonials ── */}
-      <Testimonials heading="Elevate Your Bathroom — Complete Remodels in Just 2 Weeks" />
-
-      {/* ── Process Steps ── */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-[28px] md:text-[36px] font-semibold text-brio-navy font-heading text-center mb-12">
-            How It Works
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {PROCESS_STEPS.map((s) => (
-              <div key={s.step} className="text-center">
-                <div className="w-14 h-14 bg-brio-navy text-white flex items-center justify-center text-[22px] font-bold mx-auto mb-4">
-                  {s.step}
+      {/* ── 6. Trust Signals — Two-column ── */}
+      <section className="py-16 md:py-24 bg-brio-light-gray">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            {/* Left: bullet items */}
+            <div className="space-y-6">
+              {KEY_SELLING_POINTS.map((point) => (
+                <div key={point.title} className="flex items-start gap-3">
+                  <div className="w-5 h-5 bg-brio-navy shrink-0 mt-1" />
+                  <div>
+                    <h3 className="text-brio-navy text-[16px] font-semibold font-heading mb-1">
+                      {point.title}
+                    </h3>
+                    <ul className="space-y-1">
+                      {point.items.map((item) => (
+                        <li
+                          key={item}
+                          className="text-text-body text-[14px] leading-relaxed"
+                        >
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-                <h3 className="text-brio-navy text-[18px] font-semibold font-heading mb-2">
-                  {s.title}
-                </h3>
-                <p className="text-text-body text-[14px] leading-relaxed">
-                  {s.description}
-                </p>
-              </div>
-            ))}
-          </div>
-          <div className="text-center mt-10">
-            <Link
-              href="#get-in-touch"
-              className="inline-block bg-brio-navy text-white text-[14px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
-            >
-              Book Your Free Consultation Now
-            </Link>
+              ))}
+            </div>
+
+            {/* Right: CTA block */}
+            <div>
+              <h2 className="text-[24px] md:text-[30px] font-semibold text-brio-navy font-heading mb-4 uppercase tracking-wide">
+                REMODEL WITH CONFIDENCE &ndash; CHOOSE BRIO
+              </h2>
+              <p className="text-text-body text-[15px] leading-relaxed mb-6">
+                At BRIO Construction, we combine expert craftsmanship, premium
+                materials, and a streamlined process to deliver stunning bathroom
+                transformations in just 2 weeks. From complimentary 3D renderings
+                to a 12-month workmanship warranty, every detail is designed to
+                give you peace of mind and a bathroom you&apos;ll love.
+              </p>
+              <Link
+                href="#get-in-touch"
+                className="inline-block bg-brio-navy text-white text-[14px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
+              >
+                BOOK YOUR FREE CONSULTATION NOW!
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── Contact Form ── */}
-      <ContactForm />
+      {/* ── 7. Gallery ── */}
+      <section className="py-16 md:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-[28px] md:text-[36px] font-semibold italic text-brio-navy font-heading text-center mb-12 uppercase tracking-wide">
+            ELEVATE YOUR BATHROOM COMPLETE REMODELS IN JUST 2 WEEKS
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => (
+              <div key={n} className="relative aspect-[4/3] overflow-hidden">
+                <Image
+                  src={`/images/bathroom/gallery-${n}.webp`}
+                  alt={`Bathroom renovation gallery ${n}`}
+                  fill
+                  className="object-cover hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-      {/* ── FAQ ── */}
-      <FAQ items={FAQ_ITEMS} />
+      {/* ── 8. Testimonials ── */}
+      <section className="py-16 md:py-24 bg-brio-light-gray">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-[28px] md:text-[36px] font-semibold text-brio-navy font-heading text-center mb-12 uppercase tracking-wide">
+            WHAT HOMEOWNERS ARE SAYING!
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {TESTIMONIALS.map((t) => (
+              <div key={t.name} className="bg-white p-8">
+                <p className="text-text-body text-[14px] leading-relaxed mb-6 italic">
+                  &ldquo;{t.text}&rdquo;
+                </p>
+                <div>
+                  <p className="text-brio-navy font-semibold text-[15px]">
+                    {t.name}
+                  </p>
+                  <p className="text-text-muted text-[13px]">
+                    {t.location} &mdash; {t.project}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-      {/* ── Footer ── */}
+      {/* ── 9. Contact + FAQ side by side ── */}
+      <section id="get-in-touch" className="py-16 md:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Left: Contact Form */}
+            <div>
+              <h2 className="text-[24px] md:text-[30px] font-semibold text-brio-navy font-heading mb-6 uppercase tracking-wide">
+                Get In Touch
+              </h2>
+              <form className="space-y-4">
+                <div>
+                  <label className="block text-text-body text-[13px] font-semibold uppercase tracking-wide mb-1">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Your full name"
+                    className="w-full h-12 px-4 border border-border text-sm focus:outline-none focus:border-brio-navy"
+                  />
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-text-body text-[13px] font-semibold uppercase tracking-wide mb-1">
+                      Phone
+                    </label>
+                    <input
+                      type="tel"
+                      placeholder="Your phone number"
+                      className="w-full h-12 px-4 border border-border text-sm focus:outline-none focus:border-brio-navy"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-text-body text-[13px] font-semibold uppercase tracking-wide mb-1">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      placeholder="Your email address"
+                      className="w-full h-12 px-4 border border-border text-sm focus:outline-none focus:border-brio-navy"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-text-body text-[13px] font-semibold uppercase tracking-wide mb-1">
+                    Service Address
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Project address"
+                    className="w-full h-12 px-4 border border-border text-sm focus:outline-none focus:border-brio-navy"
+                  />
+                </div>
+                <div>
+                  <label className="block text-text-body text-[13px] font-semibold uppercase tracking-wide mb-1">
+                    Description
+                  </label>
+                  <textarea
+                    placeholder="Tell us about your project..."
+                    rows={4}
+                    className="w-full px-4 py-3 border border-border text-sm focus:outline-none focus:border-brio-navy resize-none"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="w-full bg-brio-navy text-white py-4 text-[14px] font-semibold uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
+                >
+                  Book Now
+                </button>
+              </form>
+            </div>
+
+            {/* Right: FAQ */}
+            <div>
+              <FAQ items={FAQ_ITEMS} compact />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 10. Newsletter ── */}
+      <Newsletter />
+
+      {/* ── 11. Footer ── */}
       <Footer />
     </>
   );
