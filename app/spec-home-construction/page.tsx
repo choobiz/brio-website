@@ -249,48 +249,55 @@ export default function SpecHomeConstructionPage() {
         </div>
       </section>
 
-      {/* 5. What Is Spec Home Construction? */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="font-heading text-[24px] md:text-[32px] font-semibold text-brio-navy uppercase tracking-wide mb-5 text-center">
-            What Is Spec Home Construction?
-          </h2>
-          <p className="text-text-body text-[15px] leading-relaxed mb-10 max-w-3xl mx-auto text-center">
-            A spec home (short for &ldquo;speculative home&rdquo;) is a
-            residential property built without a pre-identified buyer. The
-            builder designs and constructs the home based on market research and
-            buyer demand, with high-demand features that appeal to a wide range
-            of buyers. It&rsquo;s one of the most effective ways to invest in
-            real estate development.
-          </p>
-
-          <h3 className="font-heading text-[18px] md:text-[22px] font-semibold text-brio-navy mb-6">
-            Why invest in a spec home?
-          </h3>
-          <ul className="space-y-5 mb-8">
-            {INVEST_REASONS.map((item) => (
-              <li key={item.title} className="flex items-start gap-4">
-                <span className="w-5 h-5 rounded bg-brio-navy flex items-center justify-center shrink-0 mt-0.5">
-                  <Check className="w-3.5 h-3.5 text-white" />
-                </span>
-                <div>
-                  <h4 className="text-brio-navy text-[15px] font-semibold mb-1">
-                    {item.title}
-                  </h4>
-                  <p className="text-text-body text-[13px] leading-relaxed">
-                    {item.desc}
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ul>
-          <div>
-            <Link
-              href="#get-in-touch"
-              className="inline-block bg-brio-navy text-white text-[13px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
-            >
-              Book Your Free Consultation Now!
-            </Link>
+      {/* 5. What Is Spec Home Construction? — Two-column: text left, image right */}
+      <section className="bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 items-center">
+            {/* Left — text */}
+            <div className="py-14 md:py-20 md:pr-12">
+              <h2 className="font-heading text-[28px] md:text-[34px] font-semibold text-brio-navy leading-tight mb-5">
+                What Is Spec Home Construction?
+              </h2>
+              <p className="text-text-body text-[15px] leading-relaxed mb-4">
+                A <span className="font-bold">spec home</span> (short for speculative home) is a{" "}
+                <span className="font-bold">newly built home designed and constructed without a pre-identified buyer</span>,
+                with the goal of selling it for profit. These homes are typically designed to attract a wide range of
+                buyers with high-demand features, quality finishes, and strategic locations.
+              </p>
+              <p className="text-brio-navy text-[15px] font-semibold mb-3">
+                Why invest in a spec home?
+              </p>
+              <ul className="space-y-2 mb-8">
+                <li className="flex items-start gap-2 text-text-body text-[14px]">
+                  <span className="text-brio-navy mt-0.5">&#10003;</span>
+                  <p><span className="font-bold">Faster Sales</span> &ndash; Move-in ready homes appeal to buyers looking for new builds without the long wait.</p>
+                </li>
+                <li className="flex items-start gap-2 text-text-body text-[14px]">
+                  <span className="text-brio-navy mt-0.5">&#10003;</span>
+                  <p><span className="font-bold">Strong ROI</span> &ndash; Designed for maximum market appeal and resale value.</p>
+                </li>
+                <li className="flex items-start gap-2 text-text-body text-[14px]">
+                  <span className="text-brio-navy mt-0.5">&#10003;</span>
+                  <p><span className="font-bold">Efficient Build Process</span> &ndash; With our expertise, we streamline the development process, reducing costs and timelines.</p>
+                </li>
+              </ul>
+              <Link
+                href="#get-in-touch"
+                className="inline-block bg-brio-navy text-white text-[13px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
+              >
+                Book Your Free Consultation Now!
+              </Link>
+            </div>
+            {/* Right — image */}
+            <div className="relative h-[350px] md:h-full md:min-h-[500px]">
+              <Image
+                src="/images/city/img-03.jpg"
+                alt="Spec home construction by BRIO"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            </div>
           </div>
         </div>
       </section>
