@@ -209,24 +209,43 @@ export default function SpecHomeConstructionPage() {
         </div>
       </section>
 
-      {/* 4. The BRIO Spec Home Services — CTA section */}
-      <section className="py-14 md:py-20 bg-white border-t border-gray-100">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-heading text-[24px] md:text-[32px] font-semibold text-brio-navy uppercase tracking-wide mb-5">
-            The BRIO Spec Home Services
-          </h2>
-          <p className="text-text-body text-[15px] leading-relaxed mb-8 max-w-2xl mx-auto">
-            At BRIO Construction, we offer full-service spec home development,
-            from land acquisition consulting to final build completion. Start
-            your spec home project with experts who know how to build for
-            profit!
-          </p>
-          <Link
-            href="#get-in-touch"
-            className="inline-block bg-brio-navy text-white text-[13px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
-          >
-            Book Your Free Consultation Today!
-          </Link>
+      {/* 4. The BRIO Spec Home Services — Two-column: CTA left, steps right */}
+      <section className="py-16 md:py-24 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            {/* Left — heading + CTA */}
+            <div className="lg:sticky lg:top-32">
+              <h2 className="font-heading text-[28px] md:text-[34px] font-semibold text-brio-navy leading-tight mb-5">
+                The BRIO Spec Home Services
+              </h2>
+              <p className="text-text-body text-[15px] leading-relaxed mb-2">
+                At <span className="font-bold">BRIO Construction</span>, we offer <span className="font-bold">full-service spec home development</span>, from <span className="font-bold">land acquisition consulting to final build completion</span>.
+              </p>
+              <p className="text-text-body text-[15px] leading-relaxed font-semibold mb-8">
+                Start your spec home project with experts who know how to build for profit!
+              </p>
+              <Link
+                href="#get-in-touch"
+                className="inline-block bg-brio-navy text-white text-[13px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
+              >
+                Book Your Free Consultation Now!
+              </Link>
+            </div>
+
+            {/* Right — 5 process steps with dividers */}
+            <div className="space-y-0">
+              {PROCESS_STEPS.map((item, i) => (
+                <div key={item.step} className={`py-6 ${i < PROCESS_STEPS.length - 1 ? "border-b border-gray-200" : ""}`}>
+                  <h3 className="font-heading text-[16px] md:text-[18px] font-semibold text-brio-navy italic uppercase tracking-wide mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-text-body text-[14px] leading-relaxed">
+                    {item.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
