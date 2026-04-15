@@ -126,51 +126,45 @@ export default function LanewayHomeConstructionPage() {
     <>
       <Navbar />
 
-      {/* ── 1. Hero — Two-column, white background ── */}
-      <section className="bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 items-center">
-            {/* Left — text */}
-            <div className="py-16 md:py-24 md:pr-12">
-              <h1 className="text-[32px] md:text-[44px] font-semibold italic text-brio-navy font-heading mb-6 leading-tight">
-                Laneway Homes &mdash; Maximize Your Property&apos;s Potential
-              </h1>
-              <p className="text-text-body text-[15px] leading-relaxed mb-4">
-                A laneway home is one of the smartest ways to add value, generate
-                rental income, and create additional living space on your property.
-                Whether you&apos;re looking to build a coach house, laneway home, or
-                secondary suite, BRIO Construction specializes in turning your
-                vision into reality.
-              </p>
-              <p className="text-text-body text-[15px] leading-relaxed mb-4">
-                We handle everything &mdash; from permits and design to full
-                construction &mdash; delivering high-quality, efficient, modern
-                housing solutions tailored to your needs.
-              </p>
-              <p className="text-text-body text-[15px] leading-relaxed mb-8">
-                Let&apos;s transform your property with a beautifully designed coach
-                house!
-              </p>
-              <div>
-                <Link
-                  href="#get-in-touch"
-                  className="inline-block bg-brio-navy text-white text-[13px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
-                >
-                  Book Your Free Consultation Now!
-                </Link>
-              </div>
+      {/* ── 1. Hero — Two-column: dark navy left, image fills right edge-to-edge ── */}
+      <section className="bg-brio-navy">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
+          {/* Left — text on dark navy */}
+          <div className="py-16 md:py-24 px-6 sm:px-10 lg:px-16 flex flex-col justify-center text-center">
+            <h1 className="text-[32px] md:text-[44px] font-semibold italic text-white font-heading mb-6 leading-tight">
+              Laneway Homes - Maximize Your Property&apos;s Potential
+            </h1>
+            <p className="text-white/90 text-[14px] leading-relaxed mb-2">
+              Looking to <span className="font-bold">add value to your property</span>, create a <span className="font-bold">rental income stream</span>, or build <span className="font-bold">additional living space</span>?
+            </p>
+            <p className="text-white/90 text-[14px] leading-relaxed mb-2">
+              At <span className="font-bold">BRIO Construction</span>, we specialize in designing and building <span className="font-bold">coach houses, laneway homes, and secondary suites</span>, providing homeowners with high-quality, efficient, and modern housing solution
+            </p>
+            <p className="text-white/90 text-[14px] leading-relaxed mb-2">
+              Our team handles <span className="font-bold">everything from permits and design to full construction</span>, ensuring a seamless and stress-free building experience.
+            </p>
+            <p className="text-white/90 text-[14px] leading-relaxed mb-8">
+              Let&apos;s transform your property with a beautifully designed coach house!
+            </p>
+            <div>
+              <Link
+                href="#get-in-touch"
+                className="inline-block bg-white text-brio-navy text-[13px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-gray-100 transition-colors"
+              >
+                Book Your Free Consultation Now!
+              </Link>
             </div>
-            {/* Right — hero image carousel */}
-            <HeroCarousel
-              images={[
-                { src: "/images/laneway/hero.webp", alt: "Modern laneway home exterior" },
-                { src: "/images/laneway/laneway-02.webp", alt: "Laneway house in Burnaby" },
-                { src: "/images/laneway/laneway-04.webp", alt: "Laneway house in East Vancouver" },
-                { src: "/images/laneway/laneway-05.webp", alt: "Laneway house in Kitsilano" },
-                { src: "/images/laneway/laneway-07.webp", alt: "Laneway house in North Vancouver" },
-              ]}
-            />
           </div>
+          {/* Right — image carousel, fills entire right half edge-to-edge */}
+          <HeroCarousel
+            images={[
+              { src: "/images/laneway/hero.webp", alt: "Modern laneway home exterior" },
+              { src: "/images/laneway/laneway-02.webp", alt: "Laneway house in Burnaby" },
+              { src: "/images/laneway/laneway-04.webp", alt: "Laneway house in East Vancouver" },
+              { src: "/images/laneway/laneway-05.webp", alt: "Laneway house in Kitsilano" },
+              { src: "/images/laneway/laneway-07.webp", alt: "Laneway house in North Vancouver" },
+            ]}
+          />
         </div>
       </section>
 
@@ -292,12 +286,12 @@ export default function LanewayHomeConstructionPage() {
               </Link>
             </div>
             {/* Right — image */}
-            <div className="relative h-[300px] md:h-full md:min-h-[420px] bg-gray-100">
+            <div className="relative h-[300px] md:h-full md:min-h-[480px]">
               <Image
                 src="/images/laneway/laneway-03.webp"
                 alt="Laneway house in Dunbar"
                 fill
-                className="object-contain"
+                className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
