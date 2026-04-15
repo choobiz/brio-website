@@ -6,6 +6,7 @@ import PartnersCarousel from "@/components/shared/PartnersCarousel";
 import Link from "next/link";
 import Image from "next/image";
 import { Check } from "lucide-react";
+import HeroCarousel from "@/components/service/HeroCarousel";
 
 export const metadata: Metadata = {
   title: "Laneway Home Construction",
@@ -159,17 +160,16 @@ export default function LanewayHomeConstructionPage() {
                 </Link>
               </div>
             </div>
-            {/* Right — image */}
-            <div className="relative h-[300px] md:h-auto md:min-h-[520px]">
-              <Image
-                src="/images/city/img-03.jpg"
-                alt="Laneway home construction by BRIO"
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
-                priority
-              />
-            </div>
+            {/* Right — hero image carousel */}
+            <HeroCarousel
+              images={[
+                { src: "/images/laneway/hero.webp", alt: "Modern laneway home exterior" },
+                { src: "/images/laneway/laneway-02.webp", alt: "Laneway house in Burnaby" },
+                { src: "/images/laneway/laneway-04.webp", alt: "Laneway house in East Vancouver" },
+                { src: "/images/laneway/laneway-05.webp", alt: "Laneway house in Kitsilano" },
+                { src: "/images/laneway/laneway-07.webp", alt: "Laneway house in North Vancouver" },
+              ]}
+            />
           </div>
         </div>
       </section>
@@ -294,8 +294,8 @@ export default function LanewayHomeConstructionPage() {
             {/* Right — image */}
             <div className="relative h-[350px] md:h-full md:min-h-[520px]">
               <Image
-                src="/images/city/img-04.jpg"
-                alt="Laneway home exterior"
+                src="/images/laneway/laneway-03.webp"
+                alt="Laneway house in Dunbar"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
