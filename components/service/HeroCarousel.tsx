@@ -19,7 +19,7 @@ export default function HeroCarousel({ images, interval = 4000 }: HeroCarouselPr
   }, [images.length, interval]);
 
   return (
-    <div className="relative h-[300px] md:h-full md:min-h-[520px] overflow-hidden">
+    <div className="relative h-[260px] md:h-full md:min-h-[420px] overflow-hidden bg-gray-100">
       {images.map((img, i) => (
         <div
           key={img.src}
@@ -29,7 +29,7 @@ export default function HeroCarousel({ images, interval = 4000 }: HeroCarouselPr
             src={img.src}
             alt={img.alt}
             fill
-            className="object-cover"
+            className="object-contain"
             sizes="(max-width: 768px) 100vw, 50vw"
             priority={i === 0}
           />

@@ -292,12 +292,12 @@ export default function LanewayHomeConstructionPage() {
               </Link>
             </div>
             {/* Right — image */}
-            <div className="relative h-[350px] md:h-full md:min-h-[520px]">
+            <div className="relative h-[300px] md:h-full md:min-h-[420px] bg-gray-100">
               <Image
                 src="/images/laneway/laneway-03.webp"
                 alt="Laneway house in Dunbar"
                 fill
-                className="object-cover"
+                className="object-contain"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
