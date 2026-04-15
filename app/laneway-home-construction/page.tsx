@@ -126,30 +126,30 @@ export default function LanewayHomeConstructionPage() {
     <>
       <Navbar />
 
-      {/* ── 1. Hero — Two-column: dark navy left, image fills right edge-to-edge ── */}
-      <section className="bg-brio-navy">
+      {/* ── 1. Hero — Two-column: white left, image fills right edge-to-edge ── */}
+      <section className="bg-white">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
-          {/* Left — text on dark navy */}
+          {/* Left — text */}
           <div className="py-16 md:py-24 px-6 sm:px-10 lg:px-16 flex flex-col justify-center text-center">
-            <h1 className="text-[32px] md:text-[44px] font-semibold italic text-white font-heading mb-6 leading-tight">
+            <h1 className="text-[32px] md:text-[44px] font-semibold italic text-brio-navy font-heading mb-6 leading-tight">
               Laneway Homes - Maximize Your Property&apos;s Potential
             </h1>
-            <p className="text-white/90 text-[14px] leading-relaxed mb-2">
+            <p className="text-text-body text-[14px] leading-relaxed mb-2">
               Looking to <span className="font-bold">add value to your property</span>, create a <span className="font-bold">rental income stream</span>, or build <span className="font-bold">additional living space</span>?
             </p>
-            <p className="text-white/90 text-[14px] leading-relaxed mb-2">
+            <p className="text-text-body text-[14px] leading-relaxed mb-2">
               At <span className="font-bold">BRIO Construction</span>, we specialize in designing and building <span className="font-bold">coach houses, laneway homes, and secondary suites</span>, providing homeowners with high-quality, efficient, and modern housing solution
             </p>
-            <p className="text-white/90 text-[14px] leading-relaxed mb-2">
+            <p className="text-text-body text-[14px] leading-relaxed mb-2">
               Our team handles <span className="font-bold">everything from permits and design to full construction</span>, ensuring a seamless and stress-free building experience.
             </p>
-            <p className="text-white/90 text-[14px] leading-relaxed mb-8">
+            <p className="text-text-body text-[14px] leading-relaxed mb-8">
               Let&apos;s transform your property with a beautifully designed coach house!
             </p>
             <div>
               <Link
                 href="#get-in-touch"
-                className="inline-block bg-white text-brio-navy text-[13px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-gray-100 transition-colors"
+                className="inline-block bg-brio-navy text-white text-[13px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
               >
                 Book Your Free Consultation Now!
               </Link>
