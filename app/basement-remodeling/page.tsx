@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
 import FAQ from "@/components/shared/FAQ";
-import ContactForm from "@/components/service/ContactForm";
-import Testimonials from "@/components/service/Testimonials";
+import PartnersCarousel from "@/components/shared/PartnersCarousel";
+import Newsletter from "@/components/home/Newsletter";
 import Link from "next/link";
+import Image from "next/image";
+import { Check } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Basement Remodeling",
@@ -120,107 +122,198 @@ const FAQ_ITEMS = [
   },
 ];
 
+const TESTIMONIALS = [
+  {
+    name: "Sam S.",
+    location: "Vancouver",
+    project: "Spec Home",
+    text: "BRIO Construction exceeded our expectations on every level. Their attention to detail and commitment to quality craftsmanship transformed our spec home into something truly special. Communication was excellent throughout the entire process.",
+  },
+  {
+    name: "Ron M.",
+    location: "North Vancouver",
+    project: "Full Renovation",
+    text: "From start to finish, the BRIO team was professional, transparent, and delivered outstanding results. Our full home renovation was completed on time and on budget. We couldn\u2019t be happier with the final outcome.",
+  },
+  {
+    name: "K.M.",
+    location: "Vancouver",
+    project: "Basement Remodeling",
+    text: "We hired BRIO for our basement remodel and were blown away by the quality of work. The team was respectful of our home, cleaned up daily, and the finished product looks absolutely stunning. Highly recommend!",
+  },
+];
+
 export default function BasementRemodelingPage() {
   return (
     <>
       <Navbar />
 
-      {/* Hero */}
-      <section className="bg-brio-light-gray py-16 md:py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-[32px] md:text-[42px] font-semibold text-brio-navy font-heading mb-4">
-            Turn Your Basement into a Sleek, Functional Space with BRIO
-          </h1>
-          <p className="text-brio-navy font-semibold text-[18px] mb-4">
-            Maximize Your Home&rsquo;s Potential with a Stunning Basement Remodel
-          </p>
-          <p className="text-text-body text-[16px] leading-relaxed mb-8 max-w-2xl mx-auto">
-            Your basement holds endless possibilities. Whether you envision a
-            cozy family retreat, an entertainment hub, a home office, or even a
-            rental suite, BRIO Construction transforms underused basements into
-            stunning, functional spaces that add value and comfort to your home.
-          </p>
-          <Link
-            href="#get-in-touch"
-            className="inline-block bg-brio-navy text-white text-[14px] font-semibold px-8 py-4 uppercase tracking-wide"
-          >
-            Book a Free Consultation Today!
-          </Link>
-        </div>
-      </section>
-
-      {/* Why Choose BRIO */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-[28px] md:text-[36px] font-semibold text-brio-navy font-heading text-center mb-12">
-            Why Choose BRIO for Your Basement Remodel?
-          </h2>
-          <div className="space-y-8">
-            {WHY_BRIO.map((item) => (
-              <div key={item.title}>
-                <h3 className="text-brio-navy text-[18px] font-semibold font-heading mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-text-body text-[15px] leading-relaxed">
-                  {item.desc}
-                </p>
+      {/* ── 1. Hero — Two-column, white background ── */}
+      <section className="bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 items-center">
+            {/* Left — text */}
+            <div className="py-16 md:py-24 md:pr-12">
+              <h1 className="text-[32px] md:text-[44px] font-semibold italic text-brio-navy font-heading mb-6 leading-tight">
+                Turn Your Basement Into A Sleek, Functional Space With Brio
+              </h1>
+              <p className="text-brio-navy text-[18px] font-bold mb-4">
+                Maximize Your Home&rsquo;s Potential with a Stunning Basement
+                Remodel
+              </p>
+              <p className="text-text-body text-[15px] leading-relaxed mb-8">
+                Your basement holds endless possibilities. Whether you envision a
+                cozy family retreat, an entertainment hub, a home office, or even
+                a rental suite, BRIO Construction transforms underused basements
+                into stunning, functional spaces. With expert craftsmanship,
+                smart design, and premium finishes, we add real value and comfort
+                to your home.
+              </p>
+              <div>
+                <Link
+                  href="#get-in-touch"
+                  className="inline-block bg-brio-navy text-white text-[13px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
+                >
+                  Book A Free Consultation Today!
+                </Link>
               </div>
-            ))}
+            </div>
+            {/* Right — image */}
+            <div className="relative h-[300px] md:h-auto md:min-h-[480px]">
+              <Image
+                src="/images/city/img-01.jpg"
+                alt="Stunning basement remodel by BRIO Construction"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority
+              />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Service Categories */}
+      {/* ── 2. Partners ── */}
+      <PartnersCarousel />
+
+      {/* ── 3. Why Choose BRIO — Image left, checkmarks right ── */}
+      <section className="py-16 md:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left — image */}
+            <div className="relative h-[350px] lg:h-[500px]">
+              <Image
+                src="/images/city/img-13.jpg"
+                alt="BRIO Construction custom home project"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
+
+            {/* Right — heading + checkmarks */}
+            <div>
+              <h2 className="text-[24px] md:text-[32px] font-semibold text-brio-navy font-heading mb-4 uppercase tracking-wide">
+                Why Choose BRIO For Your Custom Home?
+              </h2>
+              <p className="text-text-body text-[15px] leading-relaxed mb-8">
+                When it comes to your home, you need a construction partner you
+                can trust. BRIO brings the experience, transparency, and
+                craftsmanship to make your basement vision a reality.
+              </p>
+              <div className="space-y-4">
+                {WHY_BRIO.map((item) => (
+                  <div key={item.title} className="flex items-start gap-3">
+                    <div className="w-5 h-5 bg-brio-navy shrink-0 mt-0.5 flex items-center justify-center">
+                      <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />
+                    </div>
+                    <p className="text-text-body text-[15px] leading-relaxed">
+                      <span className="font-bold text-brio-navy">
+                        {item.title}
+                      </span>{" "}
+                      &ndash; {item.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 4. The BRIO Basement Services — CTA left (sticky), categories right ── */}
       <section className="py-16 md:py-24 bg-brio-light-gray">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-[28px] md:text-[36px] font-semibold text-brio-navy font-heading text-center mb-12">
-            Our Basement Remodeling Services
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {SERVICE_CATEGORIES.map((cat) => (
-              <div key={cat.title} className="bg-white p-8">
-                <h3 className="text-brio-navy text-[18px] font-semibold font-heading mb-4">
-                  {cat.title}
-                </h3>
-                <ul className="space-y-2">
-                  {cat.items.map((item) => (
-                    <li
-                      key={item}
-                      className="text-text-body text-[14px] flex items-start gap-2"
-                    >
-                      <span className="text-brio-navy mt-0.5">&#10003;</span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            {/* Left — sticky CTA */}
+            <div className="lg:sticky lg:top-32">
+              <h2 className="text-[24px] md:text-[32px] font-semibold text-brio-navy font-heading mb-4 uppercase tracking-wide">
+                The BRIO Basement Services
+              </h2>
+              <p className="text-text-body text-[15px] leading-relaxed mb-8">
+                At BRIO Construction, we design and build stunning, practical
+                basements that match your needs and style.
+              </p>
+              <Link
+                href="#get-in-touch"
+                className="inline-block bg-brio-navy text-white text-[13px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
+              >
+                Book A Free Consultation Today!
+              </Link>
+            </div>
+
+            {/* Right — service categories */}
+            <div className="space-y-0 divide-y divide-gray-300">
+              {SERVICE_CATEGORIES.map((cat) => (
+                <div key={cat.title} className="py-8 first:pt-0 last:pb-0">
+                  <h3 className="text-brio-navy text-[18px] font-semibold italic font-heading uppercase tracking-wide mb-4">
+                    {cat.title}
+                  </h3>
+                  <ul className="space-y-2">
+                    {cat.items.map((item) => (
+                      <li
+                        key={item}
+                        className="text-text-body text-[14px] leading-relaxed flex items-start gap-2"
+                      >
+                        <span className="text-text-muted mt-0.5">&ndash;</span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Why Remodel Your Basement */}
+      {/* ── 5. Why Remodel Your Basement — Checkmark bullets + CTA ── */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-[28px] md:text-[36px] font-semibold text-brio-navy font-heading text-center mb-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-[24px] md:text-[32px] font-semibold text-brio-navy font-heading mb-10 uppercase tracking-wide">
             Why Remodel Your Basement?
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+          <div className="space-y-6 mb-10">
             {WHY_REMODEL.map((item) => (
-              <div key={item.title}>
-                <h3 className="text-brio-navy text-[18px] font-semibold font-heading mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-text-body text-[15px] leading-relaxed">
-                  {item.desc}
-                </p>
+              <div key={item.title} className="flex items-start gap-3">
+                <div className="w-5 h-5 bg-brio-navy shrink-0 mt-0.5 flex items-center justify-center">
+                  <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />
+                </div>
+                <div>
+                  <p className="text-text-body text-[15px] leading-relaxed">
+                    <span className="font-bold text-brio-navy">
+                      {item.title}
+                    </span>{" "}
+                    &ndash; {item.desc}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
-          <div className="text-center">
+          <div>
             <Link
               href="#get-in-touch"
-              className="inline-block bg-brio-navy text-white text-[14px] font-semibold px-8 py-4 uppercase tracking-wide"
+              className="inline-block bg-brio-navy text-white text-[13px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
             >
               Start Your Basement Transformation
             </Link>
@@ -228,9 +321,143 @@ export default function BasementRemodelingPage() {
         </div>
       </section>
 
-      <Testimonials heading="What Our Clients Say" />
-      <ContactForm />
-      <FAQ items={FAQ_ITEMS} />
+      {/* ── 6. Full-width CTA Banner ── */}
+      <section className="py-16 md:py-20 bg-brio-navy">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-[24px] md:text-[32px] font-semibold text-white font-heading mb-4">
+            Ready to Turn Your Renovation Dreams Into Reality?
+          </h2>
+          <p className="text-white/80 text-[15px] leading-relaxed mb-8 max-w-2xl mx-auto">
+            From initial concept to the final walkthrough, BRIO Construction is
+            your trusted partner for basement transformations that exceed
+            expectations. Let&apos;s build something extraordinary together.
+          </p>
+          <Link
+            href="#get-in-touch"
+            className="inline-block bg-white text-brio-navy text-[13px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-gray-100 transition-colors"
+          >
+            Get Your Free Estimate
+          </Link>
+        </div>
+      </section>
+
+      {/* ── 7. Testimonials ── */}
+      <section className="py-16 md:py-24 bg-brio-light-gray">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-[28px] md:text-[36px] font-semibold text-brio-navy font-heading text-center mb-12 uppercase tracking-wide">
+            What Homeowners Are Saying!
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            {TESTIMONIALS.map((t) => (
+              <div key={t.name} className="bg-white p-8">
+                <p className="text-text-body text-[14px] leading-relaxed mb-6 italic">
+                  &ldquo;{t.text}&rdquo;
+                </p>
+                <div>
+                  <p className="text-brio-navy font-semibold text-[15px]">
+                    {t.name}
+                  </p>
+                  <p className="text-text-muted text-[13px]">
+                    {t.location} &mdash; {t.project}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="text-center">
+            <Link
+              href="#get-in-touch"
+              className="inline-block bg-brio-navy text-white text-[13px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
+            >
+              Book A Free Consultation Today!
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 8. Contact + FAQ side by side ── */}
+      <section id="get-in-touch" className="py-16 md:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Left: Contact Form */}
+            <div>
+              <h2 className="text-[24px] md:text-[30px] font-semibold text-brio-navy font-heading mb-6 uppercase tracking-wide">
+                Get In Touch
+              </h2>
+              <form className="space-y-4">
+                <div>
+                  <label className="block text-text-body text-[13px] font-semibold uppercase tracking-wide mb-1">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Your full name"
+                    className="w-full h-12 px-4 border border-border text-sm focus:outline-none focus:border-brio-navy"
+                  />
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-text-body text-[13px] font-semibold uppercase tracking-wide mb-1">
+                      Phone
+                    </label>
+                    <input
+                      type="tel"
+                      placeholder="Your phone number"
+                      className="w-full h-12 px-4 border border-border text-sm focus:outline-none focus:border-brio-navy"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-text-body text-[13px] font-semibold uppercase tracking-wide mb-1">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      placeholder="Your email address"
+                      className="w-full h-12 px-4 border border-border text-sm focus:outline-none focus:border-brio-navy"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-text-body text-[13px] font-semibold uppercase tracking-wide mb-1">
+                    Service Address
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Project address"
+                    className="w-full h-12 px-4 border border-border text-sm focus:outline-none focus:border-brio-navy"
+                  />
+                </div>
+                <div>
+                  <label className="block text-text-body text-[13px] font-semibold uppercase tracking-wide mb-1">
+                    Description
+                  </label>
+                  <textarea
+                    placeholder="Tell us about your project..."
+                    rows={4}
+                    className="w-full px-4 py-3 border border-border text-sm focus:outline-none focus:border-brio-navy resize-none"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="w-full bg-brio-navy text-white py-4 text-[14px] font-semibold uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
+                >
+                  Book Now
+                </button>
+              </form>
+            </div>
+
+            {/* Right: FAQ */}
+            <div>
+              <FAQ items={FAQ_ITEMS} compact />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 9. Newsletter ── */}
+      <Newsletter />
+
+      {/* ── 10. Footer ── */}
       <Footer />
     </>
   );
