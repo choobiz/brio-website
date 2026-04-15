@@ -209,30 +209,30 @@ export default function BathroomPage() {
       <Navbar />
 
       {/* ── 1. Hero — Two-column: text left, bathroom image right ── */}
-      <section className="bg-brio-navy">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 items-stretch">
+      <section className="bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 items-center">
             {/* Left — text */}
-            <div className="py-14 md:py-20 px-6 sm:px-10 lg:px-16 flex flex-col justify-center">
-              <h1 className="text-[32px] md:text-[44px] font-semibold italic text-white font-heading mb-6 leading-tight">
+            <div className="py-16 md:py-24 md:pr-12">
+              <h1 className="text-[32px] md:text-[44px] font-semibold italic text-brio-navy font-heading mb-6 leading-tight">
                 Transform Your Bathroom In Record Time With Brio!
               </h1>
-              <p className="text-white text-[15px] leading-relaxed mb-1">
+              <p className="text-text-body text-[15px] leading-relaxed mb-1">
                 <span className="font-bold">Complete Remodel in Just 2 weeks!</span> &ndash; No long waits, no hassle!
               </p>
-              <p className="text-white text-[15px] leading-relaxed mb-1">
+              <p className="text-text-body text-[15px] leading-relaxed mb-1">
                 <span className="font-bold">Starting at Very Low Prices</span> &ndash; High-quality renovation at an unbeatable price.
               </p>
-              <p className="text-white text-[15px] leading-relaxed mb-1">
+              <p className="text-text-body text-[15px] leading-relaxed mb-1">
                 <span className="font-bold">Complimentary 3D Rendering</span> &ndash; See your new bathroom <span className="font-bold">before</span> construction begins! <span className="font-bold">Limited-Time Offer &ndash; Act Now!</span>
               </p>
-              <p className="text-white/90 text-[15px] mt-4 mb-7">
+              <p className="text-text-body text-[15px] mt-4 mb-7">
                 Don&apos;t miss out! Upgrade your bathroom with confidence.
               </p>
               <div>
                 <Link
                   href="#get-in-touch"
-                  className="inline-block bg-white text-brio-navy text-[13px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-gray-100 transition-colors"
+                  className="inline-block bg-brio-navy text-white text-[13px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
                 >
                   Book Your Free Consultation Now
                 </Link>
