@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
 import FAQ from "@/components/shared/FAQ";
-import ContactForm from "@/components/service/ContactForm";
+import PartnersCarousel from "@/components/shared/PartnersCarousel";
 import Link from "next/link";
+import Image from "next/image";
+import { Check } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Laneway Home Construction",
@@ -123,121 +125,314 @@ export default function LanewayHomeConstructionPage() {
     <>
       <Navbar />
 
-      {/* ── Hero ── */}
-      <section className="bg-brio-light-gray py-16 md:py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-[32px] md:text-[42px] font-semibold text-brio-navy font-heading mb-6">
-            Laneway Homes &mdash; Maximize Your Property&apos;s Potential
-          </h1>
-          <p className="text-text-body text-[16px] leading-relaxed mb-4">
-            A laneway home is one of the smartest ways to add value, generate rental income,
-            and create additional living space on your property. Whether you&apos;re looking to
-            build a coach house, laneway home, or secondary suite, BRIO Construction specializes
-            in turning your vision into reality.
+      {/* ── 1. Hero — Two-column, white background ── */}
+      <section className="bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 items-center">
+            {/* Left — text */}
+            <div className="py-16 md:py-24 md:pr-12">
+              <h1 className="text-[32px] md:text-[44px] font-semibold italic text-brio-navy font-heading mb-6 leading-tight">
+                Laneway Homes &mdash; Maximize Your Property&apos;s Potential
+              </h1>
+              <p className="text-text-body text-[15px] leading-relaxed mb-4">
+                A laneway home is one of the smartest ways to add value, generate
+                rental income, and create additional living space on your property.
+                Whether you&apos;re looking to build a coach house, laneway home, or
+                secondary suite, BRIO Construction specializes in turning your
+                vision into reality.
+              </p>
+              <p className="text-text-body text-[15px] leading-relaxed mb-4">
+                We handle everything &mdash; from permits and design to full
+                construction &mdash; delivering high-quality, efficient, modern
+                housing solutions tailored to your needs.
+              </p>
+              <p className="text-text-body text-[15px] leading-relaxed mb-8">
+                Let&apos;s transform your property with a beautifully designed coach
+                house!
+              </p>
+              <div>
+                <Link
+                  href="#get-in-touch"
+                  className="inline-block bg-brio-navy text-white text-[13px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
+                >
+                  Book Your Free Consultation Now!
+                </Link>
+              </div>
+            </div>
+            {/* Right — image */}
+            <div className="relative h-[300px] md:h-auto md:min-h-[520px]">
+              <Image
+                src="/images/city/img-03.jpg"
+                alt="Laneway home construction by BRIO"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 2. Partners ── */}
+      <PartnersCarousel />
+
+      {/* ── 3. Why Choose BRIO — Image left, checkmarks right ── */}
+      <section className="py-16 md:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            {/* Left — image */}
+            <div className="relative h-[350px] lg:h-[520px]">
+              <Image
+                src="/images/city/img-04.jpg"
+                alt="Why choose BRIO for your laneway home"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
+
+            {/* Right — content */}
+            <div>
+              <h2 className="text-[28px] md:text-[36px] font-semibold text-brio-navy font-heading mb-4">
+                Why Choose BRIO For Your Laneway Home?
+              </h2>
+              <p className="text-text-body text-[15px] leading-relaxed mb-6">
+                Building a laneway home is a significant investment, and you need a
+                construction partner you can trust to deliver on time, on budget,
+                and to the highest standards.
+              </p>
+              <h3 className="text-brio-navy text-[18px] font-semibold font-heading mb-4">
+                What Sets Us Apart?
+              </h3>
+              <div className="space-y-4 mb-8">
+                {WHY_CHOOSE.map((item) => (
+                  <div key={item.title} className="flex items-start gap-3">
+                    <div className="w-5 h-5 bg-brio-navy shrink-0 mt-0.5 flex items-center justify-center">
+                      <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />
+                    </div>
+                    <p className="text-text-body text-[14px] leading-relaxed">
+                      <span className="font-bold text-brio-navy">{item.title}</span>
+                      {" "}&ndash; {item.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+              <p className="text-text-body text-[15px] leading-relaxed">
+                Let&apos;s make the most of your property &mdash; schedule your
+                consultation today!
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 4. The BRIO Laneway Home Services — CTA left, process steps right ── */}
+      <section className="py-16 md:py-24 bg-brio-light-gray">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            {/* Left — sticky CTA */}
+            <div className="lg:sticky lg:top-32">
+              <h2 className="text-[28px] md:text-[36px] font-semibold text-brio-navy font-heading mb-4">
+                The BRIO Laneway Home Services
+              </h2>
+              <p className="text-text-body text-[15px] leading-relaxed mb-8">
+                At Brio Construction, we offer turnkey solutions for homeowners
+                looking to build a coach house, laneway home, or backyard suite.
+              </p>
+              <Link
+                href="#get-in-touch"
+                className="inline-block bg-brio-navy text-white text-[13px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
+              >
+                Book Your Free Consultation Now!
+              </Link>
+            </div>
+
+            {/* Right — process steps */}
+            <div className="space-y-0">
+              {PROCESS_STEPS.map((s, i) => (
+                <div key={s.step}>
+                  <div className="py-6">
+                    <h3 className="text-brio-navy text-[18px] font-semibold italic uppercase font-heading mb-2">
+                      {s.step}. {s.title}
+                    </h3>
+                    <p className="text-text-body text-[14px] leading-relaxed">
+                      {s.description}
+                    </p>
+                  </div>
+                  {i < PROCESS_STEPS.length - 1 && (
+                    <hr className="border-border" />
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 5. What Is A Laneway House? ── */}
+      <section className="py-16 md:py-24 bg-white">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-[28px] md:text-[36px] font-semibold text-brio-navy font-heading mb-6">
+            What Is A Laneway House?
+          </h2>
+          <p className="text-text-body text-[15px] leading-relaxed mb-10">
+            A laneway home &mdash; also known as a coach house, backyard suite, or
+            garden suite &mdash; is a self-contained secondary dwelling built on an
+            existing residential lot, typically at the rear of the property near the
+            lane. Laneway homes offer a versatile and cost-effective way to add
+            living space to your property.
           </p>
-          <p className="text-text-body text-[16px] leading-relaxed mb-8">
-            We handle everything &mdash; from permits and design to full construction &mdash; so
-            you can enjoy a seamless, stress-free building experience.
+          <div className="space-y-5 mb-10">
+            {LANEWAY_BENEFITS.map((benefit) => (
+              <div key={benefit.title} className="flex items-start gap-3">
+                <div className="w-5 h-5 bg-brio-navy shrink-0 mt-0.5 flex items-center justify-center">
+                  <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />
+                </div>
+                <p className="text-text-body text-[14px] leading-relaxed">
+                  <span className="font-bold text-brio-navy">{benefit.title}</span>
+                  {" "}&ndash; {benefit.description}
+                </p>
+              </div>
+            ))}
+          </div>
+          <p className="text-text-body text-[15px] leading-relaxed mb-8">
+            Thinking about adding a coach house to your property?
           </p>
           <Link
             href="#get-in-touch"
-            className="inline-block bg-brio-navy text-white text-[14px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
+            className="inline-block bg-brio-navy text-white text-[13px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
           >
             Book Your Free Consultation Now!
           </Link>
         </div>
       </section>
 
-      {/* ── Why Choose BRIO ── */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-[28px] md:text-[36px] font-semibold text-brio-navy font-heading text-center mb-2">
-            Why Choose BRIO for Your Laneway Home?
-          </h2>
-          <p className="text-text-muted text-center text-[15px] mb-12">
-            What Sets Us Apart?
-          </p>
-          <div className="space-y-8">
-            {WHY_CHOOSE.map((item) => (
-              <div key={item.title}>
-                <h3 className="text-brio-navy text-[18px] font-semibold font-heading mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-text-body text-[14px] leading-relaxed">
-                  {item.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Process Steps ── */}
-      <section className="py-16 md:py-24 bg-brio-light-gray">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-[28px] md:text-[36px] font-semibold text-brio-navy font-heading text-center mb-12">
-            Our Laneway Home Construction Process
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {PROCESS_STEPS.map((s) => (
-              <div key={s.step} className="text-center">
-                <div className="w-14 h-14 bg-brio-navy text-white flex items-center justify-center text-[22px] font-bold mx-auto mb-4">
-                  {s.step}
+      {/* ── 6. Contact + FAQ side by side ── */}
+      <section id="get-in-touch" className="py-16 md:py-24 bg-brio-light-gray">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Left: Contact Form */}
+            <div>
+              <h2 className="text-[24px] md:text-[30px] font-semibold text-brio-navy font-heading mb-6 uppercase tracking-wide">
+                Get In Touch
+              </h2>
+              <form className="space-y-4">
+                <div>
+                  <label className="block text-text-body text-[13px] font-semibold uppercase tracking-wide mb-1">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Your full name"
+                    className="w-full h-12 px-4 border border-border text-sm focus:outline-none focus:border-brio-navy bg-white"
+                  />
                 </div>
-                <h3 className="text-brio-navy text-[18px] font-semibold font-heading mb-2">
-                  {s.title}
-                </h3>
-                <p className="text-text-body text-[14px] leading-relaxed">
-                  {s.description}
-                </p>
-              </div>
-            ))}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-text-body text-[13px] font-semibold uppercase tracking-wide mb-1">
+                      Phone
+                    </label>
+                    <input
+                      type="tel"
+                      placeholder="Your phone number"
+                      className="w-full h-12 px-4 border border-border text-sm focus:outline-none focus:border-brio-navy bg-white"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-text-body text-[13px] font-semibold uppercase tracking-wide mb-1">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      placeholder="Your email address"
+                      className="w-full h-12 px-4 border border-border text-sm focus:outline-none focus:border-brio-navy bg-white"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-text-body text-[13px] font-semibold uppercase tracking-wide mb-1">
+                    Service Address
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Project address"
+                    className="w-full h-12 px-4 border border-border text-sm focus:outline-none focus:border-brio-navy bg-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-text-body text-[13px] font-semibold uppercase tracking-wide mb-1">
+                    Description
+                  </label>
+                  <textarea
+                    placeholder="Tell us about your project..."
+                    rows={4}
+                    className="w-full px-4 py-3 border border-border text-sm focus:outline-none focus:border-brio-navy resize-none bg-white"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="w-full bg-brio-navy text-white py-4 text-[14px] font-semibold uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
+                >
+                  Book Now
+                </button>
+              </form>
+            </div>
+
+            {/* Right: FAQ */}
+            <div>
+              <FAQ items={FAQ_ITEMS} compact />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── What is a Laneway House? ── */}
-      <section className="py-16 md:py-24 bg-white">
+      {/* ── 7. Newsletter ── */}
+      <section className="bg-white py-10 md:py-14 border-t border-border">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-[28px] md:text-[36px] font-semibold text-brio-navy font-heading text-center mb-6">
-            What is a Laneway House?
-          </h2>
-          <p className="text-text-body text-[16px] leading-relaxed text-center max-w-3xl mx-auto mb-10">
-            A laneway house &mdash; also known as a coach house, backyard suite, or garden suite
-            &mdash; is a small, self-contained home built on an existing residential lot, typically
-            at the rear of the property near the lane. Laneway homes offer a versatile and
-            cost-effective way to add living space to your property.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
-            {LANEWAY_BENEFITS.map((benefit) => (
-              <div key={benefit.title}>
-                <h3 className="text-brio-navy text-[18px] font-semibold font-heading mb-2">
-                  {benefit.title}
-                </h3>
-                <p className="text-text-body text-[14px] leading-relaxed">
-                  {benefit.description}
-                </p>
-              </div>
-            ))}
-          </div>
-          <div className="text-center">
-            <Link
-              href="#get-in-touch"
-              className="inline-block bg-brio-navy text-white text-[14px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
-            >
-              Book Your Free Consultation Now!
-            </Link>
+          <div className="flex flex-col md:flex-row gap-8 items-center">
+            {/* Image */}
+            <div className="shrink-0 hidden md:block">
+              <Image
+                src="/images/newsletter.png"
+                alt="BRIO Construction newsletter"
+                width={200}
+                height={200}
+                className="object-cover w-[180px] h-[180px]"
+              />
+            </div>
+
+            {/* Content + form */}
+            <div className="flex-1">
+              <p className="text-text-muted text-[10px] uppercase tracking-[3px] mb-1">
+                Subscribe
+              </p>
+              <h3 className="text-brio-navy text-[22px] md:text-[26px] font-semibold font-heading mb-2">
+                The Inside Look
+              </h3>
+              <p className="text-text-body text-[14px] mb-4">
+                Curated home decor picks, expert design advice, and construction
+                tips. Join 4,000+ subscribers.
+              </p>
+              <form className="flex gap-2">
+                <input
+                  type="email"
+                  placeholder="Your email address..."
+                  className="flex-1 h-11 px-4 border border-border text-sm focus:outline-none focus:border-brio-navy"
+                />
+                <button
+                  type="submit"
+                  className="h-11 px-5 bg-brio-navy text-white text-xs font-semibold uppercase tracking-wide hover:bg-brio-navy/90 transition-colors whitespace-nowrap"
+                >
+                  Sign Me Up
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── Contact Form ── */}
-      <ContactForm />
-
-      {/* ── FAQ ── */}
-      <FAQ items={FAQ_ITEMS} />
-
-      {/* ── Footer ── */}
+      {/* ── 8. Footer ── */}
       <Footer />
     </>
   );
