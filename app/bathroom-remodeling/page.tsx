@@ -208,36 +208,48 @@ export default function BathroomPage() {
     <>
       <Navbar />
 
-      {/* ── 1. Hero — Dark Navy, Left-aligned ── */}
-      <section className="bg-brio-navy py-16 md:py-24">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-[32px] md:text-[46px] font-semibold italic text-white font-heading mb-8 leading-tight">
-            Transform Your Bathroom In Record Time With Brio!
-          </h1>
-          <ul className="space-y-3 mb-8">
-            <li className="text-white text-[16px] md:text-[18px] leading-relaxed">
-              <span className="font-semibold">Complete Remodel in Just 2 weeks!</span>{" "}
-              &ndash; No long waits, no hassle!
-            </li>
-            <li className="text-white text-[16px] md:text-[18px] leading-relaxed">
-              <span className="font-semibold">Starting at Very Low Prices</span>{" "}
-              &ndash; High-quality renovation at an unbeatable price.
-            </li>
-            <li className="text-white text-[16px] md:text-[18px] leading-relaxed">
-              <span className="font-semibold">Complimentary 3D Rendering</span>{" "}
-              &ndash; See your new bathroom before construction begins!
-              Limited-Time Offer &ndash; Act Now!
-            </li>
-          </ul>
-          <p className="text-white/90 text-[16px] md:text-[18px] mb-8">
-            Don&apos;t miss out! Upgrade your bathroom with confidence.
-          </p>
-          <Link
-            href="#get-in-touch"
-            className="inline-block border-2 border-white text-white text-[14px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-white hover:text-brio-navy transition-colors"
-          >
-            BOOK YOUR FREE CONSULTATION NOW!
-          </Link>
+      {/* ── 1. Hero — Two-column: text left, bathroom image right ── */}
+      <section className="bg-brio-navy">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 items-stretch">
+            {/* Left — text */}
+            <div className="py-14 md:py-20 px-6 sm:px-10 lg:px-16 flex flex-col justify-center">
+              <h1 className="text-[32px] md:text-[44px] font-semibold italic text-white font-heading mb-6 leading-tight">
+                Transform Your Bathroom In Record Time With Brio!
+              </h1>
+              <p className="text-white text-[15px] leading-relaxed mb-1">
+                <span className="font-bold">Complete Remodel in Just 2 weeks!</span> &ndash; No long waits, no hassle!
+              </p>
+              <p className="text-white text-[15px] leading-relaxed mb-1">
+                <span className="font-bold">Starting at Very Low Prices</span> &ndash; High-quality renovation at an unbeatable price.
+              </p>
+              <p className="text-white text-[15px] leading-relaxed mb-1">
+                <span className="font-bold">Complimentary 3D Rendering</span> &ndash; See your new bathroom <span className="font-bold">before</span> construction begins! <span className="font-bold">Limited-Time Offer &ndash; Act Now!</span>
+              </p>
+              <p className="text-white/90 text-[15px] mt-4 mb-7">
+                Don&apos;t miss out! Upgrade your bathroom with confidence.
+              </p>
+              <div>
+                <Link
+                  href="#get-in-touch"
+                  className="inline-block bg-white text-brio-navy text-[13px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-gray-100 transition-colors"
+                >
+                  Book Your Free Consultation Now
+                </Link>
+              </div>
+            </div>
+            {/* Right — image */}
+            <div className="relative h-[300px] md:h-auto md:min-h-[480px]">
+              <Image
+                src="/images/city/img-08.webp"
+                alt="Modern bathroom renovation by BRIO Construction"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority
+              />
+            </div>
+          </div>
         </div>
       </section>
 
