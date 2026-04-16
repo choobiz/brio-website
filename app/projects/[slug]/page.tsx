@@ -70,80 +70,100 @@ export default async function ProjectDetailPage({
         </div>
       </section>
 
-      {/* Description + first image */}
-      <section className="py-10 md:py-14 bg-white">
+      {/* Main image + description (image full-width, text below) */}
+      <section className="pb-10 md:pb-14 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-            {images[0] && (
-              <div className="relative aspect-[4/3] overflow-hidden">
-                <Image
-                  src={images[0]}
-                  alt={`${project.name} detail`}
-                  fill
-                  className="object-cover"
-                  sizes="50vw"
-                />
-              </div>
-            )}
-            <div>
-              {project.description.split("\n\n").map((p, i) => (
-                <p
-                  key={i}
-                  className="text-text-body text-[14px] leading-relaxed mb-4 last:mb-0"
-                >
-                  {p}
-                </p>
-              ))}
+          {images[0] && (
+            <div className="relative aspect-[16/9] overflow-hidden mb-8">
+              <Image
+                src={images[0]}
+                alt={`${project.name} showcase`}
+                fill
+                className="object-cover"
+                sizes="100vw"
+              />
             </div>
+          )}
+          <div className="max-w-3xl mx-auto">
+            {project.description.split("\n\n").map((p, i) => (
+              <p
+                key={i}
+                className="text-text-body text-[14px] leading-relaxed mb-4 last:mb-0"
+              >
+                {p}
+              </p>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Content sections with interspersed images */}
+      {/* Content sections with images */}
       <section className="py-10 md:py-14 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           {project.sections.map((section, i) => {
+            const isEven = i % 2 === 0;
             const imgA = images[1 + i * 2];
             const imgB = images[2 + i * 2];
+            const hasTwoSections =
+              i + 1 < project.sections.length && (i === 0 || i === 2);
+            const nextSection =
+              hasTwoSections && i + 1 < project.sections.length
+                ? project.sections[i + 1]
+                : null;
+
+            // Pair sections side by side for Design Intent + Materials, Functional + Brand
+            if (!isEven) return null; // Skip odd indices, they're rendered as pairs
 
             return (
               <div key={i} className="mb-14 last:mb-0">
-                {/* Section heading + text */}
-                <h3 className="font-heading text-[18px] md:text-[22px] font-semibold text-brio-navy italic mb-3">
-                  {section.heading}
-                </h3>
-                {section.content.split("\n\n").map((p, j) => (
-                  <p
-                    key={j}
-                    className="text-text-body text-[14px] leading-relaxed mb-3 last:mb-0"
-                  >
-                    {p}
-                  </p>
-                ))}
+                {/* Two headings + texts side by side */}
+                {nextSection ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-6">
+                    <div>
+                      <h3 className="font-heading text-[16px] md:text-[18px] font-semibold text-brio-navy italic mb-3 uppercase tracking-wide">
+                        {section.heading}
+                      </h3>
+                      {section.content.split("\n\n").map((p, j) => (
+                        <p key={j} className="text-text-body text-[13px] leading-relaxed mb-3 last:mb-0">
+                          {p}
+                        </p>
+                      ))}
+                    </div>
+                    <div>
+                      <h3 className="font-heading text-[16px] md:text-[18px] font-semibold text-brio-navy italic mb-3 uppercase tracking-wide">
+                        {nextSection.heading}
+                      </h3>
+                      {nextSection.content.split("\n\n").map((p, j) => (
+                        <p key={j} className="text-text-body text-[13px] leading-relaxed mb-3 last:mb-0">
+                          {p}
+                        </p>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="mb-6">
+                    <h3 className="font-heading text-[16px] md:text-[18px] font-semibold text-brio-navy italic mb-3 uppercase tracking-wide">
+                      {section.heading}
+                    </h3>
+                    {section.content.split("\n\n").map((p, j) => (
+                      <p key={j} className="text-text-body text-[13px] leading-relaxed mb-3 last:mb-0">
+                        {p}
+                      </p>
+                    ))}
+                  </div>
+                )}
 
-                {/* Two images side by side after content */}
+                {/* Two images side by side */}
                 {(imgA || imgB) && (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {imgA && (
                       <div className="relative aspect-[4/3] overflow-hidden">
-                        <Image
-                          src={imgA}
-                          alt={`${section.heading} photo 1`}
-                          fill
-                          className="object-cover"
-                          sizes="50vw"
-                        />
+                        <Image src={imgA} alt={`${section.heading} photo`} fill className="object-cover" sizes="50vw" />
                       </div>
                     )}
                     {imgB && (
                       <div className="relative aspect-[4/3] overflow-hidden">
-                        <Image
-                          src={imgB}
-                          alt={`${section.heading} photo 2`}
-                          fill
-                          className="object-cover"
-                          sizes="50vw"
-                        />
+                        <Image src={imgB} alt={`${nextSection?.heading || section.heading} photo`} fill className="object-cover" sizes="50vw" />
                       </div>
                     )}
                   </div>
@@ -166,12 +186,14 @@ export default async function ProjectDetailPage({
         )}
         <div className="absolute inset-0 bg-brio-navy/70" />
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-heading text-[20px] md:text-[28px] font-semibold text-white mb-4 italic">
+          <h2 className="font-heading text-[18px] md:text-[24px] font-semibold text-white mb-3 italic">
             Built with Intention, Delivered with Care
           </h2>
-          <p className="text-white/90 text-[14px] leading-relaxed mb-6 max-w-2xl mx-auto">
-            {project.ctaText} Let&apos;s build something that works for
-            you&mdash;functionally and beautifully.
+          <p className="text-white/90 text-[13px] leading-relaxed mb-6 max-w-2xl mx-auto">
+            At BRIO Construction, we know that the best spaces are the ones that reflect the people who use them. Whether we&apos;re building a home, an office, or something in between, we lead with collaboration, clarity, and care.
+          </p>
+          <p className="text-white font-semibold text-[14px] mb-6">
+            {project.ctaText}
           </p>
           <Link
             href={project.ctaLink}
@@ -182,25 +204,35 @@ export default async function ProjectDetailPage({
         </div>
       </section>
 
+      {/* YouTube Video */}
+      {slug === "downtown-coffeeshop" && (
+        <section className="py-10 md:py-14 bg-white">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="relative w-full aspect-video">
+              <iframe
+                src="https://www.youtube.com/embed/L4tiI0Xdgss"
+                title="Downtown Coffeeshop Renovation Video"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="absolute inset-0 w-full h-full"
+              />
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* More Related Content */}
-      <section className="py-14 md:py-20 bg-white">
+      <section className="py-14 md:py-20 bg-white border-t border-gray-100">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="font-heading text-[22px] md:text-[28px] font-semibold text-brio-navy text-center mb-10 uppercase tracking-wider">
             More Related Content
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {related.map((p) => (
-              <Link
-                key={p.slug}
-                href={`/projects/${p.slug}`}
-                className="group"
-              >
+              <Link key={p.slug} href={`/projects/${p.slug}`} className="group">
                 <div className="relative aspect-[4/3] overflow-hidden mb-3">
                   <Image
-                    src={
-                      p.heroImage ||
-                      `/images/projects/${p.slug.split("-")[0]}.jpg`
-                    }
+                    src={p.heroImage || `/images/projects/${p.slug.split("-")[0]}.jpg`}
                     alt={p.name}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-300"
@@ -213,6 +245,9 @@ export default async function ProjectDetailPage({
                 <p className="text-text-body text-[12px] leading-relaxed line-clamp-2">
                   {p.subtitle}
                 </p>
+                <span className="text-brio-navy text-[12px] font-semibold uppercase tracking-wide mt-2 inline-block">
+                  Read More &raquo;
+                </span>
               </Link>
             ))}
           </div>
@@ -224,39 +259,18 @@ export default async function ProjectDetailPage({
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 items-center">
             <div>
-              <p className="text-text-muted text-[11px] uppercase tracking-widest mb-1">
-                Subscribe
-              </p>
-              <h2 className="font-heading text-[22px] md:text-[26px] font-bold text-brio-navy mb-2">
-                The Inside Look
-              </h2>
+              <p className="text-text-muted text-[11px] uppercase tracking-widest mb-1">Subscribe</p>
+              <h2 className="font-heading text-[22px] md:text-[26px] font-bold text-brio-navy mb-2">The Inside Look</h2>
               <p className="text-text-body text-[13px] leading-relaxed mb-4 max-w-md">
-                The email newsletter that delivers curated home decor and
-                furniture picks, expert design advice, and more. Join 4,000+
-                subscribers.
+                The email newsletter that delivers curated home decor and furniture picks, expert design advice, and more. Join 4,000+ subscribers.
               </p>
               <form className="flex gap-2 max-w-md">
-                <input
-                  type="email"
-                  placeholder="Your email address..."
-                  className="flex-1 h-10 px-4 border border-gray-300 text-sm bg-white focus:outline-none focus:border-brio-navy"
-                />
-                <button
-                  type="submit"
-                  className="h-10 px-5 bg-brio-navy text-white font-semibold uppercase tracking-wide text-[12px] hover:bg-brio-navy/90 transition-colors shrink-0"
-                >
-                  Sign Me Up
-                </button>
+                <input type="email" placeholder="Your email address..." className="flex-1 h-10 px-4 border border-gray-300 text-sm bg-white focus:outline-none focus:border-brio-navy" />
+                <button type="submit" className="h-10 px-5 bg-brio-navy text-white font-semibold uppercase tracking-wide text-[12px] hover:bg-brio-navy/90 transition-colors shrink-0">Sign Me Up</button>
               </form>
             </div>
             <div className="hidden md:block relative w-[200px] h-[240px] rounded-t-full overflow-hidden">
-              <Image
-                src="/images/newsletter.png"
-                alt="Builder overlooking a construction site"
-                fill
-                className="object-cover"
-                sizes="200px"
-              />
+              <Image src="/images/newsletter.png" alt="Builder overlooking a construction site" fill className="object-cover" sizes="200px" />
             </div>
           </div>
         </div>
