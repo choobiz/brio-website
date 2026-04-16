@@ -155,16 +155,17 @@ export default function LanewayHomeConstructionPage() {
               </Link>
             </div>
           </div>
-          {/* Right — image carousel, fills entire right half edge-to-edge */}
-          <HeroCarousel
-            images={[
-              { src: "/images/laneway/hero.webp", alt: "Modern laneway home exterior" },
-              { src: "/images/laneway/laneway-02.webp", alt: "Laneway house in Burnaby" },
-              { src: "/images/laneway/laneway-04.webp", alt: "Laneway house in East Vancouver" },
-              { src: "/images/laneway/laneway-05.webp", alt: "Laneway house in Kitsilano" },
-              { src: "/images/laneway/laneway-07.webp", alt: "Laneway house in North Vancouver" },
-            ]}
-          />
+          {/* Right — image */}
+          <div className="relative h-[300px] md:h-auto md:min-h-[500px]">
+            <Image
+              src="/images/laneway/hero.webp"
+              alt="Modern laneway home exterior"
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
+              priority
+            />
+          </div>
         </div>
       </section>
 
