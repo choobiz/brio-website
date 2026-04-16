@@ -13,6 +13,8 @@ export interface Project {
   sections: ProjectSection[];
   ctaText: string;
   ctaLink: string;
+  heroImage?: string;
+  images?: string[];
 }
 
 export const PROJECTS: Project[] = [
@@ -23,6 +25,16 @@ export const PROJECTS: Project[] = [
       "Bringing a refined European café experience to the heart of Downtown Vancouver",
     type: "Commercial",
     year: "2024-25",
+    heroImage: "/images/projects/coffeeshop/hero.jpg",
+    images: [
+      "/images/projects/coffeeshop/img-1.jpg",
+      "/images/projects/coffeeshop/img-2.jpg",
+      "/images/projects/coffeeshop/img-3.jpg",
+      "/images/projects/coffeeshop/img-4.jpg",
+      "/images/projects/coffeeshop/img-5.jpg",
+      "/images/projects/coffeeshop/img-6.jpg",
+      "/images/projects/coffeeshop/img-7.jpg",
+    ],
     description:
       "Bringing a refined European café experience to the heart of Downtown Vancouver, this project involved the complete interior fit-out of PAUL Le Café, a globally recognized French bakery and coffee brand. Located in the lobby of a prominent commercial tower, the renovation focused on delivering a sleek, elegant café that blends hospitality, efficiency, and sophisticated design.\n\nFrom concept to completion, this space was designed to reflect PAUL's premium identity while accommodating the functional requirements of a high-traffic service counter and casual seating area. The result is a modern, inviting café that balances brand character with contemporary West Coast aesthetics.",
     sections: [
