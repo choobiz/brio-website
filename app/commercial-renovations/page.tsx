@@ -111,7 +111,7 @@ export default function CommercialRenovationsPage() {
             {/* Left — text */}
             <div className="py-16 md:py-24 md:pr-12">
               <h1 className="text-[32px] md:text-[44px] font-semibold italic text-brio-navy font-heading mb-6 leading-tight">
-                Transform Your Commercial Space, Enhance Your Success
+                Commercial Renovation &ndash; Transform Your Space, Enhance Your Success
               </h1>
               <p className="text-text-body text-[15px] leading-relaxed mb-4">
                 Whether you need a modern refresh, improved functionality, or a
@@ -138,7 +138,7 @@ export default function CommercialRenovationsPage() {
             {/* Right — image */}
             <div className="relative h-[300px] md:h-auto md:min-h-[480px]">
               <Image
-                src="/images/city/img-13.jpg"
+                src="/images/commercial/hero.jpg"
                 alt="Commercial renovation by BRIO Construction"
                 fill
                 className="object-cover"
@@ -153,31 +153,49 @@ export default function CommercialRenovationsPage() {
       {/* ── 2. Partners ── */}
       <PartnersCarousel />
 
-      {/* ── 3. Why Choose BRIO — Checkmark bullets ── */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-[24px] md:text-[32px] font-semibold text-brio-navy font-heading mb-4 uppercase tracking-wide">
-            Why Choose BRIO for Your Commercial Renovation?
+      {/* ── 3. Recent TI Projects Gallery ── */}
+      <section className="py-14 md:py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="font-heading text-[22px] md:text-[28px] font-semibold text-brio-navy text-center mb-8 uppercase tracking-wider">
+            Checkout Our Recent TI Projects
           </h2>
-          <p className="text-text-body text-[15px] leading-relaxed mb-10">
-            When it comes to your business, you need a construction partner you
-            can trust. BRIO brings the experience, transparency, and
-            craftsmanship to make your commercial vision a reality.
-          </p>
-          <div className="space-y-4">
-            {WHY_CHOOSE.map((item) => (
-              <div key={item.title} className="flex items-start gap-3">
-                <div className="w-5 h-5 bg-brio-navy shrink-0 mt-0.5 flex items-center justify-center">
-                  <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div className="relative aspect-[4/3] overflow-hidden">
+              <Image src="/images/city/img-13.jpg" alt="Commercial project 1" fill className="object-cover hover:scale-105 transition-transform duration-300" sizes="33vw" />
+            </div>
+            <div className="relative aspect-[4/3] overflow-hidden">
+              <Image src="/images/city/img-06.webp" alt="Commercial project 2" fill className="object-cover hover:scale-105 transition-transform duration-300" sizes="33vw" />
+            </div>
+            <div className="relative aspect-[4/3] overflow-hidden">
+              <Image src="/images/commercial/hero.jpg" alt="Commercial project 3" fill className="object-cover hover:scale-105 transition-transform duration-300" sizes="33vw" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 4. Why Choose BRIO — Centered heading, image left + checkmarks right ── */}
+      <section className="py-16 md:py-24 bg-white border-t border-gray-100">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="font-heading text-[22px] md:text-[28px] font-semibold text-brio-navy text-center mb-12 uppercase tracking-wider">
+            Why Choose BRIO For Your Commercial Renovation Project?
+          </h2>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <div className="relative h-[300px] lg:h-[380px]">
+              <Image src="/images/city/img-02.jpg" alt="Commercial renovation interior" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
+            </div>
+            <div className="space-y-4">
+              {WHY_CHOOSE.map((item) => (
+                <div key={item.title} className="flex items-start gap-3">
+                  <div className="w-5 h-5 rounded bg-brio-navy shrink-0 mt-0.5 flex items-center justify-center">
+                    <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />
+                  </div>
+                  <p className="text-text-body text-[14px]">
+                    <span className="font-bold">{item.title}</span>
+                    {" "}&ndash; {item.description}
+                  </p>
                 </div>
-                <p className="text-text-body text-[15px] leading-relaxed">
-                  <span className="font-bold text-brio-navy">
-                    {item.title}
-                  </span>{" "}
-                  &ndash; {item.description}
-                </p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -188,8 +206,8 @@ export default function CommercialRenovationsPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             {/* Left — sticky CTA */}
             <div className="lg:sticky lg:top-32">
-              <h2 className="text-[24px] md:text-[32px] font-semibold text-brio-navy font-heading mb-4 uppercase tracking-wide">
-                Our Commercial Renovation Services
+              <h2 className="font-heading text-[26px] md:text-[32px] font-semibold text-brio-navy mb-4">
+                The BRIO Commercial Renovation Services
               </h2>
               <p className="text-text-body text-[15px] leading-relaxed mb-8">
                 We work with businesses of all sizes to transform commercial
@@ -235,73 +253,31 @@ export default function CommercialRenovationsPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Left: Contact Form */}
             <div>
-              <h2 className="text-[24px] md:text-[30px] font-semibold text-brio-navy font-heading mb-6 uppercase tracking-wide">
-                Get In Touch
-              </h2>
-              <form className="space-y-4">
-                <div>
-                  <label className="block text-text-body text-[13px] font-semibold uppercase tracking-wide mb-1">
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Your full name"
-                    className="w-full h-12 px-4 border border-border text-sm focus:outline-none focus:border-brio-navy"
-                  />
+              <h3 className="font-heading text-[20px] md:text-[24px] font-semibold text-brio-navy mb-2 uppercase tracking-wide underline">
+                Let&apos;s Discuss Your Project
+              </h3>
+              <p className="text-text-body text-[13px] leading-relaxed mb-6">
+                Ready to explore the possibilities for your project? We&apos;d love to hear your ideas! Taking the first step is easy. Share a few details below, and our team will get in touch to schedule a friendly, no-obligation consultation to discuss your project.
+              </p>
+              <form className="space-y-3">
+                <input type="text" required placeholder="Name" className="w-full h-11 px-4 border border-gray-300 text-sm bg-white focus:outline-none focus:border-brio-navy" />
+                <div className="grid grid-cols-2 gap-3">
+                  <input type="tel" required placeholder="Phone" className="w-full h-11 px-4 border border-gray-300 text-sm bg-white focus:outline-none focus:border-brio-navy" />
+                  <input type="email" required placeholder="Email" className="w-full h-11 px-4 border border-gray-300 text-sm bg-white focus:outline-none focus:border-brio-navy" />
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-text-body text-[13px] font-semibold uppercase tracking-wide mb-1">
-                      Phone
-                    </label>
-                    <input
-                      type="tel"
-                      placeholder="Your phone number"
-                      className="w-full h-12 px-4 border border-border text-sm focus:outline-none focus:border-brio-navy"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-text-body text-[13px] font-semibold uppercase tracking-wide mb-1">
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      placeholder="Your email address"
-                      className="w-full h-12 px-4 border border-border text-sm focus:outline-none focus:border-brio-navy"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-text-body text-[13px] font-semibold uppercase tracking-wide mb-1">
-                    Service Address
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Project address"
-                    className="w-full h-12 px-4 border border-border text-sm focus:outline-none focus:border-brio-navy"
-                  />
-                </div>
-                <div>
-                  <label className="block text-text-body text-[13px] font-semibold uppercase tracking-wide mb-1">
-                    Description
-                  </label>
-                  <textarea
-                    placeholder="Tell us about your project..."
-                    rows={4}
-                    className="w-full px-4 py-3 border border-border text-sm focus:outline-none focus:border-brio-navy resize-none"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="w-full bg-brio-navy text-white py-4 text-[14px] font-semibold uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
-                >
-                  Book Now
+                <input type="text" placeholder="Service Address" className="w-full h-11 px-4 border border-gray-300 text-sm bg-white focus:outline-none focus:border-brio-navy" />
+                <textarea placeholder="Description of Work" rows={4} className="w-full px-4 py-3 border border-gray-300 text-sm bg-white focus:outline-none focus:border-brio-navy resize-none" />
+                <button type="submit" className="w-full h-11 bg-brio-navy text-white font-semibold uppercase tracking-wide text-[13px] hover:bg-brio-navy/90 transition-colors">
+                  Book Now!
                 </button>
               </form>
             </div>
 
             {/* Right: FAQ */}
             <div>
+              <h3 className="font-heading text-[20px] md:text-[24px] font-semibold text-brio-navy mb-6 uppercase tracking-wide underline">
+                Frequently Asked Questions
+              </h3>
               <FAQ items={FAQ_ITEMS} compact />
             </div>
           </div>
