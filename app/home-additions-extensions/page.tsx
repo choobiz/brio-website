@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
 import FAQ from "@/components/shared/FAQ";
-import ContactForm from "@/components/service/ContactForm";
+import PartnersCarousel from "@/components/shared/PartnersCarousel";
 import Link from "next/link";
+import Image from "next/image";
+import { Check } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Home Additions & Extensions",
@@ -42,52 +44,56 @@ const WHY_ADD = [
 const SERVICE_TYPES = [
   {
     title: "Room Additions",
-    description:
-      "Need an extra bedroom, bathroom, home office, or entertainment space? We build custom room additions that integrate seamlessly with your existing home.",
+    items: [
+      "Extra bedrooms, bathrooms, or home offices",
+      "Entertainment and media rooms",
+      "Sunrooms and four-season rooms",
+      "Seamless integration with existing layout",
+    ],
   },
   {
     title: "Kitchen & Dining Room Expansions",
-    description:
-      "Create the larger, open-concept kitchen you\u2019ve always wanted. We expand kitchens and dining areas to give you more room to cook, entertain, and gather with family.",
+    items: [
+      "Open-concept kitchen and dining areas",
+      "Extended countertop and cabinet space",
+      "Modern layouts for cooking and entertaining",
+      "Upgraded plumbing, electrical, and lighting",
+    ],
   },
   {
     title: "Second-Storey Additions",
-    description:
-      "Maximize your living space without sacrificing your yard. A second-storey addition is the ideal solution for homeowners who need more room but love their lot.",
+    items: [
+      "Double your living space without losing yard",
+      "Master suites with ensuite bathrooms",
+      "Structural engineering and permit handling",
+      "Matching roofline and exterior finishes",
+    ],
   },
   {
     title: "Garage Conversions & Extensions",
-    description:
-      "Transform your garage into valuable living space \u2014 a rental suite, a home gym, a workshop, or additional bedrooms. We also build garage extensions for more storage or parking.",
+    items: [
+      "Convert to a rental suite or home gym",
+      "Workshop or creative studio space",
+      "Additional bedrooms or living areas",
+      "Garage extensions for extra storage or parking",
+    ],
   },
   {
     title: "In-Law Suites & Secondary Dwellings",
-    description:
-      "Keep your extended family close with a self-contained in-law suite. We build legal secondary dwellings that offer privacy, comfort, and even rental income potential.",
+    items: [
+      "Self-contained suites with full kitchens",
+      "Private entrances and separate utilities",
+      "Legal secondary dwelling compliance",
+      "Rental income potential",
+    ],
   },
 ];
 
 const WHY_BRIO = [
-  {
-    title: "15+ Years of Experience",
-    description:
-      "With over 15 years in residential construction, BRIO has the expertise to handle additions of any size and complexity.",
-  },
-  {
-    title: "Custom Design & Seamless Integration",
-    description:
-      "We design additions that match your existing home\u2019s style, materials, and architecture \u2014 so the new space feels like it was always there.",
-  },
-  {
-    title: "Full-Service Project Management",
-    description:
-      "From initial design and permits to construction and final walkthrough, we manage every detail so you don\u2019t have to.",
-  },
-  {
-    title: "Cost-Effective Solutions",
-    description:
-      "We work within your budget to deliver maximum value. Our transparent pricing and detailed estimates mean no surprises.",
-  },
+  "15+ years of residential construction experience across Greater Vancouver.",
+  "Custom designs that match your existing home\u2019s style, materials, and architecture.",
+  "Full-service project management from permits to final walkthrough.",
+  "Transparent, fixed-price quotes with no hidden fees or surprises.",
 ];
 
 const FAQ_ITEMS = [
@@ -118,108 +124,296 @@ export default function HomeAdditionsExtensionsPage() {
     <>
       <Navbar />
 
-      {/* ── Hero ── */}
-      <section className="bg-brio-light-gray py-16 md:py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-[32px] md:text-[42px] font-semibold text-brio-navy font-heading mb-6">
-            Home Additions &amp; Extensions &mdash; Expand Your Living Space with BRIO
-          </h1>
-          <p className="text-text-body text-[16px] leading-relaxed mb-4">
-            Is your home feeling too small? Whether you need an extra bedroom, a larger kitchen,
-            or a full second-storey addition, BRIO Construction can help you expand your living
-            space without the hassle of moving.
-          </p>
-          <p className="text-text-body text-[16px] leading-relaxed mb-8">
-            From design to construction, we deliver smooth, stress-free renovations that
-            transform your home into the space your family deserves.
-          </p>
-          <Link
-            href="#get-in-touch"
-            className="inline-block bg-brio-navy text-white text-[14px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
-          >
-            Book Your Free Consultation Now!
-          </Link>
-        </div>
-      </section>
-
-      {/* ── Why Do a Home Addition ── */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-[28px] md:text-[36px] font-semibold text-brio-navy font-heading text-center mb-12">
-            Why Do a Home Addition?
-          </h2>
-          <div className="space-y-8">
-            {WHY_ADD.map((item) => (
-              <div key={item.title}>
-                <h3 className="text-brio-navy text-[18px] font-semibold font-heading mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-text-body text-[14px] leading-relaxed">
-                  {item.description}
-                </p>
+      {/* ── 1. Hero — Two-column: text left, image right ── */}
+      <section className="bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 items-stretch">
+            {/* Left — text */}
+            <div className="py-16 md:py-24 md:pr-12 flex flex-col justify-center">
+              <h1 className="font-heading text-[36px] md:text-[46px] font-semibold italic text-brio-navy leading-[1.15] mb-5">
+                Expand Your Living Space with BRIO
+              </h1>
+              <p className="text-text-body text-[15px] leading-relaxed mb-5 max-w-lg">
+                Is your home feeling too small? Whether you need an extra bedroom,
+                a larger kitchen, or a full second-storey addition, BRIO
+                Construction can help you expand your living space without the
+                hassle of moving.
+              </p>
+              <p className="text-text-body text-[15px] leading-relaxed mb-8 max-w-lg">
+                From design to construction, we deliver smooth, stress-free
+                renovations that transform your home into the space your family
+                deserves.
+              </p>
+              <div>
+                <Link
+                  href="#get-in-touch"
+                  className="inline-block bg-brio-navy text-white text-[13px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
+                >
+                  Book Your Free Consultation Now
+                </Link>
               </div>
-            ))}
+            </div>
+            {/* Right — image */}
+            <div className="relative h-[350px] md:h-auto md:min-h-[520px]">
+              <Image
+                src="/images/city/img-04.jpg"
+                alt="Home addition project by BRIO Construction"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority
+              />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── Service Types ── */}
+      {/* ── 2. Partners ── */}
+      <PartnersCarousel />
+
+      {/* ── 3. Why Do a Home Addition — checkmarks ── */}
+      <section className="py-16 md:py-24 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            {/* Left — image */}
+            <div className="relative h-[350px] md:h-[480px] overflow-hidden">
+              <Image
+                src="/images/city/img-04.jpg"
+                alt="BRIO home addition in progress"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
+            {/* Right — checkmarks */}
+            <div>
+              <h2 className="font-heading text-[24px] md:text-[32px] font-semibold text-brio-navy uppercase tracking-wide mb-8">
+                Why Do a Home Addition?
+              </h2>
+              <ul className="space-y-5">
+                {WHY_ADD.map((item) => (
+                  <li key={item.title} className="flex items-start gap-3">
+                    <span className="w-6 h-6 rounded bg-brio-navy flex items-center justify-center shrink-0 mt-0.5">
+                      <Check className="w-4 h-4 text-white" strokeWidth={3} />
+                    </span>
+                    <div>
+                      <h3 className="text-brio-navy text-[15px] font-semibold mb-1">
+                        {item.title}
+                      </h3>
+                      <p className="text-text-body text-[13px] leading-relaxed">
+                        {item.description}
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 4. Service Types — sticky CTA left, categories right ── */}
       <section className="py-16 md:py-24 bg-brio-light-gray">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-[28px] md:text-[36px] font-semibold text-brio-navy font-heading text-center mb-12">
-            Our Home Addition Services
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {SERVICE_TYPES.map((service) => (
-              <div key={service.title} className="bg-white p-8">
-                <h3 className="text-brio-navy text-[18px] font-semibold font-heading mb-3">
-                  {service.title}
-                </h3>
-                <p className="text-text-body text-[14px] leading-relaxed">
-                  {service.description}
-                </p>
-              </div>
-            ))}
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Left — sticky CTA */}
+            <div className="lg:sticky lg:top-24 lg:self-start">
+              <h2 className="font-heading text-[24px] md:text-[30px] font-semibold text-brio-navy uppercase tracking-wide leading-snug mb-5">
+                Our Home Addition Services
+              </h2>
+              <p className="text-text-body text-[15px] leading-relaxed mb-8">
+                From room additions and kitchen expansions to full second-storey
+                builds, BRIO delivers custom home additions that blend seamlessly
+                with your existing home. Every project includes expert design,
+                permit management, and a dedicated project manager.
+              </p>
+              <Link
+                href="#get-in-touch"
+                className="inline-block bg-brio-navy text-white text-[13px] font-semibold px-7 py-3.5 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
+              >
+                Get My Free, Detailed Estimate
+              </Link>
+            </div>
+
+            {/* Right — service categories */}
+            <div className="space-y-8">
+              {SERVICE_TYPES.map((service, idx) => (
+                <div key={service.title}>
+                  <h3 className="font-heading text-[16px] font-semibold text-brio-navy uppercase tracking-wide italic mb-3">
+                    {service.title}
+                  </h3>
+                  <ul className="space-y-2 mb-4">
+                    {service.items.map((item) => (
+                      <li
+                        key={item}
+                        className="flex items-start gap-2 text-text-body text-[14px] leading-relaxed"
+                      >
+                        <Check className="w-4 h-4 text-brio-navy shrink-0 mt-0.5" strokeWidth={2.5} />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  {idx < SERVICE_TYPES.length - 1 && (
+                    <div className="border-b border-gray-200" />
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── Why Choose BRIO ── */}
+      {/* ── 5. Why Choose BRIO — 4 checkmark bullets ── */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-[28px] md:text-[36px] font-semibold text-brio-navy font-heading text-center mb-12">
-            Why Choose BRIO for Your Home Addition?
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
-            {WHY_BRIO.map((item) => (
-              <div key={item.title}>
-                <h3 className="text-brio-navy text-[18px] font-semibold font-heading mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-text-body text-[14px] leading-relaxed">
-                  {item.description}
-                </p>
-              </div>
-            ))}
-          </div>
-          <div className="text-center">
-            <Link
-              href="#get-in-touch"
-              className="inline-block bg-brio-navy text-white text-[14px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
-            >
-              Book Your Free Consultation Now!
-            </Link>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            {/* Left — bullet list */}
+            <div>
+              <h2 className="font-heading text-[24px] md:text-[30px] font-semibold text-brio-navy uppercase tracking-wide leading-snug mb-6">
+                Why Choose BRIO for Your Home Addition?
+              </h2>
+              <ul className="space-y-4">
+                {WHY_BRIO.map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <span className="w-6 h-6 rounded bg-brio-navy flex items-center justify-center shrink-0 mt-0.5">
+                      <Check className="w-4 h-4 text-white" strokeWidth={3} />
+                    </span>
+                    <p className="text-text-body text-[14px] leading-relaxed">
+                      {item}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            {/* Right — CTA block */}
+            <div>
+              <p className="text-text-body text-[15px] leading-relaxed mb-6">
+                At BRIO Construction, we combine expert craftsmanship, premium
+                materials, and a streamlined process to deliver home additions
+                that feel like they were always part of your home. From initial
+                design and permits to construction and final walkthrough, we
+                manage every detail so you don&apos;t have to.
+              </p>
+              <Link
+                href="#get-in-touch"
+                className="inline-block bg-brio-navy text-white text-[13px] font-semibold px-7 py-3.5 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
+              >
+                Book Your Free Consultation Today!
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── Contact Form ── */}
-      <ContactForm />
+      {/* ── 6. Contact + FAQ side by side ── */}
+      <section id="get-in-touch" className="py-14 md:py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Left — form */}
+            <div>
+              <h3 className="font-heading text-[20px] md:text-[24px] font-semibold text-brio-navy mb-2 uppercase tracking-wide">
+                Let&apos;s Discuss Your Project
+              </h3>
+              <p className="text-text-body text-[13px] leading-relaxed mb-6">
+                Ready to explore the possibilities for your home addition?
+                Share a few details below, and our team will get in touch to
+                schedule a friendly, no-obligation consultation.
+              </p>
+              <form className="space-y-3">
+                <input
+                  type="text"
+                  required
+                  placeholder="Name"
+                  className="w-full h-11 px-4 border border-gray-300 text-sm bg-white focus:outline-none focus:border-brio-navy"
+                />
+                <div className="grid grid-cols-2 gap-3">
+                  <input
+                    type="tel"
+                    required
+                    placeholder="Phone"
+                    className="w-full h-11 px-4 border border-gray-300 text-sm bg-white focus:outline-none focus:border-brio-navy"
+                  />
+                  <input
+                    type="email"
+                    required
+                    placeholder="Email"
+                    className="w-full h-11 px-4 border border-gray-300 text-sm bg-white focus:outline-none focus:border-brio-navy"
+                  />
+                </div>
+                <input
+                  type="text"
+                  placeholder="Service Address"
+                  className="w-full h-11 px-4 border border-gray-300 text-sm bg-white focus:outline-none focus:border-brio-navy"
+                />
+                <textarea
+                  placeholder="Description of Work"
+                  rows={4}
+                  className="w-full px-4 py-3 border border-gray-300 text-sm bg-white focus:outline-none focus:border-brio-navy resize-none"
+                />
+                <button
+                  type="submit"
+                  className="w-full h-11 bg-brio-navy text-white font-semibold uppercase tracking-wide text-[13px] hover:bg-brio-navy/90 transition-colors"
+                >
+                  Book Now!
+                </button>
+              </form>
+            </div>
 
-      {/* ── FAQ ── */}
-      <FAQ items={FAQ_ITEMS} />
+            {/* Right — FAQ */}
+            <div>
+              <h3 className="font-heading text-[20px] md:text-[24px] font-semibold text-brio-navy mb-6 uppercase tracking-wide">
+                Frequently Asked Questions
+              </h3>
+              <FAQ items={FAQ_ITEMS} compact />
+            </div>
+          </div>
+        </div>
+      </section>
 
-      {/* ── Footer ── */}
+      {/* ── 7. Newsletter ── */}
+      <section className="py-10 md:py-14 bg-white border-t border-gray-100">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 items-center">
+            <div>
+              <p className="text-text-muted text-[11px] uppercase tracking-widest mb-1">
+                Subscribe
+              </p>
+              <h2 className="font-heading text-[22px] md:text-[26px] font-bold text-brio-navy mb-2">
+                The Inside Look
+              </h2>
+              <p className="text-text-body text-[13px] leading-relaxed mb-4 max-w-md">
+                The email newsletter that delivers curated home decor and
+                furniture picks, expert design advice, and more. Join 4,000+
+                subscribers.
+              </p>
+              <form className="flex gap-2 max-w-md">
+                <input
+                  type="email"
+                  placeholder="Your email address..."
+                  className="flex-1 h-10 px-4 border border-gray-300 text-sm bg-white focus:outline-none focus:border-brio-navy"
+                />
+                <button
+                  type="submit"
+                  className="h-10 px-5 bg-brio-navy text-white font-semibold uppercase tracking-wide text-[12px] hover:bg-brio-navy/90 transition-colors shrink-0"
+                >
+                  Sign Me Up
+                </button>
+              </form>
+            </div>
+            <div className="hidden md:block relative w-[200px] h-[240px] rounded-t-full overflow-hidden">
+              <Image
+                src="/images/newsletter.png"
+                alt="Builder overlooking a construction site"
+                fill
+                className="object-cover"
+                sizes="200px"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 8. Footer ── */}
       <Footer />
     </>
   );

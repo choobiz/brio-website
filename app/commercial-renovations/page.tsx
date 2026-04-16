@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
 import FAQ from "@/components/shared/FAQ";
-import ContactForm from "@/components/service/ContactForm";
+import PartnersCarousel from "@/components/shared/PartnersCarousel";
 import Link from "next/link";
+import Image from "next/image";
+import { Check } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Commercial Renovations",
@@ -102,116 +104,254 @@ export default function CommercialRenovationsPage() {
     <>
       <Navbar />
 
-      {/* ── Hero ── */}
-      <section className="bg-brio-light-gray py-16 md:py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-[32px] md:text-[42px] font-semibold text-brio-navy font-heading mb-6">
-            Commercial Renovation &mdash; Transform Your Space, Enhance Your
-            Success
-          </h1>
-          <p className="text-text-body text-[16px] md:text-[18px] leading-relaxed mb-4">
-            Whether you need a modern refresh, improved functionality, or a
-            complete transformation, BRIO Construction delivers commercial
-            renovations that elevate your business. From offices and retail
-            spaces to restaurants and medical facilities, we create environments
-            that work as hard as you do.
-          </p>
-          <p className="text-text-body text-[16px] md:text-[18px] leading-relaxed mb-8">
-            With over 15 years of experience, our team handles every aspect of
-            your project &mdash; from design and permits to construction and
-            final inspections &mdash; so you can focus on what matters most:
-            running your business.
-          </p>
-          <Link
-            href="#get-in-touch"
-            className="inline-block bg-brio-navy text-white text-[14px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
-          >
-            Book Your Free Consultation Now!
-          </Link>
+      {/* ── 1. Hero — Two-column, white background ── */}
+      <section className="bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 items-center">
+            {/* Left — text */}
+            <div className="py-16 md:py-24 md:pr-12">
+              <h1 className="text-[32px] md:text-[44px] font-semibold italic text-brio-navy font-heading mb-6 leading-tight">
+                Transform Your Commercial Space, Enhance Your Success
+              </h1>
+              <p className="text-text-body text-[15px] leading-relaxed mb-4">
+                Whether you need a modern refresh, improved functionality, or a
+                complete transformation, BRIO Construction delivers commercial
+                renovations that elevate your business. From offices and retail
+                spaces to restaurants and medical facilities, we create
+                environments that work as hard as you do.
+              </p>
+              <p className="text-text-body text-[15px] leading-relaxed mb-8">
+                With over 15 years of experience, our team handles every aspect
+                of your project &mdash; from design and permits to construction
+                and final inspections &mdash; so you can focus on what matters
+                most: running your business.
+              </p>
+              <div>
+                <Link
+                  href="#get-in-touch"
+                  className="inline-block bg-brio-navy text-white text-[13px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
+                >
+                  Book Your Free Consultation Now
+                </Link>
+              </div>
+            </div>
+            {/* Right — image */}
+            <div className="relative h-[300px] md:h-auto md:min-h-[480px]">
+              <Image
+                src="/images/city/img-13.jpg"
+                alt="Commercial renovation by BRIO Construction"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority
+              />
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* ── Why Choose BRIO ── */}
+      {/* ── 2. Partners ── */}
+      <PartnersCarousel />
+
+      {/* ── 3. Why Choose BRIO — Checkmark bullets ── */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-[28px] md:text-[36px] font-semibold text-brio-navy font-heading text-center mb-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-[24px] md:text-[32px] font-semibold text-brio-navy font-heading mb-4 uppercase tracking-wide">
             Why Choose BRIO for Your Commercial Renovation?
           </h2>
-          <div className="space-y-6">
+          <p className="text-text-body text-[15px] leading-relaxed mb-10">
+            When it comes to your business, you need a construction partner you
+            can trust. BRIO brings the experience, transparency, and
+            craftsmanship to make your commercial vision a reality.
+          </p>
+          <div className="space-y-4">
             {WHY_CHOOSE.map((item) => (
               <div key={item.title} className="flex items-start gap-3">
-                <span className="text-brio-navy font-bold text-[18px] mt-0.5">
-                  &#10003;
-                </span>
-                <div>
-                  <h3 className="text-brio-navy text-[18px] font-semibold font-heading">
-                    {item.title}
-                  </h3>
-                  <p className="text-text-body text-[15px] leading-relaxed mt-1">
-                    {item.description}
-                  </p>
+                <div className="w-5 h-5 bg-brio-navy shrink-0 mt-0.5 flex items-center justify-center">
+                  <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />
                 </div>
+                <p className="text-text-body text-[15px] leading-relaxed">
+                  <span className="font-bold text-brio-navy">
+                    {item.title}
+                  </span>{" "}
+                  &ndash; {item.description}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── Service Types ── */}
+      {/* ── 4. Service Types — Sticky CTA left, categories right ── */}
       <section className="py-16 md:py-24 bg-brio-light-gray">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-[28px] md:text-[36px] font-semibold text-brio-navy font-heading text-center mb-12">
-            Our Commercial Renovation Services
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {SERVICE_TYPES.map((service) => (
-              <div key={service.title} className="bg-white p-8">
-                <h3 className="text-brio-navy text-[20px] font-semibold font-heading mb-4">
-                  {service.title}
-                </h3>
-                <ul className="space-y-2">
-                  {service.items.map((item) => (
-                    <li
-                      key={item}
-                      className="text-text-body text-[14px] leading-relaxed flex items-start gap-2"
-                    >
-                      <span className="text-brio-navy font-bold mt-0.5">
-                        &#x2022;
-                      </span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            {/* Left — sticky CTA */}
+            <div className="lg:sticky lg:top-32">
+              <h2 className="text-[24px] md:text-[32px] font-semibold text-brio-navy font-heading mb-4 uppercase tracking-wide">
+                Our Commercial Renovation Services
+              </h2>
+              <p className="text-text-body text-[15px] leading-relaxed mb-8">
+                We work with businesses of all sizes to transform commercial
+                spaces into environments that inspire productivity, attract
+                customers, and support long-term growth.
+              </p>
+              <Link
+                href="#get-in-touch"
+                className="inline-block bg-brio-navy text-white text-[13px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
+              >
+                Get Your Free Estimate
+              </Link>
+            </div>
+
+            {/* Right — service categories */}
+            <div className="space-y-0 divide-y divide-gray-300">
+              {SERVICE_TYPES.map((service) => (
+                <div key={service.title} className="py-8 first:pt-0 last:pb-0">
+                  <h3 className="text-brio-navy text-[18px] font-semibold italic font-heading uppercase tracking-wide mb-4">
+                    {service.title}
+                  </h3>
+                  <ul className="space-y-2">
+                    {service.items.map((item) => (
+                      <li
+                        key={item}
+                        className="text-text-body text-[14px] leading-relaxed flex items-start gap-2"
+                      >
+                        <span className="text-text-muted mt-0.5">&ndash;</span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── CTA Section ── */}
-      <section className="py-16 md:py-20 bg-brio-navy">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-white text-[18px] md:text-[20px] leading-relaxed mb-8">
-            We work with businesses of all sizes to transform commercial spaces
-            into environments that inspire productivity, attract customers, and
-            support long-term growth. Let&apos;s build something great together.
-          </p>
-          <Link
-            href="#get-in-touch"
-            className="inline-block bg-white text-brio-navy text-[14px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-white/90 transition-colors"
-          >
-            Get Your Free Estimate
-          </Link>
+      {/* ── 5. Contact + FAQ side by side ── */}
+      <section id="get-in-touch" className="py-16 md:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Left: Contact Form */}
+            <div>
+              <h2 className="text-[24px] md:text-[30px] font-semibold text-brio-navy font-heading mb-6 uppercase tracking-wide">
+                Get In Touch
+              </h2>
+              <form className="space-y-4">
+                <div>
+                  <label className="block text-text-body text-[13px] font-semibold uppercase tracking-wide mb-1">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Your full name"
+                    className="w-full h-12 px-4 border border-border text-sm focus:outline-none focus:border-brio-navy"
+                  />
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-text-body text-[13px] font-semibold uppercase tracking-wide mb-1">
+                      Phone
+                    </label>
+                    <input
+                      type="tel"
+                      placeholder="Your phone number"
+                      className="w-full h-12 px-4 border border-border text-sm focus:outline-none focus:border-brio-navy"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-text-body text-[13px] font-semibold uppercase tracking-wide mb-1">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      placeholder="Your email address"
+                      className="w-full h-12 px-4 border border-border text-sm focus:outline-none focus:border-brio-navy"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-text-body text-[13px] font-semibold uppercase tracking-wide mb-1">
+                    Service Address
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Project address"
+                    className="w-full h-12 px-4 border border-border text-sm focus:outline-none focus:border-brio-navy"
+                  />
+                </div>
+                <div>
+                  <label className="block text-text-body text-[13px] font-semibold uppercase tracking-wide mb-1">
+                    Description
+                  </label>
+                  <textarea
+                    placeholder="Tell us about your project..."
+                    rows={4}
+                    className="w-full px-4 py-3 border border-border text-sm focus:outline-none focus:border-brio-navy resize-none"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="w-full bg-brio-navy text-white py-4 text-[14px] font-semibold uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
+                >
+                  Book Now
+                </button>
+              </form>
+            </div>
+
+            {/* Right: FAQ */}
+            <div>
+              <FAQ items={FAQ_ITEMS} compact />
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* ── Contact Form ── */}
-      <ContactForm />
+      {/* ── 6. Newsletter ── */}
+      <section className="py-10 md:py-14 bg-white border-t border-gray-100">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 items-center">
+            <div>
+              <p className="text-text-muted text-[11px] uppercase tracking-widest mb-1">
+                Subscribe
+              </p>
+              <h2 className="font-heading text-[22px] md:text-[26px] font-bold text-brio-navy mb-2">
+                The Inside Look
+              </h2>
+              <p className="text-text-body text-[13px] leading-relaxed mb-4 max-w-md">
+                The email newsletter that delivers curated home decor and
+                furniture picks, expert design advice, and more. Join 4,000+
+                subscribers.
+              </p>
+              <form className="flex gap-2 max-w-md">
+                <input
+                  type="email"
+                  placeholder="Your email address..."
+                  className="flex-1 h-10 px-4 border border-gray-300 text-sm bg-white focus:outline-none focus:border-brio-navy"
+                />
+                <button
+                  type="submit"
+                  className="h-10 px-5 bg-brio-navy text-white font-semibold uppercase tracking-wide text-[12px] hover:bg-brio-navy/90 transition-colors shrink-0"
+                >
+                  Sign Me Up
+                </button>
+              </form>
+            </div>
+            <div className="hidden md:block relative w-[200px] h-[240px] rounded-t-full overflow-hidden">
+              <Image
+                src="/images/newsletter.png"
+                alt="Builder overlooking a construction site"
+                fill
+                className="object-cover"
+                sizes="200px"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
 
-      {/* ── FAQ ── */}
-      <FAQ items={FAQ_ITEMS} />
-
-      {/* ── Footer ── */}
+      {/* ── 7. Footer ── */}
       <Footer />
     </>
   );

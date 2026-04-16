@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
 import FAQ from "@/components/shared/FAQ";
-import ContactForm from "@/components/service/ContactForm";
+import PartnersCarousel from "@/components/shared/PartnersCarousel";
 import Link from "next/link";
+import Image from "next/image";
+import { Check } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Land Development & Pre-Construction",
@@ -74,183 +76,317 @@ export default function LandDevelopmentPreConstructionPage() {
     <>
       <Navbar />
 
-      {/* Hero */}
-      <section className="bg-brio-light-gray py-16 md:py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-[32px] md:text-[42px] font-semibold text-brio-navy font-heading mb-4">
-            Expert Land Development &amp; Pre-Construction Services by BRIO
-          </h1>
-          <p className="text-brio-navy text-[18px] md:text-[22px] font-medium font-heading mb-6">
-            Turning Raw Land into Thriving Communities with Smart Planning &amp;
-            Precision Execution
-          </p>
-          <p className="text-text-body text-[16px] md:text-[18px] leading-relaxed mb-8 max-w-3xl mx-auto">
-            Whether you&apos;re a homeowner, developer, or investor, BRIO
-            Construction helps you transform vacant land into valuable,
-            build-ready sites. From site assessments and feasibility studies to
-            infrastructure planning and permit coordination, we handle every
-            detail so your project starts on the right foundation.
-          </p>
-          <Link
-            href="#get-in-touch"
-            className="inline-block bg-brio-navy text-white text-[14px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
-          >
-            Book a Free Consultation Today!
-          </Link>
-        </div>
-      </section>
-
-      {/* Why Choose BRIO */}
-      <section className="py-16 md:py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-[28px] md:text-[36px] font-semibold text-brio-navy font-heading text-center mb-10">
-            Why Choose BRIO for Land Development
-          </h2>
-          <ul className="space-y-4 max-w-2xl mx-auto">
-            <li className="flex items-start gap-3 text-text-body text-[16px] leading-relaxed">
-              <span className="text-brio-navy font-bold mt-0.5">&#10003;</span>
-              <span>
-                <strong className="text-brio-navy">Proven Expertise</strong> —
-                over 15 years of experience in land development and construction
-                across the Greater Vancouver area
-              </span>
-            </li>
-            <li className="flex items-start gap-3 text-text-body text-[16px] leading-relaxed">
-              <span className="text-brio-navy font-bold mt-0.5">&#10003;</span>
-              <span>
-                <strong className="text-brio-navy">Tailored Strategies</strong>{" "}
-                — every project is unique, and we develop custom plans to match
-                your goals and budget
-              </span>
-            </li>
-            <li className="flex items-start gap-3 text-text-body text-[16px] leading-relaxed">
-              <span className="text-brio-navy font-bold mt-0.5">&#10003;</span>
-              <span>
-                <strong className="text-brio-navy">Regulatory Experts</strong>{" "}
-                — we navigate complex zoning, permitting, and compliance
-                requirements so you don&apos;t have to
-              </span>
-            </li>
-            <li className="flex items-start gap-3 text-text-body text-[16px] leading-relaxed">
-              <span className="text-brio-navy font-bold mt-0.5">&#10003;</span>
-              <span>
-                <strong className="text-brio-navy">
-                  Cost-Effective Planning
-                </strong>{" "}
-                — we optimize every phase for maximum ROI and minimize
-                unexpected costs
-              </span>
-            </li>
-            <li className="flex items-start gap-3 text-text-body text-[16px] leading-relaxed">
-              <span className="text-brio-navy font-bold mt-0.5">&#10003;</span>
-              <span>
-                <strong className="text-brio-navy">
-                  Sustainable Development
-                </strong>{" "}
-                — incorporating eco-friendly practices and energy-efficient
-                solutions into every project
-              </span>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      {/* Service Types */}
-      <section className="py-16 md:py-24 bg-brio-light-gray">
+      {/* ── 1. Hero — Two-column, white background ── */}
+      <section className="bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-[28px] md:text-[36px] font-semibold text-brio-navy font-heading text-center mb-12">
-            Our Land Development &amp; Pre-Construction Services
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {SERVICE_CATEGORIES.map((category) => (
-              <div key={category.title} className="bg-white p-8">
-                <h3 className="text-brio-navy text-[18px] font-semibold font-heading mb-4">
-                  {category.title}
-                </h3>
-                <ul className="space-y-2">
-                  {category.items.map((item) => (
-                    <li
-                      key={item}
-                      className="text-text-body text-[14px] flex items-start gap-2"
-                    >
-                      <span className="text-brio-navy mt-0.5">&#10003;</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 items-center">
+            {/* Left — text */}
+            <div className="py-16 md:py-24 md:pr-12">
+              <h1 className="text-[32px] md:text-[44px] font-semibold italic text-brio-navy font-heading mb-6 leading-tight">
+                Expert Land Development &amp; Pre-Construction Services By BRIO
+              </h1>
+              <p className="text-text-body text-[15px] leading-relaxed mb-8">
+                Whether you&apos;re a homeowner, developer, or investor, BRIO
+                Construction helps you transform vacant land into valuable,
+                build-ready sites. From site assessments and feasibility studies
+                to infrastructure planning and permit coordination, we handle
+                every detail so your project starts on the right foundation.
+              </p>
+              <div>
+                <Link
+                  href="#get-in-touch"
+                  className="inline-block bg-brio-navy text-white text-[13px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
+                >
+                  Book A Free Consultation Today!
+                </Link>
               </div>
-            ))}
+            </div>
+            {/* Right — image */}
+            <div className="relative h-[300px] md:h-auto md:min-h-[480px]">
+              <Image
+                src="/images/city/img-03.jpg"
+                alt="Land development project by BRIO Construction"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority
+              />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Why Invest */}
+      {/* ── 2. Partners ── */}
+      <PartnersCarousel />
+
+      {/* ── 3. Why Choose BRIO — Image left, checkmarks right ── */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-[28px] md:text-[36px] font-semibold text-brio-navy font-heading mb-10">
-            Why Invest in Professional Land Development
-          </h2>
-          <ul className="space-y-4 max-w-2xl mx-auto text-left mb-10">
-            <li className="flex items-start gap-3 text-text-body text-[16px] leading-relaxed">
-              <span className="text-brio-navy font-bold mt-0.5">&#10003;</span>
-              <span>
-                <strong className="text-brio-navy">
-                  Maximize Land Value
-                </strong>{" "}
-                — unlock the full potential of your property with expert site
-                planning
-              </span>
-            </li>
-            <li className="flex items-start gap-3 text-text-body text-[16px] leading-relaxed">
-              <span className="text-brio-navy font-bold mt-0.5">&#10003;</span>
-              <span>
-                <strong className="text-brio-navy">
-                  Smooth Approvals &amp; Permitting
-                </strong>{" "}
-                — avoid delays with experienced regulatory navigation
-              </span>
-            </li>
-            <li className="flex items-start gap-3 text-text-body text-[16px] leading-relaxed">
-              <span className="text-brio-navy font-bold mt-0.5">&#10003;</span>
-              <span>
-                <strong className="text-brio-navy">
-                  Efficient Project Execution
-                </strong>{" "}
-                — streamlined processes from planning to ground-breaking
-              </span>
-            </li>
-            <li className="flex items-start gap-3 text-text-body text-[16px] leading-relaxed">
-              <span className="text-brio-navy font-bold mt-0.5">&#10003;</span>
-              <span>
-                <strong className="text-brio-navy">
-                  Cost Savings &amp; Risk Reduction
-                </strong>{" "}
-                — proactive planning that prevents costly surprises down the
-                road
-              </span>
-            </li>
-            <li className="flex items-start gap-3 text-text-body text-[16px] leading-relaxed">
-              <span className="text-brio-navy font-bold mt-0.5">&#10003;</span>
-              <span>
-                <strong className="text-brio-navy">
-                  Sustainable &amp; Future-Proof Development
-                </strong>{" "}
-                — build with long-term value and environmental responsibility in
-                mind
-              </span>
-            </li>
-          </ul>
-          <Link
-            href="#get-in-touch"
-            className="inline-block bg-brio-navy text-white text-[14px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
-          >
-            Book a Free Consultation Today!
-          </Link>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left — image */}
+            <div className="relative h-[350px] lg:h-[500px]">
+              <Image
+                src="/images/city/img-13.jpg"
+                alt="BRIO Construction land development project"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
+
+            {/* Right — heading + checkmarks */}
+            <div>
+              <h2 className="text-[24px] md:text-[32px] font-semibold text-brio-navy font-heading mb-4 uppercase tracking-wide">
+                Why Choose BRIO For Land Development
+              </h2>
+              <p className="text-text-body text-[15px] leading-relaxed mb-8">
+                Turning raw land into a thriving community takes expertise,
+                precision, and a partner you can trust. BRIO brings all three to
+                every project.
+              </p>
+              <div className="space-y-4">
+                {[
+                  {
+                    title: "Proven Expertise",
+                    desc: "over 15 years of experience in land development and construction across the Greater Vancouver area",
+                  },
+                  {
+                    title: "Tailored Strategies",
+                    desc: "every project is unique, and we develop custom plans to match your goals and budget",
+                  },
+                  {
+                    title: "Regulatory Experts",
+                    desc: "we navigate complex zoning, permitting, and compliance requirements so you don\u2019t have to",
+                  },
+                  {
+                    title: "Cost-Effective Planning",
+                    desc: "we optimize every phase for maximum ROI and minimize unexpected costs",
+                  },
+                  {
+                    title: "Sustainable Development",
+                    desc: "incorporating eco-friendly practices and energy-efficient solutions into every project",
+                  },
+                ].map((item) => (
+                  <div key={item.title} className="flex items-start gap-3">
+                    <div className="w-5 h-5 bg-brio-navy shrink-0 mt-0.5 flex items-center justify-center">
+                      <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />
+                    </div>
+                    <p className="text-text-body text-[15px] leading-relaxed">
+                      <span className="font-bold text-brio-navy">
+                        {item.title}
+                      </span>{" "}
+                      &ndash; {item.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      <ContactForm />
-      <FAQ items={FAQ_ITEMS} />
+      {/* ── 4. Service Types — Sticky CTA left, categories right ── */}
+      <section className="py-16 md:py-24 bg-brio-light-gray">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            {/* Left — sticky CTA */}
+            <div className="lg:sticky lg:top-32">
+              <h2 className="text-[24px] md:text-[32px] font-semibold text-brio-navy font-heading mb-4 uppercase tracking-wide">
+                Our Land Development &amp; Pre-Construction Services
+              </h2>
+              <p className="text-text-body text-[15px] leading-relaxed mb-8">
+                From initial feasibility studies to infrastructure installation,
+                BRIO manages every phase of land development and pre-construction
+                planning.
+              </p>
+              <Link
+                href="#get-in-touch"
+                className="inline-block bg-brio-navy text-white text-[13px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
+              >
+                Book A Free Consultation Today!
+              </Link>
+            </div>
+
+            {/* Right — service categories */}
+            <div className="space-y-0 divide-y divide-gray-300">
+              {SERVICE_CATEGORIES.map((cat) => (
+                <div key={cat.title} className="py-8 first:pt-0 last:pb-0">
+                  <h3 className="text-brio-navy text-[18px] font-semibold italic font-heading uppercase tracking-wide mb-4">
+                    {cat.title}
+                  </h3>
+                  <ul className="space-y-2">
+                    {cat.items.map((item) => (
+                      <li
+                        key={item}
+                        className="text-text-body text-[14px] leading-relaxed flex items-start gap-2"
+                      >
+                        <span className="text-text-muted mt-0.5">&ndash;</span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 5. Why Invest — Checkmarks + CTA ── */}
+      <section className="py-16 md:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-[24px] md:text-[32px] font-semibold text-brio-navy font-heading mb-10 uppercase tracking-wide">
+            Why Invest In Professional Land Development
+          </h2>
+          <div className="space-y-6 mb-10">
+            {[
+              {
+                title: "Maximize Land Value",
+                desc: "unlock the full potential of your property with expert site planning",
+              },
+              {
+                title: "Smooth Approvals & Permitting",
+                desc: "avoid delays with experienced regulatory navigation",
+              },
+              {
+                title: "Efficient Project Execution",
+                desc: "streamlined processes from planning to ground-breaking",
+              },
+              {
+                title: "Cost Savings & Risk Reduction",
+                desc: "proactive planning that prevents costly surprises down the road",
+              },
+              {
+                title: "Sustainable & Future-Proof Development",
+                desc: "build with long-term value and environmental responsibility in mind",
+              },
+            ].map((item) => (
+              <div key={item.title} className="flex items-start gap-3">
+                <div className="w-5 h-5 bg-brio-navy shrink-0 mt-0.5 flex items-center justify-center">
+                  <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />
+                </div>
+                <p className="text-text-body text-[15px] leading-relaxed">
+                  <span className="font-bold text-brio-navy">
+                    {item.title}
+                  </span>{" "}
+                  &ndash; {item.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+          <div>
+            <Link
+              href="#get-in-touch"
+              className="inline-block bg-brio-navy text-white text-[13px] font-semibold px-8 py-4 uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
+            >
+              Book A Free Consultation Today!
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 6. Contact + FAQ side by side ── */}
+      <section id="get-in-touch" className="py-16 md:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Left: Contact Form */}
+            <div>
+              <h2 className="text-[24px] md:text-[30px] font-semibold text-brio-navy font-heading mb-6 uppercase tracking-wide">
+                Get In Touch
+              </h2>
+              <form className="space-y-4">
+                <div>
+                  <label className="block text-text-body text-[13px] font-semibold uppercase tracking-wide mb-1">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Your full name"
+                    className="w-full h-12 px-4 border border-border text-sm focus:outline-none focus:border-brio-navy"
+                  />
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-text-body text-[13px] font-semibold uppercase tracking-wide mb-1">
+                      Phone
+                    </label>
+                    <input
+                      type="tel"
+                      placeholder="Your phone number"
+                      className="w-full h-12 px-4 border border-border text-sm focus:outline-none focus:border-brio-navy"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-text-body text-[13px] font-semibold uppercase tracking-wide mb-1">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      placeholder="Your email address"
+                      className="w-full h-12 px-4 border border-border text-sm focus:outline-none focus:border-brio-navy"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-text-body text-[13px] font-semibold uppercase tracking-wide mb-1">
+                    Service Address
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Project address"
+                    className="w-full h-12 px-4 border border-border text-sm focus:outline-none focus:border-brio-navy"
+                  />
+                </div>
+                <div>
+                  <label className="block text-text-body text-[13px] font-semibold uppercase tracking-wide mb-1">
+                    Description
+                  </label>
+                  <textarea
+                    placeholder="Tell us about your project..."
+                    rows={4}
+                    className="w-full px-4 py-3 border border-border text-sm focus:outline-none focus:border-brio-navy resize-none"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="w-full bg-brio-navy text-white py-4 text-[14px] font-semibold uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
+                >
+                  Book Now
+                </button>
+              </form>
+            </div>
+
+            {/* Right: FAQ */}
+            <div>
+              <FAQ items={FAQ_ITEMS} compact />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 7. Newsletter ── */}
+      <section className="py-10 md:py-14 bg-white border-t border-gray-100">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 items-center">
+            <div>
+              <p className="text-text-muted text-[11px] uppercase tracking-widest mb-1">Subscribe</p>
+              <h2 className="font-heading text-[22px] md:text-[26px] font-bold text-brio-navy mb-2">The Inside Look</h2>
+              <p className="text-text-body text-[13px] leading-relaxed mb-4 max-w-md">
+                The email newsletter that delivers curated home decor and furniture picks, expert design advice, and more. Join 4,000+ subscribers.
+              </p>
+              <form className="flex gap-2 max-w-md">
+                <input type="email" placeholder="Your email address..." className="flex-1 h-10 px-4 border border-gray-300 text-sm bg-white focus:outline-none focus:border-brio-navy" />
+                <button type="submit" className="h-10 px-5 bg-brio-navy text-white font-semibold uppercase tracking-wide text-[12px] hover:bg-brio-navy/90 transition-colors shrink-0">Sign Me Up</button>
+              </form>
+            </div>
+            <div className="hidden md:block relative w-[200px] h-[240px] rounded-t-full overflow-hidden">
+              <Image src="/images/newsletter.png" alt="Builder overlooking a construction site" fill className="object-cover" sizes="200px" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 8. Footer ── */}
       <Footer />
     </>
   );
