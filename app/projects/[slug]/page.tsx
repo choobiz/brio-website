@@ -80,33 +80,31 @@ export default async function ProjectDetailPage({
     <>
       <Navbar />
 
-      {/* ── Hero image ── */}
-      <section className="relative w-full h-[300px] md:h-[450px]">
-        <Image src={heroImage} alt={project.name} fill className="object-cover" sizes="100vw" priority />
-      </section>
-
-      {/* ── Title ── */}
-      <section className="py-10 md:py-14 bg-white">
+      {/* ── Title (no hero image — starts with title) ── */}
+      <section className="pt-10 md:pt-16 pb-8 md:pb-10 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="font-heading text-[26px] md:text-[36px] font-semibold text-brio-navy uppercase tracking-wider mb-3">
+          <h1 className="font-heading text-[28px] md:text-[40px] font-semibold text-brio-navy uppercase tracking-wider mb-4">
             {project.name}
           </h1>
-          <p className="text-text-body text-[15px] italic mb-2">{project.subtitle}</p>
-          <p className="text-text-muted text-[13px]">Project Type: {project.type} &nbsp;|&nbsp; Project Year: {project.year}</p>
+          <p className="font-heading text-[16px] md:text-[18px] italic text-text-body mb-3">{project.subtitle}</p>
+          <p className="text-text-muted text-[13px]">Project Type: {project.type}</p>
+          <p className="text-text-muted text-[13px]">Year: {project.year}</p>
         </div>
       </section>
 
-      {/* ── Image left + Description right ── */}
-      <section className="pb-10 md:pb-14 bg-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-            {img[0] && (
-              <div className="relative aspect-[4/3] overflow-hidden">
-                <Image src={img[0]} alt={`${project.name} detail`} fill className="object-cover" sizes="50vw" />
-              </div>
-            )}
-            <div>
-              <SectionText text={project.description} />
+      {/* ── Image left + Description right on dark bg ── */}
+      <section className="bg-brio-navy">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
+          {/* Left — image */}
+          <div className="relative h-[300px] md:h-auto md:min-h-[420px]">
+            <Image src={img[0] || heroImage} alt={`${project.name} interior`} fill className="object-cover" sizes="50vw" priority />
+          </div>
+          {/* Right — description text on dark bg */}
+          <div className="py-10 md:py-16 px-6 md:px-12 flex items-center">
+            <div className="text-white/90 text-[14px] leading-relaxed">
+              {project.description.split("\n\n").map((p, i) => (
+                <p key={i} className="mb-4 last:mb-0">{p}</p>
+              ))}
             </div>
           </div>
         </div>
