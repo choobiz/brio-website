@@ -18,11 +18,48 @@ export async function generateMetadata({
   const { slug } = await params;
   const project = getProjectBySlug(slug);
   if (!project) return { title: "Project Not Found" };
-
   return {
     title: `${project.name} | BRIO Construction`,
     description: project.subtitle,
   };
+}
+
+/* ── Reusable sub-components ── */
+
+function SectionHeading({ children }: { children: React.ReactNode }) {
+  return (
+    <h3 className="font-heading text-[16px] md:text-[18px] font-semibold text-brio-navy italic mb-3 uppercase tracking-wide">
+      {children}
+    </h3>
+  );
+}
+
+function SectionText({ text }: { text: string }) {
+  return (
+    <>
+      {text.split("\n\n").map((p, i) => (
+        <p key={i} className="text-text-body text-[14px] leading-relaxed mb-3 last:mb-0">{p}</p>
+      ))}
+    </>
+  );
+}
+
+function ImagePair({ a, b, altA, altB }: { a?: string; b?: string; altA: string; altB: string }) {
+  if (!a && !b) return null;
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-6">
+      {a && <div className="relative aspect-[4/3] overflow-hidden"><Image src={a} alt={altA} fill className="object-cover" sizes="50vw" /></div>}
+      {b && <div className="relative aspect-[4/3] overflow-hidden"><Image src={b} alt={altB} fill className="object-cover" sizes="50vw" /></div>}
+    </div>
+  );
+}
+
+function FullImage({ src, alt }: { src: string; alt: string }) {
+  return (
+    <div className="relative aspect-[16/9] overflow-hidden">
+      <Image src={src} alt={alt} fill className="object-cover" sizes="100vw" />
+    </div>
+  );
 }
 
 export default async function ProjectDetailPage({
@@ -34,177 +71,133 @@ export default async function ProjectDetailPage({
   const project = getProjectBySlug(slug);
   if (!project) notFound();
 
-  const heroImage =
-    project.heroImage || `/images/projects/${slug.split("-")[0]}.jpg`;
-  const images = project.images || [];
+  const heroImage = project.heroImage || `/images/projects/${slug.split("-")[0]}.jpg`;
+  const img = project.images || [];
+  const s = project.sections;
   const related = PROJECTS.filter((p) => p.slug !== slug).slice(0, 3);
 
   return (
     <>
       <Navbar />
 
-      {/* Full-width hero image */}
+      {/* ── Hero image ── */}
       <section className="relative w-full h-[300px] md:h-[450px]">
-        <Image
-          src={heroImage}
-          alt={project.name}
-          fill
-          className="object-cover"
-          sizes="100vw"
-          priority
-        />
+        <Image src={heroImage} alt={project.name} fill className="object-cover" sizes="100vw" priority />
       </section>
 
-      {/* Title section */}
+      {/* ── Title ── */}
       <section className="py-10 md:py-14 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="font-heading text-[26px] md:text-[36px] font-semibold text-brio-navy uppercase tracking-wider mb-3">
             {project.name}
           </h1>
-          <p className="text-text-body text-[15px] italic mb-2">
-            {project.subtitle}
-          </p>
-          <p className="text-text-muted text-[13px]">
-            Project Type: {project.type} | Project Year: {project.year}
-          </p>
+          <p className="text-text-body text-[15px] italic mb-2">{project.subtitle}</p>
+          <p className="text-text-muted text-[13px]">Project Type: {project.type} &nbsp;|&nbsp; Project Year: {project.year}</p>
         </div>
       </section>
 
-      {/* Main image + description (image full-width, text below) */}
+      {/* ── Image left + Description right ── */}
       <section className="pb-10 md:pb-14 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          {images[0] && (
-            <div className="relative aspect-[16/9] overflow-hidden mb-8">
-              <Image
-                src={images[0]}
-                alt={`${project.name} showcase`}
-                fill
-                className="object-cover"
-                sizes="100vw"
-              />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+            {img[0] && (
+              <div className="relative aspect-[4/3] overflow-hidden">
+                <Image src={img[0]} alt={`${project.name} detail`} fill className="object-cover" sizes="50vw" />
+              </div>
+            )}
+            <div>
+              <SectionText text={project.description} />
             </div>
-          )}
-          <div className="max-w-3xl mx-auto">
-            {project.description.split("\n\n").map((p, i) => (
-              <p
-                key={i}
-                className="text-text-body text-[14px] leading-relaxed mb-4 last:mb-0"
-              >
-                {p}
-              </p>
-            ))}
           </div>
         </div>
       </section>
 
-      {/* Content sections with images */}
-      <section className="py-10 md:py-14 bg-white">
+      {/* ── Content sections ── */}
+      <section className="py-6 md:py-10 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          {project.sections.map((section, i) => {
-            const isEven = i % 2 === 0;
-            const imgA = images[1 + i * 2];
-            const imgB = images[2 + i * 2];
-            const hasTwoSections =
-              i + 1 < project.sections.length && (i === 0 || i === 2);
-            const nextSection =
-              hasTwoSections && i + 1 < project.sections.length
-                ? project.sections[i + 1]
-                : null;
 
-            // Pair sections side by side for Design Intent + Materials, Functional + Brand
-            if (!isEven) return null; // Skip odd indices, they're rendered as pairs
+          {/* Section 0: Design Intent — single column + single image */}
+          {s[0] && (
+            <div className="mb-12">
+              <SectionHeading>{s[0].heading}</SectionHeading>
+              <SectionText text={s[0].content} />
+              {img[1] && <div className="mt-6"><FullImage src={img[1]} alt={s[0].heading} /></div>}
+            </div>
+          )}
 
-            return (
-              <div key={i} className="mb-14 last:mb-0">
-                {/* Two headings + texts side by side */}
-                {nextSection ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-6">
-                    <div>
-                      <h3 className="font-heading text-[16px] md:text-[18px] font-semibold text-brio-navy italic mb-3 uppercase tracking-wide">
-                        {section.heading}
-                      </h3>
-                      {section.content.split("\n\n").map((p, j) => (
-                        <p key={j} className="text-text-body text-[13px] leading-relaxed mb-3 last:mb-0">
-                          {p}
-                        </p>
-                      ))}
-                    </div>
-                    <div>
-                      <h3 className="font-heading text-[16px] md:text-[18px] font-semibold text-brio-navy italic mb-3 uppercase tracking-wide">
-                        {nextSection.heading}
-                      </h3>
-                      {nextSection.content.split("\n\n").map((p, j) => (
-                        <p key={j} className="text-text-body text-[13px] leading-relaxed mb-3 last:mb-0">
-                          {p}
-                        </p>
-                      ))}
-                    </div>
-                  </div>
-                ) : (
-                  <div className="mb-6">
-                    <h3 className="font-heading text-[16px] md:text-[18px] font-semibold text-brio-navy italic mb-3 uppercase tracking-wide">
-                      {section.heading}
-                    </h3>
-                    {section.content.split("\n\n").map((p, j) => (
-                      <p key={j} className="text-text-body text-[13px] leading-relaxed mb-3 last:mb-0">
-                        {p}
-                      </p>
-                    ))}
-                  </div>
-                )}
-
-                {/* Two images side by side */}
-                {(imgA || imgB) && (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {imgA && (
-                      <div className="relative aspect-[4/3] overflow-hidden">
-                        <Image src={imgA} alt={`${section.heading} photo`} fill className="object-cover" sizes="50vw" />
-                      </div>
-                    )}
-                    {imgB && (
-                      <div className="relative aspect-[4/3] overflow-hidden">
-                        <Image src={imgB} alt={`${nextSection?.heading || section.heading} photo`} fill className="object-cover" sizes="50vw" />
-                      </div>
-                    )}
-                  </div>
-                )}
+          {/* Sections 1+2: Materials & Finishes + Lighting & Seating — side by side */}
+          {s[1] && s[2] && (
+            <div className="mb-12">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-6">
+                <div>
+                  <SectionHeading>{s[1].heading}</SectionHeading>
+                  <SectionText text={s[1].content} />
+                </div>
+                <div>
+                  <SectionHeading>{s[2].heading}</SectionHeading>
+                  <SectionText text={s[2].content} />
+                </div>
               </div>
-            );
-          })}
+              <ImagePair a={img[2]} b={img[3]} altA={s[1].heading} altB={s[2].heading} />
+            </div>
+          )}
+
+          {/* Section 3: Functional Enhancements — single column + two images */}
+          {s[3] && (
+            <div className="mb-12">
+              <SectionHeading>{s[3].heading}</SectionHeading>
+              <SectionText text={s[3].content} />
+              <ImagePair a={img[4]} b={img[5]} altA={`${s[3].heading} 1`} altB={`${s[3].heading} 2`} />
+            </div>
+          )}
+
+          {/* Section 4: Brand Integration — single column + two images */}
+          {s[4] && (
+            <div className="mb-12">
+              <SectionHeading>{s[4].heading}</SectionHeading>
+              <SectionText text={s[4].content} />
+              <ImagePair a={img[6]} b={img[0]} altA={`${s[4].heading} 1`} altB={`${s[4].heading} 2`} />
+            </div>
+          )}
+
+          {/* Remaining sections (for other projects with different structure) */}
+          {s.slice(5).map((section, i) => (
+            <div key={i + 5} className="mb-12">
+              <SectionHeading>{section.heading}</SectionHeading>
+              <SectionText text={section.content} />
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* CTA — full-width dark image */}
+      {/* ── "Built with Intention" CTA ── */}
       <section className="relative py-16 md:py-24">
-        {images[images.length - 1] && (
-          <Image
-            src={images[images.length - 1]}
-            alt="Project showcase"
-            fill
-            className="object-cover"
-          />
-        )}
+        <Image src={img[img.length - 1] || heroImage} alt="Project showcase" fill className="object-cover" />
         <div className="absolute inset-0 bg-brio-navy/70" />
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="font-heading text-[18px] md:text-[24px] font-semibold text-white mb-3 italic">
             Built with Intention, Delivered with Care
           </h2>
-          <p className="text-white/90 text-[13px] leading-relaxed mb-6 max-w-2xl mx-auto">
-            At BRIO Construction, we know that the best spaces are the ones that reflect the people who use them. Whether we&apos;re building a home, an office, or something in between, we lead with collaboration, clarity, and care.
+          <p className="text-white/90 text-[13px] leading-relaxed mb-4 max-w-2xl mx-auto">
+            At BRIO Construction, we know that the best spaces are the ones that reflect the people who use them.
+            Whether we&apos;re building a home, an office, or something in between, we lead with collaboration, clarity, and care.
+            That&apos;s how we turn unique ideas into inspiring spaces.
           </p>
-          <p className="text-white font-semibold text-[14px] mb-6">
-            {project.ctaText}
-          </p>
-          <Link
-            href={project.ctaLink}
-            className="inline-block bg-white text-brio-navy text-[13px] font-semibold uppercase tracking-wide px-8 py-3.5 hover:bg-gray-100 transition-colors"
-          >
+          <p className="text-white font-semibold text-[14px] mb-6">{project.ctaText}</p>
+          <Link href={project.ctaLink} className="inline-block bg-white text-brio-navy text-[13px] font-semibold uppercase tracking-wide px-8 py-3.5 hover:bg-gray-100 transition-colors">
             Contact BRIO Construction
           </Link>
         </div>
       </section>
 
-      {/* YouTube Video */}
+      {/* ── Standalone full-width image ── */}
+      {img[5] && (
+        <section className="relative w-full h-[300px] md:h-[400px]">
+          <Image src={img[5]} alt={`${project.name} interior`} fill className="object-cover" sizes="100vw" />
+        </section>
+      )}
+
+      {/* ── YouTube Video (coffeeshop only) ── */}
       {slug === "downtown-coffeeshop" && (
         <section className="py-10 md:py-14 bg-white">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -221,7 +214,7 @@ export default async function ProjectDetailPage({
         </section>
       )}
 
-      {/* More Related Content */}
+      {/* ── More Related Content ── */}
       <section className="py-14 md:py-20 bg-white border-t border-gray-100">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="font-heading text-[22px] md:text-[28px] font-semibold text-brio-navy text-center mb-10 uppercase tracking-wider">
@@ -231,30 +224,18 @@ export default async function ProjectDetailPage({
             {related.map((p) => (
               <Link key={p.slug} href={`/projects/${p.slug}`} className="group">
                 <div className="relative aspect-[4/3] overflow-hidden mb-3">
-                  <Image
-                    src={p.heroImage || `/images/projects/${p.slug.split("-")[0]}.jpg`}
-                    alt={p.name}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    sizes="33vw"
-                  />
+                  <Image src={p.heroImage || `/images/projects/${p.slug.split("-")[0]}.jpg`} alt={p.name} fill className="object-cover group-hover:scale-105 transition-transform duration-300" sizes="33vw" />
                 </div>
-                <h3 className="text-brio-navy text-[15px] font-bold font-heading mb-1">
-                  {p.name}
-                </h3>
-                <p className="text-text-body text-[12px] leading-relaxed line-clamp-2">
-                  {p.subtitle}
-                </p>
-                <span className="text-brio-navy text-[12px] font-semibold uppercase tracking-wide mt-2 inline-block">
-                  Read More &raquo;
-                </span>
+                <h3 className="text-brio-navy text-[15px] font-bold font-heading mb-1">{p.name}</h3>
+                <p className="text-text-body text-[12px] leading-relaxed line-clamp-2">{p.subtitle}</p>
+                <span className="text-brio-navy text-[12px] font-semibold uppercase tracking-wide mt-2 inline-block">Read More &raquo;</span>
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Newsletter */}
+      {/* ── Newsletter ── */}
       <section className="py-10 md:py-14 bg-white border-t border-gray-100">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 items-center">
