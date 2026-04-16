@@ -80,8 +80,13 @@ export default async function ProjectDetailPage({
     <>
       <Navbar />
 
-      {/* ── Title ── */}
-      <section className="pt-10 md:pt-16 pb-6 md:pb-8 bg-white">
+      {/* ── Full-width hero image ── */}
+      <section className="relative w-full h-[40vh] md:h-[60vh]">
+        <Image src={heroImage} alt={project.name} fill className="object-cover" sizes="100vw" priority />
+      </section>
+
+      {/* ── Title below hero ── */}
+      <section className="pt-8 md:pt-12 pb-6 md:pb-8 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="font-heading text-[28px] md:text-[42px] font-semibold text-brio-navy uppercase tracking-wider mb-4">
             {project.name}
