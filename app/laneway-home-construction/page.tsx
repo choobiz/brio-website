@@ -156,13 +156,14 @@ export default function LanewayHomeConstructionPage() {
             </div>
           </div>
           {/* Right — image */}
-          <div className="relative h-[300px] md:h-auto md:min-h-[500px]">
+          <div className="relative h-[280px] md:h-auto md:min-h-[460px] overflow-hidden">
             <Image
               src="/images/laneway/hero-mount-pleasant.webp"
-              alt="Modern laneway home exterior"
+              alt="Modern laneway home in Mount Pleasant"
               fill
-              className="object-cover"
+              className="object-cover object-bottom"
               sizes="(max-width: 768px) 100vw, 50vw"
+              quality={90}
               priority
             />
           </div>
