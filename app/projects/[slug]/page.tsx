@@ -80,15 +80,15 @@ export default async function ProjectDetailPage({
     <>
       <Navbar />
 
-      {/* ── Title (no hero image — starts with title) ── */}
-      <section className="pt-10 md:pt-16 pb-8 md:pb-10 bg-white">
+      {/* ── Title ── */}
+      <section className="pt-10 md:pt-16 pb-6 md:pb-8 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="font-heading text-[28px] md:text-[40px] font-semibold text-brio-navy uppercase tracking-wider mb-4">
+          <h1 className="font-heading text-[28px] md:text-[42px] font-semibold text-brio-navy uppercase tracking-wider mb-4">
             {project.name}
           </h1>
           <p className="font-heading text-[16px] md:text-[18px] italic text-text-body mb-3">{project.subtitle}</p>
           <p className="text-text-muted text-[13px]">Project Type: {project.type}</p>
-          <p className="text-text-muted text-[13px]">Year: {project.year}</p>
+          <p className="text-text-muted text-[13px]">Project Year: {project.year}</p>
         </div>
       </section>
 
