@@ -158,7 +158,7 @@ export default function LanewayHomeConstructionPage() {
           {/* Right — image */}
           <div className="relative h-[300px] md:h-auto md:min-h-[500px]">
             <Image
-              src="/images/laneway/hero.webp"
+              src="/images/laneway/hero-mount-pleasant.webp"
               alt="Modern laneway home exterior"
               fill
               className="object-cover"
