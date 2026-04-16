@@ -92,16 +92,16 @@ export default async function ProjectDetailPage({
         </div>
       </section>
 
-      {/* ── Image left + Description right on dark bg ── */}
-      <section className="bg-brio-navy">
+      {/* ── Image left + Description right on white bg ── */}
+      <section className="bg-white">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
-          {/* Left — image */}
+          {/* Left — image, bleeds to left edge */}
           <div className="relative h-[300px] md:h-auto md:min-h-[420px]">
             <Image src={img[0] || heroImage} alt={`${project.name} interior`} fill className="object-cover" sizes="50vw" priority />
           </div>
-          {/* Right — description text on dark bg */}
+          {/* Right — description text on white bg */}
           <div className="py-10 md:py-16 px-6 md:px-12 flex items-center">
-            <div className="text-white/90 text-[14px] leading-relaxed">
+            <div className="text-text-body text-[14px] leading-relaxed">
               {project.description.split("\n\n").map((p, i) => (
                 <p key={i} className="mb-4 last:mb-0">{p}</p>
               ))}
