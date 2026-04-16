@@ -110,90 +110,139 @@ export default async function ProjectDetailPage({
         </div>
       </section>
 
-      {/* ── Content sections ── */}
-      <section className="py-6 md:py-10 bg-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-
-          {/* Section 0: Design Intent — single column + single image */}
-          {s[0] && (
-            <div className="mb-12">
-              <SectionHeading>{s[0].heading}</SectionHeading>
-              <SectionText text={s[0].content} />
-              {img[1] && <div className="mt-6"><FullImage src={img[1]} alt={s[0].heading} /></div>}
-            </div>
-          )}
-
-          {/* Sections 1+2: Materials & Finishes + Lighting & Seating — side by side */}
-          {s[1] && s[2] && (
-            <div className="mb-12">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-6">
-                <div>
-                  <SectionHeading>{s[1].heading}</SectionHeading>
-                  <SectionText text={s[1].content} />
-                </div>
-                <div>
-                  <SectionHeading>{s[2].heading}</SectionHeading>
-                  <SectionText text={s[2].content} />
-                </div>
-              </div>
-              <ImagePair a={img[2]} b={img[3]} altA={s[1].heading} altB={s[2].heading} />
-            </div>
-          )}
-
-          {/* Section 3: Functional Enhancements — single column + two images */}
-          {s[3] && (
-            <div className="mb-12">
-              <SectionHeading>{s[3].heading}</SectionHeading>
-              <SectionText text={s[3].content} />
-              <ImagePair a={img[4]} b={img[5]} altA={`${s[3].heading} 1`} altB={`${s[3].heading} 2`} />
-            </div>
-          )}
-
-          {/* Section 4: Brand Integration — single column + two images */}
-          {s[4] && (
-            <div className="mb-12">
-              <SectionHeading>{s[4].heading}</SectionHeading>
-              <SectionText text={s[4].content} />
-              <ImagePair a={img[6]} b={img[0]} altA={`${s[4].heading} 1`} altB={`${s[4].heading} 2`} />
-            </div>
-          )}
-
-          {/* Remaining sections (for other projects with different structure) */}
-          {s.slice(5).map((section, i) => (
-            <div key={i + 5} className="mb-12">
-              <SectionHeading>{section.heading}</SectionHeading>
-              <SectionText text={section.content} />
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── "Built with Intention" CTA ── */}
-      <section className="relative py-16 md:py-24">
-        <Image src={img[img.length - 1] || heroImage} alt="Project showcase" fill className="object-cover" />
-        <div className="absolute inset-0 bg-brio-navy/70" />
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-heading text-[18px] md:text-[24px] font-semibold text-white mb-3 italic">
-            Built with Intention, Delivered with Care
-          </h2>
-          <p className="text-white/90 text-[13px] leading-relaxed mb-4 max-w-2xl mx-auto">
-            At BRIO Construction, we know that the best spaces are the ones that reflect the people who use them.
-            Whether we&apos;re building a home, an office, or something in between, we lead with collaboration, clarity, and care.
-            That&apos;s how we turn unique ideas into inspiring spaces.
-          </p>
-          <p className="text-white font-semibold text-[14px] mb-6">{project.ctaText}</p>
-          <Link href={project.ctaLink} className="inline-block bg-white text-brio-navy text-[13px] font-semibold uppercase tracking-wide px-8 py-3.5 hover:bg-gray-100 transition-colors">
-            Contact BRIO Construction
-          </Link>
-        </div>
-      </section>
-
-      {/* ── Standalone full-width image ── */}
-      {img[5] && (
-        <section className="relative w-full h-[300px] md:h-[400px]">
-          <Image src={img[5]} alt={`${project.name} interior`} fill className="object-cover" sizes="100vw" />
+      {/* ── Full-width showcase image (PAUL LE CAFÉ counter) ── */}
+      {img[1] && (
+        <section className="relative w-full h-[300px] md:h-[450px]">
+          <Image src={img[1]} alt={`${project.name} counter view`} fill className="object-cover" sizes="100vw" />
         </section>
       )}
+
+      {/* ── Content sections: alternating image/text two-column ── */}
+
+      {/* Design Intent — image LEFT, text RIGHT */}
+      {s[0] && (
+        <section className="bg-white">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
+            <div className="relative h-[280px] md:h-auto md:min-h-[380px]">
+              <Image src={img[2] || img[0]} alt={s[0].heading} fill className="object-cover" sizes="50vw" />
+            </div>
+            <div className="py-10 md:py-16 px-6 md:px-12 flex flex-col justify-center">
+              <SectionHeading>{s[0].heading}</SectionHeading>
+              <SectionText text={s[0].content} />
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Materials & Finishes — text LEFT, image RIGHT */}
+      {s[1] && (
+        <section className="bg-white">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
+            <div className="py-10 md:py-16 px-6 md:px-12 flex flex-col justify-center md:order-1">
+              <SectionHeading>{s[1].heading}</SectionHeading>
+              <SectionText text={s[1].content} />
+            </div>
+            <div className="relative h-[280px] md:h-auto md:min-h-[380px] md:order-2">
+              <Image src={img[3] || img[0]} alt={s[1].heading} fill className="object-cover" sizes="50vw" />
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Lighting & Seating — image LEFT, text RIGHT */}
+      {s[2] && (
+        <section className="bg-white">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
+            <div className="relative h-[280px] md:h-auto md:min-h-[380px]">
+              <Image src={img[4] || img[0]} alt={s[2].heading} fill className="object-cover" sizes="50vw" />
+            </div>
+            <div className="py-10 md:py-16 px-6 md:px-12 flex flex-col justify-center">
+              <SectionHeading>{s[2].heading}</SectionHeading>
+              <SectionText text={s[2].content} />
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Functional Enhancements — text LEFT, image RIGHT */}
+      {s[3] && (
+        <section className="bg-white">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
+            <div className="py-10 md:py-16 px-6 md:px-12 flex flex-col justify-center md:order-1">
+              <SectionHeading>{s[3].heading}</SectionHeading>
+              <SectionText text={s[3].content} />
+            </div>
+            <div className="relative h-[280px] md:h-auto md:min-h-[380px] md:order-2">
+              <Image src={img[5] || img[0]} alt={s[3].heading} fill className="object-cover" sizes="50vw" />
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Brand Integration — image LEFT, text RIGHT */}
+      {s[4] && (
+        <section className="bg-white">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
+            <div className="relative h-[280px] md:h-auto md:min-h-[380px]">
+              <Image src={img[6] || img[0]} alt={s[4].heading} fill className="object-cover" sizes="50vw" />
+            </div>
+            <div className="py-10 md:py-16 px-6 md:px-12 flex flex-col justify-center">
+              <SectionHeading>{s[4].heading}</SectionHeading>
+              <SectionText text={s[4].content} />
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Remaining sections for other projects */}
+      {s.slice(5).map((section, i) => (
+        <section key={i + 5} className="bg-white">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
+            {i % 2 === 0 ? (
+              <>
+                <div className="py-10 md:py-16 px-6 md:px-12 flex flex-col justify-center">
+                  <SectionHeading>{section.heading}</SectionHeading>
+                  <SectionText text={section.content} />
+                </div>
+                <div className="relative h-[280px] md:h-auto md:min-h-[380px] bg-brio-light-gray" />
+              </>
+            ) : (
+              <>
+                <div className="relative h-[280px] md:h-auto md:min-h-[380px] bg-brio-light-gray" />
+                <div className="py-10 md:py-16 px-6 md:px-12 flex flex-col justify-center">
+                  <SectionHeading>{section.heading}</SectionHeading>
+                  <SectionText text={section.content} />
+                </div>
+              </>
+            )}
+          </div>
+        </section>
+      ))}
+
+      {/* ── "Built with Intention" — text LEFT, image RIGHT (two-column, NOT dark overlay) ── */}
+      <section className="bg-white">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
+          <div className="py-10 md:py-16 px-6 md:px-12 flex flex-col justify-center">
+            <h2 className="font-heading text-[20px] md:text-[26px] font-semibold text-brio-navy mb-4 italic uppercase tracking-wide">
+              Built with Intention, Delivered with Care
+            </h2>
+            <p className="text-text-body text-[14px] leading-relaxed mb-4">
+              At BRIO Construction, we know that the best spaces are the ones that reflect the people who use them.
+              Whether we&apos;re building a home, an office, or something in between, we lead with collaboration, clarity, and care.
+              That&apos;s how we turn unique ideas into inspiring spaces.
+            </p>
+            <p className="text-text-body text-[14px] leading-relaxed font-bold mb-4">
+              {project.ctaText} Let&apos;s build something that works for you&mdash;functionally and beautifully.
+            </p>
+            <Link href={project.ctaLink} className="text-brio-navy text-[14px] font-semibold underline hover:no-underline">
+              Contact BRIO Construction
+            </Link>
+          </div>
+          <div className="relative h-[300px] md:h-auto md:min-h-[400px]">
+            <Image src={img[img.length - 1] || heroImage} alt="BRIO project showcase" fill className="object-cover" sizes="50vw" />
+          </div>
+        </div>
+      </section>
 
       {/* ── YouTube Video (coffeeshop only) ── */}
       {slug === "downtown-coffeeshop" && (
