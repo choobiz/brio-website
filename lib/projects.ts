@@ -74,6 +74,16 @@ export const PROJECTS: Project[] = [
       "Where Comfort Meets Commerce — A Hybrid Office Built for Flexibility",
     type: "Commercial",
     year: "2024-25",
+    heroImage: "/images/projects/dental/hero.jpg",
+    images: [
+      "/images/projects/dental/img-1.jpg",
+      "/images/projects/dental/img-2.jpg",
+      "/images/projects/dental/img-3.jpg",
+      "/images/projects/dental/img-4.jpg",
+      "/images/projects/dental/img-5.jpg",
+      "/images/projects/dental/img-6.jpg",
+      "/images/projects/dental/img-7.jpg",
+    ],
     description:
       'Some spaces are designed for function. Others are designed to feel like home. But what if you could have both?\n\nThat was the challenge presented to us when a fast-growing dental product company approached BRIO Construction with a unique request. They needed a new tenant space—yes, an office for their team—but it had to be more than that. It had to feel warm, welcoming, and adaptable… almost like a living space.\n\nFrom day one, we knew this wasn\'t going to be your standard commercial tenant improvement.',
     sections: [
@@ -103,6 +113,15 @@ export const PROJECTS: Project[] = [
       "From Optics to Opportunity — A Real Estate Office Transformation in North Vancouver",
     type: "Commercial",
     year: "2024-25",
+    heroImage: "/images/projects/brokerage/hero.jpg",
+    images: [
+      "/images/projects/brokerage/img-1.jpg",
+      "/images/projects/brokerage/img-2.jpg",
+      "/images/projects/brokerage/img-3.jpg",
+      "/images/projects/brokerage/img-4.jpg",
+      "/images/projects/brokerage/img-5.jpg",
+      "/images/projects/brokerage/img-6.jpg",
+    ],
     description:
       "In one of North Vancouver's busiest intersections, a once dated optical store from the 1990s has found a vibrant new purpose. What was once a quiet retail space has been reimagined into a bright, modern real estate brokerage office—brought to life by the vision of our client and the BRIO Construction team.\n\nThe journey began with a simple but exciting challenge: our client, the owner of a successful nearby brokerage, had outgrown her previous office. She had found the perfect new location—a 2,000 sq ft ground-floor corner unit with great visibility and natural light—but the interior needed a total reinvention.",
     sections: [
@@ -132,6 +151,14 @@ export const PROJECTS: Project[] = [
       "From Vision to Value — Building a Profitable Duplex with Purpose",
     type: "Residential",
     year: "2022-24",
+    heroImage: "/images/projects/trinity/hero.jpg",
+    images: [
+      "/images/projects/trinity/img-1.jpg",
+      "/images/projects/trinity/img-2.jpg",
+      "/images/projects/trinity/img-3.jpg",
+      "/images/projects/trinity/img-4.jpg",
+      "/images/projects/trinity/img-5.jpg",
+    ],
     description:
       "Every great build starts with a dream. But when that dream is backed by a smart strategy and a trusted construction partner, it becomes something more—a success story.\n\nThat's exactly what happened when our client came to BRIO Construction with a clear goal: to make a profitable real estate investment while being hands-on throughout the journey.",
     sections: [
@@ -161,6 +188,14 @@ export const PROJECTS: Project[] = [
       "First Home, First Dream — A Thoughtful Condo Renovation in Vancouver",
     type: "Residential",
     year: "2022",
+    heroImage: "/images/projects/east-broadway/hero.jpg",
+    images: [
+      "/images/projects/east-broadway/img-1.jpg",
+      "/images/projects/east-broadway/img-2.jpg",
+      "/images/projects/east-broadway/img-3.jpg",
+      "/images/projects/east-broadway/img-4.jpg",
+      "/images/projects/east-broadway/img-5.jpg",
+    ],
     description:
       "When you're stepping into your first home, every detail matters. You're not just buying walls and windows—you're creating a space where life happens.\n\nTheir goal was clear: to transform a standard condo into something that felt like theirs. But like many first-time buyers, they were working with a strict budget and wanted to make smart decisions that didn't sacrifice style or quality.",
     sections: [
@@ -190,6 +225,14 @@ export const PROJECTS: Project[] = [
       "A Home for Today, Security for Tomorrow — Building a Custom Duplex in North Vancouver",
     type: "Residential",
     year: "2021-22",
+    heroImage: "/images/projects/lolo/hero.jpg",
+    images: [
+      "/images/projects/lolo/img-1.jpg",
+      "/images/projects/lolo/img-2.jpg",
+      "/images/projects/lolo/img-3.jpg",
+      "/images/projects/lolo/img-4.jpg",
+      "/images/projects/lolo/img-5.jpg",
+    ],
     description:
       "Every now and then, a project comes along that perfectly captures why we do what we do. This North Vancouver duplex was one of those stories.\n\nOur client, a longtime homeowner, had a vision: to breathe new life into their aging property by redeveloping it into something modern, functional, and future-focused. The dream? A custom-built duplex—one unit designed just for them, and the other as a rental suite to generate steady income.",
     sections: [
@@ -219,6 +262,14 @@ export const PROJECTS: Project[] = [
       "A Thoughtful Home Renovation That Turned a House Into a Home",
     type: "Residential",
     year: "2021",
+    heroImage: "/images/projects/jefferson/hero.jpg",
+    images: [
+      "/images/projects/jefferson/img-1.jpg",
+      "/images/projects/jefferson/img-2.jpg",
+      "/images/projects/jefferson/img-3.jpg",
+      "/images/projects/jefferson/img-4.jpg",
+      "/images/projects/jefferson/img-5.jpg",
+    ],
     description:
       "Every great renovation begins with a vision—and this one started with a simple goal: to turn a newly purchased house into a true reflection of the people who live in it.\n\nOur clients came to BRIO Construction with a clear desire for more than just updates. They wanted a home that felt modern and functional, yes—but also warm, personal, and suited to their lifestyle.",
     sections: [
