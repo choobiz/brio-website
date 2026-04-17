@@ -15,64 +15,71 @@ const PROJECTS = [
     name: "Downtown Coffeeshop Renovation",
     type: "Commercial" as const,
     year: "2024-25",
+    projectType: "Commercial Tenant Improvement",
     image: "/images/projects/coffeeshop.jpg",
     slug: "downtown-coffeeshop",
     excerpt:
-      "Downtown Coffeeshop Renovation Bringing a refined European café experience to the heart of Downtown Vancouver Project Type: Commercial Tenant Improvement Project Year: 2024-25 Bringing a...",
+      "Bringing a refined European café experience to the heart of Downtown Vancouver.",
   },
   {
     name: "Richmond Dental Office Renovation",
     type: "Commercial" as const,
     year: "2024-25",
+    projectType: "Commercial Tenant Improvement",
     image: "/images/projects/dental.jpg",
     slug: "richmond-dental",
     excerpt:
-      "Richmond Dental Office Renovation Where Comfort Meets Commerce — A Hybrid Office Built for Flexibility Project Type: Commercial Tenant Improvement Project Year: 2024-25 Some spaces...",
+      "Where Comfort Meets Commerce — A Hybrid Office Built for Flexibility.",
   },
   {
     name: "North Van Brokerage Renovation",
     type: "Commercial" as const,
     year: "2024-25",
+    projectType: "Commercial Tenant Improvement",
     image: "/images/projects/brokerage.jpg",
     slug: "north-van-brokerage",
     excerpt:
-      "North Van Brokerage Renovation From Optics to Opportunity — A Real Estate Office Transformation in North Vancouver Project Type: Commercial Tenant Improvement Project Year: 2024-25",
+      "From Optics to Opportunity — A Real Estate Office Transformation in North Vancouver.",
   },
   {
     name: "Trinity Duplex",
     type: "Residential" as const,
     year: "2022-24",
+    projectType: "New Duplex Construction",
     image: "/images/projects/trinity.jpg",
     slug: "trinity-duplex",
     excerpt:
-      "Trinity Duplex From Vision to Value — Building a Profitable Duplex with Purpose Project Type: New Duplex Construction Project Year: 2022-24 Every great build starts...",
+      "From Vision to Value — Building a Profitable Duplex with Purpose.",
   },
   {
     name: "East Broadway Condo",
     type: "Residential" as const,
     year: "2022",
+    projectType: "Condo Renovation",
     image: "/images/projects/east-broadway.jpg",
     slug: "east-broadway-condo",
     excerpt:
-      "East Broadway Condo First Home, First Dream — A Thoughtful Condo Renovation in Vancouver Project Type: Condo Renovation Project Year: 2022 When you're stepping into...",
+      "First Home, First Dream — A Thoughtful Condo Renovation in Vancouver.",
   },
   {
     name: "LoLo Duplex",
     type: "Residential" as const,
     year: "2021-22",
+    projectType: "New Duplex Construction",
     image: "/images/projects/lolo.jpg",
     slug: "lolo-duplex",
     excerpt:
-      "LoLo Duplex A Home for Today, Security for Tomorrow — Building a Custom Duplex in North Vancouver Project Type: New Duplex Construction Project Year: 2021-22",
+      "A Home for Today, Security for Tomorrow — Building a Custom Duplex in North Vancouver.",
   },
   {
     name: "Jefferson Residence",
     type: "Residential" as const,
     year: "2021",
+    projectType: "Home Renovation",
     image: "/images/projects/jefferson.jpg",
     slug: "jefferson-residence",
     excerpt:
-      "Jefferson Residence Project Type: Home Renovation Project Year: 2021 Every great renovation begins with a vision—and this one started with a simple goal: to turn...",
+      "A Thoughtful Home Renovation That Turned a House Into a Home.",
   },
 ];
 
@@ -140,10 +147,13 @@ export default function ProjectsPage() {
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
                 </div>
-                <h3 className="text-brio-navy text-[16px] font-bold font-heading uppercase tracking-wide mb-2">
+                <h3 className="text-brio-navy text-[16px] font-bold font-heading uppercase tracking-wide mb-1">
                   {p.name}
                 </h3>
-                <p className="text-text-body text-[13px] leading-relaxed mb-3 line-clamp-4">
+                <p className="text-text-muted text-[11px] uppercase tracking-wide mb-2">
+                  {p.projectType} · {p.year}
+                </p>
+                <p className="text-text-body text-[13px] leading-relaxed mb-3">
                   {p.excerpt}
                 </p>
                 <Link

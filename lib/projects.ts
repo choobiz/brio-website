@@ -8,6 +8,7 @@ export interface Project {
   name: string;
   subtitle: string;
   type: "Commercial" | "Residential";
+  projectType: string;
   year: string;
   description: string;
   sections: ProjectSection[];
@@ -16,6 +17,7 @@ export interface Project {
   heroImage?: string;
   images?: string[];
   youtubeId?: string;
+  showcaseImage?: boolean;
 }
 
 export const PROJECTS: Project[] = [
@@ -25,7 +27,9 @@ export const PROJECTS: Project[] = [
     subtitle:
       "Bringing a refined European café experience to the heart of Downtown Vancouver",
     type: "Commercial",
+    projectType: "Commercial Tenant Improvement",
     year: "2024-25",
+    showcaseImage: true,
     heroImage: "/images/projects/coffeeshop/hero.jpg",
     images: [
       "/images/projects/coffeeshop/img-1.jpg",
@@ -75,6 +79,7 @@ export const PROJECTS: Project[] = [
     subtitle:
       "Where Comfort Meets Commerce — A Hybrid Office Built for Flexibility",
     type: "Commercial",
+    projectType: "Commercial Tenant Improvement",
     year: "2024-25",
     heroImage: "/images/projects/dental/hero.jpg",
     images: [
@@ -115,6 +120,7 @@ export const PROJECTS: Project[] = [
     subtitle:
       "From Optics to Opportunity — A Real Estate Office Transformation in North Vancouver",
     type: "Commercial",
+    projectType: "Commercial Tenant Improvement",
     year: "2024-25",
     heroImage: "/images/projects/brokerage/hero.jpg",
     images: [
@@ -154,6 +160,7 @@ export const PROJECTS: Project[] = [
     subtitle:
       "From Vision to Value — Building a Profitable Duplex with Purpose",
     type: "Residential",
+    projectType: "New Duplex Construction",
     year: "2022-24",
     heroImage: "/images/projects/trinity/hero.jpg",
     images: [
@@ -191,6 +198,7 @@ export const PROJECTS: Project[] = [
     subtitle:
       "First Home, First Dream — A Thoughtful Condo Renovation in Vancouver",
     type: "Residential",
+    projectType: "Condo Renovation",
     year: "2022",
     heroImage: "/images/projects/east-broadway/hero.jpg",
     images: [
@@ -228,6 +236,7 @@ export const PROJECTS: Project[] = [
     subtitle:
       "A Home for Today, Security for Tomorrow — Building a Custom Duplex in North Vancouver",
     type: "Residential",
+    projectType: "New Duplex Construction",
     year: "2021-22",
     heroImage: "/images/projects/lolo/hero.jpg",
     images: [
@@ -265,6 +274,7 @@ export const PROJECTS: Project[] = [
     subtitle:
       "A Thoughtful Home Renovation That Turned a House Into a Home",
     type: "Residential",
+    projectType: "Home Renovation",
     year: "2021",
     heroImage: "/images/projects/jefferson/hero.jpg",
     images: [

@@ -74,7 +74,11 @@ export default async function ProjectDetailPage({
   const heroImage = project.heroImage || `/images/projects/${slug.split("-")[0]}.jpg`;
   const img = project.images || [];
   const s = project.sections;
-  const related = PROJECTS.filter((p) => p.slug !== slug).slice(0, 3);
+  const others = PROJECTS.filter((p) => p.slug !== slug);
+  const related = [
+    ...others.filter((p) => p.type === project.type),
+    ...others.filter((p) => p.type !== project.type),
+  ].slice(0, 3);
 
   return (
     <>
@@ -92,7 +96,7 @@ export default async function ProjectDetailPage({
             {project.name}
           </h1>
           <p className="font-heading text-[16px] md:text-[18px] italic text-text-body mb-3">{project.subtitle}</p>
-          <p className="text-text-muted text-[13px]">Project Type: {project.type}</p>
+          <p className="text-text-muted text-[13px]">Project Type: {project.projectType}</p>
           <p className="text-text-muted text-[13px]">Project Year: {project.year}</p>
         </div>
       </section>
@@ -115,10 +119,10 @@ export default async function ProjectDetailPage({
         </div>
       </section>
 
-      {/* ── Full-width showcase image (PAUL LE CAFÉ counter) ── */}
-      {img[1] && (
+      {/* ── Full-width showcase image (opt-in per project) ── */}
+      {project.showcaseImage && img[1] && (
         <section className="relative w-full h-[300px] md:h-[450px]">
-          <Image src={img[1]} alt={`${project.name} counter view`} fill className="object-cover" sizes="100vw" />
+          <Image src={img[1]} alt={`${project.name} showcase view`} fill className="object-cover" sizes="100vw" />
         </section>
       )}
 
@@ -244,7 +248,7 @@ export default async function ProjectDetailPage({
             </Link>
           </div>
           <div className="relative h-[300px] md:h-auto md:min-h-[400px]">
-            <Image src={img[img.length - 1] || heroImage} alt="BRIO project showcase" fill className="object-cover" sizes="50vw" />
+            <Image src={heroImage} alt="BRIO project showcase" fill className="object-cover" sizes="50vw" />
           </div>
         </div>
       </section>
