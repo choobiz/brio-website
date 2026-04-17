@@ -15,6 +15,7 @@ export interface Project {
   ctaLink: string;
   heroImage?: string;
   images?: string[];
+  youtubeId?: string;
 }
 
 export const PROJECTS: Project[] = [
@@ -66,6 +67,7 @@ export const PROJECTS: Project[] = [
     ],
     ctaText: "Looking to reimagine your commercial space?",
     ctaLink: "/commercial-renovations#get-in-touch",
+    youtubeId: "L4tiI0Xdgss",
   },
   {
     slug: "richmond-dental",
@@ -105,6 +107,7 @@ export const PROJECTS: Project[] = [
     ],
     ctaText: "Looking to reimagine your commercial space?",
     ctaLink: "/commercial-renovations#get-in-touch",
+    youtubeId: "9mYdrAYki08",
   },
   {
     slug: "north-van-brokerage",

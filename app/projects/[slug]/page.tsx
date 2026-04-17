@@ -249,14 +249,14 @@ export default async function ProjectDetailPage({
         </div>
       </section>
 
-      {/* ── YouTube Video (coffeeshop only) ── */}
-      {slug === "downtown-coffeeshop" && (
+      {/* ── YouTube Video ── */}
+      {project.youtubeId && (
         <section className="py-10 md:py-14 bg-white">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="relative w-full aspect-video">
               <iframe
-                src="https://www.youtube.com/embed/L4tiI0Xdgss"
-                title="Downtown Coffeeshop Renovation Video"
+                src={`https://www.youtube.com/embed/${project.youtubeId}`}
+                title={`${project.name} Video`}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
                 className="absolute inset-0 w-full h-full"
