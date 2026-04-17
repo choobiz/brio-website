@@ -2,7 +2,17 @@ import type { Metadata } from "next";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
 import Image from "next/image";
-import Link from "next/link";
+import ProjectsGrid, {
+  type ProjectCard,
+  type ProjectFilter,
+} from "@/components/projects/ProjectsGrid";
+
+function normalizeFilter(param: string | undefined): ProjectFilter {
+  const v = (param ?? "").toLowerCase();
+  if (v === "commercial") return "Commercial";
+  if (v === "residential") return "Residential";
+  return "All";
+}
 
 export const metadata: Metadata = {
   title: "Projects",
@@ -10,10 +20,10 @@ export const metadata: Metadata = {
     "Explore BRIO Construction's portfolio of residential and commercial projects across Greater Vancouver.",
 };
 
-const PROJECTS = [
+const PROJECTS: ProjectCard[] = [
   {
     name: "Downtown Coffeeshop Renovation",
-    type: "Commercial" as const,
+    type: "Commercial",
     year: "2024-25",
     projectType: "Commercial Tenant Improvement",
     image: "/images/projects/coffeeshop.jpg",
@@ -23,7 +33,7 @@ const PROJECTS = [
   },
   {
     name: "Richmond Dental Office Renovation",
-    type: "Commercial" as const,
+    type: "Commercial",
     year: "2024-25",
     projectType: "Commercial Tenant Improvement",
     image: "/images/projects/dental.jpg",
@@ -33,7 +43,7 @@ const PROJECTS = [
   },
   {
     name: "North Van Brokerage Renovation",
-    type: "Commercial" as const,
+    type: "Commercial",
     year: "2024-25",
     projectType: "Commercial Tenant Improvement",
     image: "/images/projects/brokerage.jpg",
@@ -43,7 +53,7 @@ const PROJECTS = [
   },
   {
     name: "Trinity Duplex",
-    type: "Residential" as const,
+    type: "Residential",
     year: "2022-24",
     projectType: "New Duplex Construction",
     image: "/images/projects/trinity.jpg",
@@ -53,7 +63,7 @@ const PROJECTS = [
   },
   {
     name: "East Broadway Condo",
-    type: "Residential" as const,
+    type: "Residential",
     year: "2022",
     projectType: "Condo Renovation",
     image: "/images/projects/east-broadway.jpg",
@@ -63,7 +73,7 @@ const PROJECTS = [
   },
   {
     name: "LoLo Duplex",
-    type: "Residential" as const,
+    type: "Residential",
     year: "2021-22",
     projectType: "New Duplex Construction",
     image: "/images/projects/lolo.jpg",
@@ -73,7 +83,7 @@ const PROJECTS = [
   },
   {
     name: "Jefferson Residence",
-    type: "Residential" as const,
+    type: "Residential",
     year: "2021",
     projectType: "Home Renovation",
     image: "/images/projects/jefferson.jpg",
@@ -83,7 +93,14 @@ const PROJECTS = [
   },
 ];
 
-export default function ProjectsPage() {
+export default async function ProjectsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ type?: string }>;
+}) {
+  const sp = await searchParams;
+  const initialFilter = normalizeFilter(sp.type);
+
   return (
     <>
       <Navbar />
@@ -118,55 +135,8 @@ export default function ProjectsPage() {
         </div>
       </section>
 
-      {/* Filter tabs + Project grid */}
-      <section className="py-12 md:py-16 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Filter tabs */}
-          <div className="flex justify-center gap-6 mb-12">
-            <span className="text-brio-navy text-[14px] font-semibold border-b-2 border-brio-navy pb-1 cursor-pointer">
-              All
-            </span>
-            <span className="text-text-muted text-[14px] font-medium cursor-pointer hover:text-brio-navy transition-colors">
-              Commercial
-            </span>
-            <span className="text-text-muted text-[14px] font-medium cursor-pointer hover:text-brio-navy transition-colors">
-              Residential
-            </span>
-          </div>
-
-          {/* Project cards — 3-column grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {PROJECTS.map((p) => (
-              <div key={p.slug} className="group">
-                <div className="relative aspect-[4/3] overflow-hidden mb-4">
-                  <Image
-                    src={p.image}
-                    alt={p.name}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-                </div>
-                <h3 className="text-brio-navy text-[16px] font-bold font-heading uppercase tracking-wide mb-1">
-                  {p.name}
-                </h3>
-                <p className="text-text-muted text-[11px] uppercase tracking-wide mb-2">
-                  {p.projectType} · {p.year}
-                </p>
-                <p className="text-text-body text-[13px] leading-relaxed mb-3">
-                  {p.excerpt}
-                </p>
-                <Link
-                  href={`/projects/${p.slug}`}
-                  className="text-brio-navy text-[13px] font-bold uppercase tracking-wide hover:underline"
-                >
-                  Learn More
-                </Link>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Filter tabs + Project grid (interactive client component) */}
+      <ProjectsGrid projects={PROJECTS} initialFilter={initialFilter} />
 
       {/* Newsletter */}
       <section className="py-10 md:py-14 bg-white border-t border-gray-100">
