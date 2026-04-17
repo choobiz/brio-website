@@ -146,6 +146,7 @@ export const PROJECTS: Project[] = [
     ],
     ctaText: "Thinking of reimagining your workspace?",
     ctaLink: "/commercial-renovations#get-in-touch",
+    youtubeId: "_s-pV7NH_X8",
   },
   {
     slug: "trinity-duplex",
