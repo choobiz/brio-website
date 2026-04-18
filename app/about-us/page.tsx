@@ -82,15 +82,19 @@ export default function AboutPage() {
       <Navbar />
 
       {/* Hero Image */}
-      <section>
-        <div className="relative w-full aspect-[21/9] md:aspect-[3/1]">
-          <Image
-            src="/images/about/hero.png"
-            alt="BRIO Construction van in front of a custom home"
-            fill
-            className="object-cover"
-            priority
-          />
+      <section className="relative w-full aspect-[21/9] md:aspect-[3/1]">
+        <Image
+          src="/images/about/hero.png"
+          alt="BRIO Construction van in front of a custom home"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-brio-navy/60 via-brio-navy/30 to-brio-navy/70" />
+        <div className="absolute inset-0 flex items-center justify-center px-4 sm:px-6 lg:px-8 [text-shadow:0_2px_8px_rgba(0,0,0,0.6)]">
+          <h1 className="font-heading !text-white text-[26px] sm:text-[34px] md:text-[52px] font-semibold italic text-center leading-tight drop-shadow-lg max-w-4xl">
+            Built with Confidence, Built by BRIO.
+          </h1>
         </div>
       </section>
 
