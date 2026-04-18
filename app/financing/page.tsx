@@ -10,6 +10,9 @@ import {
   CalendarDays,
   ShieldCheck,
   Check,
+  BadgePercent,
+  CalendarClock,
+  TrendingDown,
 } from "lucide-react";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
@@ -61,14 +64,38 @@ const SPEED = [
   },
 ];
 
+const PROMOS = [
+  {
+    icon: BadgePercent,
+    tag: "0%",
+    tagTone: "bg-green-100 text-green-700",
+    title: "No-Interest Plans",
+    body: "0% interest for 12, 24, 36, 48, or 60 months — pay over time without paying a dollar more than the project price.",
+  },
+  {
+    icon: CalendarClock,
+    tag: "0 / 0",
+    tagTone: "bg-blue-100 text-blue-700",
+    title: "Deferred Payments",
+    body: "No payments and no interest for 3, 6, or 12 months — start enjoying your renovation now and begin payments later.",
+  },
+  {
+    icon: TrendingDown,
+    tag: "2.99%",
+    tagTone: "bg-orange-100 text-orange-700",
+    title: "Rate Buydowns",
+    body: "Lower your interest rate to as little as 2.99% on qualifying loans, making monthly payments fit your budget.",
+  },
+];
+
 const TRANSPARENCY = [
   {
     title: "Interest Rates",
-    body: "We offer competitive interest rates and special promotional programs, including 0% interest for qualified customers.",
+    body: "Customized rates from 0% to 13.99% APR, plus promotional programs that can bring your effective cost lower.",
   },
   {
     title: "Loan Terms",
-    body: "Choose from flexible loan terms that suit your budget.",
+    body: "Terms up to 5 years with amortization up to 20 years for lower monthly payments.",
   },
   {
     title: "Fees",
@@ -84,10 +111,6 @@ const BENEFITS = [
   {
     title: "Flexible Payments",
     body: "Choose a payment plan that fits your life. With options for low monthly, bi-weekly, or weekly payments, you're in control.",
-  },
-  {
-    title: "Promotional Offers",
-    body: "Take advantage of special promotions like 0% interest or no payments for up to 12 months. Ask us what's available for your project!",
   },
   {
     title: "Quick & Easy Process",
@@ -118,7 +141,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "What types of renovations can I finance?",
-    a: "You can finance nearly any home improvement project, including kitchens, bathrooms, basements, roofing, windows, landscaping, and more. If you have a project in mind, let's talk!",
+    a: "You can finance nearly any home improvement project — kitchens and bathrooms, basement renovations, roofing and exteriors, windows and doors, eaves and gutters, insulation, plumbing, electrical, flooring, painting, decks and fences, landscaping, hearth and fireplaces, garages, and solar. If you don't see your project here, reach out — chances are it's covered.",
   },
 ];
 
@@ -137,28 +160,28 @@ export default function FinancingPage() {
           sizes="100vw"
           priority
         />
-        <div className="absolute inset-0 bg-brio-navy/70" />
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white py-20">
-          <h1 className="font-heading text-[30px] md:text-[48px] font-semibold leading-tight uppercase tracking-wide mb-5">
+        <div className="absolute inset-0 bg-gradient-to-b from-brio-navy/90 via-brio-navy/75 to-brio-navy/95" />
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white py-20 [text-shadow:0_2px_8px_rgba(0,0,0,0.6)]">
+          <h1 className="font-heading text-[30px] md:text-[48px] font-semibold leading-tight uppercase tracking-wide mb-5 drop-shadow-lg">
             Your Dream Home Renovation Is Finally Within Reach.
           </h1>
-          <p className="text-[15px] md:text-[17px] leading-relaxed opacity-90 max-w-2xl mx-auto mb-6">
+          <p className="text-[15px] md:text-[17px] leading-relaxed max-w-2xl mx-auto mb-6">
             Get the home you&apos;ve always wanted now and pay later with our simple,
             flexible financing options. No hidden fees, no waiting, just beautiful results.
           </p>
           <p className="font-heading italic text-[18px] md:text-[20px] mb-2">
             Renovate Now, Pay Later!
           </p>
-          <p className="text-[14px] opacity-80 mb-8">
+          <p className="text-[14px] mb-8">
             Finance your entire project with affordable monthly payments.
           </p>
           <Link
             href="#apply"
-            className="inline-block bg-brio-navy text-white text-[13px] md:text-[14px] font-semibold px-8 py-4 uppercase tracking-wide border border-white/20 hover:bg-brio-navy/80 transition-colors"
+            className="inline-block bg-brio-navy text-white text-[13px] md:text-[14px] font-semibold px-8 py-4 uppercase tracking-wide border border-white/30 hover:bg-brio-navy/80 transition-colors [text-shadow:none]"
           >
             Get Pre-Approved in Minutes
           </Link>
-          <p className="text-[12px] opacity-75 mt-4">
+          <p className="text-[12px] mt-4">
             Checking your eligibility won&apos;t affect your credit score.
           </p>
         </div>
@@ -248,6 +271,45 @@ export default function FinancingPage() {
               Your personal information is protected with bank-level security. Apply with confidence.
             </p>
           </div>
+        </div>
+      </section>
+
+      {/* ── Promotional Programs ── */}
+      <section className="py-16 md:py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <p className="text-text-muted text-[12px] uppercase tracking-widest mb-3">
+              Financeit Promotional Programs
+            </p>
+            <h2 className="font-heading text-[26px] md:text-[36px] font-semibold text-brio-navy uppercase tracking-wide mb-4">
+              Pay Less. Pay Later. Pay Your Way.
+            </h2>
+            <p className="text-text-body text-[14px] md:text-[15px] max-w-2xl mx-auto leading-relaxed">
+              Choose the program that fits your project and your cash flow. Ask us which offers are available for your renovation.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            {PROMOS.map((p) => {
+              const Icon = p.icon;
+              return (
+                <div key={p.title} className="bg-brio-light-gray p-6 md:p-8 text-center">
+                  <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-white mb-4">
+                    <Icon className="w-6 h-6 text-brio-navy" />
+                  </div>
+                  <span className={`inline-block text-[12px] font-bold uppercase tracking-wide px-3 py-1 mb-3 ${p.tagTone}`}>
+                    {p.tag}
+                  </span>
+                  <h3 className="font-heading text-brio-navy text-[18px] md:text-[20px] font-semibold mb-3">
+                    {p.title}
+                  </h3>
+                  <p className="text-text-body text-[14px] leading-relaxed">{p.body}</p>
+                </div>
+              );
+            })}
+          </div>
+          <p className="text-text-muted text-[12px] text-center mt-8 max-w-2xl mx-auto leading-relaxed">
+            Promotional offer terms set by Financeit. Fees apply for promotional programs. Ask BRIO or Financeit for details on availability and qualification.
+          </p>
         </div>
       </section>
 
