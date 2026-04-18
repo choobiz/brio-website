@@ -4,7 +4,7 @@ import Footer from "@/components/shared/Footer";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Harnessing Building-Integrated Photovoltaics (BIPV) for Net-Zero Homes in British Columbia",
+  title: "Building-Integrated Photovoltaics for BC Net-Zero Homes",
   description: "Discover how Building-Integrated Photovoltaics (BIPV) can transform homes in British Columbia into net-zero energy solutions with BRIO Construction.",
 };
 

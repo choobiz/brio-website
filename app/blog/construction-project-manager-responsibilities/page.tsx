@@ -4,7 +4,7 @@ import Footer from "@/components/shared/Footer";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Construction Project Manager Responsibilities: A Day in the Life at BRIO",
+  title: "Construction Project Manager Responsibilities: A Day in the Life",
   description: "Discover the essential construction project manager responsibilities in a typical day at BRIO, ensuring successful project execution and teamwork.",
 };
 

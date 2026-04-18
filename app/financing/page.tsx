@@ -22,7 +22,7 @@ import ApplicationForm from "@/components/financing/ApplicationForm";
 export const metadata: Metadata = {
   title: "Home Financing Options",
   description:
-    "Renovate now, pay later with BRIO Construction's flexible financing. Finance up to $100,000 with 0% interest promos. Pre-approval in minutes, no impact on credit score.",
+    "Renovate now, pay later with BRIO. Finance up to $100,000 with 0% interest promos. Pre-approval in minutes, no credit score impact.",
 };
 
 const STEPS = [

@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "5 Proven Kitchen Design Tips for a Timeless Look (2025 Guide)",
-  description: "Discover 5 proven kitchen design tips that create a timeless look for your home. Transform your space with our 2025 guide for stunning results! Kitchen Design tips",
+  description: "5 proven kitchen design tips that create a timeless look. Transform your space with our 2025 guide from BRIO Construction.",
 };
 
 export default function BlogPost() {

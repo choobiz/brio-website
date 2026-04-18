@@ -4,7 +4,7 @@ import Footer from "@/components/shared/Footer";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Vancouver Multiplex Properties: Expert Guide to Evaluate Your Lot\&apos;s Potential",
+  title: "Vancouver Multiplex: How to Evaluate Your Lot&apos;s Potential",
   description: "Discover how to evaluate your lot&apos;s potential with our expert guide on Vancouver Multiplex properties for successful investments. Vancouver Multiplex.",
 };
 

@@ -11,7 +11,7 @@ import { Check } from "lucide-react";
 export const metadata: Metadata = {
   title: "Kitchen Refinishing",
   description:
-    "Upgrade your kitchen without permits, layout changes, or long downtime. BRIO Construction delivers stunning cabinet refinishing and kitchen refresh services across Greater Vancouver.",
+    "Upgrade your kitchen without permits, layout changes, or long downtime. BRIO delivers cabinet refinishing and kitchen refresh across Greater Vancouver.",
 };
 
 const PAIN_POINTS = [

@@ -4,7 +4,7 @@ import Footer from "@/components/shared/Footer";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "7 Home Maintenance Tips for Vancouver Homeowners: Protect Your Property Year-Round",
+  title: "7 Home Maintenance Tips for Vancouver Homeowners",
   description: "Discover essential home maintenance tips for Vancouver homeowners to protect your property year-round with expert advice from BRIO Construction.",
 };
 

@@ -4,7 +4,7 @@ import Footer from "@/components/shared/Footer";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "What\&apos;s the Real Cost of a Home Renovation in Vancouver? (2025 Guide)",
+  title: "Real Cost of a Home Renovation in Vancouver (2025 Guide)",
   description: "Discover the real costs and factors involved in a home renovation in Vancouver with our 2025 guide from BRIO Construction on home renovation.",
 };
 

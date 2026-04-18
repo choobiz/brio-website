@@ -4,8 +4,8 @@ import Footer from "@/components/shared/Footer";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "2024 CHBA Municipal Benchmarking: Vancouver, Surrey & Burnaby in Focus",
-  description: "Explore the 2024 CHBA Municipal Benchmarking for Vancouver, Surrey, and Burnaby, and discover key insights for local construction trends. CHBA Municipal Benchmarking.",
+  title: "2024 CHBA Municipal Benchmarking: Vancouver, Surrey, Burnaby",
+  description: "Explore the 2024 CHBA Municipal Benchmarking for Vancouver, Surrey, and Burnaby, with key insights into local construction trends.",
 };
 
 export default function BlogPost() {
