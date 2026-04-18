@@ -53,9 +53,11 @@ export async function submitLead(payload: LeadPayload): Promise<Response> {
   const { firstName, lastName } = splitName(payload.name);
   const phone = normalizePhone(payload.phone);
   const utm = getUTMParams();
-  const pageUrl =
-    payload.page_url ??
-    (typeof window !== "undefined" ? window.location.href : "");
+  const isBrowser = typeof window !== "undefined";
+  const pageUrl = payload.page_url ?? (isBrowser ? window.location.href : "");
+  const pagePath = isBrowser ? window.location.pathname : "";
+  const pageTitle = isBrowser ? document.title : "";
+  const referrer = isBrowser ? document.referrer : "";
 
   const body = {
     // GHL standard contact fields
@@ -87,12 +89,15 @@ export async function submitLead(payload: LeadPayload): Promise<Response> {
     gclid: utm.gclid,
     fbclid: utm.fbclid,
 
-    // Context
-    landing_url: utm.landing_url || pageUrl,
-    campaign_name: payload.campaign ?? payload.source,
-    timestamp: new Date().toISOString(),
-    page_url: pageUrl,
+    // Page / attribution context — enough to identify the exact page a lead came from
     source: payload.source,
+    campaign_name: payload.campaign ?? payload.source,
+    page_url: pageUrl,
+    page_path: pagePath,
+    page_title: pageTitle,
+    referrer: referrer,
+    landing_url: utm.landing_url || pageUrl,
+    timestamp: new Date().toISOString(),
 
     // Tags for segmentation in GHL
     tags: [
