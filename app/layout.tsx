@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 import Script from "next/script";
 import { TRACKING, COMPANY } from "@/lib/constants";
+import UTMCapture from "@/components/shared/UTMCapture";
 import "./globals.css";
 
 const openSans = Open_Sans({
@@ -47,6 +48,7 @@ gtag('js',new Date());gtag('config','${TRACKING.ga4Id}');gtag('config','${TRACKI
         </Script>
       </head>
       <body className="font-sans antialiased">
+        <UTMCapture />
         {children}
       </body>
     </html>
