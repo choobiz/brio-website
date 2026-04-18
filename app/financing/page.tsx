@@ -162,7 +162,7 @@ export default function FinancingPage() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-brio-navy/90 via-brio-navy/75 to-brio-navy/95" />
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white py-20 [text-shadow:0_2px_8px_rgba(0,0,0,0.6)]">
-          <h1 className="font-heading text-[30px] md:text-[48px] font-semibold leading-tight uppercase tracking-wide mb-5 drop-shadow-lg">
+          <h1 className="font-heading !text-white text-[30px] md:text-[48px] font-semibold leading-tight uppercase tracking-wide mb-5 drop-shadow-lg">
             Your Dream Home Renovation Is Finally Within Reach.
           </h1>
           <p className="text-[15px] md:text-[17px] leading-relaxed max-w-2xl mx-auto mb-6">
