@@ -1,9 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-
-const GHL_WEBHOOK =
-  "https://services.leadconnectorhq.com/hooks/7Z5Zm3czsuWjz4zwmsFr/webhook-trigger/d8c59051-0df7-49bc-a6e7-8aee4735ec38";
+import { submitLead } from "@/lib/ghl";
 
 export default function ApplicationForm() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
@@ -12,22 +10,16 @@ export default function ApplicationForm() {
     e.preventDefault();
     const form = e.currentTarget;
     const data = new FormData(form);
-    const payload = {
-      name: String(data.get("name") ?? ""),
-      phone: String(data.get("phone") ?? ""),
-      email: String(data.get("email") ?? ""),
-      project_address: String(data.get("address") ?? ""),
-      description: String(data.get("description") ?? ""),
-      source: "financing-page",
-      page_url: typeof window !== "undefined" ? window.location.href : "",
-    };
-
     setStatus("submitting");
     try {
-      const res = await fetch(GHL_WEBHOOK, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+      const res = await submitLead({
+        name: String(data.get("name") ?? ""),
+        phone: String(data.get("phone") ?? ""),
+        email: String(data.get("email") ?? ""),
+        project_address: String(data.get("address") ?? ""),
+        description: String(data.get("description") ?? ""),
+        source: "financing-page",
+        service: "financing",
       });
       if (!res.ok) throw new Error(`Webhook ${res.status}`);
       setStatus("success");

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
+import LeadForm from "@/components/shared/LeadForm";
 import FAQ from "@/components/shared/FAQ";
 import PartnersCarousel from "@/components/shared/PartnersCarousel";
 import Link from "next/link";
@@ -259,18 +260,7 @@ export default function CommercialRenovationsPage() {
               <p className="text-text-body text-[13px] leading-relaxed mb-6">
                 Ready to explore the possibilities for your project? We&apos;d love to hear your ideas! Taking the first step is easy. Share a few details below, and our team will get in touch to schedule a friendly, no-obligation consultation to discuss your project.
               </p>
-              <form className="space-y-3">
-                <input type="text" required placeholder="Name" className="w-full h-11 px-4 border border-gray-300 text-sm bg-white focus:outline-none focus:border-brio-navy" />
-                <div className="grid grid-cols-2 gap-3">
-                  <input type="tel" required placeholder="Phone" className="w-full h-11 px-4 border border-gray-300 text-sm bg-white focus:outline-none focus:border-brio-navy" />
-                  <input type="email" required placeholder="Email" className="w-full h-11 px-4 border border-gray-300 text-sm bg-white focus:outline-none focus:border-brio-navy" />
-                </div>
-                <input type="text" placeholder="Service Address" className="w-full h-11 px-4 border border-gray-300 text-sm bg-white focus:outline-none focus:border-brio-navy" />
-                <textarea placeholder="Description of Work" rows={4} className="w-full px-4 py-3 border border-gray-300 text-sm bg-white focus:outline-none focus:border-brio-navy resize-none" />
-                <button type="submit" className="w-full h-11 bg-brio-navy text-white font-semibold uppercase tracking-wide text-[13px] hover:bg-brio-navy/90 transition-colors">
-                  Book Now!
-                </button>
-              </form>
+              <LeadForm source="commercial-renovations" service="commercial" variant="compact" />
             </div>
 
             {/* Right: FAQ */}
