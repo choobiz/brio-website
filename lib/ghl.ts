@@ -41,6 +41,21 @@ export function splitName(full: string): { firstName: string; lastName: string }
 }
 
 /**
+ * Derive the channel tag from click-id presence.
+ * Google Ads injects gclid, Meta injects fbclid. Anything else = website
+ * (organic / referral / direct).
+ *
+ * Done client-side here so the GHL Router doesn't need If/Else branches
+ * to determine channel — the right ch-* tag arrives in the payload's
+ * `tags` array and gets applied automatically.
+ */
+export function deriveChannelTag(gclid: string, fbclid: string): "ch-google-ads" | "ch-meta-ads" | "ch-website" {
+  if (gclid) return "ch-google-ads";
+  if (fbclid) return "ch-meta-ads";
+  return "ch-website";
+}
+
+/**
  * Submit a lead to the GHL inbound webhook.
  *
  * Payload shape MUST match the field names the GHL "Create Contact" workflow
@@ -104,7 +119,7 @@ export async function submitLead(payload: LeadPayload): Promise<Response> {
       `src-${payload.source}`,
       payload.service ? `svc-${payload.service}` : "",
       payload.city ? `city-${payload.city.toLowerCase().replace(/\s+/g, "-")}` : "",
-      `ch-website`,
+      deriveChannelTag(utm.gclid, utm.fbclid),
     ].filter(Boolean),
   };
 
