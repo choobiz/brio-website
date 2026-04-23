@@ -1,54 +1,38 @@
 # GHL Router Workflow Runbook
 
-**Date:** 2026-04-19 (revised 2026-04-23)
+**Date:** 2026-04-19 (revised 2026-04-23, hybrid architecture)
 **Author:** Amir Omidvar
 **Status:** Active build in progress
 **Audience:** Whoever maintains the GHL account (you)
 
-This runbook describes how to evolve the existing GHL setup (the bathroom-era Workflow #1 "Speed to Lead") into a **scalable dispatcher pattern** that handles every lead type — every service page on the website, every Google Ads campaign, every Meta Ads campaign, and any future channels — through a single inbound webhook.
+This runbook describes how to evolve the existing GHL setup (the bathroom-era Workflow #1 "Speed to Lead") into a **scalable dispatcher pattern** that handles every lead type — every service page on the website, every Google Ads campaign, every Meta Ads campaign — through a single inbound webhook.
 
-Most of the work is inside the GHL UI. **One small code change is required** — the website and marketing-hub webhook URL has to be repointed at the new Router (see "Key update — 2026-04-21" and Phase 1.5).
+Most of the work is inside the GHL UI. **Two small code changes are required** (Phase 1.5 and Phase 1.9 in the changelog).
 
-## Key update — 2026-04-23
+## Key update — 2026-04-23 (architecture pivot)
 
-Campaign launch pivots from bathroom to **Kitchen Remodeling + Basement Remodeling**. Specifically:
+The marketing-hub team already designed a **tag-based hybrid architecture** for the [Brio] workflows in `brio-marketing-hub/docs/ghl-workflow-copy-paste.md`. Service-specific copy for **Bathroom, Kitchen, Basement Suite, Deck, Kitchen+Bathroom Bundle** is already drafted. We're pivoting to that design instead of cloning per service:
 
-- The existing 7 bathroom workflows (`[Bath] *`) are **renamed and re-texted to `[Kitchen] *`** — see new **Phase 1A**. Same structure, same cadence, kitchen-specific copy.
-- A second dedicated set is **cloned for basement** (`[Basement] *`) so basement ad traffic gets bespoke nurture messaging from day one — see new **Phase 2B**.
-- A **Generic Renovation** set (Phase 2) still gets built as the fallback for any non-explicit service (custom-home, laneway, painting, etc.) using `{{custom_field.service|home renovation}}` merge tags.
-- The Router's dispatch now branches on four conditions: `service` is `kitchen` → `[Kitchen]`, `service` is `basement` → `[Basement]`, `service` is `financing` → `[Financing]`, else → `[Generic]`.
-- Pre-flight test checklist swaps bathroom for kitchen + basement.
+- **Single workflow set** named `[Brio] *` (instead of `[Kitchen] * / [Basement] * / [Generic] *`)
+- **One If/Else block per messaging action** branches on `Contact Tag → Contains → "project-X"` and pastes service-specific SMS/email content
+- **Adding a new service** = adding one `Else If` branch to each of 6 workflows + one new pipeline. No cloning.
+- **Total workflows after this is done:** 8 (Router + 6 [Brio] + 1 shared Missed Call). Down from the 23 the previous version of this runbook proposed.
+- **Source of truth for workflow content:** `brio-marketing-hub/docs/ghl-workflow-copy-paste.md` — paste from there.
+- **Phase 1A** is now the migration guide for converting existing `[Bath]` workflows to `[Brio]` hybrid (steps follow the doc above).
+- **Phases 2 and 2B (Generic + Basement clones) are removed** — no longer needed under the hybrid model.
+- **Phase 3 (Financing)** is now an additional branch inside each `[Brio]` workflow rather than a separate workflow set.
 
 ## Key update — 2026-04-21
 
 GHL **auto-generates a unique webhook URL for every Inbound Webhook trigger**. You cannot reuse the existing Workflow #1 URL on a new trigger. That means:
 
-1. When you create the new Router workflow and add the Inbound Webhook trigger, GHL hands you a **brand-new URL** (different from the one both code repos currently POST to).
-2. To make the Router the single entry point for all leads, **we repoint the code** (`brio-website/lib/ghl.ts` and `brio-marketing-hub/src/lib/submit-lead.ts`) at that new Router URL.
-3. The **existing Workflow #1 stops receiving webhook hits directly**. Its trigger is changed from Inbound Webhook to "Contact Added to Workflow" so it only fires when the Router dispatches a lead to it.
+1. When you create the new Router workflow, GHL hands you a **brand-new URL**.
+2. To make the Router the single entry point for all leads, **we repoint the code** at that new URL (Phase 1.9).
+3. The **existing Workflow #1 stops receiving webhook hits directly**. Its trigger is changed from Inbound Webhook to "Contact Added to Workflow" (Phase 1.10).
 
-This is a one-time migration; after it's done, the old webhook URL is orphaned and every lead flows through the Router.
+## Key update — 2026-04-22
 
----
-
-## Why we need this
-
-You have one webhook URL receiving leads from:
-
-- 15 form locations on the website (`brio-website-five.vercel.app` → soon `builtbybrio.com`)
-- All Google Ads campaigns (currently launching kitchen + basement; more coming)
-- All Meta Ads campaigns (planned)
-
-Right now the existing bathroom workflows were hand-built around bathroom payloads. If a kitchen or basement lead came in, it would still trigger bathroom-specific SMS/email templates — wrong messaging, wrong opportunity pipeline, wrong follow-ups.
-
-The fix: **don't put service-specific logic in the workflow that receives the webhook**. Instead, have one *Router* workflow that:
-
-1. Receives every lead
-2. Parses the payload into custom fields
-3. Tags the contact for reporting
-4. Decides which downstream nurture to dispatch to based on `service` and `source`
-
-Then each service line (kitchen, basement, financing, generic fallback) has its own dedicated set of nurture workflows triggered by "Contact Added to Workflow" — so the Router doesn't need to know how each one works internally.
+Channel detection (`ch-google-ads` / `ch-meta-ads` / `ch-website`) was originally going to be done with nested If/Else branches in the Router. **It's now done in the website code** (`lib/ghl.ts deriveChannelTag()`) and the resulting `ch-*` tag is included in the payload's `tags` array. Reason: GHL If/Else branches don't natively rejoin — each branch terminates with its own END node — and doing channel detection in three branches would have forced triplicating the entire downstream service-dispatch tree.
 
 ---
 
@@ -57,89 +41,85 @@ Then each service line (kitchen, basement, financing, generic fallback) has its 
 ```
   Website forms + Google Ads + Meta Ads
              │
-             │   POST  →  Router URL
-             │           (auto-generated by GHL when the
-             │            Router's Inbound Webhook trigger
-             │            is created — see Phase 1.2)
+             │   POST  →  Router URL (auto-generated by GHL
+             │            in Phase 1.2)
              ▼
   ┌─────────────────────────────────────┐
-  │ WF 0 — Inbound Lead Router (NEW)    │
+  │ WF 0 — Inbound Lead Router          │
   │  Trigger: Inbound Webhook           │
   │  • Create / Update Contact          │
-  │  • Apply tags (src-, svc-, ch-)     │
-  │  • Apply UTM attribution            │
-  │  • Branch on `service` field        │
-  │  • End by "Add to Workflow" → child │
+  │  • Apply tags from payload          │
+  │     (src-*, svc-*, project-*,       │
+  │      ch-*, city-*)                  │
+  │  • Add to Workflow:                 │
+  │      [Brio] New Lead — Speed to Lead│
+  │  END                                │
   └─────────────────────────────────────┘
              │
- ┌───────────┼───────────────┬─────────────┬─────────────┐
- ▼           ▼               ▼             ▼             ▼
-Kitchen    Basement       Financing      Generic       (more
-Speed-to-  Speed-to-      Speed-to-      Renovation    services
-Lead       Lead           Lead           Speed-to-Lead added later
-(Phase 1A: (Phase 2B:     (Phase 3:      (Phase 2:     by cloning
- rename +   clone of       new set)      clone of      Generic)
- re-text    [Kitchen],                   [Kitchen]
- existing   light text                   with merge
- [Bath]     swaps)                       tags)
- set)
-
-  Each service's Speed-to-Lead then leads into its own
-  downstream nurture set (No Response, Consultation Booked,
-  Post-Consultation, Long-Term, No-Show). Generic ones are
-  parameterised via {{custom_field.service}} merge tags.
-
-  Shared (regardless of service):
-  • [Brio] Missed Call — SMS Back     ← already built
+             ▼
+  ┌─────────────────────────────────────────┐
+  │ [Brio] New Lead — Speed to Lead         │
+  │  Trigger: Contact Added to Workflow     │
+  │  • Service router (pipeline + tags)     │
+  │     If/Else on campaign_name custom     │
+  │     field — branches into Bathroom /    │
+  │     Kitchen / Basement / Deck / Bundle  │
+  │     pipelines + tags                    │
+  │  • Internal Notification                │
+  │  • Wait 30s                             │
+  │  • Initial SMS — If/Else on             │
+  │     project-* tag → service copy        │
+  │  • Confirmation Email — If/Else on      │
+  │     project-* tag → service copy        │
+  │  • Branch: book consultation Y/N        │
+  │  • End                                  │
+  └─────────────────────────────────────────┘
+             │
+             ▼
+  Each subsequent [Brio] workflow
+  ([Brio] No Response Nurture, Pre-Appointment,
+  Post-Consultation, Long-Term, No-Show) follows
+  the same tag-branched pattern — service-specific
+  SMS/email lives inside an If/Else on project-* tag.
 ```
 
-**Every child workflow (Kitchen / Basement / Financing / Generic) is triggered by "Contact Added to Workflow" — NOT by Inbound Webhook.** The Router is the single owner of the inbound webhook endpoint. This is the key rule that lets one webhook URL route cleanly to N downstream nurtures.
-
-**Phase-1 launch scope (this runbook):**
-
-- Build the Router (1 new workflow)
-- Convert the existing 7 bathroom workflows to kitchen — new **Phase 1A**
-- Clone Kitchen into Generic Renovation set — **Phase 2** — covers anything not explicitly mapped (custom-home, additions, laneway, painting, commercial, strata, land-development)
-- Clone Kitchen into Basement set — new **Phase 2B**
-- Add Financing Speed-to-Lead — **Phase 3**
-
-Total workflows after Phase 1: **23** (Router + 7 Kitchen + 7 Basement + 7 Generic + 1 Financing Speed-to-Lead, with the rest of Financing nurtures shared with Generic).
-
-Add more service-specific clones later as those service lines actually run paid ad campaigns and need bespoke messaging.
+**Source of truth for workflow content (SMS / email / opportunity / pipeline routing):** `brio-marketing-hub/docs/ghl-workflow-copy-paste.md`. That doc already has copy for bathroom, kitchen, basement suite, deck, and kitchen+bathroom bundle. Paste from there into the corresponding If/Else branches as you go.
 
 ---
 
 ## Phase 0 — Custom fields setup (one-time, ~10 min)
 
-GHL → Settings → **Custom Fields** → Contacts. Add the following fields if they don't already exist. Each one stores a payload value the Router will use for tagging, segmentation, and merge tags in messages.
+Per `brio-marketing-hub/docs/ghl-workflow-copy-paste.md` "Webhook Payload Reference". Most should already exist; verify or add:
 
-| Field name | Type | Field key | Why |
-|---|---|---|---|
-| Lead Source | Single Line | `lead_source` | Page slug or campaign id (e.g. `kitchen-remodeling`, `google-ads-kitchen-c1`) |
-| Lead Channel | Single Line | `lead_channel` | `website` \| `google-ads` \| `meta-ads` \| `referral` |
-| Service | Single Line | `service` | Bucket: `kitchen`, `basement`, `bathroom`, `custom-home`, `financing`, etc. |
-| City | Single Line | `city` | Greater Vancouver city, where known |
-| Campaign | Single Line | `campaign` | Campaign id for ad leads |
-| Page URL | Single Line | `page_url` | Full URL the form was submitted from |
-| Page Path | Single Line | `page_path` | Pathname only — easier to filter on |
-| Page Title | Single Line | `page_title` | Human-readable page name |
-| Referrer | Single Line | `referrer` | Where the visitor came from |
-| Project Type | Single Line | `project_type` | (already exists, keep) |
-| Project Address | Single Line | `project_address` | (already exists, keep) |
-| Estimated Budget | Single Line | `estimated_budget` | (already exists, keep) |
-| UTM Source | Single Line | `utm_source` | (already exists, keep) |
-| UTM Medium | Single Line | `utm_medium` | First-touch attribution |
-| UTM Campaign | Single Line | `utm_campaign` | First-touch attribution |
-| UTM Content | Single Line | `utm_content` | Ad creative variant |
-| UTM Term | Single Line | `utm_term` | Search keyword that triggered the click |
-| Google Click ID | Single Line | `gclid` | Required for Google Ads conversion upload |
-| Facebook Click ID | Single Line | `fbclid` | Required for Meta CAPI conversion upload |
+| GHL Custom Field | Field key | Comes from payload |
+|---|---|---|
+| Project Address | `project_address` | website + landing pages |
+| Estimated Budget | `estimated_budget` | landing pages (range), website (currently empty) |
+| Preferred Start Date | `preferred_start_date` | landing pages |
+| Financing Interest | `financing_interest` | landing pages (Yes/No) |
+| SMS Opt-In | `sms_opt_in` | landing pages (Yes/No) |
+| Project Type | `project_type` | both (= service bucket) |
+| Lead Source | `lead_source` | website |
+| Lead Channel | `lead_channel` | website (for reporting; redundant with `ch-*` tag) |
+| Service | `service` | both (kitchen, basement, bathroom, etc.) |
+| City | `city` | website (city pages only) |
+| Campaign Name | `campaign_name` | both (drives pipeline routing inside [Brio] workflows) |
+| Page URL | `page_url` | both |
+| Page Path | `page_path` | website |
+| Page Title | `page_title` | website |
+| Referrer | `referrer` | website |
+| UTM Source / Medium / Campaign / Content / Term | `utm_*` | both |
+| Google Click ID | `gclid` | both |
+| Facebook Click ID | `fbclid` | both |
+| Landing URL | `landing_url` | both |
 
 **Tip:** when you create each field, GHL asks for a "Field key" — use the snake_case keys above so they match the webhook payload key-for-key.
 
 ---
 
-## Phase 1 — Build the Router workflow (~20 min)
+## Phase 1 — Build the Router workflow (~15 min)
+
+The Router does just enough work to land the lead and hand off — it doesn't know about service-specific messaging.
 
 ### Step 1.1: Create the workflow
 
@@ -151,108 +131,60 @@ GHL → Settings → **Custom Fields** → Contacts. Add the following fields if
 
 1. Click **Add Trigger** → **Inbound Webhook** (premium trigger)
 2. Workflow Trigger Name: `Inbound Webhook`
-3. **GHL auto-generates a brand-new URL for this trigger** (format: `https://services.leadconnectorhq.com/hooks/<locationId>/webhook-trigger/<uuid>`). **This will be different from the existing Workflow #1 URL.** You cannot override it — one trigger, one URL, permanent.
-4. **Copy this new URL** using the copy icon next to the URL field. You'll paste it into both code repos in Phase 1.9.
-5. Mapping Reference: leave blank for now — the first real POST to this URL will populate it. (We'll use it later when mapping fields in the Create/Update Contact action.)
-6. **Save Trigger**.
-
-> ⚠️ **Do not keep the trigger as Inbound Webhook on any other workflow.** The Router is now the only workflow listening to an inbound webhook. Every downstream workflow (kitchen, basement, financing, generic, etc.) must be triggered by "Contact Added to Workflow". See Phase 1.10 for migrating the existing Workflow #1 (which becomes `[Kitchen] New Lead — Speed to Lead` in Phase 1A).
+3. **GHL auto-generates a brand-new URL for this trigger.** Copy it (the copy icon next to the URL field) — you'll paste it into both code repos in Phase 1.9.
+4. Mapping Reference: leave blank for now; the first real POST will populate it. (We did this in the 2026-04-22 build session — the active mapping reference is already populated for the Router.)
+5. **Save Trigger**.
 
 ### Step 1.3: Create / Update Contact
 
-1. + Add action → **Create / Update Contact**
-2. Map the fields:
-
-| Contact field | Bind to |
-|---|---|
-| First Name | `{{inboundWebhookRequest.firstName}}` |
-| Last Name | `{{inboundWebhookRequest.lastName}}` |
-| Email | `{{inboundWebhookRequest.email}}` |
-| Phone | `{{inboundWebhookRequest.phone}}` |
-| Project Type | `{{inboundWebhookRequest.project_type}}` |
-| Project Address | `{{inboundWebhookRequest.project_address}}` |
-| Estimated Budget | `{{inboundWebhookRequest.estimated_budget}}` |
-| Lead Source | `{{inboundWebhookRequest.source}}` |
-| Service | `{{inboundWebhookRequest.service}}` |
-| City | `{{inboundWebhookRequest.city}}` |
-| Campaign | `{{inboundWebhookRequest.campaign_name}}` |
-| Page URL | `{{inboundWebhookRequest.page_url}}` |
-| Page Path | `{{inboundWebhookRequest.page_path}}` |
-| Page Title | `{{inboundWebhookRequest.page_title}}` |
-| Referrer | `{{inboundWebhookRequest.referrer}}` |
-| UTM Source | `{{inboundWebhookRequest.utm_source}}` |
-| UTM Medium | `{{inboundWebhookRequest.utm_medium}}` |
-| UTM Campaign | `{{inboundWebhookRequest.utm_campaign}}` |
-| UTM Content | `{{inboundWebhookRequest.utm_content}}` |
-| UTM Term | `{{inboundWebhookRequest.utm_term}}` |
-| Google Click ID | `{{inboundWebhookRequest.gclid}}` |
-| Facebook Click ID | `{{inboundWebhookRequest.fbclid}}` |
-
-3. Save action.
+Per the field-mapping table in `brio-marketing-hub/docs/ghl-workflow-copy-paste.md` "Webhook Payload Reference". Bind every payload key (`{{inboundWebhookRequest.firstName}}`, `{{inboundWebhookRequest.lastName}}`, `{{inboundWebhookRequest.email}}`, `{{inboundWebhookRequest.phone}}`, plus all custom fields from Phase 0). Save action.
 
 ### Step 1.4: Apply tags
 
-The website forms send a `tags[]` array — `["src-...", "svc-...", "ch-..."]` — and the channel tag (`ch-google-ads` / `ch-meta-ads` / `ch-website`) is now derived **client-side** from `gclid`/`fbclid` presence (commit `92e2788`). So GHL doesn't need If/Else branches to determine channel — the right tag arrives in the payload.
+Single "Add Contact Tag" action that applies the payload's `tags` array AND a couple of explicit fallbacks. The website (and brio-marketing-hub) now sends a tags array that includes:
 
-You can do this as a single "Add Contact Tag" action with three pills, or as three separate actions. Either way:
+- `src-<page-or-campaign>`
+- `svc-<service>`
+- `project-<service>` (NEW — this is what the [Brio] workflows branch on)
+- `city-<slug>` (city page submissions only)
+- `ch-google-ads` / `ch-meta-ads` / `ch-website` (derived from gclid/fbclid)
 
-- Pill 1: `{{inboundWebhookRequest.tags}}` — expands the array from the payload (handles `src-*`, `svc-*`, `ch-*` automatically, plus optional `city-*`)
-- Pill 2: `src-{{inboundWebhookRequest.source}}` — explicit source tag (belt-and-suspenders if the array doesn't apply for some reason)
-- Pill 3: `svc-{{inboundWebhookRequest.service}}` — explicit service tag
+Tag pills in the action:
 
-Save action(s).
+- `{{inboundWebhookRequest.tags}}` — expands the array
+- `src-{{inboundWebhookRequest.source}}` — explicit source tag (defensive)
+- `svc-{{inboundWebhookRequest.service}}` — explicit service tag (defensive)
+- `project-{{inboundWebhookRequest.service}}` — explicit project tag for workflow branching (defensive)
+
+Save action.
 
 ### Step 1.5: (deprecated) Channel branching — moved to client-side
 
-Channel detection (gclid → google-ads, fbclid → meta-ads, neither → website) used to be done with nested If/Else branches in the Router. **It's now done in the website code** (`lib/ghl.ts` `deriveChannelTag()`) and the resulting `ch-*` tag is included in the payload's `tags` array, so the Router just applies it via the action in Step 1.4.
-
-Reason: GHL If/Else branches don't natively rejoin — each branch terminates with its own END node. Doing channel detection in three branches would have forced triplicating the entire downstream service-dispatch tree (one copy per channel branch) since they can't merge back. Doing it client-side keeps the Router as a clean linear chain.
-
-Skip this step. Continue with Step 1.7 (the service dispatch).
+Channel detection (gclid → google-ads, fbclid → meta-ads, neither → website) is done in `lib/ghl.ts deriveChannelTag()` (commit `92e2788`) and arrives in the payload's `tags` array, applied via Step 1.4. Skip this step.
 
 ### Step 1.6: (deprecated)
 
 Same as 1.5 — see above.
 
-### Step 1.7: Branch on `service` and dispatch to the correct nurture
+### Step 1.7: Dispatch to the [Brio] workflow
 
-This is the core of the router. Single If/Else (with nested branches inside the NO branch) covers all four target service families.
+Under the hybrid architecture, **the Router doesn't need to branch on service** — every lead goes to the same `[Brio] New Lead — Speed to Lead` workflow, which does service-specific branching internally.
 
-**Dispatch matrix:**
+1. + Add action → **Add to Workflow**
+2. Action Name: `Dispatch → [Brio] Speed to Lead`
+3. Workflow to add: `[Brio] New Lead — Speed to Lead` (will exist after Phase 1A)
+4. Save action.
+5. The workflow ends here. The [Brio] workflow takes over from this point.
 
-| If `service` equals | Add to workflow | Built in |
-|---|---|---|
-| `kitchen` | `[Kitchen] New Lead — Speed to Lead` | Phase 1A |
-| `basement` | `[Basement] New Lead — Speed to Lead` | Phase 2B |
-| `financing` | `[Financing] New Lead — Speed to Lead` | Phase 3 |
-| anything else (custom-home, additions, laneway, painting, commercial, strata, land-development, city, general, etc.) | `[Generic] New Lead — Speed to Lead` | Phase 2 |
-
-**To do this in GHL (build out incrementally as each phase finishes):**
-
-1. + Add action → **If/Else** → name `Branch — service?`
-2. Condition: `Inbound Webhook Trigger — service` **equals** `kitchen`
-3. **YES branch** → Add action → **Add to Workflow** → pick `[Kitchen] New Lead — Speed to Lead` (will exist after Phase 1A)
-4. **NO branch** → another If/Else: `service equals basement`
-   - **YES** → Add to Workflow → `[Basement] New Lead — Speed to Lead` (will exist after Phase 2B)
-   - **NO** → another If/Else: `service equals financing`
-     - **YES** → Add to Workflow → `[Financing] New Lead — Speed to Lead` (will exist after Phase 3)
-     - **NO** → Add to Workflow → `[Generic] New Lead — Speed to Lead` (will exist after Phase 2)
-
-End each branch right after the dispatch — the child workflow takes over from there.
-
-> **You can wire each branch incrementally.** During Phase 1A (kitchen conversion only), wire just the kitchen branch and leave the others as a placeholder Internal Notification ("TODO — non-kitchen lead arrived; nurture not built yet. Service: `{{inboundWebhookRequest.service}}`. Contact: `{{contact.full_name}}` `{{contact.email}}`"). Then add the basement branch after Phase 2B, financing after Phase 3, and generic after Phase 2.
+> While Phase 1A is in progress, this dispatch can temporarily target the existing `Workflow #1: Speed to Lead` (the old bathroom-only one). Once Phase 1A is complete and Workflow #1 is renamed to `[Brio] New Lead — Speed to Lead` with hybrid branching, the dispatch automatically points at the right thing.
 
 ### Step 1.8: Publish the Router
 
 Top-right toggle: flip from Draft → **Publish**. Save.
 
-The Router is now live and listening at its new URL — but no leads are arriving yet, because the website and marketing-hub code are still posting to the old URL. Next two steps fix that.
-
 ### Step 1.9: Repoint code at the new Router URL
 
-This is the only code change required for the whole runbook.
-
-Update **both** repos to POST at the Router's URL instead of the old Workflow #1 URL:
+Update **both** repos to POST at the Router's URL instead of the old Workflow #1 URL.
 
 **Repo 1 — brio-website** (`lib/ghl.ts`)
 
@@ -262,218 +194,91 @@ export const GHL_WEBHOOK_URL =
   "https://services.leadconnectorhq.com/hooks/<location>/webhook-trigger/<NEW_ROUTER_UUID>";
 ```
 
-**Repo 2 — brio-marketing-hub** — search for any hard-coded references to the old webhook URL (`campaign1-bathroom.ts`, `shared.ts`, and anywhere else) and replace with the Router URL.
+**Repo 2 — brio-marketing-hub** — search for any hard-coded references to the old webhook URL (`campaign1-bathroom.ts`, `shared.ts`, etc.) and replace with the Router URL.
 
-Commit both, push, deploy both (Vercel prod deploy on brio-website; for brio-marketing-hub follow its own deploy flow).
+Commit + push both, deploy both.
 
-> You can also set `NEXT_PUBLIC_GHL_WEBHOOK` in Vercel project settings to avoid hard-coding the URL in source. If the env var is present, `lib/ghl.ts` uses it; otherwise it falls back to the hardcoded default.
+> Recommend setting `NEXT_PUBLIC_GHL_WEBHOOK` in Vercel project settings instead of hard-coding the URL in source.
 
 ### Step 1.10: Migrate the existing Workflow #1 trigger
 
-The existing **Workflow #1: Speed to Lead** currently listens to its own Inbound Webhook (the bathroom URL). After Step 1.9 no traffic hits that URL anymore — so Workflow #1 would sit idle unless we re-trigger it as a child of the Router.
+The existing **Workflow #1: Speed to Lead** currently listens to its own Inbound Webhook (the bathroom URL). After Step 1.9 no traffic hits that URL anymore — change Workflow #1's trigger to "Contact Added to Workflow" so the Router can dispatch into it.
 
-1. Open **Workflow #1: Speed to Lead** (will be renamed to `[Kitchen] New Lead — Speed to Lead` in Phase 1A).
-2. Click the **Inbound Webhook** trigger at the top of the canvas.
-3. In the right-side panel, **delete** this trigger (trash-can icon or Delete button at the bottom).
+1. Open **Workflow #1: Speed to Lead** (will be renamed to `[Brio] New Lead — Speed to Lead` in Phase 1A).
+2. Click the **Inbound Webhook** trigger at the top.
+3. **Delete** this trigger.
 4. Click **Add Trigger** → **Workflow / Trigger Action** → **"Contact Added to Workflow"**.
-5. Save the trigger. No URL is generated for this trigger type — it only fires when another workflow's "Add to Workflow" action targets this workflow.
-6. Save and publish Workflow #1.
+5. Save. Save and publish the workflow.
 
-The other 6 existing bathroom workflows likely don't have their own Inbound Webhook triggers (they're triggered downstream by Workflow #1) — but double-check each one and migrate any stragglers.
+The other 5 existing bathroom workflows likely don't have their own Inbound Webhook triggers (they're triggered downstream by Workflow #1) — but check each one and migrate any stragglers.
 
-### Step 1.11: Quick smoke test
+### Step 1.11: Quick smoke test (kitchen branch only)
+
+Once Phase 1A's kitchen branch is in place (the very first thing in Phase 1A), do a quick smoke test:
 
 1. Submit a test lead on `https://brio-website-five.vercel.app/kitchen-remodeling`.
-2. In GHL → Automations → **`[ROUTER] Inbound Lead Dispatcher`** → **Execution Logs** — should show one execution, all steps green.
-3. The Router's dispatch should fire `Add to Workflow → [Kitchen] New Lead — Speed to Lead`.
-4. Check `[Kitchen] New Lead — Speed to Lead` execution log — should show the same contact enrolled with all its tags applied and Speed-to-Lead SMS/email going out.
-5. Confirm the contact exists in **Contacts** with all the mapped custom fields populated.
+2. Router execution log: all green, dispatches to `[Brio] New Lead — Speed to Lead`.
+3. `[Brio] New Lead — Speed to Lead` execution log: all green; the kitchen branch of the SMS/email If/Else fires; Kitchen pipeline opportunity created.
+4. Contact appears in **Contacts** with all custom fields populated and tags `project-kitchen`, `svc-kitchen`, `src-kitchen-remodeling`, `ch-website`.
 
-If all four pass, the Router is production-ready for kitchen. Continue to Phase 2 to extend coverage to basement, financing, and generic.
-
----
-
-## Phase 1A — Convert existing bathroom workflows to kitchen (~30 min)
-
-The existing 7 bathroom workflows have a proven SMS/email cadence. Renaming + light copy editing is faster than rebuilding from scratch.
-
-### What to convert
-
-| Old name | New name |
-|---|---|
-| `[Bath] New Lead — Speed to Lead` (was Workflow #1) | `[Kitchen] New Lead — Speed to Lead` |
-| `[Bath] No Response Nurture` | `[Kitchen] No Response Nurture` |
-| `[Bath] Consultation Booked — Pre-Appointment` | `[Kitchen] Consultation Booked — Pre-Appointment` |
-| `[Bath] Post-Consultation Follow-Up` | `[Kitchen] Post-Consultation Follow-Up` |
-| `[Bath] Long-Term Nurture` | `[Kitchen] Long-Term Nurture` |
-| `[Bath] No-Show Recovery` | `[Kitchen] No-Show Recovery` |
-| `[Brio] Missed Call — SMS Back` | (no change — stays shared, service-agnostic) |
-
-### Per-workflow conversion checklist
-
-For each of the 6 workflows above:
-
-1. **Rename** the workflow itself (top of the editor — pencil icon next to the title) from `[Bath] X` to `[Kitchen] X`.
-2. **Open every action** in the workflow and update text references:
-
-   **SMS / Email body:**
-   - "bathroom" → "kitchen"
-   - "bathroom renovation" → "kitchen renovation" (or "kitchen remodel" — pick one and stay consistent)
-   - "bathroom remodel" → "kitchen remodel"
-   - Any hard-coded sales hooks that mention specific bathroom features (vanities, tubs, tile) → swap to kitchen equivalents (cabinets, countertops, backsplash) where the message would otherwise read oddly
-
-   **Email subject lines:**
-   - Same find/replace for any `Bathroom` / `bathroom`
-
-   **Internal notification body:**
-   - Same find/replace, including any "BATHROOM LEAD" prefixes
-
-   **Opportunity name (in Create Opportunity action, if any):**
-   - "Bathroom Reno — {{contact.full_name}}" → "Kitchen Reno — {{contact.full_name}}"
-
-   **Pipeline & Stage (in Move Opportunity action, if any):**
-   - If you have a Bathroom-specific opportunity pipeline, either rename it to Kitchen, OR create a Kitchen pipeline and re-target the action there. Easiest: have a single "Renovations" pipeline that all services share — see Phase 2 Step 2.4.
-
-3. **Save each action** and **save + publish the workflow**.
-
-### Test conversions before continuing
-
-After all 6 are renamed/re-texted, send a quick GHL "Test Workflow" run on `[Kitchen] New Lead — Speed to Lead` with a sample contact. Confirm the SMS/email previews read as kitchen-correct, no leftover "bathroom" references.
+If all four pass, kitchen is production-ready. Continue Phase 1A for basement and bathroom branches.
 
 ---
 
-## Phase 2 — Generic Renovation nurture set (~30 min)
+## Phase 1A — Convert existing [Bath] workflows to [Brio] hybrid
 
-The Generic set is the **fallback** for any service that doesn't have its own dedicated workflow yet (custom-home, additions, laneway, painting, commercial, strata, land-development, the about-us "general", and city-page submissions). Same proven Kitchen cadence, parameterised via merge tags so the same SMS/email speaks correctly to whatever service the lead came from.
+**Source of truth:** `brio-marketing-hub/docs/ghl-workflow-copy-paste.md` — specifically the section **"MIGRATION GUIDE: Converting Existing [Bath] Workflows to [Brio]"** at the bottom of that doc plus the per-workflow copy starting at "WORKFLOW 1: Speed-to-Lead".
 
-### Step 2.1: Clone the workflow
+### Step-by-step (one workflow at a time)
 
-For each of the 7 (now-Kitchen) workflows:
+For each of the 6 `[Bath]` workflows (Speed-to-Lead, No Response Nurture, Pre-Appointment Nurture, Post-Consultation Follow-Up, Long-Term Nurture, No-Show Recovery — `[Brio] Missed Call — SMS Back` already shared, no work needed):
 
-1. Open the workflow → right-click on its name in the workflow list → **Clone**
-2. Rename: `[Kitchen] X` → `[Generic] X`
-3. (Step 2.3 below replaces hard-coded "kitchen" references with merge tags.)
+1. **Rename** the workflow at the top of the editor: `[Bath] X` → `[Brio] X`.
+2. **For Workflow 1 (Speed-to-Lead) only:** Wrap the pipeline-creation + tag-application in an If/Else on `campaign_name` Contains `bathroom` / `kitchen` / `basement` / etc. See the dispatch matrix in Workflow 1 of the marketing-hub doc.
+3. **Find each SMS / Email action** in the workflow.
+4. **Wrap each one in an If/Else block:**
+   - Click **+** before the action.
+   - Add If/Else: `Contact Tag → Contains → project-bathroom`. The existing SMS/email content goes in the YES branch (it's the bathroom version).
+   - Add **Else If** branches for each additional service: `project-kitchen`, `project-basement-suite`, `project-deck`, `project-kitchen-bathroom-bundle`. Add `project-financing` if/when financing gets added.
+   - **Important:** check `project-kitchen-bathroom-bundle` BEFORE `project-kitchen` in the branch order, otherwise "kitchen" matches the bundle tag too.
+   - Paste the service-specific copy from `brio-marketing-hub/docs/ghl-workflow-copy-paste.md` (Workflow N → service section) into each branch.
+5. **Save action(s) → Save workflow → Publish.**
+6. **Test before moving on.** Use the GHL "Test Workflow" feature with a sample contact tagged `project-kitchen`. Verify the kitchen branch fires.
 
-The 7 to clone:
+### Order of operations
 
-| Original | Cloned name |
-|---|---|
-| `[Kitchen] New Lead — Speed to Lead` | `[Generic] New Lead — Speed to Lead` |
-| `[Kitchen] No Response Nurture` | `[Generic] No Response Nurture` |
-| `[Kitchen] Consultation Booked — Pre-Appointment` | `[Generic] Consultation Booked — Pre-Appointment` |
-| `[Kitchen] Post-Consultation Follow-Up` | `[Generic] Post-Consultation Follow-Up` |
-| `[Kitchen] Long-Term Nurture` | `[Generic] Long-Term Nurture` |
-| `[Kitchen] No-Show Recovery` | `[Generic] No-Show Recovery` |
+- **Workflow 1 (Speed-to-Lead) first** — it sets up tags and pipeline assignments that downstream workflows depend on.
+- **Workflows 2, 3, 4, 5, 7** in any order after Workflow 1 is solid.
+- **Workflow 6 (Missed Call — SMS Back)** — already shared. Skip.
 
-(`[Brio] Missed Call — SMS Back` stays shared — it's already service-agnostic.)
+### Pipelines to create
 
-### Step 2.2: Update the trigger of each cloned workflow
+In GHL → Pipelines, clone the existing Bathroom pipeline stages for each new service:
 
-Each child nurture workflow should be triggered by **"Contact Added to Workflow"** — NOT by Inbound Webhook. The Router is the only workflow that listens to the inbound webhook.
+- Kitchen Renovation Pipeline
+- Basement Suite Pipeline
+- (Deck, Bundle — only when those campaigns activate)
 
-For each cloned workflow:
+Same stage names as Bathroom: New Lead → Consultation Booked → Estimate Sent → Won / Lost (or whatever your Bathroom pipeline currently uses).
 
-1. Delete the existing trigger (it'll be inherited from Kitchen — likely already "Contact Added to Workflow", but verify)
-2. Confirm trigger is **"Contact Added to Workflow"**
+### Test checkpoints
 
-### Step 2.3: Replace kitchen-specific copy with merge tags
+After each [Brio] workflow conversion, do a smoke-test enrollment:
 
-Open each cloned workflow's SMS, email, and notification templates. Anywhere you see "kitchen" or "kitchen renovation", replace with:
-
-```
-{{custom_field.service|home renovation}}
-```
-
-The `|home renovation` is a **default value** — if the Service field is empty for some reason, the message reads naturally instead of being blank.
-
-Examples:
-
-- ❌ "Hi {{firstName}}, thanks for reaching out about your kitchen renovation."
-- ✅ "Hi {{firstName}}, thanks for reaching out about your {{custom_field.service|home renovation}} project."
-
-- ❌ Subject: "Your kitchen estimate from BRIO Construction"
-- ✅ Subject: "Your {{custom_field.service|renovation}} estimate from BRIO Construction"
-
-- ❌ Opportunity name: "Kitchen Reno — {{contact.full_name}}"
-- ✅ Opportunity name: "{{custom_field.service|Renovation}} — {{contact.full_name}}"
-
-### Step 2.4: Pipeline routing for opportunities
-
-If you have a Kitchen-specific opportunity pipeline, you'll need either:
-- A single "Renovation" pipeline that all services share, OR
-- One pipeline per service, with the Generic workflow choosing based on `{{custom_field.service}}`
-
-Easiest start: **one shared "Renovations" pipeline** with stages like Lead → Consultation Booked → Estimate Sent → Won / Lost. Add service-specific pipelines later only when reporting needs them separately.
-
-### Step 2.5: Publish each cloned workflow
-
-Flip Draft → Publish on each. Save.
+1. Apply the relevant `project-X` tag to a test contact.
+2. Use GHL's "Add to Workflow" to manually enroll the test contact into the just-converted workflow.
+3. Watch the execution log: confirm the right branch fires and the right copy goes out.
 
 ---
 
-## Phase 2B — Basement nurture set (~25 min)
+## Phase 3 — (deferred) Add Financing support
 
-Basement is a launch campaign too — it deserves bespoke messaging from day one. Clone Kitchen → Basement and adjust copy where the kitchen-specific phrasing wouldn't read well for a basement project.
+Financing is qualitatively different from a renovation lead — they're asking about money, not project scope. Two options:
 
-### Step 2B.1: Clone the workflow
+- **Option A: Add a `project-financing` branch to each [Brio] workflow** with financing-specific copy (Financeit application link, 0% promo messaging, etc.). This keeps everything inside the hybrid model. Recommended.
+- **Option B: Build a separate `[Brio Financing]` workflow set.** Choose this if the financing nurture journey diverges enough from renovation nurtures that branch-level customization is cumbersome.
 
-For each of the 7 Kitchen workflows:
-
-1. Open the workflow → **Clone**
-2. Rename: `[Kitchen] X` → `[Basement] X`
-
-The 7 to clone (same list as Phase 2):
-
-| Original | Cloned name |
-|---|---|
-| `[Kitchen] New Lead — Speed to Lead` | `[Basement] New Lead — Speed to Lead` |
-| `[Kitchen] No Response Nurture` | `[Basement] No Response Nurture` |
-| `[Kitchen] Consultation Booked — Pre-Appointment` | `[Basement] Consultation Booked — Pre-Appointment` |
-| `[Kitchen] Post-Consultation Follow-Up` | `[Basement] Post-Consultation Follow-Up` |
-| `[Kitchen] Long-Term Nurture` | `[Basement] Long-Term Nurture` |
-| `[Kitchen] No-Show Recovery` | `[Basement] No-Show Recovery` |
-
-### Step 2B.2: Confirm trigger
-
-Each clone should already inherit **"Contact Added to Workflow"** trigger. Verify.
-
-### Step 2B.3: Adjust copy where it matters
-
-Most of the Kitchen messaging will work for Basement with a simple find/replace ("kitchen" → "basement"). Spots that need more thought:
-
-- **Project hooks** — Kitchen messaging may mention cabinets, countertops, backsplash. Basement equivalents: legal suites, framing, drywall, flooring, plumbing rough-ins, egress windows, permits.
-- **Budget anchor** — Kitchen and basement projects often quote at different price ranges. Adjust any hard-coded dollar references.
-- **Timeline anchor** — Basement projects (especially those involving permits for legal suites) often quote longer timelines than kitchens. Adjust week/month references.
-- **Compliance language** — Basement work in BC frequently triggers BC Building Code references (legal suites, separation, ceiling height). If any messaging mentions code/permits, customize for basement.
-
-### Step 2B.4: Pipeline
-
-Use the shared "Renovations" pipeline (per Phase 2 Step 2.4). Or create a separate Basement pipeline if you want isolated reporting from day one — your call.
-
-### Step 2B.5: Publish each cloned workflow
-
-Flip Draft → Publish on each. Save.
-
----
-
-## Phase 3 — Add Financing Speed-to-Lead (~10 min)
-
-Financing leads are different — they're asking about money, not renovation scope. They need different messaging. Just one new workflow for now (the rest of the financing journey can fall back to the Generic nurtures).
-
-### Step 3.1: Clone `[Generic] New Lead — Speed to Lead` → rename `[Financing] New Lead — Speed to Lead`
-
-### Step 3.2: Update the messaging
-
-- SMS: "Hi {{firstName}}, this is BRIO. Your financing pre-approval request is in. We'll send you Financeit's 2-min application within the next few minutes — keep an eye on your inbox at {{contact.email}}. Reply STOP to opt out."
-- Email subject: "Your BRIO financing pre-approval is on its way"
-- Email body: link to Financeit application, mention 0% promotional offers, set expectation that pre-approval is instant
-- Internal notification: "FINANCING LEAD — {{contact.full_name}} ({{contact.phone}}) — needs Financeit link"
-
-### Step 3.3: Publish
-
-### Step 3.4: Wire it up in the Router
-
-In the Router workflow's dispatch If/Else (Phase 1, Step 1.7), make sure the `service equals financing` branch routes to this new workflow.
+**Recommendation: Option A**, mirroring how the marketing-hub doc handles Bathroom / Kitchen / Basement / Deck / Bundle as branches in one set. Defer this until the Kitchen + Basement campaigns are stable.
 
 ---
 
@@ -485,11 +290,12 @@ The Router applies these tags automatically. Use them to build smart lists in GH
 
 | Tag prefix | Example | Purpose |
 |---|---|---|
-| `src-` | `src-kitchen-remodeling`, `src-basement-remodeling`, `src-financing-page`, `src-google-ads-kitchen-c1` | Where the lead came from (page slug or campaign id) |
-| `svc-` | `svc-kitchen`, `svc-basement`, `svc-financing` | Service bucket |
-| `ch-` | `ch-website`, `ch-google-ads`, `ch-meta-ads` | Channel — derived client-side from `gclid` / `fbclid` presence |
+| `src-` | `src-kitchen-remodeling`, `src-google-ads-kitchen-c1` | Where the lead came from (page slug or campaign id) |
+| `svc-` | `svc-kitchen`, `svc-basement` | Service bucket (reporting / smart lists) |
+| `project-` | `project-kitchen`, `project-basement` | Service bucket (used by [Brio] workflows for tag-based If/Else branching) |
+| `ch-` | `ch-website`, `ch-google-ads`, `ch-meta-ads` | Channel — derived client-side from `gclid` / `fbclid` |
 | `city-` | `city-vancouver`, `city-north-vancouver` | Geo (only on city page submissions) |
-| `cmp-` | `cmp-kitchen-north-van`, `cmp-basement-q4-2026` | Specific campaign id (for ads) |
+| `cmp-` | `cmp-kitchen-north-van` | Specific campaign id (for ads) |
 
 ### Useful GHL smart lists to build
 
@@ -499,7 +305,6 @@ The Router applies these tags automatically. Use them to build smart lists in GH
 | Kitchen leads not responded in 48h | Tag `svc-kitchen` AND no SMS reply AND created < 48h ago |
 | Basement leads not responded in 48h | Tag `svc-basement` AND no SMS reply AND created < 48h ago |
 | Google Ads leads — this month | Tag `ch-google-ads` AND created in current month |
-| Financing pipeline | Tag `svc-financing` |
 | North Van — all services | Tag `city-north-vancouver` |
 | Cost per lead by service | Group leads by `svc-*` tag, divide by ad spend |
 
@@ -507,16 +312,19 @@ The Router applies these tags automatically. Use them to build smart lists in GH
 
 ## Adding a new service line later (one-page guide)
 
-When a new service starts running paid ad campaigns and needs its own messaging:
+Now dramatically simpler than the clone-per-service approach:
 
-1. **Clone** `[Kitchen] New Lead — Speed to Lead` (or `[Generic]` if you want the parameterised baseline) → rename `[ServiceName] New Lead — Speed to Lead`
-2. **Edit the messaging** — replace kitchen-specific language with the new service's vocabulary
-3. **Confirm the trigger** is "Contact Added to Workflow"
-4. **Publish**
-5. **Edit the Router workflow's dispatch If/Else** → add a new branch: `service equals new-service-slug` → Add to Workflow → `[ServiceName] New Lead — Speed to Lead`
-6. **Save & publish** the Router
+1. **GHL Setup (~15 min):**
+   - Create a new pipeline: `[Service] Pipeline` — clone stages from an existing pipeline.
+   - Confirm shared custom fields exist (already in Phase 0).
+2. **Add branches to the 6 [Brio] workflows (~45 min):**
+   - For each workflow, find each If/Else service-router block and each SMS/email branching block.
+   - Add a new "Else If" branch: `Contact Tag → Contains → project-<new-service>` (place it before `project-bathroom` if the new service is more specific).
+   - Paste service-specific copy.
+3. **Code:** verify the new service slug is what the website's `service` field will send. The website + ads need no code changes if the slug already matches one of the page service buckets. Otherwise, update the LeadForm `service` prop on the corresponding page.
+4. **Test:** submit a real lead on the new service's page → watch the full chain.
 
-That's it. The website + ads need no code changes — they already pass `service` correctly. Adding the new service to the Router is the only switch.
+That's it. No cloning, no parallel workflow sets.
 
 ---
 
@@ -524,12 +332,12 @@ That's it. The website + ads need no code changes — they already pass `service
 
 Before flipping the website DNS to production, run these tests against the live webhook:
 
-- [ ] Submit on `/kitchen-remodeling` → contact created with `svc-kitchen` tag, enrolled in `[Kitchen] New Lead — Speed to Lead`, kitchen-specific SMS goes out
-- [ ] Submit on `/basement-remodeling` → contact created with `svc-basement` tag, enrolled in `[Basement] New Lead — Speed to Lead`, basement-specific SMS goes out
-- [ ] Submit on `/bathroom-remodeling` → contact created with `svc-bathroom` tag, enrolled in `[Generic] New Lead — Speed to Lead`, generic SMS reads "Hi X, thanks for reaching out about your bathroom project."
-- [ ] Submit on `/financing` → contact created with `svc-financing` tag, enrolled in `[Financing] New Lead — Speed to Lead`, gets the Financeit-specific SMS
-- [ ] Submit on `/vancouver` → contact has `city-vancouver` tag and `svc-city`, falls through to `[Generic]`
-- [ ] Submit on a city page after appending `?utm_source=google&utm_campaign=test&gclid=fakegclid123` to the URL → contact has `gclid` populated and `ch-google-ads` tag, NOT `ch-website`
+- [ ] Submit on `/kitchen-remodeling` → contact created with tags `project-kitchen`, `svc-kitchen`, `src-kitchen-remodeling`, `ch-website`. Kitchen branch of the [Brio] Speed-to-Lead SMS fires.
+- [ ] Submit on `/basement-remodeling` → tags include `project-basement`. Basement branch fires.
+- [ ] Submit on `/bathroom-remodeling` → tags include `project-bathroom`. Bathroom branch fires (existing copy still works).
+- [ ] Submit on `/financing` → tags include `project-financing`. If Phase 3 not yet done, the [Brio] workflow's else/fallback branch handles it (or a placeholder notification fires).
+- [ ] Submit on `/vancouver` → tags include `city-vancouver` and `project-city`. The else/fallback handles it.
+- [ ] Submit on a page with `?utm_source=google&utm_campaign=test&gclid=fakegclid123` appended → contact has `gclid` populated and `ch-google-ads` tag, NOT `ch-website`.
 
 If all six pass, you're good to flip DNS.
 
@@ -537,28 +345,26 @@ If all six pass, you're good to flip DNS.
 
 ## Future enhancements (not in this runbook)
 
-- **Bathroom-specific nurture set** — currently routes through Generic. Build a dedicated `[Bathroom]` set when bathroom volume justifies bespoke messaging (likely after kitchen + basement campaigns are stable).
-- **Financing-specific downstream nurture** (after Speed-to-Lead) — currently falls back to Generic. Build it when financing volume justifies bespoke follow-up.
-- **City-specific nurture variants** — e.g. mention local building permits in West Vancouver vs. Burnaby. Probably not worth doing until you see the volume.
-- **Lost-lead reactivation** — quarterly re-engagement workflow for contacts that went cold.
-- **Conversion API uplift** — once `gclid` and `fbclid` are flowing into GHL, set up an export job that feeds them back to Google Ads / Meta to improve attribution and bidding.
+- **Phase 3 (Financing)** — add `project-financing` branches to each [Brio] workflow when financing volume justifies bespoke messaging.
+- **City-specific nurture variants** — mention local building permits in West Vancouver vs. Burnaby. Probably not worth doing until you see the volume.
+- **Lost-lead reactivation** — quarterly re-engagement workflow for cold contacts.
+- **Conversion API uplift** — once `gclid` and `fbclid` flow into GHL, set up an export job that feeds them back to Google Ads / Meta to improve attribution and bidding.
 
 ---
 
-**Total build time estimate:** ~120–150 min total for an experienced GHL operator. Breakdown:
+**Total build time estimate:** ~70–90 min total. Breakdown:
 - Phase 1 (Router build + code repoint + trigger migration + smoke test): ~50 min
-- Phase 1A (convert 6 bathroom workflows to kitchen): ~30 min
-- Phase 2 (clone Kitchen → Generic with merge tags): ~30 min
-- Phase 2B (clone Kitchen → Basement with copy adjustments): ~25 min
-- Phase 3 (Financing Speed-to-Lead): ~10 min
+- Phase 1A (convert 6 [Bath] workflows to [Brio] hybrid with kitchen + basement branches): ~30 min — most time is paste-and-test, copy is already drafted
+- Phase 3 (Financing branch additions): deferred
 
-Once Phases 1–3 are live, end-to-end test from the website pages using the Pre-flight checklist, then flip DNS.
+Once Phase 1 + 1A are live, end-to-end test with the Pre-flight checklist, then flip DNS.
 
 ---
 
 ## Changelog
 
-- **2026-04-23** — Campaign launch pivots from bathroom to **Kitchen + Basement**. Existing 7 bathroom workflows converted to Kitchen via new **Phase 1A** (rename + find/replace copy edits). New **Phase 2B** clones Kitchen → Basement with copy adjustments for basement-specific concerns (legal suites, code, longer timelines). Router dispatch (Step 1.7) now branches on 4 services: kitchen → `[Kitchen]`, basement → `[Basement]`, financing → `[Financing]`, else → `[Generic]`. Bathroom moves to "future enhancements" and routes through Generic until volume justifies a dedicated set. Pre-flight checklist updated. Total build time bumped 80–100 → 120–150 min to cover the basement clone.
-- **2026-04-22** — Steps 1.5 and 1.6 (channel If/Else branches) deprecated. Channel detection moved client-side to `lib/ghl.ts deriveChannelTag()` (commit `92e2788`) because GHL If/Else branches don't natively rejoin and would otherwise force triplicating the entire downstream service-dispatch tree. Step 1.4 updated to apply the channel tag from the payload's `tags` array.
-- **2026-04-21** — Rewrote Step 1.2 to clarify GHL auto-generates a unique URL per Inbound Webhook trigger (you can't reuse the existing one). Added Step 1.9 (repoint code at new Router URL) and Step 1.10 (migrate existing Workflow #1 from Inbound Webhook trigger to Contact-Added-to-Workflow trigger). Updated architecture diagram to show the existing Workflow #1 becoming a child of the Router. Added a "Key update" callout at the top of the doc.
+- **2026-04-23 (PM)** — **Architecture pivot:** moved from clone-per-service to **hybrid tag-based branching** to align with the design already documented at `brio-marketing-hub/docs/ghl-workflow-copy-paste.md`. Existing 6 `[Bath]` workflows convert to `[Brio]` with internal If/Else blocks branching on `project-*` tags (Phase 1A). Phases 2 and 2B (Generic and Basement clones) removed — no longer needed. Phase 3 (Financing) becomes a future branch addition rather than a separate workflow set. Total workflows reduced from 23 → 8. Copy is already drafted in the marketing-hub doc — paste from there. Code change: added `project-${service}` to the website + marketing-hub tags arrays so workflows can branch on it.
+- **2026-04-23** — Campaign launch pivots from bathroom to **Kitchen + Basement**.
+- **2026-04-22** — Steps 1.5 and 1.6 (channel If/Else branches) deprecated. Channel detection moved client-side to `lib/ghl.ts deriveChannelTag()` (commit `92e2788`).
+- **2026-04-21** — Rewrote Step 1.2 to clarify GHL auto-generates a unique URL per Inbound Webhook trigger. Added Steps 1.9 (repoint code) and 1.10 (migrate existing trigger). Added "Key update" callouts.
 - **2026-04-19** — Initial draft.

@@ -114,10 +114,22 @@ export async function submitLead(payload: LeadPayload): Promise<Response> {
     landing_url: utm.landing_url || pageUrl,
     timestamp: new Date().toISOString(),
 
-    // Tags for segmentation in GHL
+    // Tags for segmentation in GHL.
+    //
+    // - src-*    : page slug or campaign id the lead came from
+    // - svc-*    : high-level service bucket (for smart lists / reporting)
+    // - project-*: SAME bucket as svc, named to match the marketing-hub
+    //              hybrid workflow architecture which branches inside each
+    //              [Brio] workflow on Contact Tag → Contains → "project-X".
+    //              Keep both prefixes — svc- for reporting, project- for
+    //              workflow branching — so existing GHL workflows work
+    //              unchanged and we don't have to re-flag every smart list.
+    // - city-*   : geo (only on city page submissions)
+    // - ch-*     : channel — derived from gclid/fbclid presence
     tags: [
       `src-${payload.source}`,
       payload.service ? `svc-${payload.service}` : "",
+      payload.service ? `project-${payload.service}` : "",
       payload.city ? `city-${payload.city.toLowerCase().replace(/\s+/g, "-")}` : "",
       deriveChannelTag(utm.gclid, utm.fbclid),
     ].filter(Boolean),
