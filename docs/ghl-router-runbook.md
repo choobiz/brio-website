@@ -115,6 +115,8 @@ Per `brio-marketing-hub/docs/ghl-workflow-copy-paste.md` "Webhook Payload Refere
 
 **Tip:** when you create each field, GHL asks for a "Field key" — use the snake_case keys above so they match the webhook payload key-for-key.
 
+> **Project Address must be type Single Line, NOT Address.** Confirmed during the 2026-04-25 audit: an Address-type custom field expects structured sub-fields (street/city/province/postal) and silently drops freeform strings. Our payload sends a single string. Use Single Line. The City field is already captured separately via the standard Contact `city` field, so we don't lose geo data.
+
 ---
 
 ## Phase 1 — Build the Router workflow (~15 min)
