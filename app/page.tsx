@@ -1,5 +1,6 @@
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
+import LocalBusinessJsonLd from "@/components/shared/LocalBusinessJsonLd";
 import Hero from "@/components/home/Hero";
 import PartnersCarousel from "@/components/home/PartnersCarousel";
 import ServicesGrid from "@/components/home/ServicesGrid";
@@ -31,6 +32,7 @@ const PROJECTS = [
 export default function Home() {
   return (
     <>
+      <LocalBusinessJsonLd />
       <Navbar />
       <Hero />
 

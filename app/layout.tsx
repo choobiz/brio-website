@@ -19,11 +19,29 @@ export const metadata: Metadata = {
     template: "%s - BRIO Construction",
   },
   description: COMPANY.description,
-  icons: { icon: "/favicon.png" },
+  icons: {
+    icon: "/favicon.png",
+    apple: "/apple-touch-icon.png",
+  },
+  manifest: "/site.webmanifest",
   openGraph: {
     siteName: COMPANY.name,
     locale: "en_CA",
     type: "website",
+    images: [
+      {
+        url: "/og-default.jpg",
+        width: 1200,
+        height: 630,
+        alt: "BRIO Construction — Vancouver renovations and custom homes",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "BRIO Construction",
+    description: COMPANY.description,
+    images: ["/og-default.jpg"],
   },
 };
 
