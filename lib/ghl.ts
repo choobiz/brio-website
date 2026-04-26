@@ -2,7 +2,7 @@ import { getUTMParams } from "./utm";
 
 export const GHL_WEBHOOK_URL =
   process.env.NEXT_PUBLIC_GHL_WEBHOOK ??
-  "https://services.leadconnectorhq.com/hooks/7Z5Zm3czsuWjz4zwmsFr/webhook-trigger/d8c59051-0df7-49bc-a6e7-8aee4735ec38";
+  "https://services.leadconnectorhq.com/hooks/7Z5Zm3czsuWjz4zwmsFr/webhook-trigger/cfa234ea-5393-400a-9d25-d6b874bd4fad";
 
 export interface LeadPayload {
   name: string;
@@ -15,6 +15,11 @@ export interface LeadPayload {
   city?: string;
   campaign?: string;
   page_url?: string;
+  estimated_budget?: string;
+  project_start_date?: string;
+  financing_interest?: boolean;
+  /** Implicit consent via submit-button disclaimer. Defaults to true. */
+  sms_opt_in?: boolean;
 }
 
 /**
@@ -85,14 +90,15 @@ export async function submitLead(payload: LeadPayload): Promise<Response> {
     // Custom fields — match brio-marketing-hub payload key-for-key
     project_type: payload.service ?? "",
     project_address: payload.project_address?.trim() ?? "",
-    estimated_budget: "",
+    estimated_budget: payload.estimated_budget ?? "",
     // GHL field key is `project_start_date` (NOT preferred_start_date) — the
     // legacy `preferred_start_date` key is kept as an alias for backwards
     // compat with anywhere that still references the old name.
-    project_start_date: "",
-    preferred_start_date: "",
-    financing_interest: "",
-    sms_opt_in: "",
+    project_start_date: payload.project_start_date ?? "",
+    preferred_start_date: payload.project_start_date ?? "",
+    financing_interest: payload.financing_interest ? "Yes" : "No",
+    // Implicit SMS consent: form button disclaimer covers TCPA. Defaults to true.
+    sms_opt_in: payload.sms_opt_in === false ? "No" : "Yes",
     description: payload.description?.trim() ?? "",
 
     // Website-specific segmentation
