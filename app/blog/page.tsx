@@ -40,15 +40,15 @@ export default async function BlogIndexPage({ searchParams }: BlogIndexPageProps
     <>
       <Navbar />
       <section className="bg-brio-light-gray py-14 md:py-20 border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-text-muted text-[12px] uppercase tracking-[0.2em] font-semibold mb-3">
             BRIO Blog
           </p>
-          <h1 className="font-heading text-brio-navy text-[36px] md:text-[52px] font-semibold leading-[1.1] mb-4 max-w-3xl">
-            Renovation guides, design ideas, and what things really cost in Metro Vancouver.
+          <h1 className="font-heading text-brio-navy text-[40px] md:text-[56px] font-semibold leading-[1.1] mb-4">
+            Renovation guides &amp; design ideas
           </h1>
-          <p className="text-text-body text-[17px] md:text-[18px] leading-relaxed max-w-2xl">
-            Practical, specific writing from the team that builds the projects.
+          <p className="text-text-body text-[17px] md:text-[18px] leading-relaxed max-w-2xl mx-auto">
+            Practical, specific writing on Metro Vancouver renovations from the team that builds the projects.
           </p>
         </div>
       </section>
