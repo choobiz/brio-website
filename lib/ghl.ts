@@ -86,6 +86,10 @@ export async function submitLead(payload: LeadPayload): Promise<Response> {
     project_type: payload.service ?? "",
     project_address: payload.project_address?.trim() ?? "",
     estimated_budget: "",
+    // GHL field key is `project_start_date` (NOT preferred_start_date) — the
+    // legacy `preferred_start_date` key is kept as an alias for backwards
+    // compat with anywhere that still references the old name.
+    project_start_date: "",
     preferred_start_date: "",
     financing_interest: "",
     sms_opt_in: "",
