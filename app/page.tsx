@@ -21,8 +21,8 @@ const HOME_FAQ = [
 
 const PROJECTS = [
   { name: "East Broadway Condo", desc: "Our client, a first-time homeowner, wanted to make their new condo feel like home while working within a strict budget.", image: "/images/projects/east-broadway-thumb.jpg", slug: "east-broadway-condo" },
-  { name: "Richmond Dental Office Renovation", desc: "Where Comfort Meets Commerce — A Hybrid Office Built for Flexibility.", image: "/images/projects/dental-office-thumb.jpg", slug: "richmond-dental-office-renovation" },
-  { name: "North Van Brokerage Renovation", desc: "A once dated optical store from the 1990s reimagined into a bright, modern real estate brokerage office.", image: "/images/projects/brokerage-thumb.jpg", slug: "north-van-brokerage-renovation" },
+  { name: "Richmond Dental Office Renovation", desc: "Where Comfort Meets Commerce — A Hybrid Office Built for Flexibility.", image: "/images/projects/dental/hero.jpg", slug: "richmond-dental" },
+  { name: "North Van Brokerage Renovation", desc: "A once dated optical store from the 1990s reimagined into a bright, modern real estate brokerage office.", image: "/images/projects/brokerage/hero.jpg", slug: "north-van-brokerage" },
   { name: "Trinity Duplex", desc: "From Vision to Value — Building a Profitable Duplex with Purpose.", image: "/images/projects/trinity-thumb.jpg", slug: "trinity-duplex" },
   { name: "LoLo Duplex", desc: "A Home for Today, Security for Tomorrow — Building a Custom Duplex in North Vancouver.", image: "/images/projects/lolo-thumb.jpg", slug: "lolo-duplex" },
   { name: "Jefferson Residence", desc: "A modern and functional upgrade, ensuring the new house met lifestyle and design preferences.", image: "/images/projects/jefferson-thumb.jpg", slug: "jefferson-residence" },
