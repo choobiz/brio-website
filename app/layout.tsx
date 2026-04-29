@@ -3,6 +3,7 @@ import { Open_Sans } from "next/font/google";
 import Script from "next/script";
 import { TRACKING, COMPANY } from "@/lib/constants";
 import UTMCapture from "@/components/shared/UTMCapture";
+import StickyMobileCTA from "@/components/shared/StickyMobileCTA";
 import "./globals.css";
 
 const openSans = Open_Sans({
@@ -65,9 +66,10 @@ gtag('js',new Date());gtag('config','${TRACKING.ga4Id}');gtag('config','${TRACKI
           {`(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","${TRACKING.clarityId}");`}
         </Script>
       </head>
-      <body className="font-sans antialiased">
+      <body className="font-sans antialiased pb-[68px] md:pb-0">
         <UTMCapture />
         {children}
+        <StickyMobileCTA />
       </body>
     </html>
   );
