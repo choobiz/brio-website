@@ -68,10 +68,8 @@ const BADGES: Badge[] = [
     kind: "text",
     render: HouzzWordmark,
     sub: (
-      <span className="flex items-center gap-1.5 text-[12px] text-text-body whitespace-nowrap">
-        <Star />
-        <span className="font-semibold text-brio-navy">5.0</span>
-        <span>· Best of Houzz</span>
+      <span className="text-[12px] text-text-body whitespace-nowrap">
+        Verified Profile
       </span>
     ),
   },
