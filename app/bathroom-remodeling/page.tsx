@@ -5,6 +5,41 @@ import LeadForm from "@/components/shared/LeadForm";
 import FAQ from "@/components/shared/FAQ";
 import PartnersCarousel from "@/components/shared/PartnersCarousel";
 import TrustBadgeStrip from "@/components/shared/TrustBadgeStrip";
+import PriceTiers from "@/components/shared/PriceTiers";
+
+const BATHROOM_PRICE_TIERS = [
+  {
+    name: "Quick Refresh",
+    priceLabel: "from $8K",
+    timeline: "Done in ~10 days",
+    bullets: [
+      "New vanity + countertop",
+      "Faucet, showerhead, hardware",
+      "Fresh paint + minor tile patching",
+    ],
+  },
+  {
+    name: "Full Refresh",
+    priceLabel: "from $15K",
+    timeline: "Done in ~2 weeks",
+    bullets: [
+      "Everything in Quick, plus:",
+      "Full tile surround (shower or tub)",
+      "New lighting + mirror + hardware",
+    ],
+    featured: true,
+  },
+  {
+    name: "Premium Refresh",
+    priceLabel: "from $22K",
+    timeline: "Done in ~17 days",
+    bullets: [
+      "Everything in Full, plus:",
+      "Retiled walk-in shower OR stone vanity top",
+      "Frameless glass, premium fixtures",
+    ],
+  },
+];
 import BeforeAfterSlider from "@/components/service/BeforeAfterSlider";
 import Newsletter from "@/components/home/Newsletter";
 import Link from "next/link";
@@ -150,7 +185,18 @@ export default function BathroomPage() {
       {/* ── 2. Trust badge strip (recon-validated, immediately under hero) ── */}
       <TrustBadgeStrip />
 
-      {/* ── 3. Partners ── */}
+      {/* ── 3. Price tiers (Pilot 3 — uncontested Vancouver white space) ── */}
+      <PriceTiers
+        tag="TRANSPARENT, FIXED-PRICE TIERS"
+        headline="Pick Your Refresh — Real Numbers, Not 'Request a Quote'"
+        subtext="Most Vancouver contractors won't tell you the price. We do. Pick the tier that fits your bathroom; we'll quote it fixed-price before demo day."
+        tiers={BATHROOM_PRICE_TIERS}
+        ctaText="Get My Fixed-Price Quote"
+        ctaHref="#get-in-touch"
+        footnote="Tiers shown are typical scopes. Actual quote depends on bathroom size + selections. Pre-ordered materials and the on-time clause of our 5-Star Guarantee apply to every tier."
+      />
+
+      {/* ── 4. Partners ── */}
       <PartnersCarousel />
 
       {/* ── 5. Before/After Sliders ── */}
