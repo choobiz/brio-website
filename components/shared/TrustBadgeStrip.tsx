@@ -103,7 +103,7 @@ const BADGES: Badge[] = [
     height: "h-9",
     sub: (
       <span className="text-[12px] text-text-body whitespace-nowrap">
-        Licence #46629
+        Licensed Builder
       </span>
     ),
   },

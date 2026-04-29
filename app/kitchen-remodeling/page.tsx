@@ -79,7 +79,7 @@ export default function KitchenPage() {
             {/* Left – text */}
             <div className="py-16 md:py-24 md:pr-12 flex flex-col justify-center">
               <p className="text-[11px] font-bold uppercase tracking-[1.6px] text-brio-navy mb-3">
-                15+ Years &middot; 100+ Five-Star Reviews &middot; Licence #46629
+                15+ Years &middot; 100+ Five-Star Reviews &middot; Licensed &amp; Insured
               </p>
               <h1 className="font-heading text-[36px] md:text-[46px] font-semibold text-brio-navy leading-[1.15] mb-5">
                 Breathe New Life Into Your Kitchen

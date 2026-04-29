@@ -141,7 +141,7 @@ export default function BathroomPage() {
             {/* Left — text */}
             <div className="py-16 md:py-24 md:pr-12">
               <p className="text-[11px] font-bold uppercase tracking-[1.6px] text-brio-navy mb-3">
-                15+ Years &middot; 100+ Five-Star Reviews &middot; Licence #46629
+                15+ Years &middot; 100+ Five-Star Reviews &middot; Licensed &amp; Insured
               </p>
               <h1 className="text-[32px] md:text-[44px] font-semibold italic text-brio-navy font-heading mb-6 leading-tight">
                 Transform Your Bathroom In Record Time With Brio!
