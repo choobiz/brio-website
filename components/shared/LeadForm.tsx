@@ -162,12 +162,12 @@ export default function LeadForm({
       ) : (
         <>
           <input name="name" type="text" required placeholder="Name" className={inputCls} />
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <input name="phone" type="tel" required placeholder="Phone" className={inputCls} />
             <input name="email" type="email" required placeholder="Email" className={inputCls} />
           </div>
           <input name="address" type="text" placeholder="Service Address" className={inputCls} />
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <select name="budget" defaultValue="Not sure yet" className={selectCls} aria-label="Estimated budget">
               {budgetOptions.map((opt) => (
                 <option key={opt.value} value={opt.value}>

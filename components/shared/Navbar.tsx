@@ -203,14 +203,14 @@ export default function Navbar() {
           <div className="flex lg:hidden items-center gap-2">
             <a
               href={`tel:${COMPANY.phoneClean}`}
-              className="w-10 h-10 flex items-center justify-center text-brio-navy"
+              className="w-12 h-12 flex items-center justify-center text-brio-navy"
               aria-label="Call"
             >
               <Phone className="w-5 h-5" />
             </a>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="w-10 h-10 flex items-center justify-center text-brio-navy"
+              className="w-12 h-12 flex items-center justify-center text-brio-navy"
               aria-label="Menu"
             >
               {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}

@@ -35,7 +35,7 @@ export default function Footer() {
           {/* Areas We Serve – 2-col grid */}
           <div>
             <h5 className="text-brio-navy text-[13px] font-bold uppercase tracking-wider mb-3">Areas We Serve</h5>
-            <div className="grid grid-cols-2 gap-x-6 gap-y-1.5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1.5">
               {AREAS.map((a) => (
                 <Link key={a.slug} href={`/${a.slug}`} className="text-text-body text-[13px] hover:text-brio-navy transition-colors">{a.name}</Link>
               ))}
@@ -45,7 +45,7 @@ export default function Footer() {
           {/* Services – 2-col grid */}
           <div>
             <h5 className="text-brio-navy text-[13px] font-bold uppercase tracking-wider mb-3">Services</h5>
-            <div className="grid grid-cols-2 gap-x-6 gap-y-1.5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1.5">
               {SERVICES.map((s) => (
                 <Link key={s.slug} href={`/${s.slug}`} className="text-text-body text-[13px] hover:text-brio-navy transition-colors">{s.name}</Link>
               ))}

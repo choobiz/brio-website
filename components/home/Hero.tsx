@@ -62,7 +62,7 @@ export default function Hero() {
       {/* Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-28 lg:py-36 w-full">
         <div className="max-w-3xl">
-          <h1 className="!text-white text-[42px] md:text-[56px] lg:text-[68px] font-semibold leading-[1.1] mb-6 font-heading drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
+          <h1 className="!text-white text-[32px] sm:text-[42px] md:text-[56px] lg:text-[68px] font-semibold leading-[1.1] mb-6 font-heading drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
             From Concept to Completion—Together
           </h1>
           <p className="text-white/90 text-[18px] md:text-[20px] leading-relaxed mb-10 max-w-2xl">
