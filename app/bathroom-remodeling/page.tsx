@@ -4,6 +4,7 @@ import Footer from "@/components/shared/Footer";
 import LeadForm from "@/components/shared/LeadForm";
 import FAQ from "@/components/shared/FAQ";
 import PartnersCarousel from "@/components/shared/PartnersCarousel";
+import TrustBadgeStrip from "@/components/shared/TrustBadgeStrip";
 import BeforeAfterSlider from "@/components/service/BeforeAfterSlider";
 import Newsletter from "@/components/home/Newsletter";
 import Link from "next/link";
@@ -104,6 +105,9 @@ export default function BathroomPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-0 items-center">
             {/* Left — text */}
             <div className="py-16 md:py-24 md:pr-12">
+              <p className="text-[11px] font-bold uppercase tracking-[1.6px] text-brio-navy mb-3">
+                15+ Years &middot; 100+ Five-Star Reviews &middot; Licence #46629
+              </p>
               <h1 className="text-[32px] md:text-[44px] font-semibold italic text-brio-navy font-heading mb-6 leading-tight">
                 Transform Your Bathroom In Record Time With Brio!
               </h1>
@@ -143,7 +147,10 @@ export default function BathroomPage() {
         </div>
       </section>
 
-      {/* ── 2. Partners ── */}
+      {/* ── 2. Trust badge strip (recon-validated, immediately under hero) ── */}
+      <TrustBadgeStrip />
+
+      {/* ── 3. Partners ── */}
       <PartnersCarousel />
 
       {/* ── 5. Before/After Sliders ── */}

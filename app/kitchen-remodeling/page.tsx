@@ -7,6 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 import BeforeAfterSlider from "@/components/service/BeforeAfterSlider";
 import PartnersCarousel from "@/components/shared/PartnersCarousel";
+import TrustBadgeStrip from "@/components/shared/TrustBadgeStrip";
 
 export const metadata: Metadata = {
   title: "Kitchen Remodeling",
@@ -77,6 +78,9 @@ export default function KitchenPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-0 items-stretch">
             {/* Left – text */}
             <div className="py-16 md:py-24 md:pr-12 flex flex-col justify-center">
+              <p className="text-[11px] font-bold uppercase tracking-[1.6px] text-brio-navy mb-3">
+                15+ Years &middot; 100+ Five-Star Reviews &middot; Licence #46629
+              </p>
               <h1 className="font-heading text-[36px] md:text-[46px] font-semibold text-brio-navy leading-[1.15] mb-5">
                 Breathe New Life Into Your Kitchen
               </h1>
@@ -117,7 +121,10 @@ export default function KitchenPage() {
         </div>
       </section>
 
-      {/* 2. Partners */}
+      {/* 2. Trust badge strip (recon-validated, immediately under hero) */}
+      <TrustBadgeStrip />
+
+      {/* 3. Partners */}
       <PartnersCarousel />
 
       {/* Before/After Interactive Sliders */}
