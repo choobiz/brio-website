@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Navbar from "@/components/shared/Navbar";
@@ -85,13 +85,30 @@ function ImageCarousel({ images }: { images: { src: string; alt: string }[] }) {
   // Show 2 images at a time, so we have pairs: [0,1] and [2,3]
   const totalSlides = Math.ceil(images.length / 2);
   const [current, setCurrent] = useState(0);
+  const touchStartX = useRef<number | null>(null);
 
   const prev = () => setCurrent((c) => (c === 0 ? totalSlides - 1 : c - 1));
   const next = () => setCurrent((c) => (c === totalSlides - 1 ? 0 : c + 1));
 
+  // Mobile swipe — distinguishes a swipe from a tap by 50px threshold.
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX.current;
+    if (dx > 50) prev();
+    else if (dx < -50) next();
+    touchStartX.current = null;
+  };
+
   return (
     <div className="relative w-full">
-      <div className="overflow-hidden">
+      <div
+        className="overflow-hidden"
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+      >
         <div
           className="flex transition-transform duration-500 ease-in-out"
           style={{ transform: `translateX(-${current * 100}%)` }}
@@ -122,14 +139,14 @@ function ImageCarousel({ images }: { images: { src: string; alt: string }[] }) {
         <div className="flex gap-2">
           <button
             onClick={prev}
-            className="w-8 h-8 rounded-full border border-brio-navy flex items-center justify-center text-brio-navy hover:bg-brio-navy hover:text-white transition-colors"
+            className="w-11 h-11 sm:w-8 sm:h-8 rounded-full border border-brio-navy flex items-center justify-center text-brio-navy hover:bg-brio-navy hover:text-white transition-colors"
             aria-label="Previous"
           >
             <ChevronLeft className="w-4 h-4" />
           </button>
           <button
             onClick={next}
-            className="w-8 h-8 rounded-full border border-brio-navy flex items-center justify-center text-brio-navy hover:bg-brio-navy hover:text-white transition-colors"
+            className="w-11 h-11 sm:w-8 sm:h-8 rounded-full border border-brio-navy flex items-center justify-center text-brio-navy hover:bg-brio-navy hover:text-white transition-colors"
             aria-label="Next"
           >
             <ChevronRight className="w-4 h-4" />

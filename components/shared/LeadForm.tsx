@@ -148,7 +148,7 @@ export default function LeadForm({
           </div>
           <div>
             <label className={labelCls}>Description of Work</label>
-            <textarea name="description" rows={4} placeholder="Tell us about your project..." className={textareaCls} />
+            <textarea name="description" rows={3} placeholder="Tell us about your project..." className={textareaCls} />
           </div>
           <label className="flex items-center gap-2 text-[13px] text-text-body cursor-pointer">
             <input
@@ -183,7 +183,7 @@ export default function LeadForm({
               ))}
             </select>
           </div>
-          <textarea name="description" rows={4} placeholder="Description of Work" className={textareaCls} />
+          <textarea name="description" rows={3} placeholder="Description of Work" className={textareaCls} />
           <label className="flex items-center gap-2 text-[13px] text-text-body cursor-pointer">
             <input
               type="checkbox"

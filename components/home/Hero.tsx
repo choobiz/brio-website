@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { Phone } from "lucide-react";
+import { COMPANY } from "@/lib/constants";
 
 const SLIDES = [
   "/images/hero-slides/slide-1.jpg",
@@ -22,16 +24,38 @@ export default function Hero() {
   const [isZooming, setIsZooming] = useState(true);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setIsZooming(false);
-      // Brief pause for crossfade, then start next slide
-      setTimeout(() => {
-        setCurrent((prev) => (prev + 1) % SLIDES.length);
-        setIsZooming(true);
-      }, 800);
-    }, SLIDE_DURATION);
+    let timer: ReturnType<typeof setInterval> | null = null;
 
-    return () => clearInterval(timer);
+    const start = () => {
+      if (timer) return;
+      timer = setInterval(() => {
+        setIsZooming(false);
+        setTimeout(() => {
+          setCurrent((prev) => (prev + 1) % SLIDES.length);
+          setIsZooming(true);
+        }, 800);
+      }, SLIDE_DURATION);
+    };
+
+    const stop = () => {
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "hidden") stop();
+      else start();
+    };
+
+    if (document.visibilityState === "visible") start();
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      stop();
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
   }, []);
 
   return (
@@ -68,12 +92,22 @@ export default function Hero() {
           <p className="text-white/90 text-[18px] md:text-[20px] leading-relaxed mb-10 max-w-2xl">
             At BRIO, we create spaces that inspire, endure, and elevate. Whether renovating, building custom homes, or developing spec projects, our expert team ensures precision in every detail. With a streamlined process, clear communication, and expert execution, we make construction stress-free—delivering on time, on budget, and hassle-free.
           </p>
-          <Link
-            href="/about-us#get-in-touch"
-            className="inline-block bg-brio-navy text-white text-[15px] font-semibold px-8 py-4 hover:bg-brio-navy/90 transition-colors tracking-wide uppercase"
-          >
-            Book Your Free Consultation
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Link
+              href="/about-us#get-in-touch"
+              className="inline-flex items-center justify-center bg-brio-navy text-white text-[15px] font-semibold px-8 py-4 hover:bg-brio-navy/90 transition-colors tracking-wide uppercase"
+            >
+              Book Your Free Consultation
+            </Link>
+            {/* Mobile-only inline tap-to-call as a second hero CTA */}
+            <a
+              href={`tel:${COMPANY.phoneClean}`}
+              className="sm:hidden inline-flex items-center justify-center gap-2 border-2 border-white text-white text-[15px] font-semibold px-8 py-4 hover:bg-white/10 transition-colors tracking-wide uppercase"
+            >
+              <Phone className="w-4 h-4" aria-hidden="true" />
+              Call BRIO
+            </a>
+          </div>
         </div>
       </div>
 

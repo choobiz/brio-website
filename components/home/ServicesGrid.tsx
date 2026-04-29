@@ -37,7 +37,7 @@ export default function ServicesGrid() {
                 className="group flex flex-col items-center text-center bg-white p-6 md:p-8 hover:shadow-lg transition-all duration-200"
               >
                 <div className="w-16 h-16 mb-4 flex items-center justify-center">
-                  <Icon className="w-10 h-10 text-brio-navy group-hover:text-brio-navy/70 transition-colors" strokeWidth={1.2} />
+                  <Icon className="w-12 h-12 sm:w-10 sm:h-10 text-brio-navy group-hover:text-brio-navy/70 transition-colors" strokeWidth={1.2} />
                 </div>
                 <h5 className="text-brio-navy text-[13px] md:text-[14px] font-semibold uppercase tracking-wide leading-tight">
                   {service.name}

@@ -108,3 +108,18 @@ Verified each P0 claim before touching code:
 | P1 — Navbar mobile button size | **CONFIRMED.** Phone + hamburger were 40×40 (iOS HIG borderline). | Bumped both to 48×48 (`w-12 h-12`). |
 
 Build clean, type-check clean.
+
+### Round 2 — Remaining P1 + P2 cleanup (2026-04-28)
+
+| Item | File | Fix |
+|---|---|---|
+| Hero slideshow autoplay battery drain | `components/home/Hero.tsx` | `setInterval` now starts/stops on Page Visibility API (`visibilitychange`). Slideshow pauses when tab/page hidden. |
+| Click-to-call alongside hero CTA | `components/home/Hero.tsx` | Mobile-only secondary CTA "Call BRIO" with phone icon, alongside the primary "Book Your Free Consultation" button. Stacks under it on mobile, sits beside it on desktop (where it's hidden anyway via `sm:hidden`). |
+| ServicesGrid icon size | `components/home/ServicesGrid.tsx` | Icon `w-10 h-10` → `w-12 h-12 sm:w-10 sm:h-10`. Bigger touch target + visual weight on mobile. |
+| BeforeAfterSlider drag handle | `components/service/BeforeAfterSlider.tsx` | Handle `w-10 h-10` → `w-12 h-12 sm:w-10 sm:h-10`; chevron icon scaled accordingly. Better thumb-friendliness on iOS Safari. |
+| LeadForm textarea height | `components/shared/LeadForm.tsx` | `rows={4}` → `rows={3}` (both compact + stacked variants). Saves ~30px of vertical scroll, marginal UX cost. |
+| City carousel swipe support | `components/city/CityPageLayout.tsx` | Added touch handlers on the carousel viewport. 50px-threshold swipe detector → `prev()` / `next()`. Added `useRef` import. |
+| City carousel arrow buttons | `components/city/CityPageLayout.tsx` | `w-8 h-8` → `w-11 h-11 sm:w-8 sm:h-8`. 44px on mobile (Material thumb-friendly). |
+| Form placeholder contrast | `app/globals.css` | Added explicit `::placeholder` rule using `--color-text-muted` (#888888) with `opacity: 1`. Browsers no longer apply low-contrast greys. |
+
+P2 sticky urgency banner intentionally NOT shipped — would conflict with Pilot 4's dated $1,500 offer banner. Hold until Pilot 4 decision.

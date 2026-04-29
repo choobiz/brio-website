@@ -79,9 +79,9 @@ export default function BeforeAfterSlider({
         className="absolute top-1/2 z-[3] -translate-y-1/2 -translate-x-1/2"
         style={{ left: `${position}%` }}
       >
-        <div className="w-10 h-10 rounded-full bg-white/90 shadow-lg flex items-center justify-center">
+        <div className="w-12 h-12 sm:w-10 sm:h-10 rounded-full bg-white/90 shadow-lg flex items-center justify-center">
           <svg
-            className="w-5 h-5 text-gray-700"
+            className="w-6 h-6 sm:w-5 sm:h-5 text-gray-700"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"

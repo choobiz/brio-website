@@ -32,6 +32,13 @@ h1, h2, h3, h4 {
   color: var(--color-text-dark);
 }
 
+/* Form input placeholders — explicit colour to clear WCAG AA 4.5:1 on white. */
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-text-muted);
+  opacity: 1;
+}
+
 @keyframes scroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
