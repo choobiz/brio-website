@@ -115,8 +115,8 @@ export default function ApplicationForm() {
       {status === "error" && (
         <p className="text-red-600 text-[13px] text-center">
           Something went wrong. Please try again, or call us at{" "}
-          <a href="tel:16042606691" className="underline">
-            1 (604) 260-6691
+          <a href="tel:+12367069686" className="underline">
+            1 (236) 706-9686
           </a>
           .
         </p>

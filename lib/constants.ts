@@ -1,8 +1,8 @@
 export const COMPANY = {
   name: "BRIO Construction",
   legalName: "BRIO Construction Ltd.",
-  phone: "1 (604) 260-6691",
-  phoneClean: "+16042606691",
+  phone: "1 (236) 706-9686",
+  phoneClean: "+12367069686",
   email: "info@builtbybrio.com",
   website: "https://builtbybrio.com",
   address: "267 Esplanade W, North Vancouver BC V7M 1A5",

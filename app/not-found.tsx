@@ -45,11 +45,11 @@ export default function NotFound() {
               Go to Home
             </Link>
             <a
-              href="tel:+16042606691"
+              href="tel:+12367069686"
               className="inline-flex items-center justify-center gap-2 border-2 border-white text-white px-7 py-3.5 text-[14px] font-semibold uppercase tracking-wide hover:bg-white/10 transition-colors"
             >
               <Phone className="w-4 h-4" />
-              Call (604) 260-6691
+              Call (236) 706-9686
             </a>
           </div>
         </div>
