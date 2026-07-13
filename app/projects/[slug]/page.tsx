@@ -101,15 +101,19 @@ export default async function ProjectDetailPage({
         </div>
       </section>
 
-      {/* ── Image left + Description right on white bg ── */}
+      {/* ── Description left + Image right on white bg ──
+          Image sits RIGHT so it crosses with the next section (image LEFT),
+          giving the alternating/zigzag pattern the rest of the page uses.
+          (Previously both this intro image and the first content image were on
+          the left, stacking two images directly under each other.) */}
       <section className="bg-white">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
-          {/* Left — image, bleeds to left edge */}
-          <div className="relative h-[300px] md:h-auto md:min-h-[420px]">
+          {/* Image — right on desktop, first on mobile */}
+          <div className="relative h-[300px] md:h-auto md:min-h-[420px] md:order-2">
             <Image src={img[0] || heroImage} alt={`${project.name} interior`} fill className="object-cover" sizes="50vw" priority />
           </div>
-          {/* Right — description text on white bg */}
-          <div className="py-10 md:py-16 px-6 md:px-12 flex items-center">
+          {/* Description — left on desktop */}
+          <div className="py-10 md:py-16 px-6 md:px-12 flex items-center md:order-1">
             <div className="text-text-body text-[14px] leading-relaxed">
               {project.description.split("\n\n").map((p, i) => (
                 <p key={i} className="mb-4 last:mb-0">{p}</p>

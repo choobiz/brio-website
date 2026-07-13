@@ -161,15 +161,15 @@ export default function CommercialRenovationsPage() {
             Checkout Our Recent TI Projects
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-            <div className="relative aspect-[4/3] overflow-hidden">
-              <Image src="/images/city/img-13.jpg" alt="Commercial project 1" fill className="object-cover hover:scale-105 transition-transform duration-300" sizes="33vw" />
-            </div>
-            <div className="relative aspect-[4/3] overflow-hidden">
-              <Image src="/images/city/img-06.webp" alt="Commercial project 2" fill className="object-cover hover:scale-105 transition-transform duration-300" sizes="33vw" />
-            </div>
-            <div className="relative aspect-[4/3] overflow-hidden">
-              <Image src="/images/commercial/hero.jpg" alt="Commercial project 3" fill className="object-cover hover:scale-105 transition-transform duration-300" sizes="33vw" />
-            </div>
+            <Link href="/projects/downtown-coffeeshop" className="group relative aspect-[4/3] overflow-hidden block">
+              <Image src="/images/projects/coffeeshop/hero.jpg" alt="PAUL Le Café — commercial café fit-out, Downtown Vancouver" fill className="object-cover group-hover:scale-105 transition-transform duration-300" sizes="33vw" />
+            </Link>
+            <Link href="/projects/richmond-dental" className="group relative aspect-[4/3] overflow-hidden block">
+              <Image src="/images/projects/dental/hero.jpg" alt="Richmond dental company — commercial tenant improvement" fill className="object-cover group-hover:scale-105 transition-transform duration-300" sizes="33vw" />
+            </Link>
+            <Link href="/projects/north-van-brokerage" className="group relative aspect-[4/3] overflow-hidden block">
+              <Image src="/images/projects/brokerage/hero.jpg" alt="North Vancouver brokerage — commercial office renovation" fill className="object-cover group-hover:scale-105 transition-transform duration-300" sizes="33vw" />
+            </Link>
           </div>
         </div>
       </section>
@@ -182,7 +182,7 @@ export default function CommercialRenovationsPage() {
           </h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             <div className="relative h-[300px] lg:h-[380px]">
-              <Image src="/images/city/img-02.jpg" alt="Commercial renovation interior" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
+              <Image src="/images/projects/dental/img-1.jpg" alt="BRIO commercial tenant improvement — completed office interior" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
             </div>
             <div className="space-y-4">
               {WHY_CHOOSE.map((item) => (

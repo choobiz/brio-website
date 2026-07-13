@@ -4,6 +4,7 @@ import Script from "next/script";
 import { TRACKING, COMPANY } from "@/lib/constants";
 import UTMCapture from "@/components/shared/UTMCapture";
 import StickyMobileCTA from "@/components/shared/StickyMobileCTA";
+import LeadModal from "@/components/shared/LeadModal";
 import "./globals.css";
 
 const openSans = Open_Sans({
@@ -70,6 +71,7 @@ gtag('js',new Date());gtag('config','${TRACKING.ga4Id}');gtag('config','${TRACKI
         <UTMCapture />
         {children}
         <StickyMobileCTA />
+        <LeadModal />
       </body>
     </html>
   );
