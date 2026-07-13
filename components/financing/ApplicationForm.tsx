@@ -1,10 +1,13 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 import { submitLead } from "@/lib/ghl";
+import Turnstile from "@/components/shared/Turnstile";
 
 export default function ApplicationForm() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [token, setToken] = useState("");
+  const mountedAt = useRef(Date.now());
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -20,6 +23,9 @@ export default function ApplicationForm() {
         description: String(data.get("description") ?? ""),
         source: "financing-page",
         service: "financing",
+        honeypot: String(data.get("company_website") ?? ""),
+        turnstileToken: token,
+        formRenderedAt: mountedAt.current,
       });
       if (!res.ok) throw new Error(`Webhook ${res.status}`);
       setStatus("success");
@@ -103,6 +109,13 @@ export default function ApplicationForm() {
           className="w-full px-4 py-3 border border-border bg-white text-sm focus:outline-none focus:border-brio-navy resize-none"
         />
       </div>
+
+      {/* Honeypot — hidden from humans; filled = bot → silently dropped. */}
+      <div aria-hidden="true" style={{ position: "absolute", left: "-5000px", width: 1, height: 1, overflow: "hidden" }}>
+        <label>Company website<input name="company_website" type="text" tabIndex={-1} autoComplete="off" defaultValue="" /></label>
+      </div>
+
+      <Turnstile onToken={setToken} />
 
       <button
         type="submit"

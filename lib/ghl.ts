@@ -20,6 +20,14 @@ export interface LeadPayload {
   financing_interest?: boolean;
   /** Implicit consent via submit-button disclaimer. Defaults to true. */
   sms_opt_in?: boolean;
+
+  // ── Anti-spam (verified server-side in /api/lead) ──
+  /** Cloudflare Turnstile token from the widget. */
+  turnstileToken?: string;
+  /** Honeypot field value — bots fill it, humans don't. */
+  honeypot?: string;
+  /** Epoch ms when the form mounted — used for the time-to-fill check. */
+  formRenderedAt?: number;
 }
 
 /**
@@ -145,9 +153,17 @@ export async function submitLead(payload: LeadPayload): Promise<Response> {
     ].filter(Boolean),
   };
 
-  return fetch(GHL_WEBHOOK_URL, {
+  // Route through our server-side gate (/api/lead) instead of posting straight
+  // to GHL — so Turnstile can be verified, the honeypot/timing checks run, and
+  // out-of-area leads are flagged before anything reaches the CRM.
+  return fetch("/api/lead", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
+    body: JSON.stringify({
+      ghl: body,
+      hp: payload.honeypot ?? "",
+      t: payload.turnstileToken ?? "",
+      ts: payload.formRenderedAt ?? 0,
+    }),
   });
 }

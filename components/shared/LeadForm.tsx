@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 import { submitLead } from "@/lib/ghl";
+import Turnstile from "@/components/shared/Turnstile";
 
 export interface BudgetOption {
   value: string;
@@ -52,6 +53,8 @@ export default function LeadForm({
   budgetOptions = DEFAULT_BUDGET_OPTIONS,
 }: LeadFormProps) {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [token, setToken] = useState("");
+  const mountedAt = useRef(Date.now());
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -73,6 +76,10 @@ export default function LeadForm({
         source,
         service,
         city,
+        // Anti-spam
+        honeypot: String(data.get("company_website") ?? ""),
+        turnstileToken: token,
+        formRenderedAt: mountedAt.current,
       });
       if (!res.ok) throw new Error(`Webhook ${res.status}`);
       setStatus("success");
@@ -194,6 +201,13 @@ export default function LeadForm({
           </label>
         </>
       )}
+
+      {/* Honeypot — hidden from humans; bots that fill it get silently dropped. */}
+      <div aria-hidden="true" style={{ position: "absolute", left: "-5000px", width: 1, height: 1, overflow: "hidden" }}>
+        <label>Company website<input name="company_website" type="text" tabIndex={-1} autoComplete="off" defaultValue="" /></label>
+      </div>
+
+      <Turnstile onToken={setToken} />
 
       <button
         type="submit"
