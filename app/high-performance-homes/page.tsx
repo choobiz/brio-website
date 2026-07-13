@@ -3,6 +3,7 @@ import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
 import FAQ from "@/components/shared/FAQ";
 import PartnersCarousel from "@/components/shared/PartnersCarousel";
+import LeadForm from "@/components/shared/LeadForm";
 import Link from "next/link";
 import Image from "next/image";
 import { Check } from "lucide-react";
@@ -297,66 +298,9 @@ export default function HighPerformanceHomesPage() {
               <h2 className="text-[24px] md:text-[30px] font-semibold text-brio-navy font-heading mb-6 uppercase tracking-wide">
                 Get In Touch
               </h2>
-              <form className="space-y-4">
-                <div>
-                  <label className="block text-text-body text-[13px] font-semibold uppercase tracking-wide mb-1">
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Your full name"
-                    className="w-full h-12 px-4 border border-border text-sm focus:outline-none focus:border-brio-navy"
-                  />
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-text-body text-[13px] font-semibold uppercase tracking-wide mb-1">
-                      Phone
-                    </label>
-                    <input
-                      type="tel"
-                      placeholder="Your phone number"
-                      className="w-full h-12 px-4 border border-border text-sm focus:outline-none focus:border-brio-navy"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-text-body text-[13px] font-semibold uppercase tracking-wide mb-1">
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      placeholder="Your email address"
-                      className="w-full h-12 px-4 border border-border text-sm focus:outline-none focus:border-brio-navy"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-text-body text-[13px] font-semibold uppercase tracking-wide mb-1">
-                    Service Address
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Project address"
-                    className="w-full h-12 px-4 border border-border text-sm focus:outline-none focus:border-brio-navy"
-                  />
-                </div>
-                <div>
-                  <label className="block text-text-body text-[13px] font-semibold uppercase tracking-wide mb-1">
-                    Description
-                  </label>
-                  <textarea
-                    placeholder="Tell us about your project..."
-                    rows={4}
-                    className="w-full px-4 py-3 border border-border text-sm focus:outline-none focus:border-brio-navy resize-none"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="w-full bg-brio-navy text-white py-4 text-[14px] font-semibold uppercase tracking-wide hover:bg-brio-navy/90 transition-colors"
-                >
-                  Book Now
-                </button>
-              </form>
+              {/* Connected lead form (spam-gated + posts to GHL). Replaced a
+                  dead hand-rolled form that submitted nowhere. */}
+              <LeadForm source="high-performance-homes" service="high-performance-homes" submitLabel="Book Now" />
             </div>
 
             {/* Right: FAQ */}
