@@ -8,7 +8,12 @@
 
 import { useEffect, useRef } from "react";
 
-const SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "1x00000000000000000000AA";
+const SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "";
+// Only render when a REAL key is configured. Cloudflare's test keys (1x0000…)
+// render a visible "For testing only" box, which must never show to visitors —
+// so until real keys are set we render nothing and rely on honeypot + timing +
+// the server-side geo-flag.
+const IS_CONFIGURED = !!SITE_KEY && !SITE_KEY.startsWith("1x0000");
 const SCRIPT_ID = "cf-turnstile-script";
 
 interface TurnstileAPI {
@@ -25,6 +30,7 @@ export default function Turnstile({ onToken }: { onToken: (token: string) => voi
   const done = useRef(false);
 
   useEffect(() => {
+    if (!IS_CONFIGURED) return;
     function render() {
       if (done.current || !boxRef.current || !window.turnstile) return;
       done.current = true;
@@ -49,5 +55,6 @@ export default function Turnstile({ onToken }: { onToken: (token: string) => voi
     }
   }, []);
 
+  if (!IS_CONFIGURED) return null;
   return <div ref={boxRef} className="my-1" />;
 }
