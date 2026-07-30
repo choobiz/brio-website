@@ -5,6 +5,7 @@ import Hero from "@/components/home/Hero";
 import PartnersCarousel from "@/components/home/PartnersCarousel";
 import ServicesGrid from "@/components/home/ServicesGrid";
 import ProcessSteps from "@/components/home/ProcessSteps";
+import Keystone from "@/components/home/Keystone";
 import TrustSignals from "@/components/home/TrustSignals";
 import Newsletter from "@/components/home/Newsletter";
 import FAQ from "@/components/shared/FAQ";
@@ -99,6 +100,7 @@ export default function Home() {
 
       <ServicesGrid />
       <ProcessSteps />
+      <Keystone />
       <TrustSignals />
       <FAQ items={HOME_FAQ} />
       <CTA />

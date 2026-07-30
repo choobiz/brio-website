@@ -22,7 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/about-us",
     "/areas-we-serve",
     "/blog",
-    "/financing",
+    "/keystone",
     "/privacy-policy",
     "/projects",
     "/services",

@@ -47,7 +47,7 @@ const NAV_ITEMS: NavItem[] = [
     twoColumn: true,
   },
   { label: "Projects", href: "/projects" },
-  { label: "Financing", href: "/financing" },
+  { label: "BRIO Keystone", href: "/keystone" },
   { label: "Brio Blog", href: "/blog" },
 ];
 

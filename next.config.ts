@@ -45,6 +45,9 @@ const nextConfig: NextConfig = {
       // Blog index URL changed.
       { source: "/brio-blog", destination: "/blog", permanent: true },
 
+      // Financing page retired — replaced by BRIO Keystone.
+      { source: "/financing", destination: "/keystone", permanent: true },
+
       // Each old WP blog post slug — was at root, now under /blog.
       // Generated programmatically so the source list above stays the single
       // source of truth.

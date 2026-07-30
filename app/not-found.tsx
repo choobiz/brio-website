@@ -16,7 +16,7 @@ const POPULAR_LINKS = [
   { label: "Basement Suites", href: "/basement-remodeling", desc: "Legal, rentable secondary suites." },
   { label: "Home Renovations", href: "/home-renovations", desc: "Whole-home updates with fixed pricing." },
   { label: "Custom Homes", href: "/custom-home-construction", desc: "Ground-up builds across Metro Vancouver." },
-  { label: "Financing", href: "/financing", desc: "12-month 0% financing available." },
+  { label: "BRIO Keystone", href: "/keystone", desc: "Track your build live in our app." },
 ];
 
 export default function NotFound() {
