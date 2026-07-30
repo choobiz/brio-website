@@ -105,8 +105,8 @@ export default function LandDevelopmentPreConstructionPage() {
             {/* Right — image */}
             <div className="relative h-[300px] md:h-auto md:min-h-[480px]">
               <Image
-                src="/images/city/img-03.jpg"
-                alt="Land development project by BRIO Construction"
+                src="/images/projects/multifamily-357-e-4th.webp"
+                alt="Completed multi-family duplex development at 357–359 E 4th St, North Vancouver, by BRIO Construction"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -127,8 +127,8 @@ export default function LandDevelopmentPreConstructionPage() {
             {/* Left — image */}
             <div className="relative h-[350px] lg:h-[500px]">
               <Image
-                src="/images/city/img-13.jpg"
-                alt="BRIO Construction land development project"
+                src="/images/projects/multifamily-trinity.webp"
+                alt="Completed multi-family duplex development at 3636 Trinity St, Vancouver, by BRIO Construction"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
