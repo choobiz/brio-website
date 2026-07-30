@@ -14,7 +14,10 @@ export default function Footer() {
           <div>
             <Image src="/images/logo.png" alt={COMPANY.name} width={100} height={36} className="h-8 w-auto mb-3" />
             <p className="text-text-body text-[13px] leading-snug mb-1">Built with Confidence,</p>
-            <p className="text-text-body text-[13px] leading-snug mb-4">Built by BRIO.</p>
+            <p className="text-text-body text-[13px] leading-snug mb-3">Built by BRIO.</p>
+            <Link href="/keystone" className="inline-block text-brio-navy text-[13px] font-semibold hover:underline mb-4">
+              Explore BRIO Keystone &rarr;
+            </Link>
             <h5 className="text-brio-navy text-[12px] font-bold uppercase tracking-wider mb-2">Follow Us</h5>
             <div className="flex gap-2">
               <a href={COMPANY.social.facebook} target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-brio-navy flex items-center justify-center hover:bg-brio-navy/80 transition-colors" aria-label="Facebook">
