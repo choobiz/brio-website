@@ -3,7 +3,7 @@ import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
 import FAQ from "@/components/shared/FAQ";
 import PartnersCarousel from "@/components/shared/PartnersCarousel";
-import LeadForm from "@/components/shared/LeadForm";
+import LeadFormButton from "@/components/shared/LeadFormButton";
 import Link from "next/link";
 import Image from "next/image";
 import { Check } from "lucide-react";
@@ -300,7 +300,7 @@ export default function HighPerformanceHomesPage() {
               </h2>
               {/* Connected lead form (spam-gated + posts to GHL). Replaced a
                   dead hand-rolled form that submitted nowhere. */}
-              <LeadForm source="high-performance-homes" service="high-performance-homes" submitLabel="Book Now" />
+              <LeadFormButton source="high-performance-homes" service="high-performance-homes" submitLabel="Book Now" />
             </div>
 
             {/* Right: FAQ */}

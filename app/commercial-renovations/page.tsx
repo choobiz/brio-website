@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
-import LeadForm from "@/components/shared/LeadForm";
+import LeadFormButton from "@/components/shared/LeadFormButton";
 import FAQ from "@/components/shared/FAQ";
 import PartnersCarousel from "@/components/shared/PartnersCarousel";
 import Link from "next/link";
@@ -260,7 +260,7 @@ export default function CommercialRenovationsPage() {
               <p className="text-text-body text-[13px] leading-relaxed mb-6">
                 Ready to explore the possibilities for your project? We&apos;d love to hear your ideas! Taking the first step is easy. Share a few details below, and our team will get in touch to schedule a friendly, no-obligation consultation to discuss your project.
               </p>
-              <LeadForm source="commercial-renovations" service="commercial" variant="compact" />
+              <LeadFormButton source="commercial-renovations" service="commercial" variant="compact" />
             </div>
 
             {/* Right: FAQ */}

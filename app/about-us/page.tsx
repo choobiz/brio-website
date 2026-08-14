@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
-import LeadForm from "@/components/shared/LeadForm";
+import LeadFormButton from "@/components/shared/LeadFormButton";
 import Image from "next/image";
 import Link from "next/link";
 import { COMPANY } from "@/lib/constants";
@@ -292,7 +292,7 @@ export default function AboutPage() {
                 Send us your request for consultation and a member of our team
                 will get back to you quickly!
               </p>
-              <LeadForm source="about-us" service="general" variant="compact" />
+              <LeadFormButton source="about-us" service="general" variant="compact" />
             </div>
 
             {/* Get in Touch + Map */}

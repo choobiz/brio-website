@@ -6,7 +6,7 @@ import Image from "next/image";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
 import FAQ from "@/components/shared/FAQ";
-import LeadForm from "@/components/shared/LeadForm";
+import LeadFormButton from "@/components/shared/LeadFormButton";
 import { SERVICES } from "@/lib/constants";
 import { ChevronLeft, ChevronRight, Check } from "lucide-react";
 
@@ -356,7 +356,7 @@ export default function CityPageLayout({ cityName }: CityPageLayoutProps) {
                 Ready to explore the possibilities for your project? We&apos;d love to hear your ideas!
                 Taking the first step is easy. Share a few details below, and our team will get in touch to schedule a friendly, no-obligation consultation to discuss your project.
               </p>
-              <LeadForm
+              <LeadFormButton
                 source={`city-${cityName.toLowerCase().replace(/\s+/g, "-")}`}
                 service="city"
                 city={cityName}

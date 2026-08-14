@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Phone, Menu, X, ChevronDown } from "lucide-react";
 import { COMPANY, SERVICES, AREAS } from "@/lib/constants";
+import LeadFormButton from "@/components/shared/LeadFormButton";
 
 interface DropdownItem {
   label: string;
@@ -191,12 +192,12 @@ export default function Navbar() {
               <Phone className="w-4 h-4" />
               {COMPANY.phone}
             </a>
-            <Link
-              href="/about-us#get-in-touch"
-              className="bg-brio-navy text-white text-[13px] font-semibold px-5 py-2.5 hover:bg-brio-navy/90 transition-colors uppercase tracking-wide"
-            >
-              Get a Quote
-            </Link>
+            <LeadFormButton
+              source="navbar-quote"
+              service="general"
+              buttonLabel="Get a Quote"
+              buttonClassName="bg-brio-navy text-white text-[13px] font-semibold px-5 py-2.5 hover:bg-brio-navy/90 transition-colors uppercase tracking-wide"
+            />
           </div>
 
           {/* Mobile toggle */}
@@ -286,13 +287,13 @@ export default function Navbar() {
                 </Link>
               )
             )}
-            <Link
-              href="/about-us#get-in-touch"
-              className="block mt-4 text-center bg-white text-brio-navy text-[14px] font-semibold py-3 uppercase tracking-wide"
+            <LeadFormButton
+              source="navbar-quote-mobile"
+              service="general"
+              buttonLabel="Get a Quote"
               onClick={() => setMobileOpen(false)}
-            >
-              Get a Quote
-            </Link>
+              buttonClassName="block w-full mt-4 text-center bg-white text-brio-navy text-[14px] font-semibold py-3 uppercase tracking-wide"
+            />
           </div>
         </div>
       )}

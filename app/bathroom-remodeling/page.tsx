@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
-import LeadForm from "@/components/shared/LeadForm";
+import LeadFormButton from "@/components/shared/LeadFormButton";
 import FAQ from "@/components/shared/FAQ";
 import PartnersCarousel from "@/components/shared/PartnersCarousel";
 import TrustBadgeStrip from "@/components/shared/TrustBadgeStrip";
@@ -335,7 +335,7 @@ export default function BathroomPage() {
               <h2 className="text-[24px] md:text-[30px] font-semibold text-brio-navy font-heading mb-6 uppercase tracking-wide">
                 Get In Touch
               </h2>
-              <LeadForm source="bathroom-remodeling" service="bathroom" variant="stacked" />
+              <LeadFormButton source="bathroom-remodeling" service="bathroom" variant="stacked" />
             </div>
 
             {/* Right: FAQ */}

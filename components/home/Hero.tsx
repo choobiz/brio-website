@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { Phone } from "lucide-react";
 import { COMPANY } from "@/lib/constants";
+import LeadFormButton from "@/components/shared/LeadFormButton";
 
 const SLIDES = [
   "/images/hero-slides/slide-1.jpg",
@@ -93,12 +93,12 @@ export default function Hero() {
             At BRIO, we create spaces that inspire, endure, and elevate. Whether renovating, building custom homes, or developing spec projects, our expert team ensures precision in every detail. With a streamlined process, clear communication, and expert execution, we make construction stress-free—delivering on time, on budget, and hassle-free.
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
-            <Link
-              href="/about-us#get-in-touch"
-              className="inline-flex items-center justify-center bg-brio-navy text-white text-[15px] font-semibold px-8 py-4 hover:bg-brio-navy/90 transition-colors tracking-wide uppercase"
-            >
-              Book Your Free Consultation
-            </Link>
+            <LeadFormButton
+              source="hero"
+              service="general"
+              buttonLabel="Book Your Free Consultation"
+              buttonClassName="inline-flex items-center justify-center bg-brio-navy text-white text-[15px] font-semibold px-8 py-4 hover:bg-brio-navy/90 transition-colors tracking-wide uppercase"
+            />
             {/* Mobile-only inline tap-to-call as a second hero CTA */}
             <a
               href={`tel:${COMPANY.phoneClean}`}

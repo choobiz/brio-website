@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
-import LeadForm from "@/components/shared/LeadForm";
+import LeadFormButton from "@/components/shared/LeadFormButton";
 import FAQ from "@/components/shared/FAQ";
 import PartnersCarousel from "@/components/shared/PartnersCarousel";
 import Link from "next/link";
@@ -318,7 +318,7 @@ export default function SpecHomeConstructionPage() {
                 few details below, and our team will get in touch to schedule a
                 friendly, no-obligation consultation to discuss your project.
               </p>
-              <LeadForm source="spec-home-construction" service="spec-home" variant="stacked" />
+              <LeadFormButton source="spec-home-construction" service="spec-home" variant="stacked" />
             </div>
 
             {/* Right – FAQ */}
