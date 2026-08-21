@@ -134,7 +134,7 @@ export default function HomeRenovationsPage() {
             {/* Right — image */}
             <div className="relative h-[350px] md:h-auto md:min-h-[520px]">
               <Image
-                src="/images/city/img-02.jpg"
+                src="/images/services/renovations.jpg"
                 alt="Home renovation by BRIO Construction"
                 fill
                 className="object-cover"
@@ -230,7 +230,7 @@ export default function HomeRenovationsPage() {
             {/* Left — image */}
             <div className="relative h-[350px] md:h-[440px] overflow-hidden">
               <Image
-                src="/images/city/img-02.jpg"
+                src="/images/projects/jefferson.jpg"
                 alt="BRIO renovation project"
                 fill
                 className="object-cover"

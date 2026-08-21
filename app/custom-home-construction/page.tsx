@@ -136,7 +136,7 @@ export default function CustomHomeConstructionPage() {
             {/* Right – image */}
             <div className="relative h-[350px] md:h-auto md:min-h-[520px]">
               <Image
-                src="/images/city/img-06.webp"
+                src="/images/services/custom-home.jpg"
                 alt="Modern kitchen interior by BRIO Construction"
                 fill
                 className="object-cover"
@@ -267,7 +267,7 @@ export default function CustomHomeConstructionPage() {
             {/* Left – image */}
             <div className="relative aspect-[4/5] w-full overflow-hidden">
               <Image
-                src="/images/city/img-01.jpg"
+                src="/images/projects/jefferson.jpg"
                 alt="BRIO custom home construction"
                 fill
                 className="object-cover"

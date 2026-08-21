@@ -1,6 +1,6 @@
 export const COMPANY = {
   name: "BRIO Construction",
-  legalName: "BRIO Construction Ltd.",
+  legalName: "BRIO Construction Inc.",
   phone: "1 (236) 706-9686",
   phoneClean: "+12367069686",
   email: "info@builtbybrio.com",

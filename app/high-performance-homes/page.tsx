@@ -167,7 +167,7 @@ export default function HighPerformanceHomesPage() {
             {/* Right — image */}
             <div className="relative h-[300px] md:h-auto md:min-h-[480px]">
               <Image
-                src="/images/city/img-05.webp"
+                src="/images/services/custom-home.jpg"
                 alt="High-performance home by BRIO Construction"
                 fill
                 className="object-cover"

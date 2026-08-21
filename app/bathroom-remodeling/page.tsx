@@ -170,7 +170,7 @@ export default function BathroomPage() {
             {/* Right — image */}
             <div className="relative h-[300px] md:h-auto md:min-h-[480px]">
               <Image
-                src="/images/city/img-08.webp"
+                src="/images/services/bathroom.jpg"
                 alt="Modern bathroom renovation by BRIO Construction"
                 fill
                 className="object-cover"

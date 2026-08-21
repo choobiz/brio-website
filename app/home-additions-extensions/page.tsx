@@ -157,7 +157,7 @@ export default function HomeAdditionsExtensionsPage() {
             {/* Right — image */}
             <div className="relative h-[350px] md:h-auto md:min-h-[520px]">
               <Image
-                src="/images/city/img-04.jpg"
+                src="/images/services/additions.jpg"
                 alt="Home addition project by BRIO Construction"
                 fill
                 className="object-cover"
@@ -179,7 +179,7 @@ export default function HomeAdditionsExtensionsPage() {
             {/* Left — image */}
             <div className="relative h-[350px] md:h-[480px] overflow-hidden">
               <Image
-                src="/images/city/img-04.jpg"
+                src="/images/services/custom-home.jpg"
                 alt="BRIO home addition in progress"
                 fill
                 className="object-cover"

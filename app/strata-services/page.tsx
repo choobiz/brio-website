@@ -114,7 +114,7 @@ export default function StrataServicesPage() {
             {/* Right — image */}
             <div className="relative h-[300px] md:h-auto md:min-h-[480px]">
               <Image
-                src="/images/city/img-01.jpg"
+                src="/images/services/strata.jpg"
                 alt="Strata building maintained by BRIO Construction"
                 fill
                 className="object-cover"
@@ -136,7 +136,7 @@ export default function StrataServicesPage() {
             {/* Left — image */}
             <div className="relative h-[350px] lg:h-[500px]">
               <Image
-                src="/images/city/img-13.jpg"
+                src="/images/projects/brokerage.jpg"
                 alt="BRIO Construction strata maintenance project"
                 fill
                 className="object-cover"

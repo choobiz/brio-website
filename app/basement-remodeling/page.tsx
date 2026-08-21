@@ -182,7 +182,7 @@ export default function BasementRemodelingPage() {
             {/* Right — image */}
             <div className="relative h-[300px] md:h-auto md:min-h-[480px]">
               <Image
-                src="/images/city/img-01.jpg"
+                src="/images/services/basement.jpg"
                 alt="Stunning basement remodel by BRIO Construction"
                 fill
                 className="object-cover"
@@ -204,7 +204,7 @@ export default function BasementRemodelingPage() {
             {/* Left — image */}
             <div className="relative h-[350px] lg:h-[500px]">
               <Image
-                src="/images/city/img-13.jpg"
+                src="/images/services/renovations.jpg"
                 alt="BRIO Construction custom home project"
                 fill
                 className="object-cover"

@@ -136,7 +136,7 @@ export default function SpecHomeConstructionPage() {
             {/* Right – image */}
             <div className="relative h-[350px] md:h-auto md:min-h-[520px]">
               <Image
-                src="/images/city/img-03.jpg"
+                src="/images/services/spec-home.jpg"
                 alt="Spec home construction by BRIO Construction"
                 fill
                 className="object-cover"
@@ -158,7 +158,7 @@ export default function SpecHomeConstructionPage() {
             {/* Left – image */}
             <div className="relative h-[350px] md:h-[480px]">
               <Image
-                src="/images/city/img-06.webp"
+                src="/images/projects/trinity.jpg"
                 alt="Modern kitchen by BRIO Construction"
                 fill
                 className="object-cover"
@@ -292,7 +292,7 @@ export default function SpecHomeConstructionPage() {
             {/* Right — image */}
             <div className="relative h-[350px] md:h-full md:min-h-[500px]">
               <Image
-                src="/images/city/img-03.jpg"
+                src="/images/projects/lolo.jpg"
                 alt="Spec home construction by BRIO"
                 fill
                 className="object-cover"

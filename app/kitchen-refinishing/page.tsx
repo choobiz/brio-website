@@ -111,7 +111,7 @@ export default function KitchenRefinishingPage() {
             {/* Right — image */}
             <div className="relative h-[300px] md:h-auto md:min-h-[480px]">
               <Image
-                src="/images/city/img-09.webp"
+                src="/images/kitchen/gallery-01.jpeg"
                 alt="Kitchen refinishing by BRIO Construction"
                 fill
                 className="object-cover"

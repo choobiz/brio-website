@@ -109,7 +109,7 @@ export default function KitchenPage() {
             {/* Right – image */}
             <div className="relative h-[350px] md:h-auto md:min-h-[520px]">
               <Image
-                src="/images/city/img-09.webp"
+                src="/images/blog/north-vancouver-kitchen-renovation-before-and-after/20-final-reveal.webp"
                 alt="Beautiful kitchen renovation by BRIO Construction"
                 fill
                 className="object-cover"

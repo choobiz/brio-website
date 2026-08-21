@@ -124,7 +124,7 @@ export default function PaintingServicesPage() {
             {/* Right — image */}
             <div className="relative h-[300px] md:h-auto md:min-h-[480px]">
               <Image
-                src="/images/city/img-07.avif"
+                src="/images/services/renovations.jpg"
                 alt="Professional painting services by BRIO Construction"
                 fill
                 className="object-cover"

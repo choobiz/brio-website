@@ -18,6 +18,9 @@
 
 html {
   scroll-behavior: smooth;
+  /* Nudge the whole site slightly larger for readability (the design uses
+     fixed-px type, so a base font-size change wouldn't cascade). */
+  zoom: 1.0625;
 }
 
 body {
