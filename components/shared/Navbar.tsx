@@ -3,9 +3,10 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Phone, Menu, X, ChevronDown } from "lucide-react";
+import { Phone, Menu, X, ChevronDown, MessageCircle } from "lucide-react";
 import { COMPANY, SERVICES, AREAS } from "@/lib/constants";
 import LeadFormButton from "@/components/shared/LeadFormButton";
+import WhatsAppLink from "@/components/shared/WhatsAppLink";
 
 interface DropdownItem {
   label: string;
@@ -192,6 +193,13 @@ export default function Navbar() {
               <Phone className="w-4 h-4" />
               {COMPANY.phone}
             </a>
+            <WhatsAppLink
+              className="flex items-center gap-2 text-[13px] font-semibold text-[#25D366] hover:text-[#25D366]/70 transition-colors"
+              aria-label="Message BRIO Construction on WhatsApp"
+            >
+              <MessageCircle className="w-4 h-4" />
+              WhatsApp
+            </WhatsAppLink>
             <LeadFormButton
               source="navbar-quote"
               service="general"

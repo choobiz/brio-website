@@ -6,6 +6,10 @@ export const COMPANY = {
   email: "info@builtbybrio.com",
   website: "https://builtbybrio.com",
   address: "267 Esplanade W, North Vancouver BC V7M 1A5",
+  // WhatsApp Business runs on the same line as the main number. `whatsappNumber`
+  // is E.164 WITHOUT the leading "+", which is the format wa.me expects.
+  whatsappNumber: "12367069686",
+  whatsappMessage: "Hi! I'd like to ask about a renovation project.",
   tagline: "Built with Confidence, Built by BRIO.",
   description: "At BRIO Construction, we create inspiring spaces that endure, whether renovating, building custom homes, or developing spec projects.",
   social: {

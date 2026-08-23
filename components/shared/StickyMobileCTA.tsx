@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { Phone } from "lucide-react";
+import { Phone, MessageCircle } from "lucide-react";
 import { COMPANY } from "@/lib/constants";
+import WhatsAppLink from "@/components/shared/WhatsAppLink";
 
 /**
  * Bottom-pinned mobile-only call/estimate bar. Universal pattern across
@@ -23,6 +24,13 @@ export default function StickyMobileCTA() {
           <Phone className="w-4 h-4 shrink-0" aria-hidden="true" />
           Call BRIO
         </a>
+        {/* WhatsApp — same line as the phone number, now on WhatsApp Business */}
+        <WhatsAppLink
+          className="flex items-center justify-center h-12 w-12 shrink-0 rounded-md border-2 border-[#25D366] text-[#25D366] hover:bg-[#25D366]/5 transition-colors"
+          aria-label="Message BRIO Construction on WhatsApp"
+        >
+          <MessageCircle className="w-5 h-5 shrink-0" aria-hidden="true" />
+        </WhatsAppLink>
         {/* Get Estimate — routes to homepage form anchor (works from any page) */}
         <Link
           href="/#get-in-touch"

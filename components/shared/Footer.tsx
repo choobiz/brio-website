@@ -1,7 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { COMPANY, SERVICES, AREAS } from "@/lib/constants";
-import { MapPin, Phone, Mail } from "lucide-react";
+import WhatsAppLink from "@/components/shared/WhatsAppLink";
+import { MapPin, Phone, Mail, MessageCircle } from "lucide-react";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -68,6 +69,12 @@ export default function Footer() {
                   <Phone className="w-4 h-4 text-brio-navy shrink-0" />
                   {COMPANY.phone}
                 </a>
+              </li>
+              <li>
+                <WhatsAppLink className="flex items-center gap-2.5 text-text-body text-[13px] hover:text-brio-navy transition-colors">
+                  <MessageCircle className="w-4 h-4 text-[#25D366] shrink-0" />
+                  WhatsApp
+                </WhatsAppLink>
               </li>
               <li>
                 <a href={`mailto:${COMPANY.email}`} className="flex items-center gap-2.5 text-text-body text-[13px] hover:text-brio-navy transition-colors">
