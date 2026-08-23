@@ -3,6 +3,8 @@
 import { useRef, useState, type FormEvent } from "react";
 import { submitLead } from "@/lib/ghl";
 import { trackConversion } from "@/lib/tracking";
+import PhoneLink from "@/components/shared/PhoneLink";
+import { COMPANY } from "@/lib/constants";
 import Turnstile from "@/components/shared/Turnstile";
 
 export interface BudgetOption {
@@ -213,9 +215,7 @@ export default function LeadForm({
       {status === "error" && (
         <p className="text-red-600 text-[13px] text-center">
           Something went wrong. Please try again or call{" "}
-          <a href="tel:+12367069686" className="underline">
-            1 (236) 706-9686
-          </a>
+          <PhoneLink className="underline">{COMPANY.phone}</PhoneLink>
           .
         </p>
       )}

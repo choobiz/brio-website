@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/shared/Navbar";
+import PhoneLink from "@/components/shared/PhoneLink";
 import Footer from "@/components/shared/Footer";
 import LeadFormButton from "@/components/shared/LeadFormButton";
 import Image from "next/image";
@@ -306,13 +307,13 @@ export default function AboutPage() {
                   {COMPANY.address}
                 </li>
                 <li>
-                  <a
-                    href={`tel:${COMPANY.phoneClean}`}
+                  <PhoneLink
+                    
                     className="flex items-center gap-3 text-text-body text-[15px] hover:text-brio-navy transition-colors"
                   >
                     <Phone className="w-5 h-5 text-brio-navy shrink-0" />
                     {COMPANY.phone}
-                  </a>
+                  </PhoneLink>
                 </li>
                 <li>
                   <a

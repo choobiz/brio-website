@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
+import PhoneLink from "@/components/shared/PhoneLink";
+import { COMPANY } from "@/lib/constants";
 import { ArrowRight, Home, Phone } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -44,13 +46,12 @@ export default function NotFound() {
               <Home className="w-4 h-4" />
               Go to Home
             </Link>
-            <a
-              href="tel:+12367069686"
+            <PhoneLink
               className="inline-flex items-center justify-center gap-2 border-2 border-white text-white px-7 py-3.5 text-[14px] font-semibold uppercase tracking-wide hover:bg-white/10 transition-colors"
             >
               <Phone className="w-4 h-4" />
-              Call (236) 706-9686
-            </a>
+              Call {COMPANY.phone}
+            </PhoneLink>
           </div>
         </div>
       </section>

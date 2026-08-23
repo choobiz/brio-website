@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { COMPANY, SERVICES, AREAS } from "@/lib/constants";
 import WhatsAppLink from "@/components/shared/WhatsAppLink";
+import PhoneLink from "@/components/shared/PhoneLink";
 import { MapPin, Phone, Mail, MessageCircle } from "lucide-react";
 
 export default function Footer() {
@@ -65,10 +66,10 @@ export default function Footer() {
                 <span className="text-text-body text-[13px]">{COMPANY.address}</span>
               </li>
               <li>
-                <a href={`tel:${COMPANY.phoneClean}`} className="flex items-center gap-2.5 text-text-body text-[13px] hover:text-brio-navy transition-colors">
+                <PhoneLink className="flex items-center gap-2.5 text-text-body text-[13px] hover:text-brio-navy transition-colors">
                   <Phone className="w-4 h-4 text-brio-navy shrink-0" />
                   {COMPANY.phone}
-                </a>
+                </PhoneLink>
               </li>
               <li>
                 <WhatsAppLink className="flex items-center gap-2.5 text-text-body text-[13px] hover:text-brio-navy transition-colors">

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Phone } from "lucide-react";
 import { COMPANY } from "@/lib/constants";
 import LeadFormButton from "@/components/shared/LeadFormButton";
+import PhoneLink from "@/components/shared/PhoneLink";
 
 const SLIDES = [
   "/images/hero-slides/slide-1.jpg",
@@ -100,13 +101,13 @@ export default function Hero() {
               buttonClassName="inline-flex items-center justify-center bg-brio-navy text-white text-[15px] font-semibold px-8 py-4 hover:bg-brio-navy/90 transition-colors tracking-wide uppercase"
             />
             {/* Mobile-only inline tap-to-call as a second hero CTA */}
-            <a
-              href={`tel:${COMPANY.phoneClean}`}
+            <PhoneLink
+              
               className="sm:hidden inline-flex items-center justify-center gap-2 border-2 border-white text-white text-[15px] font-semibold px-8 py-4 hover:bg-white/10 transition-colors tracking-wide uppercase"
             >
               <Phone className="w-4 h-4" aria-hidden="true" />
               Call BRIO
-            </a>
+            </PhoneLink>
           </div>
         </div>
       </div>

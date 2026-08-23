@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Phone, Menu, X, ChevronDown, MessageCircle } from "lucide-react";
 import { COMPANY, SERVICES, AREAS } from "@/lib/constants";
 import LeadFormButton from "@/components/shared/LeadFormButton";
+import PhoneLink from "@/components/shared/PhoneLink";
 import WhatsAppLink from "@/components/shared/WhatsAppLink";
 
 interface DropdownItem {
@@ -186,13 +187,13 @@ export default function Navbar() {
 
           {/* Phone + Get a Quote */}
           <div className="hidden lg:flex items-center gap-4">
-            <a
-              href={`tel:${COMPANY.phoneClean}`}
+            <PhoneLink
+              
               className="flex items-center gap-2 text-[13px] font-semibold text-brio-navy hover:text-brio-navy/70 transition-colors"
             >
               <Phone className="w-4 h-4" />
               {COMPANY.phone}
-            </a>
+            </PhoneLink>
             <WhatsAppLink
               className="flex items-center gap-2 text-[13px] font-semibold text-[#25D366] hover:text-[#25D366]/70 transition-colors"
               aria-label="Message BRIO Construction on WhatsApp"
@@ -210,13 +211,13 @@ export default function Navbar() {
 
           {/* Mobile toggle */}
           <div className="flex lg:hidden items-center gap-2">
-            <a
-              href={`tel:${COMPANY.phoneClean}`}
+            <PhoneLink
+              
               className="w-12 h-12 flex items-center justify-center text-brio-navy"
               aria-label="Call"
             >
               <Phone className="w-5 h-5" />
-            </a>
+            </PhoneLink>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               className="w-12 h-12 flex items-center justify-center text-brio-navy"
