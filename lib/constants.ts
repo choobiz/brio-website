@@ -19,6 +19,14 @@ export const COMPANY = {
 export const TRACKING = {
   ga4Id: "G-NS3VTFRCTZ",
   gadsId: "AW-6531627900",
+  // Google Ads conversion action labels. Shared with the campaign landing pages
+  // (brio-marketing-hub/src/lib/campaigns/shared.ts) — same Ads account, so the
+  // same actions. Loading the tag does not report conversions; see lib/tracking.ts.
+  conversionLabels: {
+    formSubmit: "QvTFCLiluvsbEIOZuKtA",
+    phoneCall: "mykICIWq0_sbEIOZuKtA",
+    whatsappClick: "k8xxCM6F2PsbEIOZuKtA",
+  },
   clarityId: "s8pf0tyk1g",
 } as const;
 

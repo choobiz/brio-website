@@ -2,6 +2,7 @@
 
 import { useRef, useState, type FormEvent } from "react";
 import { submitLead } from "@/lib/ghl";
+import { trackConversion } from "@/lib/tracking";
 import Turnstile from "@/components/shared/Turnstile";
 
 export interface BudgetOption {
@@ -83,6 +84,10 @@ export default function LeadForm({
       });
       if (!res.ok) throw new Error(`Webhook ${res.status}`);
       setStatus("success");
+      // Report the conversion to Google Ads + GA4. Deliberately AFTER the webhook
+      // succeeded, so we never report a lead that did not reach the CRM. Never
+      // throws — a tracking failure must not turn a successful submit into an error.
+      trackConversion("form_submit");
       form.reset();
     } catch {
       setStatus("error");
