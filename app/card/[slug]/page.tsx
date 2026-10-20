@@ -43,7 +43,7 @@ function LinkedinIcon({ className }: { className?: string }) {
 }
 
 const action =
-  "flex flex-col items-center justify-center gap-1.5 h-[72px] rounded-lg border border-gray-200 bg-white text-brio-navy text-[12px] font-semibold uppercase tracking-wide shadow-sm active:bg-brio-light-gray";
+  "flex flex-col items-center justify-center gap-2 h-[80px] min-w-0 px-2 rounded-lg border border-gray-200 bg-white text-brio-navy text-[12px] font-semibold shadow-sm active:bg-brio-light-gray";
 
 export default async function CardPage({ params }: { params: Promise<{ slug: string }> }) {
   const card = getCard((await params).slug);
@@ -79,7 +79,7 @@ export default async function CardPage({ params }: { params: Promise<{ slug: str
             Save contact
           </a>
 
-          <div className="mt-3 grid grid-cols-4 gap-2">
+          <div className="mt-4 grid grid-cols-4 gap-3">
             <a href={`tel:${card.phoneClean}`} className={action} aria-label={`Call ${card.name}`}>
               <Phone className="w-5 h-5" aria-hidden="true" />
               Call
@@ -126,7 +126,6 @@ export default async function CardPage({ params }: { params: Promise<{ slug: str
               ))}
             </span>
             <span className="font-semibold text-brio-navy">5.0 on Google</span>
-            <span>· 100+ reviews</span>
           </div>
           <ul className="mt-4 grid grid-cols-2 gap-2">
             {CREDENTIALS.map((c) => (
