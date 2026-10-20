@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Phone, MessageCircle } from "lucide-react";
 import { COMPANY } from "@/lib/constants";
 import WhatsAppLink from "@/components/shared/WhatsAppLink";
@@ -13,6 +14,9 @@ import PhoneLink from "@/components/shared/PhoneLink";
  * users decide to call without scrolling back up to the header.
  */
 export default function StickyMobileCTA() {
+  // Business cards (/card/*) carry their own call/WhatsApp buttons for the
+  // person, not the company line.
+  if (usePathname()?.startsWith("/card/")) return null;
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-white border-t border-gray-200 shadow-[0_-2px_12px_rgba(0,0,0,0.08)] px-3 py-2.5">
       <div className="flex gap-2">
