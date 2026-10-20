@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Phone, MessageCircle, Mail, Download, Globe, Star } from "lucide-react";
+import { Download, Globe, Star } from "lucide-react";
 import { COMPANY } from "@/lib/constants";
 import { getAllCards, getCard } from "@/lib/team";
 import CardLeadForm from "@/components/card/CardLeadForm";
+import { cardActions, CREDENTIALS } from "@/components/card/parts";
 
 export const dynamicParams = false;
 
@@ -25,32 +26,17 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
-// Claims already made site-wide (components/shared/TrustBadgeStrip.tsx).
-const CREDENTIALS = [
-  "BC Housing Licensed Residential Builder",
-  "2-5-10 New Home Warranty · Travelers",
-  "HAVAN Member",
-  "RenoMark Certified",
-];
-
-// lucide-react 1.x dropped brand icons, so the LinkedIn mark is inline.
-function LinkedinIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
-      <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z" />
-    </svg>
-  );
-}
-
 const action =
-  "flex flex-col items-center justify-center gap-2 h-[80px] min-w-0 px-2 rounded-lg border border-gray-200 bg-white text-brio-navy text-[12px] font-semibold shadow-sm active:bg-brio-light-gray";
+  "flex items-center justify-center gap-2.5 h-14 min-w-0 px-4 rounded-lg border border-gray-200 bg-white text-brio-navy text-[14px] font-semibold shadow-sm active:bg-brio-light-gray";
+
+const ICON_COLOR: Record<string, string> = { whatsapp: "text-[#25D366]", linkedin: "text-[#0A66C2]" };
 
 export default async function CardPage({ params }: { params: Promise<{ slug: string }> }) {
   const card = getCard((await params).slug);
   if (!card) notFound();
 
   return (
-    <main className="min-h-screen bg-brio-light-gray">
+    <main className="min-h-screen max-md:-mb-[68px] bg-brio-light-gray">
       <div className="mx-auto max-w-[440px] bg-white min-h-screen shadow-sm">
         <header className="bg-brio-navy px-6 pt-6 pb-20 text-center">
           <Image src="/images/logo-white.png" alt={COMPANY.name} width={160} height={48} className="mx-auto h-10 w-auto" priority />
@@ -79,27 +65,13 @@ export default async function CardPage({ params }: { params: Promise<{ slug: str
             Save contact
           </a>
 
-          <div className="mt-4 grid grid-cols-4 gap-3">
-            <a href={`tel:${card.phoneClean}`} className={action} aria-label={`Call ${card.name}`}>
-              <Phone className="w-5 h-5" aria-hidden="true" />
-              Call
-            </a>
-            {card.whatsapp ? (
-              <a href={`https://wa.me/${card.whatsapp}`} className={action} aria-label={`WhatsApp ${card.name}`}>
-                <MessageCircle className="w-5 h-5 text-[#25D366]" aria-hidden="true" />
-                WhatsApp
+          <div className="mt-4 grid grid-cols-2 gap-3">
+            {cardActions(card).map(({ key, href, label, aria, Icon }) => (
+              <a key={key} href={href} className={action} aria-label={aria}>
+                <Icon className={`w-5 h-5 shrink-0 ${ICON_COLOR[key] ?? ""}`} />
+                {label}
               </a>
-            ) : null}
-            <a href={`mailto:${card.email}`} className={action} aria-label={`Email ${card.name}`}>
-              <Mail className="w-5 h-5" aria-hidden="true" />
-              Email
-            </a>
-            {card.linkedin ? (
-              <a href={card.linkedin} className={action} aria-label={`${card.name} on LinkedIn`}>
-                <LinkedinIcon className="w-5 h-5 text-[#0A66C2]" />
-                LinkedIn
-              </a>
-            ) : null}
+            ))}
           </div>
 
           <dl className="mt-5 space-y-1 text-[14px]">
