@@ -13,7 +13,7 @@ const ROLES = [
 const field =
   "w-full h-11 rounded-md border border-gray-300 bg-white px-3 text-[15px] text-brio-navy focus:outline-none focus:ring-2 focus:ring-brio-navy/30 focus:border-brio-navy";
 
-export default function CardLeadForm({ card, firstName, phone }: { card: string; firstName: string; phone: string }) {
+export default function CardLeadForm({ card, phone }: { card: string; phone: string }) {
   const [ts] = useState(() => Date.now());
   const [state, setState] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [error, setError] = useState("");
@@ -51,8 +51,8 @@ export default function CardLeadForm({ card, firstName, phone }: { card: string;
   if (state === "sent") {
     return (
       <div className="rounded-lg bg-brio-light-gray p-5 text-center">
-        <p className="font-semibold text-brio-navy text-[16px]">Thanks, got it.</p>
-        <p className="mt-1 text-[14px]">{firstName} will be in touch shortly.</p>
+        <p className="font-semibold text-brio-navy text-[16px]">Thanks, great to meet you.</p>
+        <p className="mt-1 text-[14px]">I&apos;ll be in touch soon.</p>
       </div>
     );
   }
@@ -76,7 +76,7 @@ export default function CardLeadForm({ card, firstName, phone }: { card: string;
       <textarea
         name="note"
         rows={3}
-        placeholder="Project or address (optional)"
+        placeholder="Anything you'd like to add (optional)"
         className={`${field} h-auto py-2.5 resize-none`}
       />
       {/* Honeypot: hidden from people, filled by bots. */}
@@ -87,7 +87,7 @@ export default function CardLeadForm({ card, firstName, phone }: { card: string;
         disabled={state === "sending"}
         className="w-full h-12 rounded-md bg-brio-navy text-white font-semibold text-[14px] uppercase tracking-wide disabled:opacity-60"
       >
-        {state === "sending" ? "Sending…" : `Send to ${firstName}`}
+        {state === "sending" ? "Sending…" : "Connect"}
       </button>
     </form>
   );

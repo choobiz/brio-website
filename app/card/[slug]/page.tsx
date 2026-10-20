@@ -144,11 +144,11 @@ export default async function CardPage({ params }: { params: Promise<{ slug: str
         </section>
 
         <section className="mx-6 mt-7 border-t border-gray-200 pt-6 pb-8">
-          <h2 className="text-[22px] text-center">Looking for a builder?</h2>
+          <h2 className="text-[20px] text-center">Let&apos;s connect</h2>
           <p className="mt-1 mb-4 text-center text-[14px]">
-            Leave your details and {card.firstName} will follow up personally.
+            Leave your details and I&apos;ll be in touch.
           </p>
-          <CardLeadForm card={card.slug} firstName={card.firstName} phone={card.phone} />
+          <CardLeadForm card={card.slug} phone={card.phone} />
         </section>
 
         <footer className="px-6 pb-10 text-center text-[12px] text-text-muted">
