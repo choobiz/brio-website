@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
+import { ChevronDown } from "lucide-react";
 import { COMPANY } from "@/lib/constants";
 import { SECTIONS, type Sec } from "./data";
 
@@ -103,6 +104,11 @@ export default function SiteVisitForm() {
   const [st, setSt] = useState<State>(initialState);
   const [loaded, setLoaded] = useState(false);
   const [msg, setMsg] = useState("");
+  // Which sections are folded. View state only, not part of the record.
+  const [folded, setFolded] = useState<Record<string, boolean>>({});
+  const allFolded = SECTIONS.every((s) => folded[s.id]);
+  const toggle = (id: string) => setFolded((f) => ({ ...f, [id]: !f[id] }));
+  const setAll = (v: boolean) => setFolded(Object.fromEntries(SECTIONS.map((s) => [s.id, v])));
 
   useEffect(() => {
     try {
@@ -129,16 +135,18 @@ export default function SiteVisitForm() {
     }
   }, [st, loaded]);
 
-  const { done, total, per } = useMemo(() => {
+  const { done, total, per, counts } = useMemo(() => {
     let done = 0, total = 0;
     const per: Record<string, number> = {};
+    const counts: Record<string, string> = {};
     for (const sec of SECTIONS) {
       let d = 0, t = 0;
       for (const g of sec.groups) for (const it of g.items) { t++; if (st.items[it.id]?.s) d++; }
       per[sec.id] = t ? (d / t) * 100 : 0;
+      counts[sec.id] = `${d}/${t}`;
       done += d; total += t;
     }
-    return { done, total, per };
+    return { done, total, per, counts };
   }, [st]);
 
   const setItem = (id: string, v: ItemState) => setSt((s) => ({ ...s, items: { ...s.items, [id]: v } }));
@@ -194,18 +202,42 @@ export default function SiteVisitForm() {
           <span>
             <b className="tabular-nums text-[#1b2430]">{done}</b> of <b className="tabular-nums text-[#1b2430]">{total}</b> items recorded
           </span>
-          <span>Saved on this device</span>
+          <span className="flex items-center gap-3">
+            <span className="hidden sm:inline">Saved on this device</span>
+            <button
+              type="button"
+              onClick={() => setAll(!allFolded)}
+              className="rounded border border-[#1D3146] px-2.5 py-1 text-[12px] font-semibold text-[#1D3146] focus-visible:outline-2 focus-visible:outline-[#1D3146]"
+            >
+              {allFolded ? "Expand all" : "Collapse all"}
+            </button>
+          </span>
         </div>
 
         {SECTIONS.map((sec) => (
           <section key={sec.id} className="mt-[18px] overflow-hidden rounded-md border border-[#dde2e8] bg-white">
-            <div className="border-b border-[#dde2e8] px-4 pt-4 pb-3">
-              <h2 className="m-0 text-[20px] leading-tight" style={{ color: "#1b2430", fontFamily: "var(--font-heading)" }}>{sec.title}</h2>
+            <div className={`px-4 pt-4 pb-3 ${folded[sec.id] ? "" : "border-b border-[#dde2e8]"}`}>
+              <h2 className="m-0 text-[20px] leading-tight" style={{ color: "#1b2430", fontFamily: "var(--font-heading)" }}>
+                <button
+                  type="button"
+                  aria-expanded={!folded[sec.id]}
+                  aria-controls={`body-${sec.id}`}
+                  onClick={() => toggle(sec.id)}
+                  className="flex w-full items-center justify-between gap-3 text-left focus-visible:outline-2 focus-visible:outline-[#1D3146]"
+                >
+                  <span>{sec.title}</span>
+                  <span className="flex shrink-0 items-center gap-2 font-sans text-[12.5px] font-semibold text-[#5d6a78] tabular-nums">
+                    {counts[sec.id]}
+                    <ChevronDown className={`h-5 w-5 transition-transform ${folded[sec.id] ? "-rotate-90" : ""}`} aria-hidden="true" />
+                  </span>
+                </button>
+              </h2>
               {sec.intro && <p className="mt-1 text-[13.5px] text-[#5d6a78]">{sec.intro}</p>}
               <div className="mt-2.5 h-1 overflow-hidden rounded bg-[#dde2e8]">
                 <i className="block h-full bg-[#1D3146] transition-[width] duration-300" style={{ width: `${per[sec.id]}%` }} />
               </div>
             </div>
+            <div id={`body-${sec.id}`} hidden={!!folded[sec.id]}>
             {sec.groups.map((g) => (
               <div key={g.g || sec.id}>
                 {g.g && <div className="px-4 pt-2.5 pb-0.5 text-[11.5px] font-bold uppercase tracking-[0.1em] text-[#5d6a78]">{g.g}</div>}
@@ -214,6 +246,7 @@ export default function SiteVisitForm() {
                 ))}
               </div>
             ))}
+            </div>
           </section>
         ))}
 
