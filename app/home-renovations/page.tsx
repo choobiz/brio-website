@@ -119,7 +119,7 @@ export default function HomeRenovationsPage() {
                 Construction is here to bring your vision to life.
               </p>
               <p className="text-text-body text-[15px] leading-relaxed mb-8 max-w-lg">
-                Building since 2018, we make renovations stress-free,
+                With 15+ years of experience, we make renovations stress-free,
                 exciting, and rewarding.
               </p>
               <div>
@@ -208,8 +208,8 @@ export default function HomeRenovationsPage() {
               </h3>
               <p className="text-text-body text-[15px] leading-relaxed mb-6">
                 At BRIO Construction, we believe in delivering excellence
-                without compromise. Our licensed, insured team has been building
-                since 2018 and brings that experience to every project, backed by transparent pricing
+                without compromise. Our licensed, insured team brings 15+ years
+                of experience to every project, backed by transparent pricing
                 and a 12-month workmanship warranty on every job.
               </p>
               <Link

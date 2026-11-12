@@ -14,7 +14,7 @@ const TRUST_ITEMS = [
   {
     title: "Proven Expertise",
     description:
-      "Building since 2018 with numerous 5-star reviews, our track record speaks to our commitment to quality and client satisfaction.",
+      "With over 15 years of experience and numerous 5-star reviews, our track record speaks to our commitment to quality and client satisfaction.",
   },
   {
     title: "Transparent Processes",

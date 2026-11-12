@@ -91,7 +91,7 @@ const SERVICE_TYPES = [
 ];
 
 const WHY_BRIO = [
-  "Building homes across Greater Vancouver since 2018.",
+  "15+ years of residential construction experience across Greater Vancouver.",
   "Custom designs that match your existing home\u2019s style, materials, and architecture.",
   "Full-service project management from permits to final walkthrough.",
   "Transparent, fixed-price quotes with no hidden fees or surprises.",

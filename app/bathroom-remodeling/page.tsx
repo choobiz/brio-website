@@ -73,7 +73,7 @@ const KEY_SELLING_POINTS = [
     items: [
       "Licensed & Insured: Full BC Builder\u2019s License and comprehensive warranty insurance.",
       "Trusted Industry Leaders: HAVAN members and RenoMark certified.",
-      "Building Since 2018: Hundreds of successful bathroom transformations.",
+      "15+ Years of Experience: Hundreds of successful bathroom transformations.",
     ],
   },
   {
@@ -141,7 +141,7 @@ export default function BathroomPage() {
             {/* Left — text */}
             <div className="py-16 md:py-24 md:pr-12">
               <p className="text-[11px] font-bold uppercase tracking-[1.6px] text-brio-navy mb-3">
-                Since 2018 &middot; 100+ Five-Star Reviews &middot; Licensed &amp; Insured
+                15+ Years &middot; 100+ Five-Star Reviews &middot; Licensed &amp; Insured
               </p>
               <h1 className="text-[32px] md:text-[44px] font-semibold italic text-brio-navy font-heading mb-6 leading-tight">
                 Transform Your Bathroom In Record Time With Brio!

@@ -149,7 +149,7 @@ export default function LandDevelopmentPreConstructionPage() {
                 {[
                   {
                     title: "Proven Expertise",
-                    desc: "land development and construction across the Greater Vancouver area since 2018",
+                    desc: "over 15 years of experience in land development and construction across the Greater Vancouver area",
                   },
                   {
                     title: "Tailored Strategies",
