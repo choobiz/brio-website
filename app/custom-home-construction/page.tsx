@@ -20,7 +20,7 @@ const WHY_CHOOSE = [
   },
   {
     title: "Experience & Expertise",
-    desc: "With 15+ years of experience in custom home building, our team brings deep knowledge of design, engineering, and construction to every project.",
+    desc: "Building custom homes since 2018, our team brings deep knowledge of design, engineering, and construction to every project.",
   },
   {
     title: "Transparent Communication",

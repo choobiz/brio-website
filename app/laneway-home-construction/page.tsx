@@ -17,9 +17,9 @@ export const metadata: Metadata = {
 
 const WHY_CHOOSE = [
   {
-    title: "15+ Years of Experience",
+    title: "Building Since 2018",
     description:
-      "BRIO has over 15 years of experience in small-scale residential construction. We understand the unique challenges and opportunities that come with building laneway homes and secondary suites.",
+      "BRIO has been building small-scale residential projects since 2018. We understand the unique challenges and opportunities that come with building laneway homes and secondary suites.",
   },
   {
     title: "Custom Design & Functional Spaces",

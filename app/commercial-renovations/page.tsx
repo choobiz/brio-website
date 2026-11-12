@@ -18,7 +18,7 @@ const WHY_CHOOSE = [
   {
     title: "Experienced & Reliable",
     description:
-      "With over 15 years of experience in commercial renovations, we deliver projects that meet the highest standards of quality and professionalism.",
+      "Building since 2018, we deliver commercial renovation projects that meet the highest standards of quality and professionalism.",
   },
   {
     title: "Customized to Your Needs",
@@ -122,7 +122,7 @@ export default function CommercialRenovationsPage() {
                 environments that work as hard as you do.
               </p>
               <p className="text-text-body text-[15px] leading-relaxed mb-8">
-                With over 15 years of experience, our team handles every aspect
+                Building since 2018, our team handles every aspect
                 of your project &mdash; from design and permits to construction
                 and final inspections &mdash; so you can focus on what matters
                 most: running your business.

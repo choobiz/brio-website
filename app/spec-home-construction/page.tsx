@@ -11,13 +11,13 @@ import { Check } from "lucide-react";
 export const metadata: Metadata = {
   title: "Spec Home Construction",
   description:
-    "Turn-key spec home development and construction. With 15+ years of experience, BRIO builds market-ready homes designed for strong ROI and fast sales.",
+    "Turn-key spec home development and construction. Building since 2018, BRIO delivers market-ready homes designed for strong ROI and fast sales.",
 };
 
 const WHY_CHOOSE = [
   {
     title: "Proven Experience",
-    desc: "With 15+ years of experience in new home construction, we bring deep industry knowledge to every spec home project, ensuring quality and efficiency from start to finish.",
+    desc: "Building homes since 2018, we bring deep industry knowledge to every spec home project, ensuring quality and efficiency from start to finish.",
   },
   {
     title: "Market Expertise",
@@ -119,8 +119,8 @@ export default function SpecHomeConstructionPage() {
               </h1>
               <p className="text-text-body text-[15px] leading-relaxed mb-8 max-w-lg">
                 Investing in real estate starts with building market-ready homes
-                that attract buyers and deliver strong returns. With 15+ years of
-                experience in new home construction, we understand market trends,
+                that attract buyers and deliver strong returns. Building homes since
+                2018, we understand market trends,
                 zoning regulations, and buyer preferences &mdash; ensuring that your
                 investment is built for success.
               </p>
@@ -175,7 +175,7 @@ export default function SpecHomeConstructionPage() {
                   <span className="w-5 h-5 rounded bg-brio-navy flex items-center justify-center shrink-0 mt-0.5">
                     <Check className="w-3.5 h-3.5 text-white" />
                   </span>
-                  <p className="text-text-body text-[14px]"><span className="font-bold">Proven Experience</span> &ndash; 15+ years building high-quality homes.</p>
+                  <p className="text-text-body text-[14px]"><span className="font-bold">Proven Experience</span> &ndash; building high-quality homes since 2018.</p>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="w-5 h-5 rounded bg-brio-navy flex items-center justify-center shrink-0 mt-0.5">

@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 const WHY_BRIO = [
   {
-    title: "15+ Years of Experience",
+    title: "Building Since 2018",
     desc: "Our team brings extensive knowledge and expertise to every basement remodel, delivering results that stand the test of time.",
   },
   {
